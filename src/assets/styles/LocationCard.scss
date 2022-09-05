@@ -1,0 +1,105 @@
+.location-card {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  .left {
+    width: 200px;
+    height: 168px;
+    position: relative;
+    background: rgb(252, 249, 245);
+    border-radius: 4px;
+    .carousel {
+      width: 100%;
+      height: 100%;
+      .carousel-inner {
+        width: 100%;
+        height: 100%;
+        .carousel-item {
+          width: 100%;
+          height: 100%;
+          img {
+            width: 100%;
+            height: 100%;
+            object-position: center center;
+            object-fit: cover;
+            border-radius: 4px;
+            user-select: none;
+          }
+        }
+      }
+    }
+  }
+  .right {
+    flex: 1;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    padding-bottom: 10px;
+    > div:nth-child(1) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .location-name {
+        font-size: 20px;
+        line-height: 23px;
+        font-weight: 700;
+      }
+    }
+    > div:nth-child(2) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgb(89, 89, 89);
+    }
+    > div:nth-child(4) {
+      width: 100%;
+      display: flex;
+      overflow: hidden;
+      .location-feature {
+        font-weight: 400;
+        font-size: 14px;
+        display: inline-block;
+        width: fit-content;
+        padding-right: 4px;
+        margin: 0px 4px 4px 0px;
+        vertical-align: middle;
+        line-height: 24px;
+        height: 24px;
+        padding-left: 4px;
+        border-radius: 2px;
+        color: rgb(244, 110, 74);
+        background-color: rgb(252, 249, 245);
+        white-space: nowrap;
+      }
+    }
+    > div:nth-child(5) {
+      margin-top: auto;
+      .location-price {
+        > span {
+          color: rgb(245, 85, 35);
+          font-size: 24px;
+          line-height: 28px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .location-card {
+    .left {
+      width: 102px !important;
+      height: 102px;
+      overflow: hidden;
+    }
+  }
+}
+@media (max-width: 525px) {
+  .location-card {
+    flex-direction: column;
+    .left {
+      width: 100% !important;
+      height: 150px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+  }
+}

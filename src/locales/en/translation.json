@@ -1,0 +1,19 @@
+{
+  "navbar": {
+    "home": "Home",
+    "locations": "Locations",
+    "for_business": "For Bussiness",
+    "space_partner": "Space Partner",
+    "newsroom": "Newsroom",
+    "language": "Language"
+  },
+  "home": {
+    "section_about": {
+      "about": "About",
+      "description": "Whether you're looking for a work desk, private office or a whole floor, cirCO is providing a collaborative workspace that fuels your business growth.",
+      "team_members": "Team members",
+      "partners": "Partners",
+      "happy_customers": "Happy Customers"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "navbar": {
+    "home": "Trang chủ",
+    "locations": "địa điểm",
+    "for_business": "Cho Doanh nghiệp",
+    "space_partner": "Đối tác không gian",
+    "newsroom": "Tin tức",
+    "language": "Ngôn ngữ"
+  },
+  "home": {
+    "section_about": {
+      "about": "Về",
+      "description": "Cho dù bạn đang tìm kiếm một bàn làm việc, văn phòng riêng hay văn phòng cả tầng, cirCO cung cấp đa dạng giải pháp không gian làm việc đáp ứng mọi nhu cầu, đề cao yếu tố linh hoạt để hỗ trợ thúc đẩy sự phát triển của doanh nghiệp bạn và mang đến những trải nghiệm tuyệt vời.",
+      "team_members": "Thành viên",
+      "partners": "Đối tác",
+      "happy_customers": "Khách hàng"
+    }
+  }
+}
