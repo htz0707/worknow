@@ -3,7 +3,7 @@ import '../assets/styles/FilterLocation.scss';
 import { IoLocationOutline } from 'react-icons/io5';
 import { Dropdown, Button } from 'react-bootstrap';
 
-export default function FilterLocation() {
+export default function FilterLocation(props) {
   const [sort, setSort] = useState('Nearest Location');
   const handleSelectSort = (value) => {
     setSort(value);

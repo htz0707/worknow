@@ -11,7 +11,13 @@ export default function Topbar() {
     i18n.changeLanguage(value);
   }
   return (
-    <Navbar bg='light' expand='lg' fixed='top' className='topbar'>
+    <Navbar
+      bg='light'
+      variant='light'
+      expand='lg'
+      fixed='top'
+      className='topbar'
+    >
       <Container fluid='md'>
         <Navbar.Brand>
           <Link to='/'>

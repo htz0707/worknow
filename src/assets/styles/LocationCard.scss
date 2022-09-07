@@ -8,6 +8,7 @@
     position: relative;
     background: rgb(252, 249, 245);
     border-radius: 4px;
+    margin-right: 15px;
     .carousel {
       width: 100%;
       height: 100%;
@@ -41,6 +42,7 @@
         font-size: 20px;
         line-height: 23px;
         font-weight: 700;
+        cursor: pointer;
       }
     }
     > div:nth-child(2) {

@@ -3,8 +3,13 @@ import '../assets/styles/LocationCard.scss';
 import { Carousel } from 'react-bootstrap';
 import Img1 from '../assets/images/location_img1.png';
 import Img2 from '../assets/images/location_img2.jpg';
+import { useNavigate } from 'react-router-dom';
 
 export default function LocationCard() {
+  let navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/locations/details/1`);
+  };
   return (
     <div className='location-card'>
       <div className='left'>
@@ -19,7 +24,9 @@ export default function LocationCard() {
       </div>
       <div className='right'>
         <div>
-          <div className='location-name'>Changi Lounge</div>
+          <div className='location-name' onClick={handleClick}>
+            Changi Lounge
+          </div>
           <div>{'> 10km'}</div>
         </div>
         <div>
