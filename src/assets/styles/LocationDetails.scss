@@ -56,6 +56,26 @@
       > .location-map {
         width: 40%;
         padding-left: 20px;
+        .map {
+          width: 100%;
+          height: calc(100% - 60px);
+        }
+        .address {
+          width: 100%;
+          height: 60px;
+          background-color: rgb(245, 245, 245);
+          padding: 16px;
+          font-size: 14px;
+          line-height: 16px;
+          display: flex;
+          justify-content: space-between;
+          button {
+            border: none;
+            background: transparent;
+            color: $primary;
+            font-weight: 700;
+          }
+        }
       }
     }
   }
@@ -89,6 +109,211 @@
           display: flex;
           flex-direction: column;
           padding-top: 20px;
+        }
+      }
+    }
+  }
+  > .location-hours {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    > .header {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px;
+      font-style: normal;
+      padding-bottom: 20px;
+    }
+    > .body {
+      .accordion {
+        .accordion-item {
+          border-radius: 10px;
+          .accordion-button {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: none;
+          }
+        }
+      }
+      .accordion-header {
+        font-size: 20px;
+        line-height: 23px;
+        > span:nth-child(1) {
+          font-weight: 700;
+          margin-right: 10px;
+        }
+      }
+      .accordion-body {
+        display: flex;
+        align-items: flex-start;
+        .info {
+          margin-left: 15px;
+          > div:nth-child(1) {
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+          }
+          > div:nth-child(2) {
+            font-size: 14px;
+            line-height: 16px;
+            color: rgb(89, 89, 89);
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+  > .amenities {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    > .header {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px;
+      font-style: normal;
+      padding-bottom: 20px;
+    }
+    > .body {
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      margin: 16px 0px 0px;
+      overflow: auto;
+      .amenity-item {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 16px;
+        margin: 0px 8px 8px 0px;
+        background: rgb(250, 250, 250);
+        border-radius: 4px;
+        width: 112px;
+        min-width: 112px;
+        height: 112px;
+        position: relative;
+        p {
+          margin: 0px;
+          color: rgb(89, 89, 89);
+          font-size: 14px;
+          line-height: 16px;
+          hyphens: auto;
+        }
+        .paid-service {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0px 4px 0px 8px;
+          background-color: rgb(240, 240, 240);
+        }
+      }
+    }
+  }
+  > .transportation {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    > .header {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px;
+      font-style: normal;
+      padding-bottom: 20px;
+    }
+    > .body {
+      .transport-item {
+        display: flex;
+        margin-bottom: 20px;
+        > .info {
+          margin-left: 10px;
+          > div:nth-child(1) {
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+          }
+          > div:nth-child(2) {
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+          }
+        }
+      }
+    }
+  }
+  > .parking {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    > .header {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px;
+      font-style: normal;
+      padding-bottom: 20px;
+    }
+    > .body {
+      .parking-item {
+        display: flex;
+        margin-bottom: 20px;
+        > .info {
+          margin-left: 10px;
+          > div:nth-child(1) {
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+          }
+          > div:nth-child(2) {
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+          }
+        }
+      }
+    }
+  }
+  > .about-location {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    > .header {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px;
+      font-style: normal;
+      padding-bottom: 20px;
+    }
+    > .body {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      color: rgb(89, 89, 89);
+    }
+  }
+  > .support {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    > .header {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 37px;
+      font-style: normal;
+      padding-bottom: 20px;
+    }
+    > .body {
+      .support-item {
+        cursor: pointer;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        margin-bottom: 20px;
+        span {
+          margin-right: 10px;
+        }
+        &:hover {
+          color: $primary;
         }
       }
     }
