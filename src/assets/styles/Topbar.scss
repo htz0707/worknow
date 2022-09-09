@@ -1,5 +1,9 @@
 @import '_setting.scss';
 .topbar {
+  padding: 0;
+  .navbar-collapse {
+    padding: 0px 10px;
+  }
   .nav-link {
     &:hover {
       color: $primary !important;
@@ -9,5 +13,8 @@
     font-weight: 700;
     color: #595959;
     border-bottom: 4px solid $primary;
+    .nav-link.active {
+      border-bottom: none;
+    }
   }
 }

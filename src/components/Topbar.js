@@ -16,9 +16,10 @@ export default function Topbar() {
       variant='light'
       expand='lg'
       fixed='top'
+      collapseOnSelect
       className='topbar'
     >
-      <Container fluid='md'>
+      <Container fluid='md' style={{ minHeight: '80px' }}>
         <Navbar.Brand>
           <Link to='/'>
             <img src={Logo} width={150} />
@@ -27,27 +28,27 @@ export default function Topbar() {
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='ms-auto'>
-            <Nav.Link>
+            <Nav.Link eventKey='1'>
               <NavLink to='/' className='nav-link'>
                 {t('navbar.home')}
               </NavLink>
             </Nav.Link>
-            <Nav.Link>
+            <Nav.Link eventKey='2'>
               <NavLink to='locations' className='nav-link'>
                 {t('navbar.locations')}
               </NavLink>
             </Nav.Link>
-            <Nav.Link>
+            <Nav.Link eventKey='3'>
               <NavLink to='business' className='nav-link'>
                 {t('navbar.for_business')}
               </NavLink>
             </Nav.Link>
-            <Nav.Link>
+            <Nav.Link eventKey='4'>
               <NavLink to='space-partner' className='nav-link'>
                 {t('navbar.space_partner')}
               </NavLink>
             </Nav.Link>
-            <Nav.Link>
+            <Nav.Link eventKey='5'>
               <NavLink to='newsroom' className='nav-link'>
                 {t('navbar.newsroom')}
               </NavLink>

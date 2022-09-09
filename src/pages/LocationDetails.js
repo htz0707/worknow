@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/LocationDetails.scss';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { GrMapLocation } from 'react-icons/gr';
@@ -17,39 +17,95 @@ import ActionButton from '../components/ActionButton';
 import Img1 from '../assets/images/location_img1.png';
 import Img2 from '../assets/images/location_img2.jpg';
 import SelectBookingType from '../components/SelectBookingType';
-import LocationCard from '../components/LocationCard';
-import { Accordion } from 'react-bootstrap';
+import { Accordion, Carousel } from 'react-bootstrap';
 import MapWrapper from '../components/MapWrapper';
 import WorkSpaceCard from '../components/WorkSpaceCard';
+import SlideshowImage from '../components/SlideshowImage';
+import { useNavigate } from 'react-router-dom';
 
 export default function LocationDetails() {
-  const key = 'AIzaSyAB2XLp4egET-NJES-1OB1AApzuY6K7UoU';
+  //const key = 'AIzaSyAB2XLp4egET-NJES-1OB1AApzuY6K7UoU';
+  let navigate = useNavigate();
   const showInMapClicked = (your_lat, your_lng) => {
-    console.log('aaa');
     window.open('https://maps.google.com?q=' + your_lat + ',' + your_lng);
   };
-  const defaultProps = {
-    center: {
-      lat: 10.788159959003151,
-      lng: 106.70259701063593,
-    },
-    zoom: 15,
+  const [imageUrl, setImageUrl] = useState([Img1, Img2, Img1, Img2]);
+  // const defaultProps = {
+  //   center: {
+  //     lat: 10.788159959003151,
+  //     lng: 106.70259701063593,
+  //   },
+  //   zoom: 15,
+  // };
+  // const GOOGLE_MAP_DEFAULT_PROPS = {
+  //   defaultCenter: {
+  //     lat: 10.788159959003151,
+  //     lng: 106.70259701063593,
+  //   },
+  //   defaultZoom: 15,
+  //   bootstrapURLKeys: {
+  //     libraries: 'drawing',
+  //     key: 'AIzaSyDq38-QJCuQZk8-QoTeuLO-diT-HCPohCA',
+  //   },
+  // };
+  const [showMoreImage, setShowMoreImage] = useState(false);
+  const handleShowMoreImage = () => {
+    setShowMoreImage(true);
   };
-  const GOOGLE_MAP_DEFAULT_PROPS = {
-    defaultCenter: {
-      lat: 10.788159959003151,
-      lng: 106.70259701063593,
-    },
-    defaultZoom: 15,
-    bootstrapURLKeys: {
-      libraries: 'drawing',
-      key: 'AIzaSyDq38-QJCuQZk8-QoTeuLO-diT-HCPohCA',
-    },
+  const handleCloseShowMoreImage = () => {
+    setShowMoreImage(false);
+  };
+  const handleGoback = () => {
+    navigate(`/locations`);
   };
   return (
     <div className='location-details container-md'>
+      <div className='general-responsive'>
+        <div className='location-image'>
+          <Carousel
+            variant='light'
+            className='carousel'
+            interval={null}
+            controls={false}
+          >
+            <Carousel.Item>
+              <img src={Img1} />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img src={Img2} />
+            </Carousel.Item>
+          </Carousel>
+          <div className='back-icon' onClick={handleGoback}>
+            <MdKeyboardArrowLeft size={25} />
+          </div>
+          <div className='share-icon'>
+            <IoShareOutline size={20} />
+          </div>
+        </div>
+        <div className='location-name'>Changi Lounge</div>
+        <div className='location-company'>Changi Airport Group</div>
+        <div className='location-tags'>
+          <Tag text='Open on Wknds' />
+          <Tag text='Late Hours' />
+        </div>
+        <div className='location-address'>
+          <div>
+            <div>78 Airport Blvd., Singapore 819666</div>
+            <div>{'>10km'}</div>
+          </div>
+          <div>
+            <button
+              onClick={() =>
+                showInMapClicked(10.788159959003151, 106.70259701063593)
+              }
+            >
+              <GoLocation />
+            </button>
+          </div>
+        </div>
+      </div>
       <div className='general'>
-        <div className='row-1'>
+        <div className='row-1' onClick={handleGoback}>
           <MdKeyboardArrowLeft size={25} />
           Locations
         </div>
@@ -75,19 +131,41 @@ export default function LocationDetails() {
           </div>
         </div>
         <div className='row-5'>
-          <div className='location-images'>
-            <div className='left'>
-              <img src={Img1} />
-            </div>
-            <div className='right'>
-              <div className='right-item'>
-                <img src={Img2} />
+          {imageUrl.length >= 3 && (
+            <div className='location-images three'>
+              <div className='left'>
+                <img src={imageUrl[0]} onClick={handleShowMoreImage} />
               </div>
-              <div className='right-item'>
-                <img src={Img2} />
+              <div className='right'>
+                <div className='right-item'>
+                  <img src={imageUrl[1]} onClick={handleShowMoreImage} />
+                </div>
+                <div className='right-item'>
+                  <img src={imageUrl[2]} onClick={handleShowMoreImage} />
+                  {imageUrl.length > 3 && (
+                    <div className='view-more' onClick={handleShowMoreImage}>
+                      <button>View More</button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
+          {imageUrl.length === 2 && (
+            <div className='location-images two'>
+              <div className='left'>
+                <img src={imageUrl[0]} onClick={handleShowMoreImage} />
+              </div>
+              <div className='right'>
+                <img src={imageUrl[1]} onClick={handleShowMoreImage} />
+              </div>
+            </div>
+          )}
+          {imageUrl.length === 1 && (
+            <div className='location-images one'>
+              <img src={imageUrl[0]} onClick={handleShowMoreImage} />
+            </div>
+          )}
           <div className='location-map'>
             <div className='map'>
               {' '}
@@ -116,6 +194,7 @@ export default function LocationDetails() {
           </div>
         </div>
       </div>
+
       <div className='workspace'>
         <div className='header'>Workspaces</div>
         <div className='body'>
@@ -304,6 +383,10 @@ export default function LocationDetails() {
           </div>
         </div>
       </div>
+      <SlideshowImage
+        show={showMoreImage}
+        handleClose={handleCloseShowMoreImage}
+      />
     </div>
   );
 }

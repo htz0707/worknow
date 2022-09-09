@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className='home'>
       <section className='section-about'>
-        <div className='container'>
+        <div className='container-md'>
           <div className='row'>
             <div className='col-lg-5'>
               <div className='content'>
