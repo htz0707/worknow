@@ -25,7 +25,7 @@ export default function Locations() {
   return (
     <div className='locations container-md'>
       <div className='header'>
-        <h5 className='title'>Locations</h5>
+        <h5 className='title'>Địa điểm</h5>
         <div className='action'>
           <SelectCountryEngine />
         </div>

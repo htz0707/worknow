@@ -4,6 +4,7 @@ import { Carousel } from 'react-bootstrap';
 import Img1 from '../assets/images/location_img1.png';
 import Img2 from '../assets/images/location_img2.jpg';
 import { useNavigate } from 'react-router-dom';
+import Tag from './Tag';
 
 export default function LocationCard() {
   let navigate = useNavigate();
@@ -15,35 +16,32 @@ export default function LocationCard() {
       <div className='left'>
         <Carousel variant='light' className='carousel' interval={null}>
           <Carousel.Item>
-            <img src={Img1} />
+            <img alt='' src={Img1} />
           </Carousel.Item>
           <Carousel.Item>
-            <img src={Img2} />
+            <img alt='' src={Img2} />
           </Carousel.Item>
         </Carousel>
       </div>
       <div className='right'>
         <div>
-          <div className='location-name' onClick={handleClick}>
-            Changi Lounge
+          <div className='location-name'>CirCo Đông Du</div>
+          <div className='location-company'>Công ty Circo</div>
+          <div className='location-address'>
+            41 Đông Du, Bến Nghé, Quận 1, Tp.HCM
           </div>
-          <div>{'> 10km'}</div>
+          <div className='location-service'>
+            <Tag text='Wifi miễn phí' />
+            <Tag text='Đậu xe miễn phí' />
+          </div>
         </div>
         <div>
-          <div className='location-company'>Changi Airport Group</div>
-          Many seats{' '}
-        </div>
-        <div>78 Airport Blvd</div>
-        <div>
-          <div className='location-feature'>Instant Booking</div>
-          <div className='location-feature'>Open on Wknds</div>
-          <div className='location-feature'>Late Hours</div>
-        </div>
-        <div>
-          ${' '}
-          <span className='location-price'>
-            <span>7.80</span>/hr
-          </span>
+          <div className='promotion'>50% giảm giá hôm nay</div>
+          <div className='old-price'>250,000đ/ giờ</div>
+          <div className='new-price'>
+            <span>Chỉ từ </span>125,000đ/ giờ
+          </div>
+          <button onClick={handleClick}>Xem chi tiết</button>
         </div>
       </div>
     </div>

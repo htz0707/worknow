@@ -4,7 +4,7 @@ import { IoLocationOutline } from 'react-icons/io5';
 import { Dropdown, Button } from 'react-bootstrap';
 
 export default function FilterLocation(props) {
-  const [sort, setSort] = useState('Nearest Location');
+  const [sort, setSort] = useState('Vị trí gần nhất');
   const handleSelectSort = (value) => {
     setSort(value);
   };
@@ -27,57 +27,57 @@ export default function FilterLocation(props) {
     <div className='filter-location'>
       <div className='select-sort'>
         <Dropdown className='dropdown'>
-          <Dropdown.Toggle id='dropdown-basic'>Sort: {sort}</Dropdown.Toggle>
+          <Dropdown.Toggle id='dropdown-basic'>Sắp xếp: {sort}</Dropdown.Toggle>
           <Dropdown.Menu className='dropdown-menu'>
             <Dropdown.Item
               className={
-                sort === 'Alphabetical'
+                sort === 'Thứ tự bảng chữ cái'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Alphabetical')}
+              onClick={() => handleSelectSort('Thứ tự bảng chữ cái')}
             >
-              Alphabetical
+              Thứ tự bảng chữ cái
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                sort === 'Nearest Location'
+                sort === 'Vị trí gần nhất'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Nearest Location')}
+              onClick={() => handleSelectSort('Vị trí gần nhất')}
             >
-              Nearest Location
+              Vị trí gần nhất
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                sort === 'Many Seats First'
+                sort === 'Nhiều chỗ ngồi'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Many Seats First')}
+              onClick={() => handleSelectSort('Nhiều chỗ ngồi')}
             >
-              Many Seats First
+              Nhiều chỗ ngồi
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                sort === 'Lowest Price First'
+                sort === 'Giá thấp nhất'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Lowest Price First')}
+              onClick={() => handleSelectSort('Giá thấp nhất')}
             >
-              Lowest Price First
+              Giá thấp nhất
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                sort === 'Highest Price First'
+                sort === 'Giá cao nhất'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Highest Price First')}
+              onClick={() => handleSelectSort('Giá cao nhất')}
             >
-              Highest Price First
+              Giá cao nhất
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
@@ -92,7 +92,7 @@ export default function FilterLocation(props) {
             id='dropdown-basic'
             onClick={() => setShowDistance(true)}
           >
-            {distance || 'Distance'}
+            {distance || 'Khoảng cách'}
           </Dropdown.Toggle>
           <Dropdown.Menu
             className='dropdown-menu'
@@ -100,40 +100,40 @@ export default function FilterLocation(props) {
           >
             <Dropdown.Item
               className={
-                selectedDistance === '<500 m(~ 7 min walk)'
+                selectedDistance === 'Dưới 500m'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectDistance('<500 m(~ 7 min walk)')}
+              onClick={() => handleSelectDistance('Dưới 500m')}
             >
-              {'<500 m(~ 7 min walk)'}
+              {'Dưới 500m'}
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                selectedDistance === '<1 km(~ 13 min walk)'
+                selectedDistance === 'Dưới 1km'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectDistance('<1 km(~ 13 min walk)')}
+              onClick={() => handleSelectDistance('Dưới 1km')}
             >
-              {'<1 km(~ 13 min walk)'}
+              {'Dưới 1km'}
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                selectedDistance === '<2 km(~ 18 min walk)'
+                selectedDistance === 'Dưới 2km'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectDistance('<2 km(~ 18 min walk)')}
+              onClick={() => handleSelectDistance('Dưới 2km')}
             >
-              {'<2 km(~ 18 min walk)'}
+              {'Dưới 2km'}
             </Dropdown.Item>
             <div className='dropdown-item-footer'>
               <Button className='clear' onClick={handleClearDistance}>
-                Clear
+                Xóa
               </Button>
               <Button className='apply' onClick={handleApplyDistance}>
-                Apply
+                Áp dụng
               </Button>
             </div>
           </Dropdown.Menu>

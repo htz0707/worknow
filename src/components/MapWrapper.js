@@ -18,7 +18,7 @@ const render = (status) => {
 
 const MapWrapper = () => {
   return (
-    <Wrapper apiKey={'AIzaSyDq38-QJCuQZk8-QoTeuLO-diT-HCPohCA'} render={render}>
+    <Wrapper apiKey={'AIzaSyDWTx7bREpM5B6JKdbzOvMW-RRlhkukmVE'} render={render}>
       <MyMapComponent />
     </Wrapper>
   );

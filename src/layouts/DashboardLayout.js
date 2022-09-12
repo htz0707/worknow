@@ -1,8 +1,12 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Topbar from '../components/Topbar';
 
 export default function DashboardLayout() {
+  const path = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [path]);
   return (
     <>
       <Topbar />

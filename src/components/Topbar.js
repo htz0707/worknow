@@ -48,11 +48,11 @@ export default function Topbar() {
                 {t('navbar.space_partner')}
               </NavLink>
             </Nav.Link>
-            <Nav.Link eventKey='5'>
+            {/* <Nav.Link eventKey='5'>
               <NavLink to='newsroom' className='nav-link'>
                 {t('navbar.newsroom')}
               </NavLink>
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link>
               <NavDropdown title={t('navbar.language')} id='basic-nav-dropdown'>
                 <NavDropdown.Item onClick={() => changeLanguage('vi')}>
@@ -68,7 +68,7 @@ export default function Topbar() {
                 variant='primary'
                 className='text-white fw-bold rounded-pill px-5'
               >
-                Login
+                Đăng nhập
               </Button>
             </Nav.Link>
           </Nav>
