@@ -1,0 +1,48 @@
+.create-booking {
+  > .header {
+    height: 80px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .booking-step {
+        min-width: 500px;
+        .ant-steps-item-content {
+          margin-top: 0px;
+          .ant-steps-item-title {
+            font-size: 14px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+  > .body {
+    margin-top: 80px;
+    padding: 20px 0px;
+    .info-customer {
+      > div {
+        border: 1px solid darkgray;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+      }
+      > .box-1 {
+        display: flex;
+        align-items: center;
+      }
+      > .box-3 {
+        > .header {
+          font-weight: 600;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
