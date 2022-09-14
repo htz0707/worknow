@@ -1,16 +1,12 @@
 import React from 'react';
 import '../assets/styles/WorkSpaceCard.scss';
-import { Carousel } from 'react-bootstrap';
 import Img1 from '../assets/images/location_img1.png';
-import Img2 from '../assets/images/location_img2.jpg';
-import { useNavigate } from 'react-router-dom';
 import Tag from './Tag';
 import TimeSlotView from './TimeSlotView';
 
-export default function WorkSpaceCard() {
-  let navigate = useNavigate();
+export default function WorkSpaceCard(props) {
   const handleClick = () => {
-    navigate(`/locations/details/1`);
+    props.handleClick();
   };
   return (
     <div className='workspace-card'>
@@ -37,7 +33,9 @@ export default function WorkSpaceCard() {
           </span>
           <span>/hr</span>
         </div>
-        <div className='booking'>Book</div>
+        <div className='booking' onClick={handleClick}>
+          Book
+        </div>
       </div>
     </div>
   );
