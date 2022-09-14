@@ -24,6 +24,7 @@ import SlideshowImage from '../components/SlideshowImage';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import ScrollspyNav from 'react-scrollspy-nav';
+import ConfirmBookingModal from '../components/ConfirmBookingModal';
 
 export default function LocationDetails() {
   //const key = 'AIzaSyAB2XLp4egET-NJES-1OB1AApzuY6K7UoU';
@@ -82,6 +83,13 @@ export default function LocationDetails() {
       window.removeEventListener('scroll', listener);
     };
   });
+  const [showModal, setShowModal] = useState(false);
+  const handleBooking = () => {
+    setShowModal(true);
+  };
+  const handleConfirmBooking = () => {
+    navigate('/create-booking/1');
+  };
   return (
     <div className='location-details container-md'>
       <div className='general-responsive'>
@@ -326,10 +334,10 @@ export default function LocationDetails() {
             <div className='right'>
               <div className='header'></div>
               <div className='body'>
-                <WorkSpaceCard />
-                <WorkSpaceCard />
-                <WorkSpaceCard />
-                <WorkSpaceCard />
+                <WorkSpaceCard handleClick={handleBooking} />
+                <WorkSpaceCard handleClick={handleBooking} />
+                <WorkSpaceCard handleClick={handleBooking} />
+                <WorkSpaceCard handleClick={handleBooking} />
               </div>
             </div>
           </div>
@@ -473,6 +481,11 @@ export default function LocationDetails() {
           </div>
         </div>
       </div>
+      <ConfirmBookingModal
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        handleConfirm={handleConfirmBooking}
+      />
       <SlideshowImage
         show={showMoreImage}
         handleClose={handleCloseShowMoreImage}

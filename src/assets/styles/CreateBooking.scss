@@ -6,6 +6,7 @@
     align-items: center;
     position: fixed;
     top: 0;
+    z-index: 1000;
     width: 100%;
     > div {
       display: flex;
@@ -41,6 +42,158 @@
         > .header {
           font-weight: 600;
           font-size: 16px;
+        }
+      }
+    }
+    .info-workspace {
+      > div {
+        border: 1px solid darkgray;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+      }
+      > .box-1 {
+        display: flex;
+        > img {
+          height: 100px;
+          max-width: 200px;
+        }
+        > div {
+          margin-left: 10px;
+          > div:nth-child(1) {
+            font-size: 20px;
+            line-height: 23px;
+            font-weight: 700;
+          }
+        }
+      }
+      > .box-2 {
+        > .time {
+          margin-bottom: 20px;
+          > div {
+            font-size: 20px;
+            line-height: 23px;
+            font-weight: 700;
+          }
+        }
+        > .workspace {
+          padding-bottom: 20px;
+          border-bottom: 1px solid #b0b0b0;
+          font-weight: 600;
+          margin-bottom: 20px;
+        }
+        > .workspace-details {
+          display: flex;
+          > img {
+            height: 100px;
+            max-width: 200px;
+          }
+          > ul {
+            list-style: none;
+          }
+        }
+      }
+      > .box-3 {
+        > .title {
+          font-weight: 600;
+          margin-bottom: 10px;
+        }
+      }
+      > .box-4 {
+        > .price-detail {
+          padding-bottom: 10px;
+          border-bottom: 1px solid #b0b0b0;
+          margin-bottom: 10px;
+          > div {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+        > .price-total {
+          display: flex;
+          justify-content: space-between;
+          > span:nth-child(1) {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    .info-payment {
+      > div {
+        border: 1px solid darkgray;
+        border-radius: 10px;
+        padding: 10px 20px;
+        > div {
+          display: flex;
+          margin-bottom: 20px;
+          > .step-number {
+            width: 40px;
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #aeb6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 20px;
+          }
+          > .step-info {
+            flex: 1;
+            > .step-title {
+              height: 40px;
+              display: flex;
+              align-items: center;
+              font-weight: 600;
+            }
+            > .step-content {
+              background-color: #d9dcf9;
+              width: 100%;
+              padding: 10px 20px;
+              .bank-account {
+                margin-top: 10px;
+
+                border-bottom: 1px solid #b0b0b0;
+                > div {
+                  display: flex;
+                  margin-bottom: 10px;
+                  > div:nth-child(1) {
+                    width: 200px;
+                  }
+                  > div:nth-child(2) {
+                    flex: 1;
+                  }
+                }
+              }
+              .bank-amount {
+                display: flex;
+                padding: 10px 0;
+                > div:nth-child(1) {
+                  width: 200px;
+                }
+                > div:nth-child(2) {
+                  flex: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .info-booking {
+      > div {
+        border: 1px solid darkgray;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+      }
+      > .need-help {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .phone-number {
+          background-color: #aeb6ff;
+          padding: 5px 10px;
         }
       }
     }
