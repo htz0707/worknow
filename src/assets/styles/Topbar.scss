@@ -4,17 +4,23 @@
   .navbar-collapse {
     padding: 0px 10px;
   }
-  .nav-link {
+  .nav-item-link {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.55);
     &:hover {
       color: $primary !important;
     }
   }
-  .nav-link.active {
+  .nav-item-link.active {
     font-weight: 700;
     color: #595959;
     border-bottom: 4px solid $primary;
-    .nav-link.active {
-      border-bottom: none;
-    }
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+  }
+  .nav-link.active {
+    border-bottom: none;
   }
 }

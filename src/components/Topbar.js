@@ -29,31 +29,31 @@ export default function Topbar() {
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='ms-auto'>
             <Nav.Link eventKey='1'>
-              <NavLink to='/' className='nav-link'>
+              <NavLink to='/' className='nav-item-link'>
                 {t('navbar.home')}
               </NavLink>
             </Nav.Link>
             <Nav.Link eventKey='2'>
-              <NavLink to='locations' className='nav-link'>
+              <NavLink to='locations' className='nav-item-link'>
                 {t('navbar.locations')}
               </NavLink>
             </Nav.Link>
             <Nav.Link eventKey='3'>
-              <NavLink to='business' className='nav-link'>
+              <NavLink to='business' className='nav-item-link'>
                 {t('navbar.for_business')}
               </NavLink>
             </Nav.Link>
             <Nav.Link eventKey='4'>
-              <NavLink to='space-partner' className='nav-link'>
+              <NavLink to='space-partner' className='nav-item-link'>
                 {t('navbar.space_partner')}
               </NavLink>
             </Nav.Link>
             {/* <Nav.Link eventKey='5'>
-              <NavLink to='newsroom' className='nav-link'>
+              <NavLink to='newsroom' className='nav-item-link'>
                 {t('navbar.newsroom')}
               </NavLink>
             </Nav.Link> */}
-            <Nav.Link>
+            <Nav.Link className='nav-item-link'>
               <NavDropdown title={t('navbar.language')} id='basic-nav-dropdown'>
                 <NavDropdown.Item onClick={() => changeLanguage('vi')}>
                   Vietnamese
