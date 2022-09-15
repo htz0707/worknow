@@ -7,6 +7,8 @@ import DashboardLayout from './layouts/DashboardLayout';
 import Locations from './pages/Locations';
 import LocationDetails from './pages/LocationDetails';
 import CreateBooking from './pages/CreateBooking';
+import Business from './pages/Business';
+import VerifyAccount from './pages/VerifyAccount';
 
 function App() {
   return (
@@ -16,8 +18,10 @@ function App() {
           <Route index element={<Home />} />
           <Route path='locations' element={<Locations />} />
           <Route path='locations/details/:id' element={<LocationDetails />} />
+          <Route path='business' element={<Business />} />
         </Route>
         <Route path='/create-booking/:id' element={<CreateBooking />} />
+        <Route path='/verify-account' element={<VerifyAccount />} />
       </Routes>
     </BrowserRouter>
   );
