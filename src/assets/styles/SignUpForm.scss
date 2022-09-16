@@ -1,0 +1,97 @@
+.sign-up {
+  h1 {
+    font-size: 24px;
+    line-height: 29px;
+    color: rgb(20, 20, 20);
+    padding: 34px 40px 24px;
+    text-align: left;
+  }
+  .signup-form {
+    max-width: 600px;
+    padding: 0px 40px 35px;
+    text-align: left;
+    .col-2 {
+      padding-right: 0;
+    }
+    label {
+      font-size: 14px;
+      line-height: 17px;
+      color: rgb(63, 63, 63);
+      margin-bottom: 4px;
+      .required {
+        color: rgb(245, 85, 35);
+      }
+    }
+    .ant-form-item {
+      width: 100%;
+    }
+    .first-name-block {
+      margin-right: 10px;
+    }
+    .ant-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      line-height: 20px;
+      border-radius: 8px;
+      resize: none;
+      display: block;
+      outline: none;
+      border: 2px solid rgb(240, 240, 240);
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    .ant-select-focused {
+      .ant-select-selector {
+        border-color: rgb(240, 240, 240) !important;
+        box-shadow: none !important;
+      }
+    }
+    .ant-select-selector {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      line-height: 20px;
+      border-radius: 8px;
+      resize: none;
+      display: block;
+      outline: none;
+      border: 2px solid rgb(240, 240, 240);
+      height: 52px;
+      &:hover {
+        border-color: rgb(240, 240, 240);
+        box-shadow: none;
+      }
+    }
+    .sign-up-term {
+      margin-top: 22px;
+      margin-bottom: 40px;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.01em;
+      font-weight: normal;
+      color: rgb(20, 20, 20);
+    }
+    .sign-up-btn {
+      width: 100%;
+      background-color: rgb(245, 85, 35);
+      border-radius: 10px;
+      color: rgb(255, 255, 255);
+      height: 48px;
+      border-color: unset;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 28px;
+    }
+    .ant-input-textarea {
+      .ant-input {
+        height: 112px;
+        min-height: 112px;
+        max-height: 112px;
+        resize: none;
+      }
+    }
+  }
+}

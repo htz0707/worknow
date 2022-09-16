@@ -15,5 +15,59 @@
       "partners": "Đối tác",
       "happy_customers": "Khách hàng"
     }
+  },
+  "business": {
+    "section_intro":{
+      "title": "Đăng ký tài khoản doanh nghiệp và nhận $ 450 ngay hôm nay!",
+      "description": "Nhân viên hạnh phúc khi được giảm giá! Đăng ký WorkNow for Business ngay hôm nay và nhận phiếu thưởng trị giá lên đến $ 450!",
+      "promo-code": "Mã khuyến mại: WorkNowWNB22",
+      "limited-time": "Thời gian giới hạn. Chỉ Singapore.",
+      "term-condition": "Xem Điều khoản & Điều kiện",
+      "get-started": "Bắt đầu"
+    },
+    "section_features":{
+      "mobile": "Mọi thứ trên điện thoại",
+      "automatic": "Đăng ký tự động",
+      "flexible": "Thanh toán linh hoạt",
+      "mobile-desc": "Tìm không gian làm việc, xem công suất sử dụng trong thời gian thực, đặt phòng và bàn làm việc, nhận phòng và trả phòng - tất cả đều thông qua ứng dụng.",
+      "automatic-desc": "Đăng ký điện thoại di động của bạn tự động hoặc theo cách thủ công thông qua mã riêng tư",
+      "flexible-desc": "Chọn thanh toán cá nhân hoặc sử dụng Chuyển đổi cho Tài khoản Doanh nghiệp trong mỗi lần thanh toán."
+    },
+    "section_realtime":{
+      "title":"WorkNow for Business Dashboard & Cổng thông tin quản lý sử dụng",
+      "description": "Nhận được khả năng hiển thị về việc tiết kiệm sử dụng bàn HQ, tiết kiệm thời gian đi làm, các khu vực lân cận phổ biến nhất, xác định và tạo báo cáo về cách nhân viên đang sử dụng WorkNow để làm việc từ mọi nơi."
+    },
+    "section_signup":{
+      "title": "Sẵn sàng để bắt đầu?",
+      "free": "Đăng ký miễn phí",
+      "pay": "Liên hệ",
+      "free-note": "Tạo tài khoản doanh nghiệp mới",
+      "pay-note": "Chuyên viên tư vấn của chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.",
+      "company": "Công ty",
+      "first-name": "Tên",
+      "last-name": "Họ",
+      "email": "Email làm việc",
+      "phone": "Số điện thoại",
+      "code" : "Mã giới thiệu",
+      "location": "Địa điểm văn phòng của bạn",
+      "job-title": "Chức danh nghề nghiệp",
+      "message" : "Tin nhắn",
+      "size": "Quy mô công ty",
+      "submit": "Gửi"
+    }
+  },
+  "verify_account":{
+    "title" : "Xin Chào",
+    "step": "Chỉ còn 2 bước nữa thôi, tài khoản Doanh nghiệp của bạn sẽ được kích hoạt ngay lập tức.",
+    "complete": "Đầu tiên, vui lòng cho chúng tôi biết thêm về Doanh nghiệp của bạn.",
+    "last" : "Tuyệt vời! Cuối cùng, hãy tạo mật khẩu để bảo mật Tài khoản của bạn .",
+    "company": "Tên Công Ty",
+    "number": "Số đăng ký kinh doanh",
+    "size": "Quy mô công ty",
+    "pass": "Mật khẩu",
+    "re-pass": "Xác nhận mật khẩu",
+    "next": "Tiếp",
+    "back": "Trở về",
+    "done" : "Xong"
   }
 }

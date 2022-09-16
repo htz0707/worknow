@@ -15,5 +15,59 @@
       "partners": "Partners",
       "happy_customers": "Happy Customers"
     }
+  },
+  "business": {
+    "section_intro":{
+      "title": "Sign up a business account and get up to $450 today!",
+      "description": "Happy employees at a discount! Sign up for WorkNow for Business today and get vouchers worth up to $450!",
+      "promo-code": "Promo code: WorkNowWNB22",
+      "limited-time": "Limited time. Singapore only.",
+      "term-condition": "View Terms & Conditions",
+      "get-started": "Get started"
+    },
+    "section_features":{
+      "mobile": "Everything On Mobile",
+      "automatic": "Automatic Registration",
+      "flexible": "Flexible Payments",
+      "mobile-desc": "Find workspaces, view real time occupancy, book rooms and desks, check in and out -- all via the app.",
+      "automatic-desc": "Register your mobile automatically, or manually via a private code",
+      "flexible-desc": "Choose to pay personally or using the WorkNow for Business Account during each checkout."
+    },
+    "section_realtime":{
+      "title":"WorkNow for Business Dashboard & Usage Management Portal",
+      "description": "Get visibility on HQ desk usage savings, commute time saved, most popular neighborhoods, define and generate reports on how employees are using WorkNow to work from anywhere."
+    },
+    "section_signup":{
+      "title": "Ready to get started?",
+      "free": "Sign up for FREE",
+      "pay": "Get in Touch",
+      "free-note": "Create a new business account.",
+      "pay-note": "Our consultant will contact you shortly.",
+      "company": "Company",
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "email": "Work Email",
+      "phone": "Phone Number",
+      "code" : "Referral Code",
+      "location": "Your Office Locations",
+      "job-title": "Job Title",
+      "message" : "Message",
+      "size": "Company Size",
+      "submit": "Submit"
+    }
+  },
+  "verify_account":{
+    "title" : "Welcome",
+    "step": "Just 2 steps and your business account will be active rightaway.",
+    "complete": "Now lets complete business information for your account",
+    "last" : "Wonderful! Finally, create a password to secure your account.",
+    "company": "Company name",
+    "number": "Company registration number",
+    "size": "No of employees",
+    "pass": "Password",
+    "re-pass": "Confirm password",
+    "next": "Next",
+    "back": "Back",
+    "done" : "Done"
   }
 }

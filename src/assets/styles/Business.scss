@@ -1,0 +1,174 @@
+.business {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  .section-intro {
+    background: linear-gradient(rgb(255, 226, 216) 0%, rgb(252, 249, 245) 100%);
+    .content {
+      padding-top: 200px;
+      padding-bottom: 160px;
+      width: 100%;
+      .title {
+        font-size: 56px;
+        margin-bottom: 24px;
+        line-height: 60px;
+        font-weight: 600;
+        max-width: 730px;
+      }
+      .description {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 32px;
+        max-width: 425px;
+      }
+      .promo-code {
+        font-size: 24px;
+        line-height: 32px;
+        color: rgb(20, 20, 20);
+        margin-top: 16px;
+        font-weight: bold;
+      }
+      .term {
+        font-size: 14px;
+        line-height: 16px;
+        color: rgb(20, 20, 20);
+        margin-top: 14px;
+      }
+      .started {
+        margin-top: 36px;
+        min-width: 232px;
+        height: 40px;
+        padding: 0px 18px;
+        border-radius: 4px;
+        text-align: center;
+        line-height: 40px;
+        font-weight: bold;
+        font-size: 16px;
+        color: rgb(255, 255, 255);
+        border: 0px;
+      }
+    }
+    .intro-img {
+      position: absolute;
+      left: 55%;
+      top: 8%;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .section-features {
+    background: rgb(255, 255, 255);
+    padding-top: 160px;
+    padding-bottom: 160px;
+    .feature-item {
+      text-align: center;
+      .img-wrap {
+        margin-bottom: 24px;
+      }
+      .content {
+        .title {
+          margin-bottom: 8px;
+          font-weight: 600;
+          font-size: 24px;
+        }
+        .text-sub {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 19px;
+          line-height: 28px;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .section-realtime {
+    position: relative;
+    min-height: 800px;
+    background-color: rgb(252, 249, 245);
+    padding-top: 160px;
+    padding-bottom: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .content {
+      max-width: 540px;
+      h2 {
+        margin-top: 0px;
+        margin-bottom: 24px;
+        font-weight: 600;
+        font-size: 48px;
+      }
+      p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19px;
+        line-height: 28px;
+        margin-top: 0;
+        margin-bottom: 24px;
+      }
+    }
+    .realtime-img {
+      position: absolute;
+      height: 652px;
+      right: calc(40% - 788px);
+      top: 10%;
+    }
+  }
+  .section-signup {
+    display: flex;
+    justify-content: space-between;
+    .sign-up-bg {
+      width: 426px;
+      background-image: url('../images/sign-up-bg.svg');
+      min-height: 100%;
+    }
+    .sign-up-block {
+      width: 100%;
+      text-align: center;
+      h2 {
+        font-weight: bold;
+        font-size: 48px;
+        line-height: 52px;
+        color: rgb(20, 20, 20);
+        margin: 120px 0px 40px;
+      }
+      .sign-up-form {
+        max-width: 672px;
+        margin: 0 auto;
+        .sign-up-tabs {
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          border-radius: 8px;
+          background: rgb(255, 255, 255);
+          margin-bottom: 60px;
+          .ant-tabs-nav-list {
+            width: 100%;
+          }
+          .ant-tabs-tab {
+            width: 100%;
+            height: 88px;
+            display: flex;
+            justify-content: center;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 26px;
+            line-height: 32px;
+            color: rgb(67, 67, 67);
+            background-color: rgb(240, 240, 240);
+            padding: 28px 0px 20px;
+            margin-left: 0;
+          }
+          .ant-tabs-tab-active {
+            background-color: #fff;
+            color: rgb(44, 44, 44);
+            .ant-tabs-tab-btn {
+              color: rgb(44, 44, 44);
+              border-bottom: 4px solid rgb(245, 85, 35);
+              padding-bottom: 4px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
