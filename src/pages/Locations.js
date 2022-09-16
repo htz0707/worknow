@@ -5,6 +5,7 @@ import SelectCountryEngine from '../components/SelectCountryEngine';
 import FilterLocation from '../components/FilterLocation';
 import LocationCard from '../components/LocationCard';
 import { useEffect } from 'react';
+import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
 
 export default function Locations() {
   const listener = (e) => {
@@ -23,14 +24,46 @@ export default function Locations() {
     };
   });
   return (
-    <div className='locations container-md'>
-      <div className='header'>
+    <div className='locations'>
+      <div className='locations_header'>
+        <div className='locations_header_content'>
+          <div className='search-bar'>
+            <SearchIcon />
+            <input type='text' placeholder='Tìm kiếm địa điểm' />
+          </div>
+          <div className='calendar-bar'></div>
+        </div>
+      </div>
+      <div className='locations_body page-container'>
+        <div className='locations_body_left'>
+          <FilterLocation />
+        </div>
+        <div className='locations_body_right'>
+          <div className='header'>
+            <div>
+              <span className='fw-bold'>1.704 văn phòng làm việc</span> tại TP.
+              Hồ Chí Minh
+            </div>
+          </div>
+          <div className='content'>
+            <LocationCard />
+            <LocationCard />
+            <LocationCard />
+            <LocationCard />
+            <LocationCard />
+            <LocationCard />
+            <LocationCard />
+            <LocationCard />
+          </div>
+        </div>
+      </div>
+      {/* <div className='header'>
         <h5 className='title'>Địa điểm</h5>
         <div className='action'>
           <SelectCountryEngine />
         </div>
-      </div>
-      <div id='body_location' className='body'>
+      </div> */}
+      {/* <div id='body_location' className='body'>
         <div className='left'>
           <SelectBookingType />
         </div>
@@ -49,7 +82,7 @@ export default function Locations() {
             <LocationCard />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

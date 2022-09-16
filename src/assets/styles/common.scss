@@ -1,0 +1,29 @@
+.page-container {
+  width: 100%;
+  padding-left: 130px !important;
+  padding-right: 130px !important;
+}
+@media (max-width: 1200px) {
+  .page-container {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+  }
+}
+@media (max-width: 992px) {
+  .page-container {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+  }
+}
+@media (max-width: 768px) {
+  .page-container {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+}
+@media (max-width: 576px) {
+  .page-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}

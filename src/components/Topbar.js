@@ -12,14 +12,16 @@ export default function Topbar() {
   }
   return (
     <Navbar
-      bg='light'
       variant='light'
       expand='lg'
       fixed='top'
       collapseOnSelect
       className='topbar'
     >
-      <Container fluid='md' style={{ minHeight: '80px' }}>
+      <Container
+        className='page-container'
+        style={{ minHeight: '80px', maxWidth: '100%' }}
+      >
         <Navbar.Brand>
           <Link to='/'>
             <img src={Logo} width={150} />
@@ -27,7 +29,7 @@ export default function Topbar() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='ms-auto'>
+          <Nav>
             <Nav.Link eventKey='1'>
               <NavLink to='/' className='nav-item-link'>
                 {t('navbar.home')}
@@ -53,7 +55,7 @@ export default function Topbar() {
                 {t('navbar.newsroom')}
               </NavLink>
             </Nav.Link> */}
-            <Nav.Link className='nav-item-link'>
+            {/* <Nav.Link className='nav-item-link'>
               <NavDropdown title={t('navbar.language')} id='basic-nav-dropdown'>
                 <NavDropdown.Item onClick={() => changeLanguage('vi')}>
                   Vietnamese
@@ -62,16 +64,9 @@ export default function Topbar() {
                   English
                 </NavDropdown.Item>
               </NavDropdown>
-            </Nav.Link>
-            <Nav.Link>
-              <Button
-                variant='primary'
-                className='text-white fw-bold rounded-pill px-5'
-              >
-                Đăng nhập
-              </Button>
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
+          <button className='btn-login ms-auto'>Đăng nhập</button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
