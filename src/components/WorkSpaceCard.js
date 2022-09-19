@@ -14,28 +14,20 @@ export default function WorkSpaceCard(props) {
         <img src={Img1} />
       </div>
       <div className='center'>
-        <div>Lounge Area (4 Hours Promotion)</div>
-        <div>Simply show your booking at the front desk</div>
-        <div>09:00 - 21:00</div>
+        <div>Bàn làm việc số 1</div>
         <div>
-          <Tag text='Instant Booking' />
+          <div>Gần cửa sổ</div>
+          <div>Tầm nhìn ra thành phố</div>
+          <div>09:00 - 21:00</div>
         </div>
         <div>
           <TimeSlotView start='09:00' end='23:00' />
         </div>
       </div>
       <div className='right'>
-        <div className='price'>
-          <span>$</span>
-          <span className='number'>
-            <span>7</span>
-            <span>.80</span>
-          </span>
-          <span>/hr</span>
-        </div>
-        <div className='booking' onClick={handleClick}>
-          Book
-        </div>
+        <div className='new-price'>125,000đ/ giờ</div>
+        <div className='old-price'>250,000đ/ giờ</div>
+        <button onClick={handleClick}>Đặt ngay</button>
       </div>
     </div>
   );

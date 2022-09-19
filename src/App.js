@@ -1,4 +1,4 @@
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

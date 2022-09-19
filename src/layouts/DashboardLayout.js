@@ -12,7 +12,6 @@ export default function DashboardLayout() {
       <Topbar />
       <div
         style={{
-          marginTop: '80px',
           display: 'flex',
           justifyContent: 'center',
           width: '100%',

@@ -1,20 +1,26 @@
 @import '_setting.scss';
 .topbar {
   padding: 0;
+  background-color: rgba(171, 171, 171, 0.5);
   .navbar-collapse {
     padding: 0px 10px;
   }
   .nav-item-link {
     text-decoration: none;
-    color: rgba(0, 0, 0, 0.55);
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    padding: 7px 12px;
     &:hover {
-      color: $primary !important;
+      background: rgba(1, 1, 1, 0.3);
+      border-radius: 2px;
     }
   }
   .nav-item-link.active {
     font-weight: 700;
-    color: #595959;
-    border-bottom: 4px solid $primary;
+    background: rgba(1, 1, 1, 0.3);
+    border-radius: 2px;
   }
   .nav-link {
     display: flex;
@@ -22,5 +28,12 @@
   }
   .nav-link.active {
     border-bottom: none;
+  }
+  .btn-login {
+    width: 116px;
+    height: 33px;
+    color: #ffffff;
+    background: #282723;
+    border-radius: 100px;
   }
 }
