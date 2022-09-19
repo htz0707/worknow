@@ -27,3 +27,17 @@
     padding-right: 20px !important;
   }
 }
+/*CUSTOM SCROLL BAR*/
+.scroll-bar-custom::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  margin-right: 5px;
+}
+.scroll-bar-custom ::-webkit-scrollbar-track {
+  color: #c4c4c4;
+  border-radius: 6px;
+}
+.scroll-bar-custom::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}

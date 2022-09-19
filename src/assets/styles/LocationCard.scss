@@ -9,7 +9,7 @@
   border-radius: 20px;
   .location-card_left {
     width: 250px;
-    height: 168px;
+    height: 180px;
     position: relative;
     background: rgb(252, 249, 245);
     border-radius: 4px;
@@ -166,16 +166,16 @@
           color: $primary;
         }
         button {
-          font-weight: bold;
           font-size: 14px;
           line-height: 16px;
           text-align: center;
           letter-spacing: 0.01em;
           user-select: none;
-          background: #282723;
+          background: #ffb31f;
           border-radius: 50px;
-          color: #ffffff;
+          color: black;
           padding: 8px 20px;
+          border: none;
         }
       }
     }

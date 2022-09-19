@@ -1,11 +1,11 @@
 import React from 'react';
 import '../assets/styles/Locations.scss';
-import SelectBookingType from '../components/SelectBookingType';
-import SelectCountryEngine from '../components/SelectCountryEngine';
 import FilterLocation from '../components/FilterLocation';
 import LocationCard from '../components/LocationCard';
 import { useEffect } from 'react';
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
+import MapWrapper from '../components/MapWrapper';
+import SortLocation from '../components/SortLocation';
 
 export default function Locations() {
   const listener = (e) => {
@@ -36,6 +36,12 @@ export default function Locations() {
       </div>
       <div className='locations_body page-container'>
         <div className='locations_body_left'>
+          <div className='search-on-map'>
+            <div>
+              <MapWrapper />
+            </div>
+            <div>Xem trên bản đồ</div>
+          </div>
           <FilterLocation />
         </div>
         <div className='locations_body_right'>
@@ -44,6 +50,7 @@ export default function Locations() {
               <span className='fw-bold'>1.704 văn phòng làm việc</span> tại TP.
               Hồ Chí Minh
             </div>
+            <SortLocation />
           </div>
           <div className='content'>
             <LocationCard />
