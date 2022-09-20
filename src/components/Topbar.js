@@ -4,7 +4,7 @@ import { NavLink, Link } from 'react-router-dom';
 import '../assets/styles/Topbar.scss';
 import { useTranslation } from 'react-i18next';
 import i18n from '../translation/i18n';
-import Logo from '../assets/images/logo.png';
+import Logo from '../assets/images/logo.svg';
 export default function Topbar() {
   const { t } = useTranslation();
   function changeLanguage(value) {
@@ -24,7 +24,7 @@ export default function Topbar() {
       >
         <Navbar.Brand>
           <Link to='/'>
-            <img src={Logo} width={150} />
+            <img src={Logo} width={50} />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
