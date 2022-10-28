@@ -30,6 +30,7 @@ import { ReactComponent as CheckIcon } from '../assets/icons/check.svg';
 import { ReactComponent as QuoteIcon } from '../assets/icons/quote.svg';
 import { Avatar, DatePicker } from 'antd';
 import moment from 'moment';
+import Bcrumb from '../components/Bcrumb';
 
 export default function LocationDetails() {
   //const key = 'AIzaSyAB2XLp4egET-NJES-1OB1AApzuY6K7UoU';
@@ -155,9 +156,19 @@ export default function LocationDetails() {
           </div>
         </div>
         <div className='general page-container'>
-          <div className='row-1' onClick={handleGoback}>
-            <MdKeyboardArrowLeft size={25} />
-            Địa điểm
+          <div className='row-1'>
+            <Bcrumb
+              data={[
+                {
+                  label: 'Danh Dách',
+                  path: '/locations',
+                },
+                {
+                  label: 'Thông tin văn phòng',
+                  active: true,
+                },
+              ]}
+            />
           </div>
           <div className='row-2'>
             Circo Đông Du <span>+1200 lượt đặt</span>
