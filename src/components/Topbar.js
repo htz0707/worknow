@@ -5,11 +5,16 @@ import '../assets/styles/Topbar.scss';
 import { useTranslation } from 'react-i18next';
 import i18n from '../translation/i18n';
 import Logo from '../assets/images/logo.svg';
+import { useNavigate } from 'react-router-dom';
 export default function Topbar() {
   const { t } = useTranslation();
   function changeLanguage(value) {
     i18n.changeLanguage(value);
   }
+  let navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/sign-in`);
+  };
   return (
     <Navbar
       variant='light'
@@ -66,7 +71,7 @@ export default function Topbar() {
               </NavDropdown>
             </Nav.Link> */}
           </Nav>
-          <button className='btn-login ms-auto'>Đăng nhập</button>
+          <button className='btn-login ms-auto' onClick={handleClick}>Đăng nhập</button>
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Topbar from '../components/Topbar';
+import BottomBar from '../components/BottomBar';
 
 export default function DashboardLayout() {
   const path = useLocation();
@@ -19,6 +20,7 @@ export default function DashboardLayout() {
       >
         <Outlet />
       </div>
+      <BottomBar />
     </>
   );
 }
