@@ -1,0 +1,69 @@
+@import '_setting.scss';
+
+.sign-in {
+  width: 100vw;
+  background-image: url('../images/sign-in-bg.png');
+  min-height: 100vh;
+  background-size: cover;
+
+  .logo {
+    min-height: 100vh;
+  }
+
+  .sign-in-form {
+    background-color: white;
+    min-width: 35vw;
+    min-height: 50vh;
+
+    .btn {
+      background: #FFB31F;
+      font-weight: 500;
+    }
+
+    .btn-white {
+      background: white;
+      font-weight: 400;
+      .icon {
+        width: 35px;
+      }
+    }
+  }
+
+  .password-field {
+    display: flex !important;
+  }
+
+  .eye-icon {
+    margin-bottom: -30px;
+    margin-top: 10px;
+    margin-left: -30px;
+    cursor: pointer;
+  }
+
+  .link {
+    text-decoration: none;
+    color: #0075FF;
+    font-weight: 500;
+  }
+
+  .text-gray {
+    color: gray;
+  }
+
+  .single-line-input {
+    background-color: white;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    border-bottom: 2px solid #eeeeee;
+    min-height: 40px;
+  }
+
+  .single-line-input:focus {
+    background-color: white;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 2px solid #eeeeee;
+    padding: 0;
+  }
+}

@@ -1,0 +1,26 @@
+@import '_setting.scss';
+
+.bottom-bar {
+  color: white;
+
+  .container-bottom-bar {
+    min-height: 80px;
+    max-width: 100%;
+    padding-left: 160px;
+
+    .title {
+      margin-bottom: 100px;
+    }
+
+    .link-text {
+      font-weight: 100;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .icon {
+      width: 30px;
+      cursor: pointer;
+    }
+  }
+}

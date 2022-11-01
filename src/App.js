@@ -9,6 +9,8 @@ import LocationDetails from './pages/LocationDetails';
 import CreateBooking from './pages/CreateBooking';
 import Business from './pages/Business';
 import VerifyAccount from './pages/VerifyAccount';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         </Route>
         <Route path='/create-booking/:id' element={<CreateBooking />} />
         <Route path='/verify-account' element={<VerifyAccount />} />
+        <Route path='sign-in' element={<SignIn />} />
+        <Route path='sign-up' element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );
