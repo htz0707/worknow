@@ -2,12 +2,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Button, Input, Select } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import '../assets/styles/SignUpForm.scss'
 
 export default function SignUpForm(props) {
   const { Option } = Select;
   const { t } = useTranslation();
+  let navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/business/register/final-step`);
+  };
   return (
     <div className='sign-up'>
       <h1>
@@ -157,6 +162,7 @@ export default function SignUpForm(props) {
             type='primary'
             htmlType='submit'
             className='sign-up-btn'
+            onClick={handleClick}
           >
             {t('business.section_signup.submit')}
           </Button>

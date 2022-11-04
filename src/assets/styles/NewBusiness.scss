@@ -1,0 +1,126 @@
+@import '_setting.scss';
+
+.business-register {
+  width: 100%;
+
+  .layout {
+    background: url('../images/layout.png');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .section-about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .description {
+        margin-right: 70px;
+      }
+
+      .btn {
+        max-width: 50%;
+        text-align: left !important;
+        border-radius: 10px !important;
+        justify-content: center;
+      }
+
+      .icon {
+        border-radius: 50%;
+        background: linear-gradient(265.95deg, rgba(186, 123, 29, 0.8) -59.03%, rgba(255, 224, 178, 0.8) 6.24%, rgba(255, 191, 67, 0.8) 111.24%);
+      }
+    }
+
+    .image {
+      width: 100%;
+      margin-left: 60px;
+    }
+  }
+
+  .button-gray {
+    background-color: rgba(171, 171, 171, 0.5);
+    border: 0;
+
+    &:hover {
+      color: white !important;
+    }
+  }
+
+  .nav-link.active.no-underline {
+    border: 0 !important;
+  }
+
+  .text-pointer {
+    cursor: pointer !important;
+
+    &:hover {
+      color: $primary !important;
+    }
+  }
+
+  .text-reason {
+    width: 24%;
+  }
+
+  .flex {
+    display: flex;
+    .image-card {
+      position: relative;
+      text-align: center;
+      color: #FFFFFF;
+      h4 {
+        color: #FFFFFF;
+      }
+      .image-hl {
+        height: 650px;
+        border-radius: 30px;
+      }
+
+      .text-bottom-1 {
+        position: absolute;
+        bottom: 80px;
+        left: 40px;
+      }
+      .text-bottom-2 {
+        position: absolute;
+        bottom: 30px;
+        left: 40px;
+      }
+      .text-bottom-3 {
+        position: absolute;
+        bottom: 10px;
+        left: 40px;
+      }
+      .btn-bottom {
+        position: absolute;
+        bottom: 55px;
+        right: 40px;
+      }
+    }
+    .image-1, .image-3 {
+      margin-right: 20px;
+    }
+    .image-2 {
+      top: 70px;
+    }
+    .image-3 {
+      top: 20px;
+      margin-bottom: 200px;     
+    }
+    .image-4 {
+      top: 90px;
+      margin-bottom: 200px;     
+    }
+  }
+  .image-partner {
+    width: 7%;
+    margin-right: 13%;
+  }
+}
