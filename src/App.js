@@ -11,6 +11,9 @@ import Business from './pages/Business';
 import VerifyAccount from './pages/VerifyAccount';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import BusinessRegister from './pages/BusinessRegister';
+import NewBusiness from './pages/NewBusiness';
+import BusinessRegisterFinalStep from './pages/BusinessRegisterFinalStep'
 
 function App() {
   return (
@@ -20,7 +23,10 @@ function App() {
           <Route index element={<Home />} />
           <Route path='locations' element={<Locations />} />
           <Route path='locations/details/:id' element={<LocationDetails />} />
-          <Route path='business' element={<Business />} />
+          <Route path='old-business' element={<Business />} />
+          <Route path='business' element={<NewBusiness />} />
+          <Route path='business/register' element={<BusinessRegister />} />
+          <Route path='business/register/final-step' element={<BusinessRegisterFinalStep />} />
         </Route>
         <Route path='/create-booking/:id' element={<CreateBooking />} />
         <Route path='/verify-account' element={<VerifyAccount />} />
