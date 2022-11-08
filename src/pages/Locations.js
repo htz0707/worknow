@@ -25,7 +25,7 @@ export default function Locations() {
   });
   return (
     <div className='locations'>
-      <div className='locations_header'>
+      <div className='locations_header page-container'>
         <div className='locations_header_content'>
           <div className='search-bar'>
             <SearchIcon />

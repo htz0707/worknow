@@ -25,8 +25,8 @@ export default function WorkSpaceCard(props) {
         </div>
       </div>
       <div className='right'>
-        <div className='new-price'>125,000đ/ giờ</div>
-        <div className='old-price'>250,000đ/ giờ</div>
+        <div className='old-price'>250,000Đ/H</div>
+        <div className='new-price'>125,000Đ/H</div>
         <button onClick={handleClick}>Đặt ngay</button>
       </div>
     </div>

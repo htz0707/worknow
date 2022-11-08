@@ -14,7 +14,7 @@ export default function SortLocation() {
       <Dropdown className='dropdown'>
         <Dropdown.Toggle id='dropdown-basic'>
           <SortIcon className='sort-icon' />
-          Sắp xếp: {sort}
+          {sort}
         </Dropdown.Toggle>
         <Dropdown.Menu className='dropdown-menu'>
           <Dropdown.Item

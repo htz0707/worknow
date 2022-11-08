@@ -19,7 +19,7 @@ function App() {
         <Route path='/' element={<DashboardLayout />}>
           <Route index element={<Home />} />
           <Route path='locations' element={<Locations />} />
-          <Route path='locations/details/:id' element={<LocationDetails />} />
+          <Route path='locations/:id' element={<LocationDetails />} />
           <Route path='business' element={<Business />} />
         </Route>
         <Route path='/create-booking/:id' element={<CreateBooking />} />

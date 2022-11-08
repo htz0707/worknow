@@ -1,24 +1,12 @@
 import React, { useState } from 'react';
 import '../assets/styles/LocationDetails.scss';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
-import { GrMapLocation } from 'react-icons/gr';
 import { IoShareOutline } from 'react-icons/io5';
-import { GiExitDoor, GiMeal } from 'react-icons/gi';
-import { HiOutlineWifi } from 'react-icons/hi';
-import { BiPrinter, BiCar } from 'react-icons/bi';
-import { MdOutlineAttachMoney } from 'react-icons/md';
-import { TbCoffee, TbCup, TbParking } from 'react-icons/tb';
-import { GiRoundTable } from 'react-icons/gi';
-import { GrTrain } from 'react-icons/gr';
 import { GoLocation } from 'react-icons/go';
 import { AiOutlineRight } from 'react-icons/ai';
-import Tag from '../components/Tag';
-import ActionButton from '../components/ActionButton';
 import Img1 from '../assets/images/location_img1.png';
 import Img2 from '../assets/images/location_img2.jpg';
-import SelectBookingType from '../components/SelectBookingType';
-import { Accordion, Carousel } from 'react-bootstrap';
-import MapWrapper from '../components/MapWrapper';
+import { Carousel } from 'react-bootstrap';
 import WorkSpaceCard from '../components/WorkSpaceCard';
 import SlideshowImage from '../components/SlideshowImage';
 import { useNavigate } from 'react-router-dom';
@@ -439,7 +427,21 @@ export default function LocationDetails() {
             <div className='header'>Không gian làm việc</div>
             <div className='body'>
               <div className='left'>
-                <SelectBookingType />
+                <div className='filter-workspace'>
+                  <div className='filter-workspace_item active'>
+                    Phòng làm việc riêng
+                  </div>
+                  <div className='filter-workspace_item'>
+                    Bàn làm việc linh hoạt
+                  </div>
+                  <div className='filter-workspace_item'>Phòng họp</div>
+                  <div className='filter-workspace_item'>Sảnh lớn</div>
+                  <div className='filter-workspace_item'>Bàn rộng</div>
+                  <div className='filter-workspace_item'>
+                    Phòng Gaming Style
+                  </div>
+                  <div className='filter-workspace_item'>Phòng Minimal</div>
+                </div>
               </div>
               <div className='right'>
                 <div className='header'>
