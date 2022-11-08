@@ -13,7 +13,7 @@ import { ReactComponent as AuthenIcon } from '../assets/icons/shield.svg';
 export default function LocationCard() {
   let navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/locations/details/1`);
+    navigate(`/locations/1`);
   };
   return (
     <div className='location-card'>
@@ -69,10 +69,10 @@ export default function LocationCard() {
         <div>
           <div className='promotion'>50% giảm giá hôm nay</div>
           <div>
+            <div className='old-price'>250,000Đ/H</div>
             <div className='new-price'>
-              <span>Chỉ từ </span>125,000đ/ giờ
+              <span>Chỉ từ </span>125,000Đ/H
             </div>
-            <div className='old-price'>250,000đ/ giờ</div>
             <button onClick={handleClick}>Xem chi tiết</button>
           </div>
         </div>

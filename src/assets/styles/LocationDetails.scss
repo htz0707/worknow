@@ -254,14 +254,33 @@
         padding: 20px;
         border-radius: 20px;
         > .left {
-          width: 250px;
+          width: 300px;
           padding-right: 20px;
           margin-right: 20px;
           margin-bottom: 20px;
           border-right: 1px solid #ababab;
+          .filter-workspace {
+            width: 100%;
+            .filter-workspace_item {
+              height: 46px;
+              padding: 12px 16px;
+              margin-bottom: 10px;
+              color: #98968d;
+              font-weight: 600;
+              font-size: 16px;
+              line-height: 22px;
+              text-transform: capitalize;
+              cursor: pointer;
+              &.active {
+                background: #5e5b50;
+                border-radius: 100px;
+                color: #ffffff;
+              }
+            }
+          }
         }
         > .right {
-          width: calc(100% - 250px);
+          width: calc(100% - 300px);
           > .header {
             padding-top: 20px;
             padding-bottom: 20px;
@@ -310,7 +329,9 @@
         }
         > div:nth-child(2) {
           display: flex;
-          flex-wrap: wrap;
+          flex-wrap: nowrap;
+          overflow: auto;
+          padding-bottom: 20px;
           .time-box {
             margin-right: 20px;
             position: relative;
@@ -615,6 +636,15 @@
           flex-direction: column;
           > .left {
             width: 100%;
+            .filter-workspace {
+              width: 100%;
+              display: flex;
+              flex-wrap: nowrap;
+              overflow-x: auto;
+              .filter-workspace_item {
+                white-space: nowrap;
+              }
+            }
           }
           > .right {
             width: 100%;
