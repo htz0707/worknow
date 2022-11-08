@@ -576,4 +576,12 @@
       }
     }
   }
+  
+  .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after {
+    background-color: #FFB31F;
+  }
+
+  .ant-steps-item-finish .ant-steps-icon-dot, .ant-steps-item-active .ant-steps-icon-dot {
+    background-color: #FFB31F !important;
+  }
 }
