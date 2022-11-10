@@ -85,6 +85,7 @@ export default function CreateBooking() {
         </div>
         <div className='booking-step'>
           <Steps
+            responsive={false}
             progressDot
             current={currentStep} labelPlacement='vertical'
           >

@@ -15,11 +15,11 @@ export default function SignUpForm(props) {
   };
   return (
     <div className='sign-up'>
-      <h1>
+      {/* <h1>
         {props.free
           ? t('business.section_signup.free-note')
           : t('business.section_signup.pay-note')}{' '}
-      </h1>
+      </h1> */}
       <Form
         name='free_signup'
         className='signup-form'
