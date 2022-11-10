@@ -84,7 +84,11 @@ export default function CreateBooking() {
           />
         </div>
         <div className='booking-step'>
-          <Steps current={currentStep} labelPlacement='vertical'>
+          <Steps
+            responsive={false}
+            progressDot
+            current={currentStep} labelPlacement='vertical'
+          >
             <Step title='Thông tin đặt chỗ' />
             <Step title='Thanh toán' />
             <Step title='Trạng thái' />
