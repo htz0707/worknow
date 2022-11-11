@@ -1,171 +1,198 @@
-.business {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  .section-intro {
-    background: linear-gradient(rgb(255, 226, 216) 0%, rgb(252, 249, 245) 100%);
-    .content {
-      padding-top: 200px;
-      padding-bottom: 160px;
-      width: 100%;
-      .title {
-        font-size: 56px;
-        margin-bottom: 24px;
-        line-height: 60px;
-        font-weight: 600;
-        max-width: 730px;
-      }
-      .description {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 32px;
-        max-width: 425px;
-      }
-      .promo-code {
-        font-size: 24px;
-        line-height: 32px;
-        color: rgb(20, 20, 20);
-        margin-top: 16px;
-        font-weight: bold;
-      }
-      .term {
-        font-size: 14px;
-        line-height: 16px;
-        color: rgb(20, 20, 20);
-        margin-top: 14px;
-      }
-      .started {
-        margin-top: 36px;
-        min-width: 232px;
-        height: 40px;
-        padding: 0px 18px;
-        border-radius: 4px;
-        text-align: center;
-        line-height: 40px;
-        font-weight: bold;
-        font-size: 16px;
-        color: rgb(255, 255, 255);
-        border: 0px;
-      }
-    }
-    .intro-img {
-      position: absolute;
-      left: 55%;
-      top: 8%;
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .section-features {
-    background: rgb(255, 255, 255);
-    padding-top: 160px;
-    padding-bottom: 160px;
-    .feature-item {
-      text-align: center;
-      .img-wrap {
-        margin-bottom: 24px;
-      }
-      .content {
-        .title {
-          margin-bottom: 8px;
-          font-weight: 600;
-          font-size: 24px;
-        }
-        .text-sub {
-          font-style: normal;
-          font-weight: 400;
-          font-size: 19px;
-          line-height: 28px;
-          margin-top: 0;
-        }
-      }
-    }
-  }
-  .section-realtime {
-    position: relative;
-    min-height: 800px;
-    background-color: rgb(252, 249, 245);
-    padding-top: 160px;
-    padding-bottom: 160px;
+@import '_setting.scss';
+
+.business-register {
+  .layout {
+    margin-top: 160px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    .content {
-      max-width: 540px;
-      h2 {
-        margin-top: 0px;
-        margin-bottom: 24px;
-        font-weight: 600;
-        font-size: 48px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-image: url('../images/layout.png');
+    background-size: cover;
+  }
+
+  .section-about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .picture-group {
+      width: 50vw;
+      min-height: 500px;
+      position: relative;
+      text-align: center;
+
+      .hex-1 {
+        display: flex;
+        width: 300px;
+        position: absolute;
+        bottom: -80px;
+        right: -40px;
       }
-      p {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 19px;
-        line-height: 28px;
-        margin-top: 0;
-        margin-bottom: 24px;
+
+      .hex-2 {
+        display: flex;
+        width: 300px;
+        position: absolute;
+        right: 250px;
+        bottom: 80px;
+      }
+
+      .hex-3 {
+        display: flex;
+        width: 300px;
+        position: absolute;
+        right: -10px;
+        top: 0px;
+      }
+
+      .hex-4 {
+        display: flex;
+        width: 300px;
+        position: absolute;
+        right: 280px;
+        bottom: 95px;
+        z-index: 2;
+      }
+
+      .hex-5 {
+        display: flex;
+        width: 300px;
+        position: absolute;
+        bottom: -65px;
+        right: -10px;
+        z-index: 1;
+      }
+
+      .circle-1 {
+        display: flex;
+        position: absolute;
+        top: 80px;
+        right: 300px;
+      }
+
+      .circle-2 {
+        display: flex;
+        position: absolute;
+        top: 30px;
+        right: -30px;
+      }
+
+      .circle-3 {
+        display: flex;
+        position: absolute;
+        bottom: 200px;
+        right: -40px;
+      }
+
+    }
+
+    .content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .description {
+        margin-right: 70px;
+      }
+
+      .btn {
+        max-width: 60%;
+        text-align: left !important;
+        border-radius: 10px !important;
+        justify-content: center;
+      }
+
+      .icon {
+        border-radius: 50%;
+        background: linear-gradient(265.95deg, rgba(186, 123, 29, 0.8) -59.03%, rgba(255, 224, 178, 0.8) 6.24%, rgba(255, 191, 67, 0.8) 111.24%);
       }
     }
-    .realtime-img {
-      position: absolute;
-      height: 652px;
-      right: calc(40% - 788px);
-      top: 10%;
+
+    .image {
+      width: 100%;
     }
   }
-  .section-signup {
-    display: flex;
-    justify-content: space-between;
-    .sign-up-bg {
-      width: 426px;
-      background-image: url('../images/sign-up-bg.svg');
-      min-height: 100%;
+
+  .button-gray {
+    background-color: rgba(171, 171, 171, 0.5);
+    border: 0;
+
+    &:hover {
+      color: white !important;
     }
-    .sign-up-block {
-      width: 100%;
-      text-align: center;
-      h2 {
-        font-weight: bold;
-        font-size: 48px;
-        line-height: 52px;
-        color: rgb(20, 20, 20);
-        margin: 120px 0px 40px;
-      }
-      .sign-up-form {
-        max-width: 672px;
-        margin: 0 auto;
-        .sign-up-tabs {
-          border: 1px solid rgba(0, 0, 0, 0.08);
-          border-radius: 8px;
-          background: rgb(255, 255, 255);
-          margin-bottom: 60px;
-          .ant-tabs-nav-list {
-            width: 100%;
-          }
-          .ant-tabs-tab {
-            width: 100%;
-            height: 88px;
-            display: flex;
-            justify-content: center;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 26px;
-            line-height: 32px;
-            color: rgb(67, 67, 67);
-            background-color: rgb(240, 240, 240);
-            padding: 28px 0px 20px;
-            margin-left: 0;
-          }
-          .ant-tabs-tab-active {
-            background-color: #fff;
+  }
+
+  .nav-link.active.no-underline {
+    border: 0 !important;
+  }
+
+  .text-pointer {
+    cursor: pointer !important;
+
+    &:hover {
+      color: $primary !important;
+    }
+  }
+
+  .layout-2 {
+    max-width: 90%;
+    margin-top: 120px;
+  }
+
+  .sign-up-block {
+    width: 100%;
+    text-align: center;
+
+    h2 {
+      font-weight: bold;
+      font-size: 48px;
+      line-height: 52px;
+      color: rgb(20, 20, 20);
+      margin: 120px 0px 40px;
+    }
+
+    .sign-up-form {
+      max-width: 672px;
+      margin: 0 auto;
+
+      .sign-up-tabs {
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        background: #F3F3F3;
+        margin-bottom: 60px;
+
+        .ant-tabs-nav-list {
+          width: 100%;
+        }
+
+        .ant-tabs-tab {
+          width: 100%;
+          height: 88px;
+          display: flex;
+          justify-content: center;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 26px;
+          line-height: 32px;
+          color: rgb(67, 67, 67);
+          background-color: #F3F3F3;
+          padding: 28px 0px 20px;
+          margin-left: 0;
+        }
+
+        .ant-tabs-tab-active {
+          background-color: #F3F3F3;
+          color: rgb(44, 44, 44);
+          border: 0;
+          justify-content: left;
+          padding-left: 45px;
+
+          .ant-tabs-tab-btn {
             color: rgb(44, 44, 44);
-            .ant-tabs-tab-btn {
-              color: rgb(44, 44, 44);
-              border-bottom: 4px solid rgb(245, 85, 35);
-              padding-bottom: 4px;
-            }
+            border-bottom: 4px solid black;
+            padding-bottom: 4px;
           }
         }
       }
