@@ -148,7 +148,7 @@ export default function LocationDetails() {
             <Bcrumb
               data={[
                 {
-                  label: 'Danh Dách',
+                  label: 'Danh Sách',
                   path: '/locations',
                 },
                 {

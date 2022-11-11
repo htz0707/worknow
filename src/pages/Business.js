@@ -42,7 +42,7 @@ export default function Business() {
         <section className='section-about'>
           <div className='container-md'>
             <div className='row'>
-              <div className='col-lg-5'>
+              <div className='col-5'>
                 <div className='content'>
                   <h2>
                     TRỞ THÀNH KHÁCH HÀNG<br />DOANH NGHIỆP CỦA<br />WORKNOW VÀ TẬN HƯỞNG NHIỀU ƯU ĐÃI HƠN.
@@ -55,7 +55,7 @@ export default function Business() {
                   </button>
                 </div>
               </div>
-              <div className='col-lg-7 picture-group'>
+              <div className='col-7 picture-group'>
                 <img src={hex1} alt='hex-1' className='hex-1' />
                 <img src={hex5} alt='hex-5' className='hex-5' />
                 <img src={hex2} alt='hex-2' className='hex-2' />

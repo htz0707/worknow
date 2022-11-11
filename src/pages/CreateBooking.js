@@ -69,7 +69,7 @@ export default function CreateBooking() {
           <Bcrumb
             data={[
               {
-                label: 'Danh Dách',
+                label: 'Danh Sách',
                 path: '/locations',
               },
               {
