@@ -9,10 +9,6 @@ import '../assets/styles/SignUpForm.scss'
 export default function SignUpForm(props) {
   const { Option } = Select;
   const { t } = useTranslation();
-  let navigate = useNavigate();
-  const handleClick = () => {
-    navigate(`/business/register/final-step`);
-  };
   return (
     <div className='sign-up'>
       {/* <h1>
@@ -25,71 +21,70 @@ export default function SignUpForm(props) {
         className='signup-form'
         initialValues={{ remember: true }}
       >
-        <Form.Item
-          name='company'
-          rules={[
-            {
-              required: true,
-              message: 'Please input your company!',
-            },
-          ]}
-        >
-          <label>
-            {t('business.section_signup.company')}
-            <span className='required'>*</span>
-          </label>
-          <Input />
-        </Form.Item>
         <div className='d-flex'>
           <Form.Item
-            name='first-name'
-            className='first-name-block'
+            name='last-name'
+            className='last-name-block'
             rules={[
               {
                 required: true,
-                message: 'Please input your first name!',
+                message: 'Vui Lòng Nhập Họ Của Bạn!',
               },
             ]}
           >
-            <label>
-              {t('business.section_signup.first-name')}
+            <label className='fw-bold'>
+              {t('business.section_signup.last-name')}
               <span className='required'>*</span>
             </label>
             <Input />
           </Form.Item>
           <Form.Item
-            name='last-name'
+            name='first-name'
             rules={[
               {
                 required: true,
-                message: 'Please input your last name!',
+                message: 'Vui Lòng Nhập Tên Của Bạn!',
               },
             ]}
           >
-            <label>
-              {t('business.section_signup.last-name')}
+            <label className='fw-bold'>
+              {t('business.section_signup.first-name')}
               <span className='required'>*</span>
             </label>
             <Input />
           </Form.Item>
         </div>
         <Form.Item
+          name='company'
+          rules={[
+            {
+              required: true,
+              message: 'Vui Lòng Nhập Tên Công Ty!',
+            },
+          ]}
+        >
+          <label className='fw-bold'>
+            Tên Công Ty
+          </label><span className='required'>*</span>
+          <Input />
+        </Form.Item>
+        <Form.Item
           name='work-email'
           rules={[
             {
               required: true,
-              message: 'Please input your work email!',
+              message: 'Vui Lòng Nhập Email!',
             },
           ]}
         >
-          <label>
+          <label className='fw-bold'>
             {t('business.section_signup.email')}
             <span className='required'>*</span>
           </label>
           <Input />
         </Form.Item>
         <div className='row'>
-          <label>
+          <label className='fw-bold'>
             {t('business.section_signup.phone')} <span className='required'>*</span>
           </label>
           <div className='col-2'>
@@ -106,7 +101,7 @@ export default function SignUpForm(props) {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your phone number!',
+                  message: 'Vui Lòng Nhập Số Điện Thoại!',
                 },
               ]}
             >
@@ -114,7 +109,7 @@ export default function SignUpForm(props) {
             </Form.Item>
           </div>
         </div>
-        {props.free ? (
+        {/* {props.free ? (
           <>
             <Form.Item name='referral-code'>
               <label>{t('business.section_signup.code')}</label>
@@ -156,13 +151,13 @@ export default function SignUpForm(props) {
               </Select>
             </Form.Item>
           </>
-        )}
+        )} */}
+
         <Form.Item>
           <Button
             type='primary'
             htmlType='submit'
             className='sign-up-btn'
-            onClick={handleClick}
           >
             {t('business.section_signup.submit')}
           </Button>

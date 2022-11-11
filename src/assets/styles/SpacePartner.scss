@@ -1,13 +1,13 @@
 @import '_setting.scss';
 
-.business-register {
-  .layout {
+.space-partner {
+  width: 100%;
+
+  .layout-1 {
     margin-top: 80px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    background: url('../images/layout.png');
+    background-position: bottom;
     background-repeat: no-repeat;
-    background-image: url('../images/layout.png');
     background-size: cover;
   }
 
@@ -16,13 +16,13 @@
     justify-content: center;
     align-items: center;
 
-    .right-picture-1 {
+    .right-layout-1 {
       max-width: 50vw;
       min-height: 500px;
       position: relative;
       text-align: center;
 
-      .layout-1 {
+      .right-picture-1 {
         display: flex;
         position: absolute;
         top: -50px;
@@ -79,11 +79,6 @@
     }
   }
 
-  .layout-2 {
-    max-width: 90%;
-    margin-top: 120px;
-  }
-
   .sign-up-block {
     width: 100%;
     text-align: center;
@@ -128,6 +123,9 @@
         .ant-tabs-tab-active {
           background-color: #F3F3F3;
           color: rgb(44, 44, 44);
+          border: 0;
+          justify-content: left;
+          padding-left: 45px;
 
           .ant-tabs-tab-btn {
             color: rgb(44, 44, 44);
@@ -156,12 +154,12 @@
         }
 
         .relationship-icon {
-          margin-left: 115px;
+          margin-left: 85px;
           width: 60px;
           background-color: white;
 
           .image-icon {
-            width: 20px;
+            height: 55px;
             padding-top: 10px;
             padding-bottom: 10px;
           }
@@ -226,6 +224,7 @@
         top: -75px;
         right: -100px;
       }
+
       .data-2 {
         height: 200px;
         display: flex;
@@ -233,6 +232,7 @@
         top: 160px;
         left: 200px;
       }
+
       .data-3 {
         height: 200px;
         display: flex;
@@ -240,6 +240,7 @@
         top: 20px;
         right: -100px;
       }
+
       .data-4 {
         height: 200px;
         display: flex;

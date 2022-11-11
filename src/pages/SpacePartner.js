@@ -1,11 +1,8 @@
 import React from 'react';
-import { Container, Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
-import { NavLink, Link } from 'react-router-dom';
-import '../assets/styles/SpacePartner.scss'
-import { useTranslation } from 'react-i18next';
+import '../assets/styles/SpacePartner.scss';
 import { useEffect } from 'react';
 import { Tabs } from 'antd';
-import SignUpForm from '../components/SignUpForm';
+import SignUpForm from '../components/SignUpFormForSpacePartner';
 import layout1 from '../assets/images/space_partner_1.png'
 import room1 from '../assets/images/room_1.svg';
 import room2 from '../assets/images/room_2.svg';
@@ -46,8 +43,8 @@ export default function SpacePartner() {
     };
   });
   return (
-    <div className='business-register' >
-      <div className='layout'>
+    <div className='space-partner' >
+      <div className='layout-1'>
         <section className='section-about'>
           <div className='container-md'>
             <div className='row'>
@@ -64,8 +61,8 @@ export default function SpacePartner() {
                   </button>
                 </div>
               </div>
-              <div className='col-lg-7 right-picture-1'>
-                <img src={layout1} className='layout-1' />
+              <div className='col-lg-7 right-layout-1'>
+                <img src={layout1} className='right-picture-1' />
               </div>
             </div>
           </div>
@@ -73,34 +70,6 @@ export default function SpacePartner() {
       </div>
       <div className='container-md'>
         <div className='align-center'>
-          {/* <div className='col-md-6'>
-            <img src={ThreePeople} alt='three-peole' className='layout-2' />
-          </div>
-          <div className='col-md-6'>
-            <div className='sign-up-block'>
-              <h2>Ready to get started?</h2>
-              <div className='sign-up-form'>
-                <Tabs
-                  defaultActiveKey='1'
-                  // onChange={onChange}
-                  className='sign-up-tabs'
-                  type='card'
-                  items={[
-                    {
-                      label: 'Sign Up For Free',
-                      key: '1',
-                      children: <SignUpForm free={true} />,
-                    },
-                    {
-                      label: 'Get In Touch',
-                      key: '2',
-                      children: <SignUpForm free={false} />,
-                    }
-                  ]}
-                />
-              </div>
-            </div>
-          </div> */}
           <h2 className='content-2'>CÁC LOẠI HÌNH</h2>
           <p>Tìm Kiếm Nguồn Nhu Cầu Không Giới Hạn, Lấp Đầy Các Không Gian Làm Việc Của Bạn <br />
             Và Cung Cấp Dịch Vụ Ở Bất Cứ Đâu.</p>
@@ -146,21 +115,21 @@ export default function SpacePartner() {
               <div className='mb-3 border rounded-circle relationship-icon'>
                 <img src={money} className='image-icon' />
               </div>
-              <h3>GIÁ CẢ</h3>
+              <h4>GIÁ CẢ</h4>
               <p className='text-solution'>Bạn kiểm soát việc định giá không gian của mình. WorkNow sẽ cung cấp cho bạn các đề xuất về cách tối ưu hóa doanh thu của bạn.</p>
             </div>
             <div className='col-3 solution-card border rounded p-4'>
               <div className='mb-3 border rounded-circle relationship-icon'>
                 <img src={clock} className='image-icon' />
               </div>
-              <h3>THỜI GIAN MỞ CỬA</h3>
+              <h4>THỜI GIAN MỞ CỬA</h4>
               <p className='text-solution'>Bạn kiểm soát giờ mở cửa, ngày nghỉ và thời gian đóng cửa tạm thời của không gian của mình.</p>
             </div>
             <div className='col-3 solution-card border rounded p-4'>
               <div className='mb-3 border rounded-circle relationship-icon'>
                 <img src={chart} className='image-icon' />
               </div>
-              <h3>DỮ LIỆU</h3>
+              <h4>DỮ LIỆU</h4>
               <p className='text-solution'>Khả năng hiển thị dữ liệu theo thời gian thực. Truy cập thanh toán và tạo báo cáo qua Cổng đối tác WorkNow.</p>
             </div>
           </div>
@@ -182,10 +151,10 @@ export default function SpacePartner() {
                 </div>
               </div>
               <div className='col-lg-7 right-picture-data'>
-                <img src={data1} className='data-1'/>
-                <img src={data2} className='data-2'/>
-                <img src={data3} className='data-3'/>
-                <img src={data4} className='data-4'/>
+                <img src={data1} className='data-1' />
+                <img src={data2} className='data-2' />
+                <img src={data3} className='data-3' />
+                <img src={data4} className='data-4' />
               </div>
             </div>
           </div>
@@ -196,7 +165,6 @@ export default function SpacePartner() {
         <div className='sign-up-form'>
           <Tabs
             defaultActiveKey='1'
-            // onChange={onChange}
             className='sign-up-tabs'
             type='card'
             items={[
@@ -209,7 +177,6 @@ export default function SpacePartner() {
           />
         </div>
       </div>
-      {/* <div>abcd</div> */}
     </div >
   );
 }
