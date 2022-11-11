@@ -1,13 +1,12 @@
 @import '_setting.scss';
 
 .business-register {
+  width: 100%;
   .layout {
     margin-top: 160px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    background: url('../images/layout.png');
+    background-position: bottom;
     background-repeat: no-repeat;
-    background-image: url('../images/layout.png');
     background-size: cover;
   }
 
@@ -17,7 +16,7 @@
     align-items: center;
 
     .picture-group {
-      width: 50vw;
+      max-width: 50vw;
       min-height: 500px;
       position: relative;
       text-align: center;
@@ -98,7 +97,7 @@
       }
 
       .btn {
-        max-width: 60%;
+        max-width: 300px;
         text-align: left !important;
         border-radius: 10px !important;
         justify-content: center;
