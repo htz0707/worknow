@@ -45,11 +45,11 @@ export default function SpacePartner() {
   return (
     <div className='space-partner' >
       <div className='layout-1'>
-        <section className='section-about'>
-          <div className='container-md'>
+        <div className='container-md'>
+          <section>
             <div className='row'>
-              <div className='col-lg-5'>
-                <div className='content'>
+              <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
+                <div>
                   <h2>
                     ĐĂNG KÝ ĐỐI TÁC VỚI WORKNOW ĐỂ TRỞ THÀNH MỘT PHẦN CỦA VĂN HÓA “LÀM VIỆC BẤT CỨ ĐÂU, BẤT CỨ KHI NÀO BẠN CẦN”
                   </h2>
@@ -62,16 +62,16 @@ export default function SpacePartner() {
                 </div>
               </div>
               <div className='col-lg-7 right-layout-1'>
-                <img src={layout1} className='right-picture-1' />
+                <img src={layout1} className='w-100 right-picture-1' alt='image' />
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
-      <div className='container-md'>
-        <div className='align-center'>
-          <h2 className='content-2'>CÁC LOẠI HÌNH</h2>
-          <p>Tìm Kiếm Nguồn Nhu Cầu Không Giới Hạn, Lấp Đầy Các Không Gian Làm Việc Của Bạn <br />
+      <div className='container-md mt-5'>
+        <div className=''>
+          <h2 className='text-center'>CÁC LOẠI HÌNH</h2>
+          <p className='text-center'>Tìm Kiếm Nguồn Nhu Cầu Không Giới Hạn, Lấp Đầy Các Không Gian Làm Việc Của Bạn <br />
             Và Cung Cấp Dịch Vụ Ở Bất Cứ Đâu.</p>
           <div className='image-card-group-1'>
             <div className='image-card'>
@@ -103,29 +103,29 @@ export default function SpacePartner() {
             </div>
           </div>
         </div>
-        <div className='align-center'>
-          <h2 className='content-2'>GIẢI PHÁP TỐI ƯU NƠI LÀM VIỆC DÀNH MỌI DOANH NGHIỆP</h2>
-          <p>Cung Cấp Đủ Chỗ Ngồi Với Lực Lượng Lao Động Doanh Nghiệp, Khách Đi Công Tác, Doanh Nhân Và Nhân Viên Di Động.</p>
-          <img src={solution} className='solution' />
+        <div className='mt-5'>
+          <h2 className='text-center'>GIẢI PHÁP TỐI ƯU NƠI LÀM VIỆC DÀNH MỌI DOANH NGHIỆP</h2>
+          <p className='text-center'>Cung Cấp Đủ Chỗ Ngồi Với Lực Lượng Lao Động Doanh Nghiệp, Khách Đi Công Tác, Doanh Nhân Và Nhân Viên Di Động.</p>
+          <img src={solution} className='w-100 my-3' />
         </div>
         <div className='align-center'>
-          <h2 className='content-2'>QUAN HỆ ĐỐI TÁC CHIẾN LƯỢC </h2>
+          <h2 className='text-center'>QUAN HỆ ĐỐI TÁC CHIẾN LƯỢC </h2>
           <div className='row solution-group'>
-            <div className='col-3 solution-card border rounded p-4'>
+            <div className='col-lg-3 solution-card border rounded p-4'>
               <div className='mb-3 border rounded-circle relationship-icon'>
                 <img src={money} className='image-icon' />
               </div>
               <h4>GIÁ CẢ</h4>
               <p className='text-solution'>Bạn kiểm soát việc định giá không gian của mình. WorkNow sẽ cung cấp cho bạn các đề xuất về cách tối ưu hóa doanh thu của bạn.</p>
             </div>
-            <div className='col-3 solution-card border rounded p-4'>
+            <div className='col-lg-3 solution-card border rounded p-4'>
               <div className='mb-3 border rounded-circle relationship-icon'>
                 <img src={clock} className='image-icon' />
               </div>
               <h4>THỜI GIAN MỞ CỬA</h4>
               <p className='text-solution'>Bạn kiểm soát giờ mở cửa, ngày nghỉ và thời gian đóng cửa tạm thời của không gian của mình.</p>
             </div>
-            <div className='col-3 solution-card border rounded p-4'>
+            <div className='col-lg-3 solution-card border rounded p-4'>
               <div className='mb-3 border rounded-circle relationship-icon'>
                 <img src={chart} className='image-icon' />
               </div>
@@ -135,7 +135,7 @@ export default function SpacePartner() {
           </div>
         </div>
       </div >
-      <div className='data-layout'>
+      {/* <div className='data-layout'>
         <section className='section-about'>
           <div className='container-md'>
             <div className='row'>
@@ -159,6 +159,31 @@ export default function SpacePartner() {
             </div>
           </div>
         </section>
+      </div> */}
+      <div className='layout-1'>
+        <div className='container-md'>
+          <section>
+            <div className='row'>
+              <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
+                <div>
+                <h2>
+                    BÁO CÁO DỮ LIỆU <br />
+                    THEO THỜI GIAN THỰC
+                  </h2>
+                  <p className='description'>
+                    Nhận thông tin chi tiết về đăng ký và thanh toán của từng đặt chỗ, quản lý doanh thu và xác định các báo cáo của riêng bạn về việc sử dụng, doanh thu, theo địa điểm, không gian làm việc, theo phạm thời gian.
+                  </p>
+                </div>
+              </div>
+              <div className='col-lg-7 right-picture-data'>
+                <img src={data1} className='data-1' />
+                <img src={data2} className='data-2' />
+                <img src={data3} className='data-3' />
+                <img src={data4} className='data-4' />
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
       <div className='sign-up-block'>
         <h2>LIÊN HỆ VỚI WORKNOW</h2>
