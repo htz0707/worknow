@@ -13,7 +13,7 @@ import solution from '../assets/images/solution.svg';
 import money from '../assets/icons/money.svg';
 import clock from '../assets/icons/clock.svg';
 import chart from '../assets/icons/chart.svg';
-import data1 from '../assets/images/data1.svg';
+import data1 from '../assets/images/data1.png';
 import data2 from '../assets/images/data2.svg';
 import data3 from '../assets/images/data3.svg';
 import data4 from '../assets/images/data4.svg';
