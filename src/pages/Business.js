@@ -15,6 +15,7 @@ import hex5 from '../assets/images/hex5.svg';
 import circle1 from '../assets/images/smallcircle.svg';
 import circle2 from '../assets/images/normalcircle.svg';
 import circle3 from '../assets/images/largecircle.svg';
+import TwoPeople from '../assets/images/two_people.png';
 
 export default function Business() {
   let navigate = useNavigate();
@@ -37,8 +38,8 @@ export default function Business() {
     };
   });
   return (
-    <div className='business-register' >
-      <div className='layout'>
+    <div className='business' >
+      {/* <div className='layout'>
         <section className='section-about'>
           <div className='container-md'>
             <div className='row'>
@@ -68,11 +69,47 @@ export default function Business() {
             </div>
           </div>
         </section>
+      </div> */}
+
+      <div className='layout'>
+        <div className='container-md'>
+          <section>
+            <div className='row'>
+              <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
+                <div>
+                  <h2>
+                    TRỞ THÀNH KHÁCH HÀNG<br />DOANH NGHIỆP CỦA<br />WORKNOW VÀ TẬN HƯỞNG NHIỀU ƯU ĐÃI HƠN.
+                  </h2>
+                  <p>
+                    Đăng Ký Với Chúng Tôi Để Nhận Ưu Đãi Ngay.
+                  </p>
+                  <button
+                    onClick={handleClick}
+                    className='btn btn-warning fw-bold'
+                  >
+                    ĐĂNG KÝ KH DOANH NGHIỆP <BsPlayCircle className='ms-3 icon' fill='dark' size={25} />
+                  </button>
+                </div>
+              </div>
+              <div className='col-lg-7 picture-group'>
+                <img src={hex1} alt='hex-1' className='hex-1' />
+                <img src={hex5} alt='hex-5' className='hex-5' />
+                <img src={hex2} alt='hex-2' className='hex-2' />
+                <img src={hex4} alt='hex-4' className='hex-4' />
+                <img src={hex3} alt='hex-3' className='hex-3' />
+                <img src={circle1} alt='circle1' className='circle-1' />
+                <img src={circle2} alt='circle2' className='circle-2' />
+                <img src={circle3} alt='cricle3' className='circle-3' />
+              </div>
+            </div>
+          </section>
+        </div>
+
       </div>
       <div className='container-md'>
         <div className='row'>
           <div className='col-md-6'>
-            <img src={ThreePeople} alt='three-peole' className='layout-2' />
+            <img src={ThreePeople} alt='three-peole' className='layout-2 w-100' />
           </div>
           <div className='col-md-6'>
             <div className='sign-up-block'>

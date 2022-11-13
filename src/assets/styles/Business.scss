@@ -1,116 +1,121 @@
 @import '_setting.scss';
 
-.business-register {
-  width: 100%;
+.business {
+  margin-top: 20px;
+
   .layout {
-    margin-top: 160px;
+    width: 99vw;
     background: url('../images/layout.png');
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
   }
 
-  .section-about {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .icon {
+    border-radius: 50%;
+    background: linear-gradient(265.95deg, rgba(186, 123, 29, 0.8) -59.03%, rgba(255, 224, 178, 0.8) 6.24%, rgba(255, 191, 67, 0.8) 111.24%);
+  }
 
-    .picture-group {
-      max-width: 50vw;
-      min-height: 500px;
-      position: relative;
-      text-align: center;
+  .picture-group {
+    max-width: 50vw;
+    min-height: 500px;
+    position: relative;
+    text-align: center;
 
-      .hex-1 {
-        display: flex;
-        width: 300px;
-        position: absolute;
-        bottom: -80px;
-        right: -40px;
-      }
-
-      .hex-2 {
-        display: flex;
-        width: 300px;
-        position: absolute;
-        right: 250px;
-        bottom: 80px;
-      }
-
-      .hex-3 {
-        display: flex;
-        width: 300px;
-        position: absolute;
-        right: -10px;
-        top: 0px;
-      }
-
-      .hex-4 {
-        display: flex;
-        width: 300px;
-        position: absolute;
-        right: 280px;
-        bottom: 95px;
-        z-index: 2;
-      }
-
-      .hex-5 {
-        display: flex;
-        width: 300px;
-        position: absolute;
-        bottom: -65px;
-        right: -10px;
-        z-index: 1;
-      }
-
-      .circle-1 {
-        display: flex;
-        position: absolute;
-        top: 80px;
-        right: 300px;
-      }
-
-      .circle-2 {
-        display: flex;
-        position: absolute;
-        top: 30px;
-        right: -30px;
-      }
-
-      .circle-3 {
-        display: flex;
-        position: absolute;
-        bottom: 200px;
-        right: -40px;
-      }
-
-    }
-
-    .content {
-      height: 100%;
+    .hex-1 {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      .description {
-        margin-right: 70px;
-      }
-
-      .btn {
-        max-width: 300px;
-        text-align: left !important;
-        border-radius: 10px !important;
-        justify-content: center;
-      }
-
-      .icon {
-        border-radius: 50%;
-        background: linear-gradient(265.95deg, rgba(186, 123, 29, 0.8) -59.03%, rgba(255, 224, 178, 0.8) 6.24%, rgba(255, 191, 67, 0.8) 111.24%);
-      }
+      width: 300px;
+      position: absolute;
+      bottom: -80px;
+      right: -40px;
     }
 
-    .image {
-      width: 100%;
+    .hex-2 {
+      display: flex;
+      width: 300px;
+      position: absolute;
+      right: 250px;
+      bottom: 80px;
+    }
+
+    .hex-3 {
+      display: flex;
+      width: 300px;
+      position: absolute;
+      right: -10px;
+      top: 0px;
+    }
+
+    .hex-4 {
+      display: flex;
+      width: 300px;
+      position: absolute;
+      right: 280px;
+      bottom: 95px;
+      z-index: 2;
+    }
+
+    .hex-5 {
+      display: flex;
+      width: 300px;
+      position: absolute;
+      bottom: -65px;
+      right: -10px;
+      z-index: 1;
+    }
+
+    .circle-1 {
+      display: flex;
+      position: absolute;
+      top: 80px;
+      right: 300px;
+    }
+
+    .circle-2 {
+      display: flex;
+      position: absolute;
+      top: 30px;
+      right: -30px;
+    }
+
+    .circle-3 {
+      display: flex;
+      position: absolute;
+      bottom: 200px;
+      right: -40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .picture-group {
+      max-width: 80vw;
+      min-height: 210px;
+      .hex-1,
+      .hex-2,
+      .hex-3,
+      .hex-4,
+      .hex-5 {
+        width: 150px;
+      }
+      .hex-2 {
+        right: 115px;
+        bottom: 8px;
+      }
+      .hex-4 {
+        right: 130px;
+        bottom: 15px
+      }
+      .hex-1 {
+        right: -30px;
+        bottom: -75px;
+      }
+      .circle-1 {
+        right: 140px;
+        top: 20px
+      }
+      .circle-2 {
+        top: 100px;
+      }
     }
   }
 
@@ -136,8 +141,11 @@
   }
 
   .layout-2 {
-    max-width: 90%;
-    margin-top: 120px;
+    margin-top: 173px;
+
+    @media (max-width: 768px) {
+      margin-top: 100px;
+    }
   }
 
   .sign-up-block {
