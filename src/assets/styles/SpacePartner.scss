@@ -1,7 +1,11 @@
 @import '_setting.scss';
 
 .space-partner {
-  margin-top: 100px;
+  margin-top: 200px;
+
+  @media (max-width: 768px) {
+    margin-top: 100px;
+  }
 
   .layout-1 {
     width: 99vw;
