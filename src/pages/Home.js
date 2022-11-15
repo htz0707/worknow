@@ -149,7 +149,7 @@ export default function NewBusiness() {
           </div>
         </div>
       </div>
-      <div className='container-md'>
+      {/* <div className='container-md'>
         <h3 className='my-5 text-center'>ĐỐI TÁC CỦA CHÚNG TÔI</h3>
         <div className='mb-5 partner-group'>
           <div className='mb-5'>
@@ -167,7 +167,7 @@ export default function NewBusiness() {
             <img src={P5} alt='p1' className='image-partner image-last' />
           </div>
         </div>
-      </div>
+      </div> */}
 
     </div>
   );
