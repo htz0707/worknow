@@ -36,7 +36,6 @@ export default function ConfirmBookingModal(props) {
               endDate={endDate}
               selectsRange
               inline
-              locale ='vi'
             />
           </div>
         </div>

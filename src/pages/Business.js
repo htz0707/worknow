@@ -22,21 +22,6 @@ export default function Business() {
   const handleClick = () => {
     navigate(`/business/register`);
   };
-  const listener = (e) => {
-    var body_location = document.getElementById('body_location');
-    var sticky = body_location.offsetTop;
-    if (window.pageYOffset > sticky - 80) {
-      body_location.classList.add('sticky');
-    } else {
-      body_location.classList.remove('sticky');
-    }
-  };
-  useEffect(() => {
-    window.addEventListener('scroll', listener);
-    return () => {
-      window.removeEventListener('scroll', listener);
-    };
-  });
   return (
     <div className='business' >
       {/* <div className='layout'>
@@ -108,10 +93,10 @@ export default function Business() {
       </div>
       <div className='container-md'>
         <div className='row'>
-          <div className='col-md-6'>
+          <div className='col-lg-6'>
             <img src={ThreePeople} alt='three-peole' className='layout-2 w-100' />
           </div>
-          <div className='col-md-6'>
+          <div className='col-lg-6'>
             <div className='sign-up-block'>
               <h2>Trải Nghiệm Ngay!</h2>
               <div className='sign-up-form'>
