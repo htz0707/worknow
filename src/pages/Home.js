@@ -27,21 +27,6 @@ export default function NewBusiness() {
   const handleClick = () => {
     navigate(`/business`);
   };
-  const listener = (e) => {
-    var body_location = document.getElementById('body_location');
-    var sticky = body_location.offsetTop;
-    if (window.pageYOffset > sticky - 80) {
-      body_location.classList.add('sticky');
-    } else {
-      body_location.classList.remove('sticky');
-    }
-  };
-  useEffect(() => {
-    window.addEventListener('scroll', listener);
-    return () => {
-      window.removeEventListener('scroll', listener);
-    };
-  });
   return (
     <div className='home'>
       <div className='layout'>

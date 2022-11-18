@@ -90,6 +90,7 @@
     .picture-group {
       max-width: 80vw;
       min-height: 210px;
+
       .hex-1,
       .hex-2,
       .hex-3,
@@ -97,25 +98,36 @@
       .hex-5 {
         width: 150px;
       }
+
       .hex-2 {
         right: 115px;
         bottom: 8px;
       }
+
       .hex-4 {
         right: 130px;
         bottom: 15px
       }
+
       .hex-1 {
         right: -30px;
         bottom: -75px;
       }
+
       .circle-1 {
         right: 140px;
         top: 20px
       }
+
       .circle-2 {
         top: 100px;
       }
+    }
+  }
+
+  @media (max-height: 600px) {
+    .picture-group {
+      margin-left: 200px;
     }
   }
 
