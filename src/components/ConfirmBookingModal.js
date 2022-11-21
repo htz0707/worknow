@@ -79,7 +79,7 @@ export default function ConfirmBookingModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <div className='row w-100'>
-          <div className='col-md-6 px-1'>
+          <div className='col-6 px-1'>
             <button
               type='button'
               className='w-100 btn btn-outline-dark rounded-pill'
@@ -88,7 +88,7 @@ export default function ConfirmBookingModal(props) {
               Hủy
             </button>
           </div>
-          <div className='col-md-6 px-1'>
+          <div className='col-6 px-1'>
             <button
               type='button'
               className='w-100 btn btn-orange rounded-pill'
