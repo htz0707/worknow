@@ -5,9 +5,9 @@ import { IoLocationOutline } from 'react-icons/io5';
 export default function SelectCountryEngine() {
   return (
     <div className='select-country-engine'>
-      <div class='dropdown'>
+      <div className='dropdown'>
         <button
-          class='btn dropdown-toggle'
+          className='btn dropdown-toggle'
           type='button'
           id='dropdownMenuButton1'
           data-bs-toggle='dropdown'
@@ -15,14 +15,14 @@ export default function SelectCountryEngine() {
         >
           <IoLocationOutline size={20} /> Vietnam
         </button>
-        <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
+        <ul className='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
           <li>
-            <a class='dropdown-item active' href='#'>
+            <a className='dropdown-item active' href='#'>
               Vietnam
             </a>
           </li>
           <li>
-            <a class='dropdown-item' href='#'>
+            <a className='dropdown-item' href='#'>
               Singapore
             </a>
           </li>
