@@ -6,8 +6,52 @@ import { useEffect } from 'react';
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
 import MapWrapper from '../components/MapWrapper';
 import SortLocation from '../components/SortLocation';
+import { useQuery, gql, useLazyQuery } from '@apollo/client';
+import { useState } from 'react';
 
 export default function Locations() {
+  const GET_LOCATIONS = gql`
+    query GetLocations {
+      locations(params: {}) {
+        edges {
+          address
+          city {
+            name
+          }
+          country {
+            name
+          }
+          description
+          district {
+            name
+          }
+          name
+          ward {
+            name
+          }
+          id
+          images {
+            publicUrl
+          }
+          amenities {
+            name
+          }
+        }
+      }
+    }
+  `;
+  const [getLocation] = useLazyQuery(GET_LOCATIONS);
+  const [locations, setLocations] = useState([]);
+  const getLocationsList = async () => {
+    let res = await getLocation();
+    if (res.data) {
+      console.log(res.data.locations.edges);
+      setLocations(res.data.locations.edges);
+    }
+  };
+  useEffect(() => {
+    getLocationsList();
+  }, []);
   return (
     <div className='locations'>
       <div className='locations_header page-container'>
@@ -38,14 +82,9 @@ export default function Locations() {
             <SortLocation />
           </div>
           <div className='content'>
-            <LocationCard />
-            <LocationCard />
-            <LocationCard />
-            <LocationCard />
-            <LocationCard />
-            <LocationCard />
-            <LocationCard />
-            <LocationCard />
+            {locations.map((item, index) => {
+              return <LocationCard data={item} key={index} />;
+            })}
           </div>
         </div>
       </div>
