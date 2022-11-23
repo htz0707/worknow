@@ -6,13 +6,21 @@ import { useEffect } from 'react';
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
 import MapWrapper from '../components/MapWrapper';
 import SortLocation from '../components/SortLocation';
-import { useQuery, gql, useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 
 export default function Locations() {
   const GET_LOCATIONS = gql`
-    query GetLocations {
-      locations(params: {}) {
+    query GetLocations(
+      $amenitiesLocationIds: [UUID!]
+      $workingSpaceCapacityIds: [UUID!]
+    ) {
+      locations(
+        params: {
+          amenitiesLocationIds: $amenitiesLocationIds
+          workingSpaceCapacityIds: $workingSpaceCapacityIds
+        }
+      ) {
         edges {
           address
           city {
@@ -37,21 +45,34 @@ export default function Locations() {
             name
           }
         }
+        pageInfo {
+          count
+        }
       }
     }
   `;
   const [getLocation] = useLazyQuery(GET_LOCATIONS);
+  const [locationsAmount, setLocationAmount] = useState(0);
   const [locations, setLocations] = useState([]);
   const getLocationsList = async () => {
-    let res = await getLocation();
+    let res = await getLocation({
+      variables: {
+        amenitiesLocationIds: filterLocations.amenitiesIds,
+        workingSpaceCapacityIds: filterLocations.capacityIds,
+      },
+    });
     if (res.data) {
-      console.log(res.data.locations.edges);
-      setLocations(res.data.locations.edges);
+      setLocations(res.data?.locations?.edges);
+      setLocationAmount(res.data?.locations?.pageInfo?.count);
     }
   };
+  const [filterLocations, setFilterLocations] = useState({
+    amenitiesIds: [],
+    capacityIds: [],
+  });
   useEffect(() => {
     getLocationsList();
-  }, []);
+  }, [filterLocations]);
   return (
     <div className='locations'>
       <div className='locations_header page-container'>
@@ -71,13 +92,18 @@ export default function Locations() {
             </div>
             <div>Xem trên bản đồ</div>
           </div>
-          <FilterLocation />
+          <FilterLocation
+            setFilterLocations={setFilterLocations}
+            filterLocations={filterLocations}
+          />
         </div>
         <div className='locations_body_right'>
           <div className='header'>
             <div>
-              <span className='fw-bold'>1.704 văn phòng làm việc</span> tại TP.
-              Hồ Chí Minh
+              <span className='fw-bold'>
+                {locationsAmount} văn phòng làm việc
+              </span>{' '}
+              tại TP. Hồ Chí Minh
             </div>
             <SortLocation />
           </div>
