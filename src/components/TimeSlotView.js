@@ -6,22 +6,22 @@ export default function TimeSlotView(props) {
     {
       date: '2022-09-08',
       time: '09:00',
-      available: false,
+      available: true,
     },
     {
       date: '2022-09-08',
       time: '09:30',
-      available: false,
+      available: true,
     },
     {
       date: '2022-09-08',
       time: '10:00',
-      available: false,
+      available: true,
     },
     {
       date: '2022-09-08',
       time: '10:30',
-      available: false,
+      available: true,
     },
     {
       date: '2022-09-08',
@@ -93,36 +93,36 @@ export default function TimeSlotView(props) {
       time: '17:30',
       available: false,
     },
-    {
-      date: '2022-09-08',
-      time: '18:00',
-      available: true,
-    },
-    {
-      date: '2022-09-08',
-      time: '18:30',
-      available: true,
-    },
-    {
-      date: '2022-09-08',
-      time: '19:00',
-      available: true,
-    },
-    {
-      date: '2022-09-08',
-      time: '19:30',
-      available: true,
-    },
-    {
-      date: '2022-09-08',
-      time: '20:00',
-      available: true,
-    },
-    {
-      date: '2022-09-08',
-      time: '20:30',
-      available: true,
-    },
+    // {
+    //   date: '2022-09-08',
+    //   time: '18:00',
+    //   available: true,
+    // },
+    // {
+    //   date: '2022-09-08',
+    //   time: '18:30',
+    //   available: true,
+    // },
+    // {
+    //   date: '2022-09-08',
+    //   time: '19:00',
+    //   available: true,
+    // },
+    // {
+    //   date: '2022-09-08',
+    //   time: '19:30',
+    //   available: true,
+    // },
+    // {
+    //   date: '2022-09-08',
+    //   time: '20:00',
+    //   available: true,
+    // },
+    // {
+    //   date: '2022-09-08',
+    //   time: '20:30',
+    //   available: true,
+    // },
   ];
 
   return (

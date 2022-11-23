@@ -1,16 +1,18 @@
 @import '_setting.scss';
 
-.sign-in {
+.sign-up-page {
   width: 100vw;
   background-image: url('../images/sign-in-bg.png');
   min-height: 100vh;
   background-size: cover;
 
   .logo {
-    min-height: 100vh;
+    @media (min-width: 768px) {
+      min-height: 100vh;
+    }
   }
 
-  .sign-in-form {
+  .sign-up-form {
     background-color: white;
     min-width: 35vw;
     min-height: 50vh;
@@ -23,47 +25,49 @@
     .btn-white {
       background: white;
       font-weight: 400;
+
       .icon {
         width: 35px;
       }
     }
-  }
 
-  .password-field {
-    display: flex;
-  }
+    .password-field {
+      display: flex;
+  
+      .eye-icon {
+        margin-bottom: -30px;
+        margin-top: 10px;
+        margin-left: -30px;
+        cursor: pointer;
+      }
+    }
 
-  .eye-icon {
-    margin-bottom: -30px;
-    margin-top: 10px;
-    margin-left: -30px;
-    cursor: pointer;
-  }
+    .link {
+      text-decoration: none;
+      color: #0075FF;
+      font-weight: 500;
+      cursor: pointer;
+    }
 
-  .link {
-    text-decoration: none;
-    color: #0075FF;
-    font-weight: 500;
-  }
+    .text-gray {
+      color: gray;
+    }
 
-  .text-gray {
-    color: gray;
-  }
+    .single-line-input {
+      background-color: white;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+      border-bottom: 2px solid #eeeeee;
+      min-height: 40px;
+    }
 
-  .single-line-input {
-    background-color: white;
-    border: none;
-    padding: 0;
-    border-radius: 0;
-    border-bottom: 2px solid #eeeeee;
-    min-height: 40px;
-  }
-
-  .single-line-input:focus {
-    background-color: white;
-    outline: none;
-    box-shadow: none;
-    border-bottom: 2px solid #eeeeee;
-    padding: 0;
+    .single-line-input:focus {
+      background-color: white;
+      outline: none;
+      box-shadow: none;
+      border-bottom: 2px solid #eeeeee;
+      padding: 0;
+    }
   }
 }
