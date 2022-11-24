@@ -53,7 +53,8 @@
         display: flex;
         > .location-images.three {
           width: 65%;
-          height: 700px;
+          min-height: 500px;
+          max-height: 700px;
           .top {
             display: flex;
             width: 100%;
@@ -104,7 +105,8 @@
         }
         > .location-images.two {
           width: 65%;
-          height: 336px;
+          min-height: 500px;
+          max-height: 700px;
           display: flex;
           .left {
             display: flex;
@@ -125,7 +127,8 @@
         }
         > .location-images.one {
           width: 65%;
-          height: 336px;
+          min-height: 500px;
+          max-height: 700px;
           img {
             display: block;
             width: 100%;
