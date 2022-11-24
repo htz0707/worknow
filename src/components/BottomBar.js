@@ -14,28 +14,21 @@ export default function BottomBar() {
     >
       <Container className='container-bottom-bar'>
         <div className='row w-100'>
-          <div className='bar-item col-lg-3 col-6'>
-            <div className='my-4 fw-bold'>WORKNOW</div>
-            <div className='link-text'>About us</div>
-            <div className='link-text'>Media & Press</div>
-            <div className='link-text'>Inspiration</div>
-            <div className='link-text'>Career</div>
+          <div className='bar-item col-md-4 col-12'>
+            <div className='my-4 fw-bold'>WorkNow</div>
+            <div className='link-text'>Về chúng tôi</div>
+            <div className='link-text'>Truyền thông</div>
+            <div className='link-text'>Tuyển dụng</div>
           </div>
-          <div className='bar-item col-lg-3 col-6'>
-            <div className='my-4 fw-bold'>CONTACT</div>
-            <div className='link-text'>Help Center and Contact</div>
-            <div className='link-text'>Become A Partner</div>
+          <div className='bar-item col-md-4 col-12'>
+            <div className='my-4 fw-bold'>Liên hệ</div>
+            <div className='link-text'>Trung tâm trợ giúp</div>
+            <div className='link-text'>Trở thành Đôi tác</div>
           </div>
-          <div className='bar-item col-lg-3 col-6'>
-            <div className='my-4 fw-bold'>PRIVACY & TERMS</div>
-            <div className='link-text'>Terms of Service</div>
-            <div className='link-text'>Privacy Policy</div>
-            <div className='link-text'>Legal</div>
-          </div>
-          <div className='bar-item col-lg-3 col-6'>
-            <div className='my-4 fw-bold'>SAVE OUR PLANNET</div>
-            <div className='link-text'>Travel Guide</div>
-            <div className='link-text'>Sustainable Travel</div>
+          <div className='bar-item col-md-4 col-12'>
+            <div className='my-4 fw-bold'>Chính sách và Điều khoản</div>
+            <div className='link-text'>Điều khoản và Điều kiện</div>
+            <div className='link-text'>Chính sách Bảo mật </div>
           </div>
           <div className='d-flex justify-content-center my-3'>
             <FacebookIcon className='icon me-4' />

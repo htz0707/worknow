@@ -5,11 +5,16 @@
 
   .container-bottom-bar {
     min-height: 80px;
-    max-width: 100%;
-    padding-left: 160px;
+    width: 100%;
 
     .title {
       margin-bottom: 100px;
+    }
+
+    .bar-item {
+     @media (min-width: 768px) {
+      padding-left: 12%;
+     }
     }
 
     .link-text {
