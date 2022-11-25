@@ -11,8 +11,9 @@ import Business from './pages/Business';
 import VerifyAccount from './pages/VerifyAccount';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import BusinessRegisterFinalStep from './pages/BusinessRegisterFinalStep'
-import SpacePartner from './pages/SpacePartner'
+import BusinessRegisterFinalStep from './pages/BusinessRegisterFinalStep';
+import SpacePartner from './pages/SpacePartner';
+import WorkingSpaceDetails from './pages/WorkingSpaceDetails';
 
 function App() {
   return (
@@ -22,8 +23,15 @@ function App() {
           <Route index element={<Home />} />
           <Route path='locations' element={<Locations />} />
           <Route path='locations/:id' element={<LocationDetails />} />
+          <Route
+            path='locations/:location_id/working-space/:working_space_id'
+            element={<WorkingSpaceDetails />}
+          />
           <Route path='business' element={<Business />} />
-          <Route path='business/register' element={<BusinessRegisterFinalStep />} />
+          <Route
+            path='business/register'
+            element={<BusinessRegisterFinalStep />}
+          />
           <Route path='space-partner' element={<SpacePartner />} />
         </Route>
         <Route path='/create-booking/:id' element={<CreateBooking />} />
