@@ -4,30 +4,17 @@ import Img1 from '../assets/images/location_img1.png';
 import Tag from './Tag';
 import TimeSlotView from './TimeSlotView';
 import { Carousel } from 'react-bootstrap';
-import { formatCurrency } from '../helpers/helpers';
+import { formatCurrency, renderHourOrDay } from '../helpers/helpers';
+import { useNavigate } from 'react-router-dom';
 
 export default function WorkSpaceCard(props) {
   const { data } = props;
   const handleClick = () => {
     props.handleClick();
   };
-  const renderHourOrDay = (value) => {
-    if (
-      value === 'Bàn làm việc linh hoạt' ||
-      value === 'Bàn làm việc cố định' ||
-      value === 'Phòng làm việc riêng'
-    ) {
-      return 'Ngày';
-    } else if (
-      value === 'Phòng họp' ||
-      value === 'Sảnh sự kiện' ||
-      value === 'Phòng hội nghị' ||
-      value === 'Phone booth'
-    ) {
-      return 'h';
-    } else {
-      return 'h';
-    }
+  let navigate = useNavigate();
+  const handleGoToWorkingSpaceDetail = (location_id, working_space_id) => {
+    navigate(`/locations/${location_id}/working-space/${working_space_id}`);
   };
   return (
     <div className='workspace-card'>
@@ -43,7 +30,12 @@ export default function WorkSpaceCard(props) {
         </Carousel>
       </div>
       <div className='center'>
-        <div className='name'>{data?.name}</div>
+        <div
+          className='name'
+          onClick={() => handleGoToWorkingSpaceDetail(data.locationId, data.id)}
+        >
+          {data?.name}
+        </div>
         <div className='description'>
           <div>{data.description}</div>
         </div>
