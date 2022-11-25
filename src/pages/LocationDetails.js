@@ -591,7 +591,7 @@ export default function LocationDetails() {
               </div>
             </div>
           </div>
-          <div className='comment' id='section_4'>
+          {/* <div className='comment' id='section_4'>
             <div className='header'>Đánh giá</div>
             <div className='body scroll-bar-custom'>
               <div className='comment-card'>
@@ -664,7 +664,7 @@ export default function LocationDetails() {
                 <QuoteIcon className='quote-icon-close' />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className='support' id='section_5'>
             <div className='header'>Hỗ trợ</div>
             <div className='body'>
