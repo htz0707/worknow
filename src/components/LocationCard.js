@@ -75,7 +75,7 @@ export default function LocationCard(props) {
         <div>
           {/* <div className='promotion'>50% giảm giá hôm nay</div> */}
           <div>
-            <div className='old-price'>250,000Đ/H</div>
+            {/* <div className='old-price'>250,000Đ/H</div> */}
             <div className='new-price'>
               <span>Chỉ từ </span>125,000Đ/H
             </div>
