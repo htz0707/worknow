@@ -41,7 +41,7 @@ export default function LocationCard(props) {
               <StarIcon className='icon' />
               <StarIcon className='icon' />
             </div>
-            <span>+1200 lượt đặt</span>
+            {/* <span>+1200 lượt đặt</span> */}
           </div>
           <div className='location-address'>
             <div className='icon-badge'>
@@ -56,7 +56,7 @@ export default function LocationCard(props) {
             <div className='icon-badge'>
               <BuildingIcon className='icon' />
             </div>
-            <div>Coffee shop</div>
+            <div>Working space</div>
           </div>
           <div className='location-authen'>
             <div className='icon-badge'>
@@ -73,7 +73,7 @@ export default function LocationCard(props) {
           </div>
         </div>
         <div>
-          <div className='promotion'>50% giảm giá hôm nay</div>
+          {/* <div className='promotion'>50% giảm giá hôm nay</div> */}
           <div>
             <div className='old-price'>250,000Đ/H</div>
             <div className='new-price'>
