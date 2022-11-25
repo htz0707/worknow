@@ -7,25 +7,13 @@ import { ReactComponent as StarIcon } from '../assets/icons/start.svg';
 import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
 import { ReactComponent as BuildingIcon } from '../assets/icons/building.svg';
 import { ReactComponent as AuthenIcon } from '../assets/icons/shield.svg';
+import { renderAddress } from '../helpers/helpers';
 
 export default function LocationCard(props) {
   const { data } = props;
   let navigate = useNavigate();
   const handleClick = (id) => {
     navigate(`/locations/${id}`);
-  };
-  const renderAddress = () => {
-    let address_str =
-      data.address +
-      ', ' +
-      data.ward?.name +
-      ', ' +
-      data.district?.name +
-      ', ' +
-      data.city?.name +
-      ', ' +
-      data.country?.name;
-    return address_str;
   };
   return (
     <div className='location-card'>
@@ -42,7 +30,9 @@ export default function LocationCard(props) {
       </div>
       <div className='location-card_right'>
         <div>
-          <div className='location-name'>{data.name}</div>
+          <div className='location-name' onClick={() => handleClick(data.id)}>
+            {data.name}
+          </div>
           <div className='location-review'>
             <div>
               <StarIcon className='icon' />
@@ -58,7 +48,7 @@ export default function LocationCard(props) {
               <LocationIcon className='icon' />
             </div>
             <div>
-              <div>{renderAddress()}</div>
+              <div>{renderAddress(data)}</div>
               <div>Cách tôi 0,2km</div>
             </div>
           </div>

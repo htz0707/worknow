@@ -4,8 +4,6 @@ import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { IoShareOutline } from 'react-icons/io5';
 import { GoLocation } from 'react-icons/go';
 import { AiOutlineRight } from 'react-icons/ai';
-import Img1 from '../assets/images/location_img1.png';
-import Img2 from '../assets/images/location_img2.jpg';
 import { Carousel } from 'react-bootstrap';
 import WorkSpaceCard from '../components/WorkSpaceCard';
 import SlideshowImage from '../components/SlideshowImage';
@@ -16,13 +14,14 @@ import ConfirmBookingModal from '../components/ConfirmBookingModal';
 import { ReactComponent as StarIcon } from '../assets/icons/start.svg';
 import { ReactComponent as CheckIcon } from '../assets/icons/check.svg';
 import { ReactComponent as QuoteIcon } from '../assets/icons/quote.svg';
-import { Avatar, DatePicker } from 'antd';
+import { Avatar } from 'antd';
 import moment from 'moment';
 import Bcrumb from '../components/Bcrumb';
 import { gql, useLazyQuery } from '@apollo/client';
 import cx from 'classnames';
 import 'moment/locale/vi'; // without this line it didn't work
 import ShowMore from '../components/ShowMore';
+import { renderAddress, renderWorkingHour } from '../helpers/helpers';
 moment.locale('vi');
 
 export default function LocationDetails() {
@@ -183,20 +182,6 @@ export default function LocationDetails() {
   //
   const [showMoreAmenities, setShowMoreAmenities] = useState(false);
   //
-  const renderAddress = (data) => {
-    let address_str =
-      data.address +
-      ', ' +
-      data.ward?.name +
-      ', ' +
-      data.district?.name +
-      ', ' +
-      data.city?.name +
-      ', ' +
-      data.country?.name;
-    return address_str;
-  };
-  //
   const dayArray = [
     {
       id: 1,
@@ -227,9 +212,6 @@ export default function LocationDetails() {
       name: 'Chủ Nhật',
     },
   ];
-  const renderWorkingHour = (open_time, close_time) => {
-    return open_time?.slice(0, 5) + ' - ' + close_time?.slice(0, 5);
-  };
   // //
   // const GET_WORKING_SPACE = gql`
   //   query GetWorkingSpace($id: UUID!) {
@@ -263,6 +245,15 @@ export default function LocationDetails() {
   // useEffect(() => {
   //   handleGetWorkingSpace();
   // }, [id]);
+  const defineWorkingType = {
+    flexible_desk: 'Bàn làm việc linh hoạt',
+    fixed_desk: 'Bàn làm việc cố định',
+    private_room: 'Phòng làm việc riêng',
+    meeting_room: 'Phòng họp',
+    event: 'Sảnh sự kiện',
+    convience_room: 'Phòng hội nghị',
+    booth: 'Phone booth',
+  };
   return (
     <div className='location-details'>
       <div className='location-details_header'></div>
@@ -570,7 +561,7 @@ export default function LocationDetails() {
                         key={index}
                         onClick={() => handleSelectTypeWorkingSpace(item)}
                       >
-                        {item}
+                        {defineWorkingType[item]}
                       </div>
                     );
                   })}
