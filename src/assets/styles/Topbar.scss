@@ -14,13 +14,13 @@
     padding: 7px 12px;
     &:hover {
       background: rgba(171, 171, 171, 0.5);
-      border-radius: 2px;
+      border-radius: 25px;
     }
   }
   .nav-item-link.active {
     font-weight: 700;
     background: rgba(171, 171, 171, 0.5);
-    border-radius: 2px;
+    border-radius: 25px;
   }
   .nav-link {
     display: flex;
