@@ -63,13 +63,6 @@ export default function LocationDetails() {
       window.removeEventListener('scroll', listener);
     };
   });
-  const [showModal, setShowModal] = useState(false);
-  const handleBooking = () => {
-    setShowModal(true);
-  };
-  const handleConfirmBooking = () => {
-    navigate('/create-booking/1');
-  };
   //
   const [date, setDate] = useState('');
   const getDateDefault = () => {
@@ -253,6 +246,15 @@ export default function LocationDetails() {
     event: 'Sảnh sự kiện',
     convience_room: 'Phòng hội nghị',
     booth: 'Phone booth',
+  };
+  const [selectedWorkingSpace, setSelectedWorkingSpace] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const handleBooking = (item) => {
+    setSelectedWorkingSpace(item);
+    setShowModal(true);
+  };
+  const handleConfirmBooking = () => {
+    navigate('/create-booking/1');
   };
   return (
     <div className='location-details'>
@@ -582,7 +584,7 @@ export default function LocationDetails() {
                     return (
                       <WorkSpaceCard
                         data={item}
-                        handleClick={handleBooking}
+                        handleClick={() => handleBooking(item)}
                         key={index}
                       />
                     );
@@ -686,6 +688,9 @@ export default function LocationDetails() {
       </div>
       <ConfirmBookingModal
         show={showModal}
+        selectedWorkingSpace={selectedWorkingSpace}
+        openTime={locationInfo?.openTime}
+        closeTime={locationInfo?.closeTime}
         handleClose={() => setShowModal(false)}
         handleConfirm={handleConfirmBooking}
       />
