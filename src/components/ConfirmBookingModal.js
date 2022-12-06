@@ -13,17 +13,19 @@ import {
   returnTypeOfBooking,
   toHoursAndMinutes,
 } from '../helpers/helpers';
+import { useNavigate } from 'react-router-dom';
 
 export default function ConfirmBookingModal(props) {
   registerLocale('vi', vi);
   const {
     show,
     handleClose,
-    handleConfirm,
+    locationId,
     selectedWorkingSpace,
     openTime,
     closeTime,
   } = props;
+  let navigate = useNavigate();
   const [typeOfBooking, setTypeBooking] = useState('');
   useEffect(() => {
     if (selectedWorkingSpace) {
@@ -113,6 +115,7 @@ export default function ConfirmBookingModal(props) {
   });
   const handleChangeBookingInfoTypeHour = (data) => {
     setBookingInfoTypeHour({ ...bookingInfoTypeHour, ...data });
+    setError('');
   };
   const handleDateChange = (value) => {
     setBookingInfoTypeHour({
@@ -165,6 +168,84 @@ export default function ConfirmBookingModal(props) {
     bookingInfoTypeHour.endTime,
     typeOfBooking,
   ]);
+  const [error, setError] = useState('');
+  //
+  const handleSubmit = () => {
+    if (typeOfBooking === 'day') {
+      let start_date_join_time =
+        moment(bookingInfoTypeDay.startDate).format('YYYY-MM-DD') +
+        'T' +
+        openTime;
+      let start_date_utc = moment
+        .utc(new Date(start_date_join_time).toUTCString())
+        .format();
+      let end_date_join_time;
+      if (bookingInfoTypeDay.endDate) {
+        end_date_join_time =
+          moment(bookingInfoTypeDay.endDate).format('YYYY-MM-DD') +
+          'T' +
+          closeTime;
+      } else {
+        end_date_join_time =
+          moment(bookingInfoTypeDay.startDate).format('YYYY-MM-DD') +
+          'T' +
+          closeTime;
+      }
+      let end_date_utc = moment
+        .utc(new Date(end_date_join_time).toUTCString())
+        .format();
+      let data = {
+        type: 'day',
+        date_range: bookingInfoTypeDay.date_range,
+        totalDay: bookingInfoTypeDay.totalDay,
+        price: bookingInfoTypeDay.price,
+        start_date_utc: start_date_utc,
+        end_date_utc: end_date_utc,
+      };
+      navigate(`/create-booking/${locationId}/${selectedWorkingSpace.id}`, {
+        state: {
+          orderInfo: data,
+        },
+      });
+    }
+    if (typeOfBooking === 'hour') {
+      if (
+        bookingInfoTypeHour.startTime.time &&
+        bookingInfoTypeHour.endTime.time
+      ) {
+        let start_date_join_time =
+          moment(bookingInfoTypeHour.date).format('YYYY-MM-DD') +
+          'T' +
+          bookingInfoTypeHour.startTime.time;
+        let end_date_join_time =
+          moment(bookingInfoTypeHour.date).format('YYYY-MM-DD') +
+          'T' +
+          bookingInfoTypeHour.endTime.time;
+        let start_date_utc = moment
+          .utc(new Date(start_date_join_time).toUTCString())
+          .format();
+        let end_date_utc = moment
+          .utc(new Date(end_date_join_time).toUTCString())
+          .format();
+        let data = {
+          type: 'hour',
+          date: moment(bookingInfoTypeHour.date).format('DD/MM/YYYY'),
+          time_range: bookingInfoTypeHour.time_range,
+          price: bookingInfoTypeHour.price,
+          totalTime: bookingInfoTypeHour.totalTime,
+          start_date_utc: start_date_utc,
+          end_date_utc: end_date_utc,
+        };
+        navigate(`/create-booking/${locationId}/${selectedWorkingSpace.id}`, {
+          state: {
+            orderInfo: data,
+          },
+        });
+      } else {
+        setError('Vui lòng chọn thời gian bạn muốn đặt chỗ.');
+      }
+    }
+  };
   //
   useEffect(() => {
     setBookingInfoTypeDay({
@@ -182,6 +263,7 @@ export default function ConfirmBookingModal(props) {
       price: null,
       date_range: moment(new Date()).format('DD/MM/YYYY'),
     });
+    setError('');
   }, [show]);
   return (
     <Modal
@@ -274,6 +356,7 @@ export default function ConfirmBookingModal(props) {
                   {bookingInfoTypeHour.time_range}
                 </label>
               </div>
+              {error && <div className='text-danger'>{error}</div>}
             </div>
             <hr className='mx-4' />
             <div className='row px-4'>
@@ -306,7 +389,7 @@ export default function ConfirmBookingModal(props) {
             <button
               type='button'
               className='w-100 btn btn-orange rounded-pill'
-              onClick={handleConfirm}
+              onClick={handleSubmit}
             >
               Đặt Ngay
             </button>

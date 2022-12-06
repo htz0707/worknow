@@ -254,7 +254,7 @@ export default function LocationDetails() {
     setShowModal(true);
   };
   const handleConfirmBooking = () => {
-    navigate('/create-booking/1');
+    navigate(`/create-booking/${id}/${selectedWorkingSpace.id}`);
   };
   return (
     <div className='location-details'>
@@ -688,11 +688,11 @@ export default function LocationDetails() {
       </div>
       <ConfirmBookingModal
         show={showModal}
+        locationId={id}
         selectedWorkingSpace={selectedWorkingSpace}
         openTime={locationInfo?.openTime}
         closeTime={locationInfo?.closeTime}
         handleClose={() => setShowModal(false)}
-        handleConfirm={handleConfirmBooking}
       />
       <SlideshowImage
         show={showMoreImage}

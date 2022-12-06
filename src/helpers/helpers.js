@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { message } from 'antd';
 export const spliceSplit = (str, index, count, add) => {
   var ar = str.split('');
   ar.splice(index, count, add);
@@ -94,3 +95,16 @@ export const toHoursAndMinutes = (totalMinutes) => {
     return minutes + ' phút';
   }
 };
+export function handleMessage(kind, content) {
+  if (kind === 'success') {
+    message.success({
+      content: content,
+      className: 'success-mess',
+    });
+  } else {
+    message.error({
+      content: content,
+      className: 'error-mess',
+    });
+  }
+}
