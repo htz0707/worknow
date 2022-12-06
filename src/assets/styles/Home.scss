@@ -88,9 +88,16 @@
       position: absolute;
       bottom: 55px;
       right: 40px;
+
       @media (max-width: 768px) {
         bottom: 80px;
       }
+
+      background: rgba(171, 171, 171, 0.5);
+      box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(3px);
+      border: rgba(171, 171, 171, 0.5);
+      font-weight: 600;
     }
   }
 
@@ -99,8 +106,13 @@
       max-width: 7%;
       margin-right: 16%;
     }
+
     .image-last {
       margin-right: 0;
     }
+  }
+
+  .text-justify {
+    text-align: justify;
   }
 }

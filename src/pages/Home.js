@@ -46,7 +46,7 @@ export default function NewBusiness() {
                   </p>
                   <button
                     onClick={handleClick}
-                    className='btn btn-warning fw-bold'
+                    className='btn btn-warning fw-bold rounded-pill d-flex justify-content-center'
                   >
                     TÌM HIỂU VỀ WORKNOW <BsPlayCircle className='ms-3 icon' fill='dark' size={25} />
                   </button>
@@ -64,23 +64,23 @@ export default function NewBusiness() {
         <div className='row'>
           <div className='col-lg-3'>
             <div className='d-flex justify-content-center align-items center'><Reason1 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center' >Cải Thiện Năng Suất</h5>
-            <p className='px-3'>Tối ưu hóa hiệu suất công việc bằng cách khám phá không gian/môi trường tươi mới và sáng tạo cùng Worknow.</p>
+            <h5 className='d-flex justify-content-center align-items center mt-3' >Cải Thiện Năng Suất</h5>
+            <p className='px-3 text-justify'>Tối ưu hóa hiệu suất công việc bằng cách khám phá không gian / môi trường tươi mới và sáng tạo cùng Worknow.</p>
           </div>
           <div className='col-lg-3'>
             <div className='d-flex justify-content-center align-items center'><Reason2 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center' >Đa Dạng Vị Trí</h5>
-            <p className='px-3'>Không gian làm việc chung, Cao ốc văn phòng, Trung tâm mua sắm, Quán cà phê, Khách sạn,...</p>
+            <h5 className='d-flex justify-content-center align-items center mt-3' >Đa Dạng Vị Trí</h5>
+            <p className='px-3 text-justify'>Không gian làm việc chung, Cao ốc văn phòng, Trung tâm mua sắm, Quán cà phê, Khách sạn,...</p>
           </div>
           <div className='col-lg-3'>
-            <div className='d-flex justify-content-center align-items center'><Reason3 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center' >Cho Mọi Doanh Nghiệp</h5>
-            <p className='px-3'>Giải pháp làm việc từ xa hoặc trực tiếp cho bất kỳ doanh nghiệp ở mọi lĩnh vực kinh doanh.</p>
+            <div className='d-flex justify-content-center align-items center'><Reason1 height={170} /></div>
+            <h5 className='d-flex justify-content-center align-items center mt-3' >Cho Mọi Doanh Nghiệp</h5>
+            <p className='px-3 text-justify'>Giải pháp làm việc từ xa hoặc trực tiếp cho bất kỳ doanh nghiệp ở mọi lĩnh vực kinh doanh.</p>
           </div>
           <div className='col-lg-3'>
-            <div className='d-flex justify-content-center align-items center'><Reason4 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center' >Tiết Kiệm Chi Phí</h5>
-            <p className='px-3'>Chi phí phải chăng và phù hợp, bạn sẽ chỉ thanh toán cho những tiện ích mà mình sử dụng.</p>
+            <div className='d-flex justify-content-center align-items center'><Reason2 height={170} /></div>
+            <h5 className='d-flex justify-content-center align-items center mt-3' >Tiết Kiệm Chi Phí</h5>
+            <p className='px-3 text-justify'>Chi phí phải chăng và phù hợp, bạn sẽ chỉ thanh toán cho những tiện ích mà mình sử dụng.</p>
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@ export default function NewBusiness() {
           <div className='col-lg-6'>
             <div className='d-flex'>
               <div className='card-hl'>
-                <h4 className='text-bottom-1'>BOOTH CÁ NHÂN</h4>
+                <h4 className='text-bottom-1 fw-bold'>BOOTH CÁ NHÂN</h4>
                 <p className='text-bottom-2'>Booth riêng có 1 chỗ đến 4 chỗ.</p>
                 <Button className='btn-bottom rounded-pill' variant='secondary'>
                   Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
@@ -100,7 +100,7 @@ export default function NewBusiness() {
             </div>
             <div className='d-flex'>
               <div className='card-hl card-down'>
-                <h4 className='text-bottom-1'>GHẾ LINH HOẠT</h4>
+                <h4 className='text-bottom-1 fw-bold'>GHẾ LINH HOẠT</h4>
                 <p className='text-bottom-2'>Tìm bàn làm việc ở bất cứ đâu.</p>
                 <Button className='btn-bottom rounded-pill' variant='secondary'>
                   Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
@@ -112,7 +112,7 @@ export default function NewBusiness() {
           <div className='col-lg-6 col-right'>
             <div className='d-flex'>
               <div className='card-hl'>
-                <h4 className='text-bottom-1'>PHÒNG HỌP</h4>
+                <h4 className='text-bottom-1 fw-bold'>PHÒNG HỌP</h4>
                 <p className='text-bottom-2'>Phòng riêng với tất cả các tiện nghi bạn cần.</p>
                 <Button className='btn-bottom rounded-pill' variant='secondary'>
                   Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
@@ -122,7 +122,7 @@ export default function NewBusiness() {
             </div>
             <div className='d-flex'>
               <div className='card-hl card-down'>
-                <h4 className='text-bottom-1'>SẢNH SỰ KIỆN</h4>
+                <h4 className='text-bottom-1 fw-bold'>SẢNH SỰ KIỆN</h4>
                 <p className='text-bottom-2'>Tổ chức bài giảng, buổi họp mặt hoặc talkshow</p>
                 <p className='text-bottom-3'><br />theo nhu cầu của bạn. </p>
                 <Button className='btn-bottom rounded-pill' variant='secondary'>
