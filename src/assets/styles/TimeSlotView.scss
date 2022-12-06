@@ -11,7 +11,7 @@
     display: inline-block;
     width: 20px;
     height: 35px;
-    background: #FFB31F;
+    background: white;
     border-top: 1px solid rgb(217, 217, 217);
     border-right: 1px solid rgb(217, 217, 217);
     border-bottom: 1px solid rgb(217, 217, 217);
@@ -35,5 +35,11 @@
   }
   .slot.over {
     background: rgb(240, 240, 240);
+  }
+  .slot.selected {
+    background-color: #ffb31f !important;
+  }
+  .slot.hover {
+    background-color: #ffeac2;
   }
 }
