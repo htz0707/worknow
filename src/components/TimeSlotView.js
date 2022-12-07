@@ -195,6 +195,7 @@ export default function TimeSlotView(props) {
         if (index % 2 == 0) {
           return (
             <div
+              key={index}
               className={cx('slot', {
                 over: !item.available,
                 selected:
@@ -212,6 +213,7 @@ export default function TimeSlotView(props) {
         } else {
           return (
             <div
+              key={index}
               className={cx('slot', {
                 over: !item.available,
                 selected:
