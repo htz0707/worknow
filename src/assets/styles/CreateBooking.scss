@@ -300,12 +300,24 @@
             font-size: 25px;
             margin-bottom: 10px;
           }
-
           .content {
             font-weight: 700;
             font-size: 20px;
             color: #ff4f4f;
-            text-transform: uppercase;
+            .btn-extend-time {
+              font-weight: 400;
+              font-size: 13px;
+              line-height: 18px;
+              display: flex;
+              align-items: center;
+              color: #0075ff;
+              margin-left: 5px;
+              border: none;
+              background: transparent;
+              &:disabled {
+                opacity: 50%;
+              }
+            }
           }
         }
       }
