@@ -15,6 +15,7 @@ import BusinessRegisterFinalStep from './pages/BusinessRegisterFinalStep';
 import SpacePartner from './pages/SpacePartner';
 import WorkingSpaceDetails from './pages/WorkingSpaceDetails';
 import BookingPayment from './pages/BookingPayment';
+import BookingStatus from './pages/BookingStatus';
 
 function App() {
   return (
@@ -40,8 +41,12 @@ function App() {
           element={<CreateBooking />}
         />
         <Route
-          path='/create-booking/payment/:order_id'
+          path='/create-booking/payment/:location_id/:order_id'
           element={<BookingPayment />}
+        />
+        <Route
+          path='/create-booking/status/:location_id/:order_id'
+          element={<BookingStatus />}
         />
         <Route path='/verify-account' element={<VerifyAccount />} />
         <Route path='sign-in' element={<SignIn />} />

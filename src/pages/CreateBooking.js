@@ -23,6 +23,7 @@ export default function CreateBooking() {
   let navigate = useNavigate();
   const { location_id, working_space_id } = useParams();
   const orderInfo = useLocation()?.state?.orderInfo;
+  //get working space details
   const GET_WORKING_SPACE_DETAILS = gql`
     query GetWorkingSpaceDetails(
       $location_id: UUID!
@@ -90,6 +91,7 @@ export default function CreateBooking() {
   }, [location_id, working_space_id]);
   const [showMoreAmenities, setShowMoreAmenities] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  //handle create order
   const [form] = Form.useForm();
   const [customerInfo, setCustomerInfo] = useState({
     full_name: '',
@@ -109,8 +111,8 @@ export default function CreateBooking() {
       $phoneNumber: String!
       $note: String!
       $workingSpaceId: UUID!
-      $startDate: DateTime!
-      $endDate: DateTime!
+      $startDate: datetime!
+      $endDate: datetime!
     ) {
       createOrder(
         data: {
@@ -137,8 +139,8 @@ export default function CreateBooking() {
       variables: {
         fullname: customerInfo.full_name,
         email: customerInfo.email,
-        phoneCountryCode: parse_phone.nationalNumber,
-        phoneNumber: parse_phone.countryCallingCode,
+        phoneCountryCode: parse_phone.countryCallingCode,
+        phoneNumber: parse_phone.nationalNumber,
         note: customerInfo.note,
         workingSpaceId: working_space_id,
         startDate: orderInfo.start_date_utc,
@@ -147,7 +149,7 @@ export default function CreateBooking() {
     });
   };
   if (data) {
-    navigate(`/create-booking/payment/${data?.createOrder?.id}`);
+    navigate(`/create-booking/payment/${location_id}/${data?.createOrder?.id}`);
   }
   if (error) {
     handleMessage('error', 'Đặt chỗ không thành công.');
