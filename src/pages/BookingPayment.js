@@ -92,44 +92,29 @@ export default function BookingPayment() {
       }
     }
   `;
-  const [getOrderDetails, { called, refetch }] =
-    useLazyQuery(GET_ORDER_DETAILS);
+  const [getOrderDetails, { called, refetch }] = useLazyQuery(
+    GET_ORDER_DETAILS,
+    {
+      fetchPolicy: 'no-cache',
+    }
+  );
   const [locationInfo, setLocationInfo] = useState({});
   const [workingSpaceInfo, setWorkingSpaceInfo] = useState({});
   const [orderInfo, setOrderInfo] = useState({});
   const handleGetOrderDetail = async () => {
     if (location_id && order_id) {
-      if (!called) {
-        let res = await getOrderDetails({
-          variables: {
-            location_id: location_id,
-            order_id: order_id,
-          },
-        });
-        if (res.data) {
-          console.log(res.data);
-          setLocationInfo(res.data.location);
-          setWorkingSpaceInfo(res.data.order?.orderDetails[0]?.workingSpaces);
-          setOrderInfo(res.data.order);
-          if (res.data.order.status === 'booking_expired') {
-            setShowOrderExpire(true);
-          }
-        }
-      } else {
-        let res = await refetch({
-          variables: {
-            location_id: location_id,
-            order_id: order_id,
-          },
-        });
-        if (res.data) {
-          console.log(res.data);
-          setLocationInfo(res.data.location);
-          setWorkingSpaceInfo(res.data.order?.orderDetails[0]?.workingSpaces);
-          setOrderInfo(res.data.order);
-          if (res.data.order.status === 'booking_expired') {
-            setShowOrderExpire(true);
-          }
+      let res = await getOrderDetails({
+        variables: {
+          location_id: location_id,
+          order_id: order_id,
+        },
+      });
+      if (res.data) {
+        setLocationInfo(res.data.location);
+        setWorkingSpaceInfo(res.data.order?.orderDetails[0]?.workingSpaces);
+        setOrderInfo(res.data.order);
+        if (res.data.order.status === 'booking_expired') {
+          setShowOrderExpire(true);
         }
       }
     }

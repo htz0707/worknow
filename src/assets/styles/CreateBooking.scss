@@ -599,7 +599,7 @@
           }
 
           > div:nth-child(2) {
-            width: 130px;
+            width: 160px;
             display: flex;
             justify-content: center;
           }
@@ -611,9 +611,25 @@
             text-align: center;
           }
 
-          .status.verify {
+          .status.confirming {
             background: #ffefe3;
             color: #ff7a19;
+          }
+          .status.confirmed {
+            background: #eafaff;
+            color: #0075ff;
+          }
+          .status.booking_successful {
+            background: #edffde;
+            color: #6dba31;
+          }
+          .status.payment_fail {
+            background: #ffe8e8;
+            color: #ff4f4f;
+          }
+          .status.canceled {
+            background: #f3f3f3;
+            color: #5e5b50;
           }
         }
 
@@ -630,11 +646,18 @@
           }
 
           > div:nth-child(2) {
-            width: 130px;
+            width: 160px;
             text-align: center;
           }
         }
-
+        .btn-refresh {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 22px;
+          color: #0075ff;
+          margin-bottom: 20px;
+          cursor: pointer;
+        }
         .confirm-booking {
           background: #fff1f1;
           border-radius: 4px;

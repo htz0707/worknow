@@ -69,7 +69,9 @@ export default function CreateBooking() {
       }
     }
   `;
-  const [getWorkingSpaceDetails] = useLazyQuery(GET_WORKING_SPACE_DETAILS);
+  const [getWorkingSpaceDetails] = useLazyQuery(GET_WORKING_SPACE_DETAILS, {
+    fetchPolicy: 'no-cache',
+  });
   const [locationInfo, setLocationInfo] = useState({});
   const [workingSpaceInfo, setWorkingSpaceInfo] = useState({});
   const handleGetWorkingSpaceDetail = async () => {

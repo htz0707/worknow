@@ -108,3 +108,25 @@ export function handleMessage(kind, content) {
     });
   }
 }
+export const returnStatusBooking = (status) => {
+  switch (status) {
+    case 'booking':
+      return 'Đã tạo đơn';
+    case 'confirming':
+      return 'Chờ xác nhận thanh toán';
+    case 'confirmed':
+      return 'Đã xác nhận thanh toán';
+    case 'booking_successful':
+      return 'Đặt chỗ thành công';
+    case 'payment_fail':
+      return 'Xác nhận thanh toán thất bại';
+    case 'canceled':
+      return 'Đã hủy đơn';
+    case 'booking_expired':
+      return 'Đơn hết hiệu lực';
+    case 'extended':
+      return 'Đơn được gia hạn';
+    default:
+      return null;
+  }
+};

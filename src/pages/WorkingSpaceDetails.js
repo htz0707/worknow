@@ -20,6 +20,7 @@ import {
   renderHourOrDay,
   renderWorkingHour,
 } from '../helpers/helpers';
+import ConfirmBookingModal from '../components/ConfirmBookingModal';
 
 export default function WorkingSpaceDetails() {
   const { location_id, working_space_id } = useParams();
@@ -82,6 +83,10 @@ export default function WorkingSpaceDetails() {
   useEffect(() => {
     handleGetWorkingSpaceDetail();
   }, [location_id, working_space_id]);
+  const [showModal, setShowModal] = useState(false);
+  const handleBooking = (item) => {
+    setShowModal(true);
+  };
   return (
     <div className='working-space-details page-container'>
       <div className='working-space-details_header'>
@@ -166,7 +171,9 @@ export default function WorkingSpaceDetails() {
                 {formatCurrency(workingSpaceInfo?.price)}/
                 {renderHourOrDay(workingSpaceInfo?.type)}
               </div>
-              <button className='btn-booking'>Đặt ngay</button>
+              <button className='btn-booking' onClick={handleBooking}>
+                Đặt ngay
+              </button>
             </div>
           </div>
         </div>
@@ -209,6 +216,14 @@ export default function WorkingSpaceDetails() {
           </div>
         </div>
       </div>
+      <ConfirmBookingModal
+        show={showModal}
+        locationId={location_id}
+        selectedWorkingSpace={workingSpaceInfo}
+        openTime={locationInfo?.openTime}
+        closeTime={locationInfo?.closeTime}
+        handleClose={() => setShowModal(false)}
+      />
     </div>
   );
 }
