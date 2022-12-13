@@ -32,22 +32,22 @@ export default function SignUpForm(props) {
           ]}
         >
           <label className='fw-bold'>
-            Tên Công Ty
-          </label><span className='required'>*</span>
+            Tên Công Ty<span className='required'>*</span>
+          </label>
           <Input />
         </Form.Item>
         <Form.Item
           name='address'
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Vui Lòng Nhập Địa Chỉ Công Ty!',
             },
           ]}
         >
           <label className='fw-bold'>
             Địa Chỉ Công Ty
-          </label><span className='required'>*</span>
+          </label>
           <Input />
         </Form.Item>
         <div className='d-flex'>
@@ -128,28 +128,28 @@ export default function SignUpForm(props) {
           name='position'
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Vui Lòng Nhập Chức Danh!',
             },
           ]}
         >
           <label className='fw-bold'>
             Chức Danh
-          </label><span className='required'>*</span>
+          </label>
           <Input />
         </Form.Item>
         <Form.Item
           name='message'
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Vui Lòng Nhập Tin Nhắn!',
             },
           ]}
         >
           <label className='fw-bold'>
             Tin Nhắn
-          </label><span className='required'>*</span>
+          </label>
           <Input />
         </Form.Item>
         {/* {props.free ? (
