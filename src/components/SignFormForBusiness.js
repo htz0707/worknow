@@ -65,7 +65,8 @@ export default function SignUpForm(props) {
         >
           <label className='fw-bold'>
             Tên Công Ty
-          </label><span className='required'>*</span>
+            <span className='required'>*</span>
+          </label>
           <Input />
         </Form.Item>
         <Form.Item

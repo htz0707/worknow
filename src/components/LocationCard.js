@@ -48,7 +48,7 @@ export default function LocationCard(props) {
               <LocationIcon className='icon' />
             </div>
             <div>
-              <div>{renderAddress(data)}</div>
+              <div className='text-address'>{renderAddress(data)}</div>
               <div>Cách tôi 0,2km</div>
             </div>
           </div>
