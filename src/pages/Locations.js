@@ -8,6 +8,8 @@ import MapWrapper from '../components/MapWrapper';
 import SortLocation from '../components/SortLocation';
 import { gql, useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
+import FilterSortLocationMobile from '../components/FilterSortLocationMobile';
+import { Avatar, List, Skeleton, Switch } from 'antd';
 
 export default function Locations() {
   const GET_LOCATIONS = gql`
@@ -51,10 +53,14 @@ export default function Locations() {
       }
     }
   `;
-  const [getLocation] = useLazyQuery(GET_LOCATIONS);
+  const [getLocation] = useLazyQuery(GET_LOCATIONS, {
+    fetchPolicy: 'no-cache',
+  });
   const [locationsAmount, setLocationAmount] = useState(0);
   const [locations, setLocations] = useState([]);
+  const [loading, setLoading] = useState(true);
   const getLocationsList = async () => {
+    setLoading(true);
     let res = await getLocation({
       variables: {
         amenitiesLocationIds: filterLocations.amenitiesIds,
@@ -65,6 +71,9 @@ export default function Locations() {
       setLocations(res.data?.locations?.edges);
       setLocationAmount(res.data?.locations?.pageInfo?.count);
     }
+    setTimeout(() => {
+      setLoading(false);
+    }, 300);
   };
   const [filterLocations, setFilterLocations] = useState({
     amenitiesIds: [],
@@ -75,13 +84,26 @@ export default function Locations() {
   }, [filterLocations]);
   return (
     <div className='locations'>
-      <div className='locations_header page-container'>
+      <div className='locations_header'>
         <div className='locations_header_content'>
-          <div className='search-bar'>
-            <SearchIcon />
-            <input type='text' placeholder='Tìm kiếm địa điểm' />
+          <div className='row-1'>
+            <div className='page-container'>
+              <div className='search-bar'>
+                <SearchIcon />
+                <input type='text' placeholder='Tìm kiếm địa điểm' />
+              </div>
+              <div className='calendar-bar'></div>
+            </div>
           </div>
-          <div className='calendar-bar'></div>
+          <div className='row-2'>
+            <div className='page-container'>
+              <FilterSortLocationMobile
+                setFilterLocations={setFilterLocations}
+                filterLocations={filterLocations}
+                result={locationsAmount}
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div className='locations_body page-container'>
@@ -105,12 +127,33 @@ export default function Locations() {
               </span>{' '}
               tại TP. Hồ Chí Minh
             </div>
-            <SortLocation />
+            <div className='sort-location'>
+              <SortLocation />
+            </div>
           </div>
           <div className='content'>
-            {locations.map((item, index) => {
+            {/* <List
+              itemLayout='vertical'
+              size='large'
+              dataSource={locations}
+              renderItem={(item) => (
+                <List.Item key={item.id}>
+                  <Skeleton loading={loading} active avatar>
+                    <LocationCard data={item} />
+                  </Skeleton>
+                </List.Item>
+              )}
+            /> */}
+            {loading
+              ? new Array(3).fill(1).map((_, i) => {
+                  return <Skeleton loading={loading} active avatar key={i} />;
+                })
+              : locations.map((item, index) => {
+                  return <LocationCard data={item} key={index} />;
+                })}
+            {/* {locations.map((item, index) => {
               return <LocationCard data={item} key={index} />;
-            })}
+            })} */}
           </div>
         </div>
       </div>
