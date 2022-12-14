@@ -17,6 +17,10 @@
     min-width: 35vw;
     min-height: 50vh;
 
+    @media (max-width: 500px) {
+      min-width: 369.4px;
+    }
+
     .btn {
       background: #FFB31F;
       font-weight: 500;

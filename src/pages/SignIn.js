@@ -26,7 +26,7 @@ export default function SignIn() {
       <div className='container-md'>
         <div className='row'>
           <div className='logo col-lg-5 d-flex justify-content-center align-items-center'>
-            <img src={Logo} width={200} alt='logo' />
+            <img src={Logo} width={200} alt='logo' onClick={handleLogIn} />
           </div>
           <div className='col-lg-7 d-flex justify-content-center align-items-center'>
             <div className='sign-in-form rounded px-3 py-4'>
