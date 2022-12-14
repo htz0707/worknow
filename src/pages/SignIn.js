@@ -17,7 +17,7 @@ export default function SignIn() {
   const handleSignUp = () => {
     navigate('/sign-up')
   }
-  const handleLogIn = () => {
+  const handleRedirectToHome = () => {
     navigate('/')
   }
 
@@ -26,7 +26,7 @@ export default function SignIn() {
       <div className='container-md'>
         <div className='row'>
           <div className='logo col-lg-5 d-flex justify-content-center align-items-center'>
-            <img src={Logo} width={200} alt='logo' onClick={handleLogIn} />
+            <img src={Logo} width={200} alt='logo' onClick={handleRedirectToHome} />
           </div>
           <div className='col-lg-7 d-flex justify-content-center align-items-center'>
             <div className='sign-in-form rounded px-3 py-4'>
@@ -57,7 +57,7 @@ export default function SignIn() {
                       />
                   }
                 </div>
-                <button type="submit" onClick={handleLogIn} className="btn w-100 rounded-pill">Đăng Nhập</button>
+                <button type="submit" className="btn w-100 rounded-pill">Đăng Nhập</button>
               </form>
               <div className='row mt-2'>
                 <div className='col-lg-8'>
