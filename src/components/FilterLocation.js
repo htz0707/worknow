@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../assets/styles/FilterLocation.scss';
 import { IoLocationOutline } from 'react-icons/io5';
 import { Dropdown, Button } from 'react-bootstrap';
-import { ReactComponent as ServiceIcon } from '../assets/icons/dichVu.svg';
+import { ReactComponent as ServiceIcon } from '../assets/icons/tienich.svg';
 import { ReactComponent as DistanceIcon } from '../assets/icons/ganToiNhat.svg';
 import { ReactComponent as RoomIcon } from '../assets/icons/loaiVanPhong.svg';
 import { ReactComponent as CapacityIcon } from '../assets/icons/sucChua.svg';
@@ -174,19 +174,36 @@ export default function FilterLocation(props) {
     handleGetData();
   }, []);
   // handle filter by amenity
-  const onClickAmenities = (id) => {
-    let copy = [...filterLocations.amenitiesIds];
+  const onClickAmenitiesLocation = (id) => {
+    let copy = [...filterLocations.amenitiesLocationIds];
     if (copy.includes(id)) {
       let filter_arr = copy.filter((item) => item !== id);
       setFilterLocations({
         ...filterLocations,
-        amenitiesIds: filter_arr,
+        amenitiesLocationIds: filter_arr,
       });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
-        amenitiesIds: copy,
+        amenitiesLocationIds: copy,
+      });
+    }
+  };
+  // handle filter by amenity
+  const onClickAmenitiesWorkingSpace = (id) => {
+    let copy = [...filterLocations.amenitiesWorkingSpaceIds];
+    if (copy.includes(id)) {
+      let filter_arr = copy.filter((item) => item !== id);
+      setFilterLocations({
+        ...filterLocations,
+        amenitiesWorkingSpaceIds: filter_arr,
+      });
+    } else {
+      copy.push(id);
+      setFilterLocations({
+        ...filterLocations,
+        amenitiesWorkingSpaceIds: copy,
       });
     }
   };
@@ -226,8 +243,10 @@ export default function FilterLocation(props) {
                     className='form-check-input'
                     type='checkbox'
                     id={'service' + item.id}
-                    checked={filterLocations.amenitiesIds?.includes(item.id)}
-                    onChange={() => onClickAmenities(item.id)}
+                    checked={filterLocations.amenitiesLocationIds?.includes(
+                      item.id
+                    )}
+                    onChange={() => onClickAmenitiesLocation(item.id)}
                   />
                   <label className='form-check-label' for={'service' + item.id}>
                     {item.name}
@@ -242,8 +261,10 @@ export default function FilterLocation(props) {
                       className='form-check-input'
                       type='checkbox'
                       id={'service' + item.id}
-                      checked={filterLocations.amenitiesIds?.includes(item.id)}
-                      onChange={() => onClickAmenities(item.id)}
+                      checked={filterLocations.amenitiesLocationIds?.includes(
+                        item.id
+                      )}
+                      onChange={() => onClickAmenitiesLocation(item.id)}
                     />
                     <label
                       className='form-check-label'
@@ -277,8 +298,10 @@ export default function FilterLocation(props) {
                     className='form-check-input'
                     type='checkbox'
                     id={'service' + item.id}
-                    checked={filterLocations.amenitiesIds?.includes(item.id)}
-                    onChange={() => onClickAmenities(item.id)}
+                    checked={filterLocations.amenitiesWorkingSpaceIds?.includes(
+                      item.id
+                    )}
+                    onChange={() => onClickAmenitiesWorkingSpace(item.id)}
                   />
                   <label className='form-check-label' for={'service' + item.id}>
                     {item.name}
@@ -293,8 +316,10 @@ export default function FilterLocation(props) {
                       className='form-check-input'
                       type='checkbox'
                       id={'service' + item.id}
-                      checked={filterLocations.amenitiesIds?.includes(item.id)}
-                      onChange={() => onClickAmenities(item.id)}
+                      checked={filterLocations.amenitiesWorkingSpaceIds?.includes(
+                        item.id
+                      )}
+                      onChange={() => onClickAmenitiesWorkingSpace(item.id)}
                     />
                     <label
                       className='form-check-label'

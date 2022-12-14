@@ -19,6 +19,7 @@ import {
   renderAddress,
   renderHourOrDay,
   renderWorkingHour,
+  returnTypeOfBooking,
 } from '../helpers/helpers';
 import ConfirmBookingModal from '../components/ConfirmBookingModal';
 
@@ -55,7 +56,8 @@ export default function WorkingSpaceDetails() {
           publicUrl
         }
         description
-        price
+        priceByDay
+        priceByHour
         type
         amenities {
           name
@@ -167,10 +169,18 @@ export default function WorkingSpaceDetails() {
               </div>
             </div>
             <div className='content-booking'>
-              <div className='price'>
-                {formatCurrency(workingSpaceInfo?.price)}/
-                {renderHourOrDay(workingSpaceInfo?.type)}
-              </div>
+              {returnTypeOfBooking(workingSpaceInfo?.type) === 'hour' && (
+                <div className='price'>
+                  {formatCurrency(workingSpaceInfo?.priceByHour)}/
+                  {renderHourOrDay(workingSpaceInfo?.type)}
+                </div>
+              )}
+              {returnTypeOfBooking(workingSpaceInfo?.type) === 'day' && (
+                <div className='price'>
+                  {formatCurrency(workingSpaceInfo?.priceByDay)}/
+                  {renderHourOrDay(workingSpaceInfo?.type)}
+                </div>
+              )}
               <button className='btn-booking' onClick={handleBooking}>
                 Đặt ngay
               </button>

@@ -10,16 +10,19 @@ import { gql, useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import FilterSortLocationMobile from '../components/FilterSortLocationMobile';
 import { Avatar, List, Skeleton, Switch } from 'antd';
+import NoData from '../components/NoData';
 
 export default function Locations() {
   const GET_LOCATIONS = gql`
     query GetLocations(
       $amenitiesLocationIds: [UUID!]
+      $amenitiesWorkingSpaceIds: [UUID!]
       $workingSpaceCapacityIds: [UUID!]
     ) {
       locations(
         params: {
           amenitiesLocationIds: $amenitiesLocationIds
+          amenitiesWorkingSpaceIds: $amenitiesWorkingSpaceIds
           workingSpaceCapacityIds: $workingSpaceCapacityIds
         }
       ) {
@@ -63,7 +66,8 @@ export default function Locations() {
     setLoading(true);
     let res = await getLocation({
       variables: {
-        amenitiesLocationIds: filterLocations.amenitiesIds,
+        amenitiesLocationIds: filterLocations.amenitiesLocationIds,
+        amenitiesWorkingSpaceIds: filterLocations.amenitiesWorkingSpaceIds,
         workingSpaceCapacityIds: filterLocations.capacityIds,
       },
     });
@@ -76,7 +80,8 @@ export default function Locations() {
     }, 300);
   };
   const [filterLocations, setFilterLocations] = useState({
-    amenitiesIds: [],
+    amenitiesLocationIds: [],
+    amenitiesWorkingSpaceIds: [],
     capacityIds: [],
   });
   useEffect(() => {
@@ -144,13 +149,21 @@ export default function Locations() {
                 </List.Item>
               )}
             /> */}
-            {loading
-              ? new Array(3).fill(1).map((_, i) => {
-                  return <Skeleton loading={loading} active avatar key={i} />;
-                })
-              : locations.map((item, index) => {
-                  return <LocationCard data={item} key={index} />;
-                })}
+            {loading ? (
+              new Array(3).fill(1).map((_, i) => {
+                return <Skeleton loading={loading} active avatar key={i} />;
+              })
+            ) : (
+              <>
+                {locations.length ? (
+                  locations.map((item, index) => {
+                    return <LocationCard data={item} key={index} />;
+                  })
+                ) : (
+                  <NoData />
+                )}
+              </>
+            )}
             {/* {locations.map((item, index) => {
               return <LocationCard data={item} key={index} />;
             })} */}
