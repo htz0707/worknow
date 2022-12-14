@@ -61,7 +61,8 @@ export default function CreateBooking() {
           publicUrl
         }
         description
-        price
+        priceByDay
+        priceByHour
         type
         amenities {
           name
@@ -115,6 +116,7 @@ export default function CreateBooking() {
       $workingSpaceId: UUID!
       $startDate: datetime!
       $endDate: datetime!
+      $bookingType: BookingType!
     ) {
       createOrder(
         data: {
@@ -127,6 +129,7 @@ export default function CreateBooking() {
             workingSpaceId: $workingSpaceId
             startDate: $startDate
             endDate: $endDate
+            bookingType: $bookingType
           }
         }
       ) {
@@ -147,6 +150,7 @@ export default function CreateBooking() {
         workingSpaceId: working_space_id,
         startDate: orderInfo.start_date_utc,
         endDate: orderInfo.end_date_utc,
+        bookingType: orderInfo.type,
       },
     });
   };
