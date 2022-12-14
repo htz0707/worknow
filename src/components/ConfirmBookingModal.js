@@ -42,11 +42,11 @@ export default function ConfirmBookingModal(props) {
   // };
 
   const [bookingInfoTypeDay, setBookingInfoTypeDay] = useState({
-    startDate: new Date(),
+    startDate: null,
     endDate: null,
     totalDay: null,
     price: null,
-    date_range: moment(new Date()).format('DD/MM/YYYY'),
+    date_range: null,
   });
   const handleDateRangeChange = (dates) => {
     const [start, end] = dates;
@@ -55,6 +55,7 @@ export default function ConfirmBookingModal(props) {
       startDate: start,
       endDate: end,
     });
+    setError('');
   };
   const handleCaculate = () => {
     if (typeOfBooking === 'day') {
@@ -69,7 +70,7 @@ export default function ConfirmBookingModal(props) {
           let total_day =
             moment(end_date_format).diff(moment(start_date_format), 'days') + 1;
 
-          let price = total_day * selectedWorkingSpace.price;
+          let price = total_day * selectedWorkingSpace.priceByDay;
           let date_range;
           let start_date_format1 = moment(bookingInfoTypeDay.startDate).format(
             'DD/MM/YYYY'
@@ -92,7 +93,7 @@ export default function ConfirmBookingModal(props) {
           setBookingInfoTypeDay({
             ...bookingInfoTypeDay,
             totalDay: 1,
-            price: selectedWorkingSpace.price,
+            price: selectedWorkingSpace.priceByDay,
             date_range: moment(bookingInfoTypeDay.startDate).format(
               'DD/MM/YYYY'
             ),
@@ -144,7 +145,7 @@ export default function ConfirmBookingModal(props) {
         let price =
           (bookingInfoTypeHour.endTime.id - bookingInfoTypeHour.startTime.id) *
           0.5 *
-          selectedWorkingSpace.price;
+          selectedWorkingSpace.priceByHour;
         setBookingInfoTypeHour({
           ...bookingInfoTypeHour,
           time_range: time_range,
@@ -172,41 +173,45 @@ export default function ConfirmBookingModal(props) {
   //
   const handleSubmit = () => {
     if (typeOfBooking === 'day') {
-      let start_date_join_time =
-        moment(bookingInfoTypeDay.startDate).format('YYYY-MM-DD') +
-        'T' +
-        openTime;
-      let start_date_utc = moment
-        .utc(new Date(start_date_join_time).toUTCString())
-        .format();
-      let end_date_join_time;
-      if (bookingInfoTypeDay.endDate) {
-        end_date_join_time =
-          moment(bookingInfoTypeDay.endDate).format('YYYY-MM-DD') +
-          'T' +
-          closeTime;
-      } else {
-        end_date_join_time =
+      if (bookingInfoTypeDay.startDate) {
+        let start_date_join_time =
           moment(bookingInfoTypeDay.startDate).format('YYYY-MM-DD') +
           'T' +
-          closeTime;
+          openTime;
+        let start_date_utc = moment
+          .utc(new Date(start_date_join_time).toUTCString())
+          .format();
+        let end_date_join_time;
+        if (bookingInfoTypeDay.endDate) {
+          end_date_join_time =
+            moment(bookingInfoTypeDay.endDate).format('YYYY-MM-DD') +
+            'T' +
+            closeTime;
+        } else {
+          end_date_join_time =
+            moment(bookingInfoTypeDay.startDate).format('YYYY-MM-DD') +
+            'T' +
+            closeTime;
+        }
+        let end_date_utc = moment
+          .utc(new Date(end_date_join_time).toUTCString())
+          .format();
+        let data = {
+          type: 'day',
+          date_range: bookingInfoTypeDay.date_range,
+          totalDay: bookingInfoTypeDay.totalDay,
+          price: bookingInfoTypeDay.price,
+          start_date_utc: start_date_utc,
+          end_date_utc: end_date_utc,
+        };
+        navigate(`/create-booking/${locationId}/${selectedWorkingSpace.id}`, {
+          state: {
+            orderInfo: data,
+          },
+        });
+      } else {
+        setError('Vui lòng chọn thời gian bạn muốn đặt chỗ.');
       }
-      let end_date_utc = moment
-        .utc(new Date(end_date_join_time).toUTCString())
-        .format();
-      let data = {
-        type: 'day',
-        date_range: bookingInfoTypeDay.date_range,
-        totalDay: bookingInfoTypeDay.totalDay,
-        price: bookingInfoTypeDay.price,
-        start_date_utc: start_date_utc,
-        end_date_utc: end_date_utc,
-      };
-      navigate(`/create-booking/${locationId}/${selectedWorkingSpace.id}`, {
-        state: {
-          orderInfo: data,
-        },
-      });
     }
     if (typeOfBooking === 'hour') {
       if (
@@ -249,11 +254,11 @@ export default function ConfirmBookingModal(props) {
   //
   useEffect(() => {
     setBookingInfoTypeDay({
-      startDate: new Date(),
+      startDate: null,
       endDate: null,
       totalDay: null,
       price: null,
-      date_range: moment(new Date()).format('DD/MM/YYYY'),
+      date_range: null,
     });
     setBookingInfoTypeHour({
       date: new Date(),
@@ -289,7 +294,7 @@ export default function ConfirmBookingModal(props) {
                   selectsRange
                   inline
                   locale={'vi'}
-                  minDate={moment().toDate()}
+                  minDate={moment().add(1, 'd').toDate()}
                 />
               </div>
             </div>
@@ -306,12 +311,15 @@ export default function ConfirmBookingModal(props) {
                   Thời gian: {bookingInfoTypeDay.date_range}
                 </label>
               </div>
+              {error && <div className='text-danger'>{error}</div>}
             </div>
             <hr className='mx-4' />
             <div className='row px-4'>
               <div className='col-8 text-gray'>Tổng thời gian:</div>
               <div className='col-4 text-end'>
-                {bookingInfoTypeDay.totalDay} ngày
+                {bookingInfoTypeDay.totalDay && (
+                  <>{bookingInfoTypeDay.totalDay} ngày</>
+                )}
               </div>
             </div>
             <div className='row px-4'>

@@ -110,7 +110,8 @@ export default function LocationDetails() {
           id
           name
           description
-          price
+          priceByDay
+          priceByHour
           images {
             publicUrl
           }

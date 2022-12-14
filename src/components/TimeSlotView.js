@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import '../assets/styles/TimeSlotView.scss';
 import { createTimeSlot } from '../helpers/helpers';
 import cx from 'classnames';
+import moment from 'moment';
 
 export default function TimeSlotView(props) {
   const { openTime, closeTime, startTime, endTime, handleChangeTimeSlot } =
@@ -136,6 +137,8 @@ export default function TimeSlotView(props) {
     let time_slot = createTimeSlot(openTime, closeTime);
     let arr = [];
     let arr1 = [];
+    // let current_time = moment().format('HH:mm');
+    // console.log(current_time);
     time_slot?.forEach((item, index) => {
       arr.push({
         id: index + 1,

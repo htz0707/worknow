@@ -4,7 +4,11 @@ import Img1 from '../assets/images/location_img1.png';
 import Tag from './Tag';
 import TimeSlotView from './TimeSlotView';
 import { Carousel } from 'react-bootstrap';
-import { formatCurrency, renderHourOrDay } from '../helpers/helpers';
+import {
+  formatCurrency,
+  renderHourOrDay,
+  returnTypeOfBooking,
+} from '../helpers/helpers';
 import { useNavigate } from 'react-router-dom';
 
 export default function WorkSpaceCard(props) {
@@ -49,9 +53,16 @@ export default function WorkSpaceCard(props) {
       </div>
       <div className='right'>
         {/* <div className='old-price'>250,000Đ/H</div> */}
-        <div className='new-price'>
-          {formatCurrency(data?.price)}/{renderHourOrDay(data?.type)}
-        </div>
+        {returnTypeOfBooking(data?.type) === 'hour' && (
+          <div className='new-price'>
+            {formatCurrency(data?.priceByHour)}/{renderHourOrDay(data?.type)}
+          </div>
+        )}
+        {returnTypeOfBooking(data?.type) === 'day' && (
+          <div className='new-price'>
+            {formatCurrency(data?.priceByDay)}/{renderHourOrDay(data?.type)}
+          </div>
+        )}
         <button onClick={handleClick}>Đặt ngay</button>
       </div>
     </div>

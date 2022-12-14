@@ -73,19 +73,36 @@ export default function FilterSortLocationMobile(props) {
     handleGetData();
   }, []);
   // handle filter by amenity
-  const onClickAmenities = (id) => {
-    let copy = [...filterLocations.amenitiesIds];
+  const onClickAmenitiesLocation = (id) => {
+    let copy = [...filterLocations.amenitiesLocationIds];
     if (copy.includes(id)) {
       let filter_arr = copy.filter((item) => item !== id);
       setFilterLocations({
         ...filterLocations,
-        amenitiesIds: filter_arr,
+        amenitiesLocationIds: filter_arr,
       });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
-        amenitiesIds: copy,
+        amenitiesLocationIds: copy,
+      });
+    }
+  };
+  // handle filter by amenity
+  const onClickAmenitiesWorkingSpace = (id) => {
+    let copy = [...filterLocations.amenitiesWorkingSpaceIds];
+    if (copy.includes(id)) {
+      let filter_arr = copy.filter((item) => item !== id);
+      setFilterLocations({
+        ...filterLocations,
+        amenitiesWorkingSpaceIds: filter_arr,
+      });
+    } else {
+      copy.push(id);
+      setFilterLocations({
+        ...filterLocations,
+        amenitiesWorkingSpaceIds: copy,
       });
     }
   };
@@ -113,13 +130,15 @@ export default function FilterSortLocationMobile(props) {
   //
   const handleClearFilter = () => {
     setFilterLocations({
-      amenitiesIds: [],
+      amenitiesLocationIds: [],
+      amenitiesWorkingSpaceIds: [],
       capacityIds: [],
     });
   };
   const handleCheckFilter = () => {
     if (
-      filterLocations?.amenitiesIds?.length > 0 ||
+      filterLocations?.amenitiesLocationIds?.length > 0 ||
+      filterLocations?.amenitiesWorkingSpaceIds?.length > 0 ||
       filterLocations?.capacityIds?.length > 0
     ) {
       return true;
@@ -171,10 +190,10 @@ export default function FilterSortLocationMobile(props) {
                           className='form-check-input'
                           type='checkbox'
                           id={'service' + item.id}
-                          checked={filterLocations.amenitiesIds?.includes(
+                          checked={filterLocations.amenitiesLocationIds?.includes(
                             item.id
                           )}
-                          onChange={() => onClickAmenities(item.id)}
+                          onChange={() => onClickAmenitiesLocation(item.id)}
                         />
                         <label
                           className='form-check-label'
@@ -192,10 +211,10 @@ export default function FilterSortLocationMobile(props) {
                             className='form-check-input'
                             type='checkbox'
                             id={'service' + item.id}
-                            checked={filterLocations.amenitiesIds?.includes(
+                            checked={filterLocations.amenitiesLocationIds?.includes(
                               item.id
                             )}
-                            onChange={() => onClickAmenities(item.id)}
+                            onChange={() => onClickAmenitiesLocation(item.id)}
                           />
                           <label
                             className='form-check-label'
@@ -229,10 +248,10 @@ export default function FilterSortLocationMobile(props) {
                           className='form-check-input'
                           type='checkbox'
                           id={'service' + item.id}
-                          checked={filterLocations.amenitiesIds?.includes(
+                          checked={filterLocations.amenitiesWorkingSpaceIds?.includes(
                             item.id
                           )}
-                          onChange={() => onClickAmenities(item.id)}
+                          onChange={() => onClickAmenitiesWorkingSpace(item.id)}
                         />
                         <label
                           className='form-check-label'
@@ -250,10 +269,12 @@ export default function FilterSortLocationMobile(props) {
                             className='form-check-input'
                             type='checkbox'
                             id={'service' + item.id}
-                            checked={filterLocations.amenitiesIds?.includes(
+                            checked={filterLocations.amenitiesWorkingSpaceIds?.includes(
                               item.id
                             )}
-                            onChange={() => onClickAmenities(item.id)}
+                            onChange={() =>
+                              onClickAmenitiesWorkingSpace(item.id)
+                            }
                           />
                           <label
                             className='form-check-label'

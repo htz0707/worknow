@@ -130,3 +130,10 @@ export const returnStatusBooking = (status) => {
       return null;
   }
 };
+export function compareTime(time1, time2) {
+  if (new Date('1/1/1999 ' + time1) >= new Date('1/1/1999 ' + time2)) {
+    return true;
+  } else {
+    return false;
+  }
+}

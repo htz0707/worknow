@@ -73,7 +73,7 @@ export default function LocationCard(props) {
           </div>
         </div>
         <div>
-          <div className='d-flex mt-auto'>
+          <div className='price-section'>
             {/* <div className='old-price'>250,000Đ/H</div> */}
             <div className='new-price'>
               <span>Chỉ từ </span>125,000Đ/H
