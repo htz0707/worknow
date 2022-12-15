@@ -393,7 +393,9 @@ export default function BookingPayment() {
                             </div>
                             <div>
                               <span>Nội dung chuyển khoản</span>
-                              <span>Thanh toan dat cho #1234567</span>
+                              <span>
+                                Thanh toan dat cho #{orderInfo?.orderId}
+                              </span>
                             </div>
                           </div>
                           <div className='bank-amount'>
@@ -441,7 +443,9 @@ export default function BookingPayment() {
                             </div>
                             <div>
                               <span>Nội dung chuyển khoản</span>
-                              <span>Thanh toan dat cho #1234567</span>
+                              <span>
+                                Thanh toan dat cho #{orderInfo?.orderId}
+                              </span>
                             </div>
                           </div>
                           <div className='amount'>
@@ -586,7 +590,7 @@ export default function BookingPayment() {
                 Giá trên không bao gồm các chi phí khi bạn sử dụng các dịch vụ
                 và tiện ích khác của tòa nhà. Khi bạn muốn hủy hoặc hoàn tiền
                 cho vị trí đã đặt vui lòng kiểm tra kỹ{' '}
-                <b>chính sách hủy và hoàn tiền của Circo</b>{' '}
+                <b>chính sách hủy và hoàn tiền của WorkNow</b>{' '}
                 <a href='#'>tại đây</a>
               </p>
             </div>

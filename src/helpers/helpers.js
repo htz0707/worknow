@@ -137,3 +137,29 @@ export function compareTime(time1, time2) {
     return false;
   }
 }
+export const handleError = (value, defaultMessage) => {
+  switch (value) {
+    case 'USER_IS_EXIST':
+      return `Tài khoản email này đã tồn tại. Vui lòng kiểm tra lại`;
+      break;
+    case 'PASSWORD_INVALID':
+      return `Mật khẩu của bạn không chính xác, vui lòng kiểm tra lại.`;
+      break;
+    case 'USER_NOT_FOUND':
+      return `Chưa có tài khoản email này, vui lòng tạo tài khoản.`;
+      break;
+    default:
+      return defaultMessage;
+      break;
+  }
+};
+export const redirectAfterLogin = (navigate, defaultUrl) => {
+  let preUrl = JSON.parse(localStorage.getItem('preUrl'));
+  if (preUrl) {
+    navigate(preUrl.pathname, {
+      state: preUrl.state,
+    });
+  } else {
+    navigate(defaultUrl);
+  }
+};
