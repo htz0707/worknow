@@ -3,7 +3,8 @@ import '../assets/styles/FilterSortLocationMobile.scss';
 import { ReactComponent as SortIcon } from '../assets/icons/sort.svg';
 import { ReactComponent as FilterIcon } from '../assets/icons/filter.svg';
 import { ReactComponent as CloseIcon } from '../assets/icons/close.svg';
-import { ReactComponent as ServiceIcon } from '../assets/icons/tienich.svg';
+import { ReactComponent as ServiceIcon } from '../assets/icons/tienichtoanha.svg';
+import { ReactComponent as OfficeIcon } from '../assets/icons/tienichvanphong.svg';
 import { ReactComponent as CapacityIcon } from '../assets/icons/sucChua.svg';
 import { Offcanvas } from 'react-bootstrap';
 import { useQuery, gql, useLazyQuery } from '@apollo/client';
@@ -237,7 +238,7 @@ export default function FilterSortLocationMobile(props) {
             </div>
             <div className='filter-location_card'>
               <div className='filter-location_card_title'>
-                <ServiceIcon className='icon' /> Tiện Ích Văn Phòng
+                <OfficeIcon className='icon'/> Tiện Ích Văn Phòng
               </div>
               <div className='filter-location_card_list'>
                 {amenitiesWorkingSpace.map((item, index) => {
