@@ -20,6 +20,7 @@ import parsePhoneNumber from 'libphonenumber-js';
 const { Step } = Steps;
 
 export default function CreateBooking() {
+  const path = useLocation();
   let navigate = useNavigate();
   const { location_id, working_space_id } = useParams();
   const orderInfo = useLocation()?.state?.orderInfo;
@@ -229,9 +230,23 @@ export default function CreateBooking() {
                   Bạn là nhân viên của Doanh nghiệp đối tác với WorkNow?
                 </div>
                 <div>
-                  <a href='#'>Đăng nhập</a> để thanh toán bằng tài khoản Doanh
-                  nghiệp. Hoặc <a href='#'>Đăng ký</a> để tận hưởng những ưu đãi
-                  thành viên.
+                  <a
+                    href='#'
+                    // onClick={() => {
+                    //   localStorage.setItem(
+                    //     'preUrl',
+                    //     JSON.stringify({
+                    //       pathname: path.pathname,
+                    //       state: path.state,
+                    //     })
+                    //   );
+                    //   navigate(`/sign-in`);
+                    // }}
+                  >
+                    Đăng nhập
+                  </a>{' '}
+                  để thanh toán bằng tài khoản Doanh nghiệp. Hoặc{' '}
+                  <a href='#'>Đăng ký</a> để tận hưởng những ưu đãi thành viên.
                 </div>
               </div>
             </div>
@@ -447,7 +462,7 @@ export default function CreateBooking() {
                 Giá trên không bao gồm các chi phí khi bạn sử dụng các dịch vụ
                 và tiện ích khác của tòa nhà. Khi bạn muốn hủy hoặc hoàn tiền
                 cho vị trí đã đặt vui lòng kiểm tra kỹ{' '}
-                <b>chính sách hủy và hoàn tiền của Circo</b>{' '}
+                <b>chính sách hủy và hoàn tiền của WorkNow</b>{' '}
                 <a href='#'>tại đây</a>
               </p>
             </div>

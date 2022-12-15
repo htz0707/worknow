@@ -16,9 +16,67 @@
     background-color: white;
     min-width: 35vw;
     min-height: 50vh;
+    label {
+      font-weight: 600;
+      color: #282723;
 
+      > span {
+        color: #ff4f4f;
+      }
+    }
+    .custom-input {
+      background: #ffffff;
+      border: 1.00058px solid #a7a49a;
+      box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+      border-radius: 12.007px;
+    }
+    .phone-input-engine {
+      input {
+        background: #ffffff;
+        border: 1.00058px solid #a7a49a;
+        box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+        border-radius: 12.007px;
+      }
+      .react-tel-input {
+        .form-control {
+          width: 100%;
+        }
+        .flag-dropdown {
+          border-bottom-left-radius: 12.007px;
+          border-top-left-radius: 12.007px;
+
+          &.open {
+            border-bottom-left-radius: 12.007px;
+            border-top-left-radius: 12.007px;
+
+            .selected-flag {
+              border-bottom-left-radius: 12.007px;
+              border-top-left-radius: 12.007px;
+            }
+          }
+          .selected-flag {
+            &:hover {
+              border-bottom-left-radius: 12.007px;
+              border-top-left-radius: 12.007px;
+            }
+          }
+        }
+      }
+    }
+    .ant-form-item-control-input-content {
+      .ant-input-affix-wrapper {
+        background: #ffffff;
+        border: 1.00058px solid #a7a49a;
+        box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+        border-radius: 12.007px;
+        padding: 0.375rem 0.75rem;
+      }
+      .ant-input-affix-wrapper:hover {
+        border: 1.00058px solid #a7a49a;
+      }
+    }
     .btn {
-      background: #FFB31F;
+      background: #ffb31f;
       font-weight: 500;
     }
 
@@ -33,7 +91,7 @@
 
     .password-field {
       display: flex;
-  
+
       .eye-icon {
         margin-bottom: -30px;
         margin-top: 10px;
@@ -44,7 +102,7 @@
 
     .link {
       text-decoration: none;
-      color: #0075FF;
+      color: #0075ff;
       font-weight: 500;
       cursor: pointer;
     }
