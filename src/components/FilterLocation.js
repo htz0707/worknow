@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../assets/styles/FilterLocation.scss';
 import { IoLocationOutline } from 'react-icons/io5';
 import { Dropdown, Button } from 'react-bootstrap';
-import { ReactComponent as ServiceIcon } from '../assets/icons/tienich.svg';
+import { ReactComponent as ServiceIcon } from '../assets/icons/tienichtoanha.svg';
+import { ReactComponent as OfficeIcon } from '../assets/icons/tienichvanphong.svg';
 import { ReactComponent as DistanceIcon } from '../assets/icons/ganToiNhat.svg';
 import { ReactComponent as RoomIcon } from '../assets/icons/loaiVanPhong.svg';
 import { ReactComponent as CapacityIcon } from '../assets/icons/sucChua.svg';
@@ -232,7 +233,7 @@ export default function FilterLocation(props) {
     <div className='filter-location'>
       <div className='filter-location_card'>
         <div className='filter-location_card_title'>
-          <ServiceIcon className='icon' /> Tiện Ích Tòa Nhà
+          <ServiceIcon className='icon' /> Tiện ích tòa Nhà
         </div>
         <div className='filter-location_card_list'>
           {amenitiesLocations.map((item, index) => {
@@ -287,7 +288,7 @@ export default function FilterLocation(props) {
       </div>
       <div className='filter-location_card'>
         <div className='filter-location_card_title'>
-          <ServiceIcon className='icon' /> Tiện Ích Văn Phòng
+          <OfficeIcon className='icon' /> Tiện ích văn phòng
         </div>
         <div className='filter-location_card_list'>
           {amenitiesWorkingSpace.map((item, index) => {

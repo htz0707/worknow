@@ -126,12 +126,16 @@ export default function SignUp() {
     navigate('/sign-in');
   };
 
+  const handleLogIn = () => {
+    navigate('/')
+  }
+
   return (
     <div className='sign-up-page'>
       <div className='container-md'>
         <div className='row'>
           <div className='logo col-lg-5 d-flex justify-content-center align-items-center'>
-            <img src={Logo} width={200} />
+            <img src={Logo} width={200} onClick={handleLogIn} />
           </div>
           <div className='col-lg-7 d-flex justify-content-center align-items-center'>
             <div className='sign-up-form rounded px-3 py-4'>
