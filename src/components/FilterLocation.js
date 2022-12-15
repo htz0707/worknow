@@ -233,7 +233,7 @@ export default function FilterLocation(props) {
     <div className='filter-location'>
       <div className='filter-location_card'>
         <div className='filter-location_card_title'>
-          <ServiceIcon className='icon' /> Tiện Ích Tòa Nhà
+          <ServiceIcon className='icon' /> Tiện ích tòa Nhà
         </div>
         <div className='filter-location_card_list'>
           {amenitiesLocations.map((item, index) => {
@@ -288,7 +288,7 @@ export default function FilterLocation(props) {
       </div>
       <div className='filter-location_card'>
         <div className='filter-location_card_title'>
-          <OfficeIcon className='icon' /> Tiện Ích Văn Phòng
+          <OfficeIcon className='icon' /> Tiện ích văn phòng
         </div>
         <div className='filter-location_card_list'>
           {amenitiesWorkingSpace.map((item, index) => {
