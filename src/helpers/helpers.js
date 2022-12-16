@@ -6,12 +6,11 @@ export const spliceSplit = (str, index, count, add) => {
   return ar.join('');
 };
 export function formatCurrency(value, currency = 'VND') {
-  const formatter = new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: currency,
-  });
   if (!isNaN(parseFloat(value))) {
-    return formatter.format(value);
+    return value.toLocaleString('it-IT', {
+      style: 'currency',
+      currency: currency,
+    });
   }
   return value;
 }
@@ -44,9 +43,9 @@ export const renderHourOrDay = (value) => {
     value === 'convience_room' ||
     value === 'booth'
   ) {
-    return 'h';
+    return 'H';
   } else {
-    return 'h';
+    return 'H';
   }
 };
 export const returnTypeOfBooking = (value) => {
