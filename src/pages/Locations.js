@@ -18,12 +18,14 @@ export default function Locations() {
       $amenitiesLocationIds: [UUID!]
       $amenitiesWorkingSpaceIds: [UUID!]
       $workingSpaceCapacityIds: [UUID!]
+      $keyword: String!
     ) {
       locations(
         params: {
           amenitiesLocationIds: $amenitiesLocationIds
           amenitiesWorkingSpaceIds: $amenitiesWorkingSpaceIds
           workingSpaceCapacityIds: $workingSpaceCapacityIds
+          keyword: $keyword
         }
       ) {
         edges {
@@ -56,11 +58,20 @@ export default function Locations() {
       }
     }
   `;
+
   const [getLocation] = useLazyQuery(GET_LOCATIONS, {
     fetchPolicy: 'no-cache',
   });
   const [locationsAmount, setLocationAmount] = useState(0);
   const [locations, setLocations] = useState([]);
+  const [searchData, setSearchData] = useState("");
+  let timeout = null;
+  const handleTypeSearch = (value) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      setSearchData(value);
+    }, 300);
+  };
   const [loading, setLoading] = useState(true);
   const getLocationsList = async () => {
     setLoading(true);
@@ -69,6 +80,7 @@ export default function Locations() {
         amenitiesLocationIds: filterLocations.amenitiesLocationIds,
         amenitiesWorkingSpaceIds: filterLocations.amenitiesWorkingSpaceIds,
         workingSpaceCapacityIds: filterLocations.capacityIds,
+        keyword: searchData
       },
     });
     if (res.data) {
@@ -86,7 +98,7 @@ export default function Locations() {
   });
   useEffect(() => {
     getLocationsList();
-  }, [filterLocations]);
+  }, [filterLocations, searchData]);
   return (
     <div className='locations'>
       <div className='locations_header'>
@@ -95,7 +107,10 @@ export default function Locations() {
             <div className='page-container'>
               <div className='search-bar'>
                 <SearchIcon />
-                <input type='text' placeholder='Tìm kiếm địa điểm' />
+                <input
+                  type='text' placeholder='Tìm kiếm địa điểm'
+                  onChange={(e) => handleTypeSearch(e.target.value)}
+                />
               </div>
               <div className='calendar-bar'></div>
             </div>
