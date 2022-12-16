@@ -477,7 +477,7 @@ export default function LocationDetails() {
               </div> */}
               <div className='policy'>
                 Chính sách hủy đặt chỗ và hoàn tiền dựa trên chính sách của
-                Circo. <span>Xem chính sách</span>
+                WorkNow. <span>Xem chính sách</span>
               </div>
             </div>
           </div>
