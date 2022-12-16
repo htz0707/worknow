@@ -46,6 +46,8 @@ export default function SignUp() {
           description
         }
         employeeId
+        phoneCountryCode
+        phoneNumber
       }
     }
   `;
@@ -127,8 +129,8 @@ export default function SignUp() {
   };
 
   const handleLogIn = () => {
-    navigate('/')
-  }
+    navigate('/');
+  };
 
   return (
     <div className='sign-up-page'>

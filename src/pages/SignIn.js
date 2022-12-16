@@ -42,6 +42,8 @@ export default function SignIn() {
           description
         }
         employeeId
+        phoneCountryCode
+        phoneNumber
       }
     }
   `;
