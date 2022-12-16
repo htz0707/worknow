@@ -103,6 +103,9 @@ export default function Locations() {
   useEffect(() => {
     getLocationsList();
   }, [filterLocations, searchData]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [filterLocations, searchData]);
   return (
     <div className='locations'>
       <div className='locations_header'>
