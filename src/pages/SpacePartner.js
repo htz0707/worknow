@@ -55,7 +55,7 @@ export default function SpacePartner() {
       </div>
       <div className='container-md mt-5'>
         <div className=''>
-          <h2 className='text-center'>CÁC LOẠI HÌNH</h2>
+          <h2 className='fw-bold text-center'>CÁC LOẠI HÌNH</h2>
           <p className='text-center'>Tìm Kiếm Nguồn Nhu Cầu Không Giới Hạn, Lấp Đầy Các Không Gian Làm Việc Của Bạn <br />
             Và Cung Cấp Dịch Vụ Ở Bất Cứ Đâu.</p>
           <div className='image-card-group-1'>
@@ -89,12 +89,12 @@ export default function SpacePartner() {
           </div>
         </div>
         <div className='mt-5'>
-          <h2 className='text-center'>GIẢI PHÁP TỐI ƯU NƠI LÀM VIỆC DÀNH MỌI DOANH NGHIỆP</h2>
+          <h2 className='fw-bold text-center'>GIẢI PHÁP TỐI ƯU NƠI LÀM VIỆC DÀNH MỌI DOANH NGHIỆP</h2>
           <p className='text-center'>Cung Cấp Đủ Chỗ Ngồi Với Lực Lượng Lao Động Doanh Nghiệp, Khách Đi Công Tác, Doanh Nhân Và Nhân Viên Di Động.</p>
           <img src={solution} className='w-100 my-3' />
         </div>
         <div className='align-center'>
-          <h2 className='text-center'>QUAN HỆ ĐỐI TÁC CHIẾN LƯỢC </h2>
+          <h2 className='fw-bold text-center'>QUAN HỆ ĐỐI TÁC CHIẾN LƯỢC </h2>
           <div className='row solution-group'>
             <div className='col-lg-3 solution-card border rounded p-4'>
               <div className='mb-3 border rounded-circle relationship-icon'>
@@ -151,7 +151,7 @@ export default function SpacePartner() {
             <div className='row'>
               <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
                 <div>
-                <h2>
+                  <h2 className='fw-bold'>
                     BÁO CÁO DỮ LIỆU <br />
                     THEO THỜI GIAN THỰC
                   </h2>
@@ -171,7 +171,7 @@ export default function SpacePartner() {
         </div>
       </div>
       <div className='sign-up-block'>
-        <h2>LIÊN HỆ VỚI WORKNOW</h2>
+        <h2 className='fw-bold'>LIÊN HỆ VỚI WORKNOW</h2>
         <div className='sign-up-form'>
           <Tabs
             defaultActiveKey='1'
