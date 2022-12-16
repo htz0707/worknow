@@ -18,6 +18,7 @@ export default function Locations() {
       $amenitiesLocationIds: [UUID!]
       $amenitiesWorkingSpaceIds: [UUID!]
       $workingSpaceCapacityIds: [UUID!]
+      $workingSpaceTypes: [WorkingSpaceType!]
       $keyword: String!
     ) {
       locations(
@@ -25,6 +26,7 @@ export default function Locations() {
           amenitiesLocationIds: $amenitiesLocationIds
           amenitiesWorkingSpaceIds: $amenitiesWorkingSpaceIds
           workingSpaceCapacityIds: $workingSpaceCapacityIds
+          workingSpaceTypes: $workingSpaceTypes
           keyword: $keyword
         }
       ) {
@@ -64,7 +66,7 @@ export default function Locations() {
   });
   const [locationsAmount, setLocationAmount] = useState(0);
   const [locations, setLocations] = useState([]);
-  const [searchData, setSearchData] = useState("");
+  const [searchData, setSearchData] = useState('');
   let timeout = null;
   const handleTypeSearch = (value) => {
     clearTimeout(timeout);
@@ -80,7 +82,8 @@ export default function Locations() {
         amenitiesLocationIds: filterLocations.amenitiesLocationIds,
         amenitiesWorkingSpaceIds: filterLocations.amenitiesWorkingSpaceIds,
         workingSpaceCapacityIds: filterLocations.capacityIds,
-        keyword: searchData
+        workingSpaceTypes: filterLocations.workingSpaceTypes,
+        keyword: searchData,
       },
     });
     if (res.data) {
@@ -95,6 +98,7 @@ export default function Locations() {
     amenitiesLocationIds: [],
     amenitiesWorkingSpaceIds: [],
     capacityIds: [],
+    workingSpaceTypes: [],
   });
   useEffect(() => {
     getLocationsList();
@@ -108,7 +112,8 @@ export default function Locations() {
               <div className='search-bar'>
                 <SearchIcon />
                 <input
-                  type='text' placeholder='Tìm kiếm địa điểm'
+                  type='text'
+                  placeholder='Tìm kiếm địa điểm'
                   onChange={(e) => handleTypeSearch(e.target.value)}
                 />
               </div>
