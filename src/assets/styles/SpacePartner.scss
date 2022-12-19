@@ -150,6 +150,10 @@
       .image-scale {
         height: 200px;
       }
+
+      h3 {
+        margin-top: 12px;
+      }
     }
 
     @media (max-width: 768px),
@@ -183,6 +187,10 @@
 
       .image-scale {
         height: 200px;
+      }
+
+      h3 {
+        margin-top: 12px;
       }
     }
 
@@ -332,8 +340,10 @@
         left: 280px;
       }
     }
+
     @media (max-height: 600px) {
       margin-left: 100px;
+
       .data-2 {
         left: -100px;
       }
