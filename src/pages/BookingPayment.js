@@ -263,6 +263,8 @@ export default function BookingPayment() {
   };
   //
   const [showOrderExpire, setShowOrderExpire] = useState(false);
+  //
+  const [paymentMethod, setPaymentMethod] = useState('bank_account');
   // handle pay order with bank
   const PAY_ORDER_WITH_BANK = gql`
     mutation PayOrderWithBank($fileId: UUID, $orderId: UUID!) {
@@ -403,100 +405,124 @@ export default function BookingPayment() {
                   Thư xác nhận sẽ được gửi đến email của bạn ngay sau khi chúng
                   tôi hoàn tất quá trình kiểm tra.
                 </div>
-                <div className='fw-bold'>Chuyển khoản qua ngân hàng</div>
-                <div className='according-bank'>
-                  <Accordion>
-                    <Accordion.Item eventKey='0'>
-                      <Accordion.Header>
-                        <div className='according-bank_header'>
-                          Thông tin thanh toán
-                        </div>
-                      </Accordion.Header>
-                      <Accordion.Body>
-                        <div className='according-bank_body'>
-                          <div className='bank-name'>Vietcombank</div>
-                          <div className='bank-details'>
-                            <div>
-                              <span>Số tài khoản</span>
-                              <span>0331000468999</span>
+                <div className='payment-method-title'>
+                  <input
+                    className='form-check-input'
+                    type='checkbox'
+                    checked={paymentMethod === 'bank_account'}
+                    onChange={() => setPaymentMethod('bank_account')}
+                  />
+                  <span>Chuyển khoản qua ngân hàng</span>
+                </div>
+                {paymentMethod === 'bank_account' && (
+                  <div className='according-bank'>
+                    <Accordion defaultActiveKey='0'>
+                      <Accordion.Item eventKey='0'>
+                        <Accordion.Header>
+                          <div className='according-bank_header'>
+                            Thông tin thanh toán
+                          </div>
+                        </Accordion.Header>
+                        <Accordion.Body>
+                          <div className='according-bank_body'>
+                            <div className='bank-name'>Vietcombank</div>
+                            <div className='bank-details'>
+                              <div>
+                                <span>Số tài khoản</span>
+                                <span>0331000468999</span>
+                              </div>
+                              <div>
+                                <span>Chủ tài khoản</span>
+                                <span>Công ty TNHH WorkNow</span>
+                              </div>
+                              <div>
+                                <span>Nội dung chuyển khoản</span>
+                                <span>
+                                  Thanh toan dat cho #{orderInfo?.orderId}
+                                </span>
+                              </div>
                             </div>
-                            <div>
-                              <span>Chủ tài khoản</span>
-                              <span>Công ty TNHH WorkNow</span>
-                            </div>
-                            <div>
-                              <span>Nội dung chuyển khoản</span>
+                            <div className='bank-amount'>
+                              <span>Số tiền</span>
                               <span>
-                                Thanh toan dat cho #{orderInfo?.orderId}
+                                {formatCurrency(orderInfo?.finalTotal)}
                               </span>
                             </div>
                           </div>
-                          <div className='bank-amount'>
-                            <span>Số tiền</span>
-                            <span>{formatCurrency(orderInfo?.finalTotal)}</span>
-                          </div>
-                        </div>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
+                  </div>
+                )}
+                <div className='payment-method-title'>
+                  <input
+                    className='form-check-input'
+                    type='checkbox'
+                    checked={paymentMethod === 'e_wallet'}
+                    onChange={() => setPaymentMethod('e_wallet')}
+                  />
+                  <span>Ví điện tử</span>
                 </div>
-                <div className='fw-bold'>Ví điện tử</div>
-                <div className='according-ewallet'>
-                  <Accordion>
-                    <Accordion.Item eventKey='0'>
-                      <Accordion.Header>
-                        <div className='according-ewallet_header'>
-                          Chọn ví điện tử
-                        </div>
-                      </Accordion.Header>
-                      <Accordion.Body>
-                        <div className='according-ewallet_body'>
-                          <div className='select-ewallet'>
-                            <div className='ewallet active'>
-                              <div className='logo-container'>
-                                <img src={MomoLogo} alt='' />
-                              </div>
-                              <div>MOMO</div>
-                            </div>
-                            <div className='ewallet'>
-                              <div className='logo-container'>
-                                <img src={VnpayLogo} alt='' />
-                              </div>
-                              <div>VNPAY</div>
-                            </div>
+                {paymentMethod === 'e_wallet' && (
+                  <div className='according-ewallet'>
+                    <Accordion defaultActiveKey='0'>
+                      <Accordion.Item eventKey='0'>
+                        <Accordion.Header>
+                          <div className='according-ewallet_header'>
+                            Chọn ví điện tử
                           </div>
-                          <div className='ewallet-details'>
-                            <div>
-                              <span>Số tài khoản</span>
-                              <span>0331000468999</span>
+                        </Accordion.Header>
+                        <Accordion.Body>
+                          <div className='according-ewallet_body'>
+                            <div className='select-ewallet'>
+                              <div className='ewallet active'>
+                                <div className='logo-container'>
+                                  <img src={MomoLogo} alt='' />
+                                </div>
+                                <div>MOMO</div>
+                              </div>
+                              {/* <div className='ewallet'>
+                                <div className='logo-container'>
+                                  <img src={VnpayLogo} alt='' />
+                                </div>
+                                <div>VNPAY</div>
+                              </div> */}
                             </div>
-                            <div>
-                              <span>Chủ tài khoản</span>
-                              <span>Công ty TNHH WorkNow</span>
+                            <div className='ewallet-details'>
+                              <div>
+                                <span>Số tài khoản</span>
+                                <span>0331000468999</span>
+                              </div>
+                              <div>
+                                <span>Chủ tài khoản</span>
+                                <span>Công ty TNHH WorkNow</span>
+                              </div>
+                              <div>
+                                <span>Nội dung chuyển khoản</span>
+                                <span>
+                                  Thanh toan dat cho #{orderInfo?.orderId}
+                                </span>
+                              </div>
                             </div>
-                            <div>
-                              <span>Nội dung chuyển khoản</span>
+                            <div className='amount'>
+                              <span>Số tiền</span>
                               <span>
-                                Thanh toan dat cho #{orderInfo?.orderId}
+                                {formatCurrency(orderInfo?.finalTotal)}
                               </span>
                             </div>
-                          </div>
-                          <div className='amount'>
-                            <span>Số tiền</span>
-                            <span>{formatCurrency(orderInfo?.finalTotal)}</span>
-                          </div>
-                          <div className='qrcode'>
-                            <div>Hoặc</div>
-                            <div>Scan QR Code để thanh toán</div>
-                            <div>
-                              <img src={QrcodeImg} alt='' />
+                            <div className='qrcode'>
+                              <div>Hoặc</div>
+                              <div>Scan QR Code để thanh toán</div>
+                              <div>
+                                <img src={QrcodeImg} alt='' />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion>
-                </div>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
+                  </div>
+                )}
                 <Upload
                   listType='picture'
                   defaultFileList={[...fileList]}
