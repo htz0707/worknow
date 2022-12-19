@@ -314,17 +314,17 @@ export default function ConfirmBookingModal(props) {
               {error && <div className='text-danger'>{error}</div>}
             </div>
             <hr className='mx-4' />
-            <div className='row px-4'>
-              <div className='col-8 text-gray'>Tổng thời gian:</div>
-              <div className='col-4 text-end'>
+            <div className='d-flex justify-content-between px-4'>
+              <div className='text-gray'>Tổng thời gian:</div>
+              <div className='text-end'>
                 {bookingInfoTypeDay.totalDay && (
                   <>{bookingInfoTypeDay.totalDay} ngày</>
                 )}
               </div>
             </div>
-            <div className='row px-4'>
-              <div className='col-8 text-gray'>Giá:</div>
-              <div className='text-red col-4 text-end'>
+            <div className='d-flex justify-content-between px-4'>
+              <div className='text-gray'>Giá:</div>
+              <div className='text-red'>
                 <h4>{formatCurrency(bookingInfoTypeDay.price)}</h4>
               </div>
             </div>
@@ -343,7 +343,7 @@ export default function ConfirmBookingModal(props) {
                 />
               </div>
             </div>
-            <div className='mb-3 mx-4'>
+            <div className='mb-3 px-4'>
               <div className='fw-bold d-flex justify-content-center align-items-center'>
                 Thời gian
               </div>
@@ -367,15 +367,13 @@ export default function ConfirmBookingModal(props) {
               {error && <div className='text-danger'>{error}</div>}
             </div>
             <hr className='mx-4' />
-            <div className='row px-4'>
-              <div className='col-8 text-gray'>Tổng thời gian:</div>
-              <div className='col-4 text-end'>
-                {bookingInfoTypeHour.totalTime}
-              </div>
+            <div className='d-flex justify-content-between px-4'>
+              <div className='text-gray'>Tổng thời gian:</div>
+              <div className='text-end'>{bookingInfoTypeHour.totalTime}</div>
             </div>
-            <div className='row px-4'>
-              <div className='col-8 text-gray'>Giá:</div>
-              <div className='text-red col-4 text-end'>
+            <div className='d-flex justify-content-between px-4'>
+              <div className='text-gray'>Giá:</div>
+              <div className='text-red'>
                 <h4>{formatCurrency(bookingInfoTypeHour.price)}</h4>
               </div>
             </div>

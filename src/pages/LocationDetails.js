@@ -310,7 +310,7 @@ export default function LocationDetails() {
             <Bcrumb
               data={[
                 {
-                  label: 'Danh Sách',
+                  label: 'Danh sách địa điểm',
                   path: '/locations',
                 },
                 {
@@ -325,8 +325,10 @@ export default function LocationDetails() {
           </div>
           <div className='row-3'>
             <div>
-              <GoLocation /> {renderAddress(locationInfo)}. Cách tôi 0.2km{' '}
+              <GoLocation /> {renderAddress(locationInfo)}.{' '}
+              <span className='distance'>cách tôi 0.2km</span>
               <span
+                className='view-on-map'
                 onClick={() =>
                   showInMapClicked(locationInfo.lat, locationInfo.long)
                 }
@@ -342,7 +344,7 @@ export default function LocationDetails() {
                 <StarIcon />
                 <StarIcon />
               </div>
-              <div>120 Đánh giá từ khách hàng</div>
+              <div>120 đánh giá từ khách hàng</div>
             </div>
           </div>
           <div className='row-4'>
@@ -412,7 +414,7 @@ export default function LocationDetails() {
             )}
             <div className='location-services'>
               <div className='outstanding'>
-                <div className='title'>Nổi Bật</div>
+                <div className='title'>Nổi bật</div>
                 <div className='content'>
                   <div>
                     <CheckIcon className='icon' /> Hơn 1200 lượt đặt chỗ
@@ -430,7 +432,7 @@ export default function LocationDetails() {
                 </div>
               </div>
               <div className='amenity'>
-                <div className='title'>Tiện Nghi</div>
+                <div className='title'>Tiện nghi</div>
                 <div className='content'>
                   {locationInfo?.amenities?.map((item, index) => {
                     if (showMoreAmenities) {

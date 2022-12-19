@@ -394,6 +394,7 @@ export default function CreateBooking() {
                   <label>Ghi chú</label>
                   <textarea
                     className='form-control'
+                    style={{ resize: 'none' }}
                     rows='3'
                     value={customerInfo.note}
                     onChange={(e) =>
