@@ -26,6 +26,7 @@
 
     .logo {
       width: 100px;
+      cursor: pointer;
     }
 
     .booking-step {
@@ -605,8 +606,8 @@
           margin-bottom: 10px;
 
           > div:nth-child(1) {
-            width: 140px;
-            margin-right: 30px;
+            width: 150px;
+            margin-right: 20px;
             text-align: center;
             font-weight: 600;
           }
@@ -632,7 +633,7 @@
             background: #eafaff;
             color: #0075ff;
           }
-          .status.booking_successful {
+          .status.booking_successfull {
             background: #edffde;
             color: #6dba31;
           }
@@ -652,8 +653,8 @@
           margin-bottom: 10px;
 
           > div:nth-child(1) {
-            width: 140px;
-            margin-right: 30px;
+            width: 150px;
+            margin-right: 20px;
             text-align: center;
             font-weight: 600;
           }
@@ -672,6 +673,7 @@
           cursor: pointer;
         }
         .confirm-booking {
+          width: 100%;
           background: #fff1f1;
           border-radius: 4px;
           padding: 10px 10px;
@@ -772,6 +774,7 @@
           align-items: center;
           justify-content: center;
           font-weight: 600;
+          color: #282723;
         }
       }
     }
