@@ -206,7 +206,7 @@ export default function CreateBooking() {
       </div> */}
       <div className='create-booking_header'>
         <div>
-          <Logo className='logo' />
+          <Logo className='logo' onClick={() => navigate('/locations')} />
         </div>
         <div>
           <Bcrumb
