@@ -18,3 +18,10 @@
 .ant-picker-dropdown {
   z-index: 1075 !important;
 }
+.form-check-input {
+  cursor: pointer;
+}
+.form-check-input:checked {
+  background-color: #ffb31f !important;
+  border-color: #ffb31f !important;
+}
