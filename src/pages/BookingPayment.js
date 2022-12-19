@@ -10,7 +10,7 @@ import QrcodeImg from '../assets/images/qrcode.png';
 import { AiOutlineCheck } from 'react-icons/ai';
 import Bcrumb from '../components/Bcrumb';
 import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import {
   formatCurrency,
@@ -28,6 +28,8 @@ import OrderExpireModal from '../components/OrderExpireModal';
 const { Step } = Steps;
 
 export default function BookingPayment() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const path = useLocation();
   const { location_id, order_id } = useParams();
   const navigate = useNavigate();
   //get order details
@@ -263,7 +265,7 @@ export default function BookingPayment() {
   const [showOrderExpire, setShowOrderExpire] = useState(false);
   // handle pay order with bank
   const PAY_ORDER_WITH_BANK = gql`
-    mutation PayOrderWithBank($fileId: UUID!, $orderId: UUID!) {
+    mutation PayOrderWithBank($fileId: UUID, $orderId: UUID!) {
       payOrderWithBank(data: { fileId: $fileId, orderId: $orderId }) {
         id
       }
@@ -329,19 +331,50 @@ export default function BookingPayment() {
       <div className='create-booking_body'>
         <div className='row'>
           <div className='col-lg-7 info-payment'>
-            <div className='box-1'>
-              <WavingIcon />
-              <div>
-                <div className='fw-bold'>
-                  Bạn là nhân viên của Doanh nghiệp đối tác với WorkNow?
-                </div>
+            {!user && (
+              <div className='box-1'>
+                <WavingIcon />
                 <div>
-                  <a href='#'>Đăng nhập</a> để thanh toán bằng tài khoản Doanh
-                  nghiệp. Hoặc <a href='#'>Đăng ký</a> để tận hưởng những ưu đãi
-                  thành viên.
+                  <div className='fw-bold'>
+                    Bạn là nhân viên của Doanh nghiệp đối tác với WorkNow?
+                  </div>
+                  <div>
+                    <a
+                      href='#'
+                      onClick={() => {
+                        localStorage.setItem(
+                          'preUrl',
+                          JSON.stringify({
+                            pathname: path.pathname,
+                            state: path.state,
+                          })
+                        );
+                        navigate(`/sign-in`);
+                      }}
+                    >
+                      Đăng nhập
+                    </a>{' '}
+                    để thanh toán bằng tài khoản Doanh nghiệp. Hoặc{' '}
+                    <a
+                      href='#'
+                      onClick={() => {
+                        localStorage.setItem(
+                          'preUrl',
+                          JSON.stringify({
+                            pathname: path.pathname,
+                            state: path.state,
+                          })
+                        );
+                        navigate(`/sign-up`);
+                      }}
+                    >
+                      Đăng ký
+                    </a>{' '}
+                    để tận hưởng những ưu đãi thành viên.
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <div className='box-2'>
               <div className='row g-3'>
                 <div className='col-md-6'>
@@ -393,7 +426,9 @@ export default function BookingPayment() {
                             </div>
                             <div>
                               <span>Nội dung chuyển khoản</span>
-                              <span>Thanh toan dat cho #1234567</span>
+                              <span>
+                                Thanh toan dat cho #{orderInfo?.orderId}
+                              </span>
                             </div>
                           </div>
                           <div className='bank-amount'>
@@ -441,7 +476,9 @@ export default function BookingPayment() {
                             </div>
                             <div>
                               <span>Nội dung chuyển khoản</span>
-                              <span>Thanh toan dat cho #1234567</span>
+                              <span>
+                                Thanh toan dat cho #{orderInfo?.orderId}
+                              </span>
                             </div>
                           </div>
                           <div className='amount'>
@@ -586,7 +623,7 @@ export default function BookingPayment() {
                 Giá trên không bao gồm các chi phí khi bạn sử dụng các dịch vụ
                 và tiện ích khác của tòa nhà. Khi bạn muốn hủy hoặc hoàn tiền
                 cho vị trí đã đặt vui lòng kiểm tra kỹ{' '}
-                <b>chính sách hủy và hoàn tiền của Circo</b>{' '}
+                <b>chính sách hủy và hoàn tiền của WorkNow</b>{' '}
                 <a href='#'>tại đây</a>
               </p>
             </div>

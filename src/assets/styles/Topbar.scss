@@ -36,4 +36,54 @@
     background: #282723;
     border-radius: 100px;
   }
+  .login-section {
+    .isNotLogin {
+      cursor: pointer;
+      .text {
+        margin-right: 10px;
+      }
+    }
+    .isLoginWeb {
+      display: flex;
+      align-items: center;
+      .text {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+        > div:nth-child(2) {
+          cursor: pointer;
+        }
+      }
+    }
+    .isLoginMobile {
+      display: none;
+    }
+  }
+  @media (max-width: 992px) {
+    .navbar-collapse {
+      order: 4 !important;
+    }
+    .login-section {
+      order: 3 !important;
+      .isNotLogin {
+        cursor: pointer;
+        .text {
+          display: none;
+        }
+      }
+      .isLoginWeb {
+        display: none;
+      }
+      .isLoginMobile {
+        display: unset;
+        .btn-avatar {
+          width: fit-content;
+          height: fit-content;
+          padding: 0;
+          background: transparent;
+          border: none;
+        }
+      }
+    }
+  }
 }

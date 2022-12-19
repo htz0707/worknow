@@ -16,6 +16,7 @@ import SpacePartner from './pages/SpacePartner';
 import WorkingSpaceDetails from './pages/WorkingSpaceDetails';
 import BookingPayment from './pages/BookingPayment';
 import BookingStatus from './pages/BookingStatus';
+import PublicRoute from './utils/PublicRoute';
 
 function App() {
   return (
@@ -49,8 +50,22 @@ function App() {
           element={<BookingStatus />}
         />
         <Route path='/verify-account' element={<VerifyAccount />} />
-        <Route path='sign-in' element={<SignIn />} />
-        <Route path='sign-up' element={<SignUp />} />
+        <Route
+          path='sign-in'
+          element={
+            <PublicRoute>
+              <SignIn />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path='sign-up'
+          element={
+            <PublicRoute>
+              <SignUp />
+            </PublicRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

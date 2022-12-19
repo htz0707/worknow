@@ -1,20 +1,43 @@
 import React from 'react';
-import { Container, Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
-import { NavLink, Link } from 'react-router-dom';
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import '../assets/styles/Topbar.scss';
 import { useTranslation } from 'react-i18next';
 import i18n from '../translation/i18n';
 import Logo from '../assets/images/logo.svg';
 import { useNavigate } from 'react-router-dom';
+import { ReactComponent as UserIcon } from '../assets/icons/User.svg';
+import LetteredAvatar from 'react-lettered-avatar';
+import { Button, Dropdown, Menu } from 'antd';
 export default function Topbar() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const path = useLocation();
   const { t } = useTranslation();
   function changeLanguage(value) {
     i18n.changeLanguage(value);
   }
   let navigate = useNavigate();
   const handleClick = () => {
+    localStorage.setItem(
+      'preUrl',
+      JSON.stringify({
+        pathname: path.pathname,
+        state: path.state,
+      })
+    );
     navigate(`/sign-in`);
   };
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+  const menu = (
+    <Menu>
+      <Menu.Item style={{ width: '120px' }} onClick={handleLogout}>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <Navbar
       variant='light'
@@ -27,12 +50,12 @@ export default function Topbar() {
         className='page-container'
         style={{ minHeight: '80px', maxWidth: '100%' }}
       >
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Brand>
           <Link to='/'>
-            <img src={Logo} width={50} />
+            <img src={Logo} width={45} />
           </Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav>
             <Nav.Link eventKey='1'>
@@ -71,8 +94,40 @@ export default function Topbar() {
               </NavDropdown>
             </Nav.Link> */}
           </Nav>
-          <button className='btn-login ms-auto' onClick={handleClick}>Đăng nhập</button>
         </Navbar.Collapse>
+        <div className='login-section'>
+          {user ? (
+            <>
+              <div className='isLoginWeb'>
+                <div className='text'>
+                  <div>Hi, {user?.fullname}</div>
+                  <div onClick={handleLogout}>Logout</div>
+                </div>
+                <LetteredAvatar
+                  name={user?.fullname}
+                  backgroundColor='#ffb31f80'
+                  color='#282723'
+                />
+              </div>
+              <div className='isLoginMobile'>
+                <Dropdown overlay={menu} placement='bottomRight' forceRender>
+                  <Button className='btn-avatar'>
+                    <LetteredAvatar
+                      name={user?.fullname}
+                      backgroundColor='#ffb31f80'
+                      color='#282723'
+                    />
+                  </Button>
+                </Dropdown>
+              </div>
+            </>
+          ) : (
+            <div className='isNotLogin' onClick={handleClick}>
+              <span className='text'>Đăng nhập</span>
+              <UserIcon />
+            </div>
+          )}
+        </div>
       </Container>
     </Navbar>
   );

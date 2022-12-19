@@ -39,10 +39,10 @@ export default function NewBusiness() {
                     ĐẶT CHỖ LÀM VIỆC BẤT CỨ ĐÂU,
                     BẤT CỨ KHI NÀO BẠN CẦN.
                   </h2>
-                  <p className=''>
-                    Cung Cấp Ghế Linh Hoạt, Phòng Họp, Phòng Hội Nghị, Sự Kiện
-                    Theo Giờ Ngày Với Mạng Lưới Địa Điểm Thuận Tiện
-                    Trong Nhiều Loại Hình Không Gian Làm Việc.
+                  <p>
+                    Cung cấp ghế linh hoạt, phòng họp, phòng hội nghị, sự kiện
+                    theo giờ ngày với mạng lưới địa điểm thuận tiện
+                    trong nhiều loại hình không gian làm việc.
                   </p>
                   <button
                     onClick={handleClick}
@@ -64,22 +64,22 @@ export default function NewBusiness() {
         <div className='row'>
           <div className='col-lg-3'>
             <div className='d-flex justify-content-center align-items center'><Reason1 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center mt-3' >Cải Thiện Năng Suất</h5>
+            <h5 className='d-flex justify-content-center align-items center mt-3' >Cải thiện năng suất</h5>
             <p className='px-3 text-justify'>Tối ưu hóa hiệu suất công việc bằng cách khám phá không gian / môi trường tươi mới và sáng tạo cùng Worknow.</p>
           </div>
           <div className='col-lg-3'>
             <div className='d-flex justify-content-center align-items center'><Reason2 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center mt-3' >Đa Dạng Vị Trí</h5>
+            <h5 className='d-flex justify-content-center align-items center mt-3' >Đa dạng vị trí</h5>
             <p className='px-3 text-justify'>Không gian làm việc chung, Cao ốc văn phòng, Trung tâm mua sắm, Quán cà phê, Khách sạn,...</p>
           </div>
           <div className='col-lg-3'>
             <div className='d-flex justify-content-center align-items center'><Reason1 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center mt-3' >Cho Mọi Doanh Nghiệp</h5>
+            <h5 className='d-flex justify-content-center align-items center mt-3' >Cho mọi doanh nghiệp</h5>
             <p className='px-3 text-justify'>Giải pháp làm việc từ xa hoặc trực tiếp cho bất kỳ doanh nghiệp ở mọi lĩnh vực kinh doanh.</p>
           </div>
           <div className='col-lg-3'>
             <div className='d-flex justify-content-center align-items center'><Reason2 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center mt-3' >Tiết Kiệm Chi Phí</h5>
+            <h5 className='d-flex justify-content-center align-items center mt-3' >Tiết kiệm chi phí</h5>
             <p className='px-3 text-justify'>Chi phí phải chăng và phù hợp, bạn sẽ chỉ thanh toán cho những tiện ích mà mình sử dụng.</p>
           </div>
         </div>

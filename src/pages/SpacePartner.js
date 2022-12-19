@@ -39,7 +39,9 @@ export default function SpacePartner() {
                     ĐĂNG KÝ ĐỐI TÁC VỚI WORKNOW ĐỂ TRỞ THÀNH MỘT PHẦN CỦA VĂN HÓA “LÀM VIỆC BẤT CỨ ĐÂU, BẤT CỨ KHI NÀO BẠN CẦN”
                   </h2>
                   <p className='description'>
-                    Nắm Bắt Được Xu Hương Làm Việc Tương Lai, Worknow Là Nền Tảng Tiên Phong Ở Việt Nam Dành Cho Không Gian Làm Việc Theo Yêu Cầu. Giúp Bạn Kết Nối Với Những Người Có Nhu Cầu Tìm Kiếm Không Gian Làm Việc Ở Bất Kỳ Đâu, Bất Kỳ Lúc Nào.
+                    Nắm bắt được xu hương làm việc tương lai, worknow là nền tảng tiên phong ở việt nam dành cho không gian làm 
+                    việc theo yêu cầu. giúp bạn kết nối với những người có nhu cầu tìm kiếm không gian làm việc ở bất kỳ đâu, bất
+                    kỳ lúc nào.
                   </p>
                   <button className='btn btn-warning fw-bold' onClick={handleClick}>
                     TRỞ THÀNH ĐỐI TÁC<BsPlayCircle className='ms-3 icon' fill='dark' size={25} />
@@ -55,9 +57,9 @@ export default function SpacePartner() {
       </div>
       <div className='container-md mt-5'>
         <div className=''>
-          <h2 className='fw-bold text-center'>CÁC LOẠI HÌNH</h2>
-          <p className='text-center'>Tìm Kiếm Nguồn Nhu Cầu Không Giới Hạn, Lấp Đầy Các Không Gian Làm Việc Của Bạn <br />
-            Và Cung Cấp Dịch Vụ Ở Bất Cứ Đâu.</p>
+          <h2 className='text-center'>CÁC LOẠI HÌNH</h2>
+          <p className='text-center'>Tìm kiếm nguồn nhu cầu không giới hạn, lấp đầy các không gian làm việc của bạn <br />
+            và cung cấp dịch vụ ở bất cứ đâu.</p>
           <div className='image-card-group-1'>
             <div className='image-card'>
               <img src={room2} className='image-scale' />

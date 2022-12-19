@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import '../assets/styles/FilterLocation.scss';
 import { IoLocationOutline } from 'react-icons/io5';
 import { Dropdown, Button } from 'react-bootstrap';
-import { ReactComponent as ServiceIcon } from '../assets/icons/tienich.svg';
+import { ReactComponent as ServiceIcon } from '../assets/icons/tienichtoanha.svg';
+import { ReactComponent as OfficeIcon } from '../assets/icons/tienichvanphong.svg';
 import { ReactComponent as DistanceIcon } from '../assets/icons/ganToiNhat.svg';
 import { ReactComponent as RoomIcon } from '../assets/icons/loaiVanPhong.svg';
 import { ReactComponent as CapacityIcon } from '../assets/icons/sucChua.svg';
 import { ReactComponent as PolicyIcon } from '../assets/icons/chinhSach.svg';
-import { useQuery, gql, useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery } from '@apollo/client';
 import ShowMore from './ShowMore';
 
 export default function FilterLocation(props) {
@@ -54,32 +55,6 @@ export default function FilterLocation(props) {
   //   {
   //     id: 4,
   //     name: 'Dưới 20km',
-  //   },
-  // ]);
-  // const [roomType, setRoomType] = useState([
-  //   {
-  //     id: 1,
-  //     name: 'Bàn làm việc đơn',
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Phòng họp',
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Văn Phòng riêng',
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Văn phòng cafe',
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'Đại sảnh',
-  //   },
-  //   {
-  //     id: 6,
-  //     name: 'Hội trường',
   //   },
   // ]);
   // const [capacityType, setCapacityType] = useState([
@@ -164,6 +139,37 @@ export default function FilterLocation(props) {
       setCapacity(res.data.capacity);
     }
   };
+  //
+  const [roomType, setRoomType] = useState([
+    {
+      id: 'flexible_desk',
+      name: 'Bàn làm việc linh hoạt',
+    },
+    {
+      id: 'fixed_desk',
+      name: 'Bàn làm việc cố định',
+    },
+    {
+      id: 'private_room',
+      name: 'Phòng làm việc riêng',
+    },
+    {
+      id: 'meeting_room',
+      name: 'Phòng họp',
+    },
+    {
+      id: 'convience_room',
+      name: 'Phòng hội nghị',
+    },
+    {
+      id: 'event',
+      name: 'Sảnh sự kiện',
+    },
+    {
+      id: 'booth',
+      name: 'Phone booth',
+    },
+  ]);
   // function get all data
   const handleGetData = async () => {
     await handleGetAmenitiesLocations();
@@ -224,6 +230,23 @@ export default function FilterLocation(props) {
       });
     }
   };
+  // handle filter by room type
+  const onClickRoomType = (id) => {
+    let copy = [...filterLocations.workingSpaceTypes];
+    if (copy.includes(id)) {
+      let filter_arr = copy.filter((item) => item !== id);
+      setFilterLocations({
+        ...filterLocations,
+        workingSpaceTypes: filter_arr,
+      });
+    } else {
+      copy.push(id);
+      setFilterLocations({
+        ...filterLocations,
+        workingSpaceTypes: copy,
+      });
+    }
+  };
   const [showMoreAmenitiesLocation, setShowMoreAmenitiesLocation] =
     useState(false);
   const [showMoreAmenitiesWorkingSpace, setShowMoreAmenitiesWorkingSpace] =
@@ -232,7 +255,7 @@ export default function FilterLocation(props) {
     <div className='filter-location'>
       <div className='filter-location_card'>
         <div className='filter-location_card_title'>
-          <ServiceIcon className='icon' /> Tiện Ích Tòa Nhà
+          <ServiceIcon className='icon' /> Tiện ích tòa Nhà
         </div>
         <div className='filter-location_card_list'>
           {amenitiesLocations.map((item, index) => {
@@ -287,7 +310,7 @@ export default function FilterLocation(props) {
       </div>
       <div className='filter-location_card'>
         <div className='filter-location_card_title'>
-          <ServiceIcon className='icon' /> Tiện Ích Văn Phòng
+          <OfficeIcon className='icon' /> Tiện ích văn phòng
         </div>
         <div className='filter-location_card_list'>
           {amenitiesWorkingSpace.map((item, index) => {
@@ -357,6 +380,29 @@ export default function FilterLocation(props) {
                 />
                 <label className='form-check-label' for={'service' + item.id}>
                   {item.name} người
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className='filter-location_card'>
+        <div className='filter-location_card_title'>
+          <RoomIcon className='icon' /> Loại văn phòng
+        </div>
+        <div className='filter-location_card_list'>
+          {roomType.map((item, index) => {
+            return (
+              <div className='item form-check' key={index}>
+                <input
+                  className='form-check-input'
+                  type='checkbox'
+                  id={'service' + item.id}
+                  checked={filterLocations.workingSpaceTypes?.includes(item.id)}
+                  onChange={() => onClickRoomType(item.id)}
+                />
+                <label className='form-check-label' for={'service' + item.id}>
+                  {item.name}
                 </label>
               </div>
             );

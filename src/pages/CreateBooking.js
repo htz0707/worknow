@@ -20,6 +20,8 @@ import parsePhoneNumber from 'libphonenumber-js';
 const { Step } = Steps;
 
 export default function CreateBooking() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const path = useLocation();
   let navigate = useNavigate();
   const { location_id, working_space_id } = useParams();
   const orderInfo = useLocation()?.state?.orderInfo;
@@ -105,6 +107,24 @@ export default function CreateBooking() {
   const handleChangePhoneNumber = (value) => {
     setCustomerInfo({ ...customerInfo, phone_number: value });
   };
+  //
+  useEffect(() => {
+    if (user) {
+      let initInfo = {
+        full_name: user.fullname,
+        email: user.email,
+        note: '',
+      };
+      if (user.phoneNumber) {
+        initInfo.phone_number = user.phoneCountryCode + user.phoneNumber;
+      } else {
+        initInfo.phone_number = '';
+      }
+      console.log(initInfo);
+      form.setFieldsValue(initInfo);
+      setCustomerInfo(initInfo);
+    }
+  }, []);
   //
   const CREATE_ORDER = gql`
     mutation CreateOrder(
@@ -222,19 +242,50 @@ export default function CreateBooking() {
       <div className='create-booking_body'>
         <div className='row'>
           <div className='col-lg-7 info-customer'>
-            <div className='box-1'>
-              <WavingIcon />
-              <div>
-                <div className='fw-bold'>
-                  Bạn là nhân viên của Doanh nghiệp đối tác với WorkNow?
-                </div>
+            {!user && (
+              <div className='box-1'>
+                <WavingIcon />
                 <div>
-                  <a href='#'>Đăng nhập</a> để thanh toán bằng tài khoản Doanh
-                  nghiệp. Hoặc <a href='#'>Đăng ký</a> để tận hưởng những ưu đãi
-                  thành viên.
+                  <div className='fw-bold'>
+                    Bạn là nhân viên của Doanh nghiệp đối tác với WorkNow?
+                  </div>
+                  <div>
+                    <a
+                      href='#'
+                      onClick={() => {
+                        localStorage.setItem(
+                          'preUrl',
+                          JSON.stringify({
+                            pathname: path.pathname,
+                            state: path.state,
+                          })
+                        );
+                        navigate(`/sign-in`);
+                      }}
+                    >
+                      Đăng nhập
+                    </a>{' '}
+                    để thanh toán bằng tài khoản Doanh nghiệp. Hoặc{' '}
+                    <a
+                      href='#'
+                      onClick={() => {
+                        localStorage.setItem(
+                          'preUrl',
+                          JSON.stringify({
+                            pathname: path.pathname,
+                            state: path.state,
+                          })
+                        );
+                        navigate(`/sign-up`);
+                      }}
+                    >
+                      Đăng ký
+                    </a>{' '}
+                    để tận hưởng những ưu đãi thành viên.
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             {/* <div className='box-2'>
               <div className='title'>Mã đơn đặt</div>
               <div className='content'>#123456</div>
@@ -447,7 +498,7 @@ export default function CreateBooking() {
                 Giá trên không bao gồm các chi phí khi bạn sử dụng các dịch vụ
                 và tiện ích khác của tòa nhà. Khi bạn muốn hủy hoặc hoàn tiền
                 cho vị trí đã đặt vui lòng kiểm tra kỹ{' '}
-                <b>chính sách hủy và hoàn tiền của Circo</b>{' '}
+                <b>chính sách hủy và hoàn tiền của WorkNow</b>{' '}
                 <a href='#'>tại đây</a>
               </p>
             </div>
