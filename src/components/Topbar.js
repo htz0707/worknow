@@ -31,8 +31,14 @@ export default function Topbar() {
     localStorage.clear();
     window.location.reload();
   };
+  const handleViewUserInfo = () => {
+    navigate('/user')
+  }
   const menu = (
     <Menu>
+      <Menu.Item style={{ width: '120px' }} onClick={handleViewUserInfo}>
+        Profile
+      </Menu.Item>
       <Menu.Item style={{ width: '120px' }} onClick={handleLogout}>
         Logout
       </Menu.Item>
@@ -103,11 +109,13 @@ export default function Topbar() {
                   <div>Hi, {user?.fullname}</div>
                   <div onClick={handleLogout}>Logout</div>
                 </div>
-                <LetteredAvatar
-                  name={user?.fullname}
-                  backgroundColor='#ffb31f80'
-                  color='#282723'
-                />
+                <div onClick={handleViewUserInfo}>
+                  <LetteredAvatar
+                    name={user?.fullname}
+                    backgroundColor='#ffb31f80'
+                    color='#282723'
+                  />
+                </div>
               </div>
               <div className='isLoginMobile'>
                 <Dropdown overlay={menu} placement='bottomRight' forceRender>
