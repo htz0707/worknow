@@ -33,6 +33,7 @@ export default function Topbar() {
     navigate(`/sign-in`);
   };
   const handleLogout = () => {
+    navigate('/sign-in');
     localStorage.clear();
     window.location.reload();
   };

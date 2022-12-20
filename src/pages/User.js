@@ -25,6 +25,11 @@ export default function User() {
   const handleToHomePage = () => {
     navigate('/');
   }
+  const handleLogout = () => {
+    navigate('/sign-in');
+    localStorage.clear();
+    window.location.reload();
+  };
   return (
     <div className='user'>
       <div className='container-fluid'>
@@ -76,7 +81,7 @@ export default function User() {
                   >
                     <Secure className /><p className='text-secure mb-0'>Bảo mật</p>
                   </div>
-                  <div className='text-log-out pointer'>
+                  <div className='text-log-out pointer' onClick={handleLogout}>
                     <Lockout /> Đăng xuất
                   </div>
                 </div>
