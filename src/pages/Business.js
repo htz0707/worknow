@@ -20,7 +20,10 @@ import TwoPeople from '../assets/images/two_people.png';
 export default function Business() {
   let navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/business/register`);
+    if (window.innerWidth < 768) {
+      window.scrollTo(0, 1200);
+    }
+    else window.scrollTo(0, 700);
   };
   return (
     <div className='business' >

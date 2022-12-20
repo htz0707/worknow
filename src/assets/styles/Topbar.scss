@@ -76,14 +76,18 @@
       }
       .isLoginMobile {
         display: unset;
-        .btn-avatar {
-          width: fit-content;
-          height: fit-content;
-          padding: 0;
-          background: transparent;
-          border: none;
-        }
       }
     }
+  }
+  .btn-avatar {
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+
+  .pointer {
+    cursor: pointer;
   }
 }

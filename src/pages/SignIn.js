@@ -199,11 +199,11 @@ export default function SignIn() {
                     Đăng ký
                   </span>
                 </div>
-                <div className='col-lg-4 text-end'>
+                <div className='col-lg-auto text-end'>
                   <span className='link'>Quên mật khẩu?</span>
                 </div>
               </div>
-              <div className='d-flex justify-content-center my-2 text-gray'>
+              {/* <div className='d-flex justify-content-center my-2 text-gray'>
                 - Hoặc -
               </div>
               <button className='btn btn-white w-100 border rounded mb-2'>
@@ -211,7 +211,7 @@ export default function SignIn() {
               </button>
               <button className='btn btn-white w-100 border rounded'>
                 <GoogleIcon className='icon me-3' /> Đăng nhập với Google
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
