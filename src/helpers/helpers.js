@@ -178,3 +178,12 @@ export const redirectAfterLogin = (navigate, defaultUrl) => {
     navigate(defaultUrl);
   }
 };
+export const returnUrlParams = (urlParams) => {
+  let arr = [];
+  for (const entry of urlParams) {
+    arr.push(entry);
+  }
+  const entries = new Map(arr);
+  const obj = Object.fromEntries(entries);
+  return obj;
+};

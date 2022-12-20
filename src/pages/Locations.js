@@ -11,8 +11,50 @@ import { useState } from 'react';
 import FilterSortLocationMobile from '../components/FilterSortLocationMobile';
 import { Avatar, List, Skeleton, Switch } from 'antd';
 import NoData from '../components/NoData';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { returnUrlParams } from '../helpers/helpers';
 
 export default function Locations() {
+  const path = useLocation();
+  const [urlParams] = useSearchParams();
+  let currentParams = returnUrlParams(urlParams.entries());
+  const handleInitFilterSort = (obj) => {
+    if (obj.sort) {
+      setSortLocation(obj.sort);
+    } else {
+      setSortLocation('');
+    }
+    let filter_location = {};
+    if (obj.amenitiesLocationIds) {
+      filter_location.amenitiesLocationIds =
+        obj.amenitiesLocationIds.split(',');
+    } else {
+      filter_location.amenitiesLocationIds = [];
+    }
+    if (obj.amenitiesWorkingSpaceIds) {
+      filter_location.amenitiesWorkingSpaceIds =
+        obj.amenitiesWorkingSpaceIds.split(',');
+    } else {
+      filter_location.amenitiesWorkingSpaceIds = [];
+    }
+    if (obj.capacityIds) {
+      filter_location.capacityIds = obj.capacityIds.split(',');
+    } else {
+      filter_location.capacityIds = [];
+    }
+    if (obj.workingSpaceTypes) {
+      filter_location.workingSpaceTypes = obj.workingSpaceTypes.split(',');
+    } else {
+      filter_location.workingSpaceTypes = [];
+    }
+    setFilterLocations({
+      ...filterLocations,
+      ...filter_location,
+    });
+  };
+  useEffect(() => {
+    handleInitFilterSort(currentParams);
+  }, [path]);
   const GET_LOCATIONS = gql`
     query GetLocations(
       $amenitiesLocationIds: [UUID!]
@@ -20,6 +62,7 @@ export default function Locations() {
       $workingSpaceCapacityIds: [UUID!]
       $workingSpaceTypes: [WorkingSpaceType!]
       $keyword: String!
+      $sort: String!
     ) {
       locations(
         params: {
@@ -28,6 +71,7 @@ export default function Locations() {
           workingSpaceCapacityIds: $workingSpaceCapacityIds
           workingSpaceTypes: $workingSpaceTypes
           keyword: $keyword
+          sort: $sort
         }
       ) {
         edges {
@@ -84,6 +128,7 @@ export default function Locations() {
         workingSpaceCapacityIds: filterLocations.capacityIds,
         workingSpaceTypes: filterLocations.workingSpaceTypes,
         keyword: searchData,
+        sort: sortLocation,
       },
     });
     if (res.data) {
@@ -100,9 +145,10 @@ export default function Locations() {
     capacityIds: [],
     workingSpaceTypes: [],
   });
+  const [sortLocation, setSortLocation] = useState('');
   useEffect(() => {
     getLocationsList();
-  }, [filterLocations, searchData]);
+  }, [filterLocations, searchData, sortLocation]);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [filterLocations, searchData]);
@@ -129,6 +175,8 @@ export default function Locations() {
                 setFilterLocations={setFilterLocations}
                 filterLocations={filterLocations}
                 result={locationsAmount}
+                sort={sortLocation}
+                setSort={setSortLocation}
               />
             </div>
           </div>
@@ -156,7 +204,7 @@ export default function Locations() {
               tại TP. Hồ Chí Minh
             </div>
             <div className='sort-location'>
-              <SortLocation />
+              <SortLocation sort={sortLocation} setSort={setSortLocation} />
             </div>
           </div>
           <div className='content'>

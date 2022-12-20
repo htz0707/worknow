@@ -12,9 +12,19 @@ import { gql, useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import ShowMore from './ShowMore';
 import { Badge } from 'antd';
+import SortLocation from './SortLocation';
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
+import { returnUrlParams } from '../helpers/helpers';
 
 export default function FilterSortLocationMobile(props) {
-  const { filterLocations, setFilterLocations, result } = props;
+  const { filterLocations, setFilterLocations, result, sort, setSort } = props;
+  const [urlParams] = useSearchParams();
+  let currentParams = returnUrlParams(urlParams.entries());
+  const navigate = useNavigate();
   const [showFilterModal, setShowFilterModal] = useState(false);
   const GET_AMENITIES = gql`
     query GetAmenities($type: AmenityType) {
@@ -114,11 +124,23 @@ export default function FilterSortLocationMobile(props) {
         ...filterLocations,
         amenitiesLocationIds: filter_arr,
       });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesLocationIds: filter_arr.toString(),
+        }).toString(),
+      });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
         amenitiesLocationIds: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesLocationIds: copy.toString(),
+        }).toString(),
       });
     }
   };
@@ -131,11 +153,23 @@ export default function FilterSortLocationMobile(props) {
         ...filterLocations,
         amenitiesWorkingSpaceIds: filter_arr,
       });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesWorkingSpaceIds: filter_arr.toString(),
+        }).toString(),
+      });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
         amenitiesWorkingSpaceIds: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesWorkingSpaceIds: copy.toString(),
+        }).toString(),
       });
     }
   };
@@ -148,11 +182,23 @@ export default function FilterSortLocationMobile(props) {
         ...filterLocations,
         capacityIds: filter_arr,
       });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          capacityIds: filter_arr.toString(),
+        }).toString(),
+      });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
         capacityIds: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          capacityIds: copy.toString(),
+        }).toString(),
       });
     }
   };
@@ -165,11 +211,23 @@ export default function FilterSortLocationMobile(props) {
         ...filterLocations,
         workingSpaceTypes: filter_arr,
       });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          workingSpaceTypes: filter_arr.toString(),
+        }).toString(),
+      });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
         workingSpaceTypes: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          workingSpaceTypes: copy.toString(),
+        }).toString(),
       });
     }
   };
@@ -185,6 +243,15 @@ export default function FilterSortLocationMobile(props) {
       capacityIds: [],
       workingSpaceTypes: [],
     });
+    if (currentParams.sort) {
+      navigate({
+        search: createSearchParams({
+          sort: currentParams.sort,
+        }).toString(),
+      });
+    } else {
+      navigate('/locations');
+    }
   };
   const handleCheckFilter = () => {
     if (
@@ -201,14 +268,15 @@ export default function FilterSortLocationMobile(props) {
   return (
     <div className='filter-sort-location-mobile'>
       <div className='filter' onClick={() => setShowFilterModal(true)}>
-        <Badge dot={handleCheckFilter()} size='default'>
-          <FilterIcon className='icon' />
-        </Badge>
-        Lọc
+        <div>
+          <Badge dot={handleCheckFilter()} size='default'>
+            <FilterIcon className='icon' />
+          </Badge>
+          Lọc
+        </div>
       </div>
       <div className='sort'>
-        <SortIcon className='icon' />
-        Sắp xếp theo
+        <SortLocation sort={sort} setSort={setSort} />
       </div>
       <Offcanvas
         show={showFilterModal}
