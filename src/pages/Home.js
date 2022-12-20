@@ -25,7 +25,7 @@ import hl4 from '../assets/images/highlight4.svg';
 export default function NewBusiness() {
   let navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/business`);
+    navigate(`/locations`);
   };
   return (
     <div className='home'>
@@ -44,12 +44,12 @@ export default function NewBusiness() {
                     theo giờ ngày với mạng lưới địa điểm thuận tiện
                     trong nhiều loại hình không gian làm việc.
                   </p>
-                  <button
+                  {/* <button
                     onClick={handleClick}
                     className='btn btn-warning fw-bold rounded-pill d-flex justify-content-center'
                   >
                     TÌM HIỂU VỀ WORKNOW <BsPlayCircle className='ms-3 icon' fill='dark' size={25} />
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <div className='col-lg-7'>
@@ -92,7 +92,7 @@ export default function NewBusiness() {
               <div className='card-hl'>
                 <h4 className='text-bottom-1 fw-bold'>BOOTH CÁ NHÂN</h4>
                 <p className='text-bottom-2'>Booth riêng có 1 chỗ đến 4 chỗ.</p>
-                <Button className='btn-bottom rounded-pill' variant='secondary'>
+                <Button onClick={handleClick} className='btn-bottom rounded-pill' variant='secondary'>
                   Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
                 </Button>
                 <img src={hl4} alt='hl-4' className='w-100 image-hl' />
@@ -102,7 +102,7 @@ export default function NewBusiness() {
               <div className='card-hl card-down'>
                 <h4 className='text-bottom-1 fw-bold'>GHẾ LINH HOẠT</h4>
                 <p className='text-bottom-2'>Tìm bàn làm việc ở bất cứ đâu.</p>
-                <Button className='btn-bottom rounded-pill' variant='secondary'>
+                <Button onClick={handleClick} className='btn-bottom rounded-pill' variant='secondary'>
                   Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
                 </Button>
                 <img src={hl1} alt='hl-1' className='w-100 image-hl' />
@@ -114,7 +114,7 @@ export default function NewBusiness() {
               <div className='card-hl'>
                 <h4 className='text-bottom-1 fw-bold'>PHÒNG HỌP</h4>
                 <p className='text-bottom-2'>Phòng riêng với tất cả các tiện nghi bạn cần.</p>
-                <Button className='btn-bottom rounded-pill' variant='secondary'>
+                <Button onClick={handleClick} className='btn-bottom rounded-pill' variant='secondary'>
                   Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
                 </Button>
                 <img src={hl2} alt='hl-2' className='w-100 image-hl' />
@@ -125,7 +125,7 @@ export default function NewBusiness() {
                 <h4 className='text-bottom-1 fw-bold'>SẢNH SỰ KIỆN</h4>
                 <p className='text-bottom-2'>Tổ chức bài giảng, buổi họp mặt hoặc talkshow</p>
                 <p className='text-bottom-3'><br />theo nhu cầu của bạn. </p>
-                <Button className='btn-bottom rounded-pill' variant='secondary'>
+                <Button onClick={handleClick} className='btn-bottom rounded-pill' variant='secondary'>
                   Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
                 </Button>
                 <img src={hl3} alt='hl-3' className='w-100 image-hl' />
