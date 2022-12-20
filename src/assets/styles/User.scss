@@ -39,11 +39,32 @@
       padding-top: 0;
     }
 
-    .user-avatar {
-      width: 68px;
-      height: 68px;
+    .avatar-block {
+      cursor: pointer;
+
+      .user-avatar {
+        width: 68px;
+        height: 68px
+      }
+
+      .camera {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        z-index: 1;
+      }
     }
 
+    .avatar-block:hover {
+      .user-avatar {
+        filter: blur(2px);
+      }
+
+      .camera {
+        display: initial !important;
+      }
+    }
 
     .tab-icon-1 {
       margin-top: 7px;
@@ -90,8 +111,57 @@
       color: #282723;
       border-color: #FFB31F;
     }
+
+    .ant-tabs-tab:hover,
+    .ant-tabs-tab-active>div {
+      color: #FFB31F !important;
+    }
+
+    .ant-tabs-ink-bar {
+      position: absolute;
+      background: #FFB31F;
+      pointer-events: none;
+    }
+
     .pointer {
       cursor: pointer;
+    }
+
+    .text-header {
+      font-weight: 600;
+      font-size: 20px;
+
+      .text-blue {
+        color: #0075FF;
+      }
+    }
+
+    .text-name {
+      font-weight: 600;
+    }
+
+    .history-card {
+      background: #F3FFEF;
+      border-left: 4px solid #6DBA31;
+      box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.05);
+
+      .card-image {
+        max-height: 120px;
+      }
+    }
+
+    .text-gray-2 {
+      color: #98968D;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .text-orange {
+      color: #FF7A19;
+    }
+
+    .text-red {
+      color: #FF4F4F;
     }
   }
 }

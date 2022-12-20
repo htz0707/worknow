@@ -199,7 +199,7 @@ export default function SignIn() {
                     Đăng ký
                   </span>
                 </div>
-                <div className='col-lg-4 text-end'>
+                <div className='col-lg-auto text-end'>
                   <span className='link'>Quên mật khẩu?</span>
                 </div>
               </div>

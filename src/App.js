@@ -38,7 +38,7 @@ function App() {
           />
           <Route path='space-partner' element={<SpacePartner />} />
           <Route
-            path='/user'
+            path='/user/:currentTab'
             element={<User />}
           />
         </Route>
