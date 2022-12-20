@@ -291,7 +291,7 @@ export default function FilterSortLocationMobile(props) {
             />
             <div className='main-title'>Lọc</div>
             <div className='clear-title' onClick={handleClearFilter}>
-              Xóa hết
+              {handleCheckFilter() && <>Xóa hết</>}
             </div>
           </div>
         </Offcanvas.Header>

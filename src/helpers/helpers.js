@@ -187,3 +187,23 @@ export const returnUrlParams = (urlParams) => {
   const obj = Object.fromEntries(entries);
   return obj;
 };
+export const returnLowestPrice = (priceByHour, priceByDay) => {
+  if (priceByHour && priceByDay) {
+    if (priceByHour <= priceByDay) {
+      let price = formatCurrency(priceByHour);
+      return price + '/H';
+    } else {
+      let price = formatCurrency(priceByDay);
+      return price + '/Ngày';
+    }
+  } else {
+    if (priceByHour) {
+      let price = formatCurrency(priceByHour);
+      return price + '/H';
+    }
+    if (priceByDay) {
+      let price = formatCurrency(priceByDay);
+      return price + '/Ngày';
+    }
+  }
+};

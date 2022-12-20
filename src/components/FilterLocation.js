@@ -326,12 +326,26 @@ export default function FilterLocation(props) {
       navigate('/locations');
     }
   };
+  const handleCheckFilter = () => {
+    if (
+      filterLocations?.amenitiesLocationIds?.length > 0 ||
+      filterLocations?.amenitiesWorkingSpaceIds?.length > 0 ||
+      filterLocations?.capacityIds?.length > 0 ||
+      filterLocations?.workingSpaceTypes?.length > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   return (
     <div className='filter-location'>
       <div className='filter-location_card'>
-        <div className='clear-filter' onClick={handleClearFilter}>
-          <CloseIcon className='icon' /> Loại bỏ bộ lọc
-        </div>
+        {handleCheckFilter() && (
+          <div className='clear-filter' onClick={handleClearFilter}>
+            <CloseIcon className='icon' /> Loại bỏ bộ lọc
+          </div>
+        )}
         <div className='filter-location_card_title'>
           <ServiceIcon className='icon' /> Tiện ích tòa Nhà
         </div>

@@ -91,6 +91,8 @@ export default function Locations() {
             name
           }
           id
+          priceByDay
+          priceByHour
           images {
             publicUrl
           }

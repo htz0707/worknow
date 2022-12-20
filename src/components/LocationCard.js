@@ -7,7 +7,7 @@ import { ReactComponent as StarIcon } from '../assets/icons/start.svg';
 import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
 import { ReactComponent as BuildingIcon } from '../assets/icons/building.svg';
 import { ReactComponent as AuthenIcon } from '../assets/icons/shield.svg';
-import { renderAddress } from '../helpers/helpers';
+import { renderAddress, returnLowestPrice } from '../helpers/helpers';
 
 export default function LocationCard(props) {
   const { data } = props;
@@ -76,7 +76,8 @@ export default function LocationCard(props) {
           <div className='price-section'>
             {/* <div className='old-price'>250,000Đ/H</div> */}
             <div className='new-price'>
-              <span>Chỉ từ </span>125,000Đ/H
+              <span>Chỉ từ </span>
+              {returnLowestPrice(data.priceByHour, data.priceByDay)}
             </div>
             <button onClick={() => handleClick(data.id)}>Xem chi tiết</button>
           </div>
