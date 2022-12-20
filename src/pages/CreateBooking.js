@@ -206,7 +206,7 @@ export default function CreateBooking() {
       </div> */}
       <div className='create-booking_header'>
         <div>
-          <Logo className='logo' />
+          <Logo className='logo' onClick={() => navigate('/locations')} />
         </div>
         <div>
           <Bcrumb
@@ -394,6 +394,7 @@ export default function CreateBooking() {
                   <label>Ghi chú</label>
                   <textarea
                     className='form-control'
+                    style={{ resize: 'none' }}
                     rows='3'
                     value={customerInfo.note}
                     onChange={(e) =>

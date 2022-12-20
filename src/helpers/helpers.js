@@ -112,19 +112,35 @@ export const returnStatusBooking = (status) => {
     case 'booking':
       return 'Đã tạo đơn';
     case 'confirming':
-      return 'Chờ xác nhận thanh toán';
+      return 'Chờ xác thực thanh toán';
     case 'confirmed':
-      return 'Đã xác nhận thanh toán';
-    case 'booking_successful':
+      return 'Đã xác thực thanh toán';
+    case 'booking_successfull':
       return 'Đặt chỗ thành công';
     case 'payment_fail':
-      return 'Xác nhận thanh toán thất bại';
+      return 'Thanh toán thất bại';
     case 'canceled':
-      return 'Đã hủy đơn';
+      return 'Đặt chỗ bị huỷ';
     case 'booking_expired':
       return 'Đơn hết hiệu lực';
     case 'extended':
       return 'Đơn được gia hạn';
+    default:
+      return null;
+  }
+};
+export const returnDescriptionStatusBooking = (status) => {
+  switch (status) {
+    case 'confirming':
+      return 'Email xác thực sẽ được gửi đến bạn sau khi hoàn tất quá trình xác thực.';
+    case 'confirmed':
+      return 'Đã xác thực thanh toán. Chúng tôi sẽ gửi email thông báo ngay khi Nhà cung cấp xác nhận đặt chỗ thành công.';
+    case 'booking_successfull':
+      return 'Đặt chỗ thành công. Hãy kiểm tra hộp thư email của bạn để lấy mã QR code check-in nào.';
+    case 'payment_fail':
+      return 'Xác nhận thanh toán thất bại. Vui lòng đặt chỗ lại hoặc liên hệ với chúng tôi.';
+    case 'canceled':
+      return 'Đặt chỗ của bạn đã bị huỷ bởi Nhà cung cấp vì lý do bất khả kháng. Thanh toán của bạn sẽ được hoàn lại trong thời gian ngắn nhất. Mong bạn thông cảm.';
     default:
       return null;
   }

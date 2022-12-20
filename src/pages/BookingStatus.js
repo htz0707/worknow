@@ -6,10 +6,11 @@ import { Steps } from 'antd';
 import Bcrumb from '../components/Bcrumb';
 import { useEffect } from 'react';
 import { gql, useLazyQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   formatCurrency,
   renderAddress,
+  returnDescriptionStatusBooking,
   returnStatusBooking,
   returnTypeOfBooking,
   toHoursAndMinutes,
@@ -20,6 +21,7 @@ const { Step } = Steps;
 
 export default function BookingStatus() {
   const { location_id, order_id } = useParams();
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(2);
   //get order details
   const GET_ORDER_DETAILS = gql`
@@ -114,7 +116,7 @@ export default function BookingStatus() {
     <div className='create-booking page-container'>
       <div className='create-booking_header'>
         <div>
-          <Logo className='logo' />
+          <Logo className='logo' onClick={() => navigate('/locations')} />
         </div>
         <div>
           <Bcrumb
@@ -173,10 +175,7 @@ export default function BookingStatus() {
                 <RefreshIcon /> Tải lại trang
               </div>
               <div className='confirm-booking'>
-                <p>
-                  Email xác thực sẽ được gửi đến bạn sau khi hoàn tất quá trình
-                  xác thực.
-                </p>
+                <p>{returnDescriptionStatusBooking(orderInfo.status)}</p>
                 {/* <div>01:25:00</div> */}
               </div>
               <div className='location-info'>
@@ -255,9 +254,9 @@ export default function BookingStatus() {
             <div>
               <div className='title'>Hỗ trợ</div>
               <p>Gọi ngay cho chúng tôi ngay nếu bạn cần trợ giúp</p>
-              <div className='phone-button'>
-                <PhoneIcon className='me-2' /> 1900 5232
-              </div>
+              <a href='tel:+842836205144' className='phone-button'>
+                <PhoneIcon className='me-2' /> +84 28 3620 5144
+              </a>
             </div>
           </div>
         </div>
