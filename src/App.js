@@ -17,6 +17,7 @@ import BookingPayment from './pages/BookingPayment';
 import BookingStatus from './pages/BookingStatus';
 import PublicRoute from './utils/PublicRoute';
 import User from './pages/User';
+import LocationsMap from './pages/LocationsMap';
 import Rules from './pages/Rules';
 import Privacy from './pages/Privacy';
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/' element={<DashboardLayout />}>
           <Route index element={<Home />} />
           <Route path='locations' element={<Locations />} />
+          <Route path='locations/map' element={<LocationsMap />} />
           <Route path='locations/:id' element={<LocationDetails />} />
           <Route
             path='locations/:location_id/working-space/:working_space_id'
@@ -34,10 +36,7 @@ function App() {
           />
           <Route path='business' element={<Business />} />
           <Route path='space-partner' element={<SpacePartner />} />
-          <Route
-            path='/user/:currentTab'
-            element={<User />}
-          />
+          <Route path='/user/:currentTab' element={<User />} />
           <Route
             path='/rules'
             element={<Rules />}
