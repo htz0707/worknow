@@ -10,10 +10,7 @@ import '../assets/styles/BottomBar.scss';
 export default function BottomBar() {
   const navigate = useNavigate();
   return (
-    <Navbar
-      bg='dark'
-      className='bottom-bar'
-    >
+    <Navbar bg='dark' className='bottom-bar'>
       <Container className='container-bottom-bar'>
         <div className='row w-100'>
           <div className='bar-item col-md-4 col-12'>
@@ -29,14 +26,24 @@ export default function BottomBar() {
           </div>
           <div className='bar-item col-md-4 col-12'>
             <div className='my-4 fw-bold'>Chính sách và Điều khoản</div>
-            <div className='link-text' onClick={() => navigate('/rules')}>Điều khoản và Điều kiện</div>
-            <div className='link-text' onClick={() => navigate('/privacy')}>Chính sách Bảo mật </div>
+            <div className='link-text' onClick={() => navigate('/rules')}>
+              Điều khoản và Điều kiện
+            </div>
+            <div className='link-text' onClick={() => navigate('/privacy')}>
+              Chính sách Bảo mật{' '}
+            </div>
           </div>
           <div className='d-flex justify-content-center my-3'>
-            <FacebookIcon className='icon me-4' />
-            <TwitterIcon className='icon me-4 pt-2' />
-            <YoutubeIcon className='icon me-4' />
-            <InstagramIcon className='icon me-4' />
+            <a href='https://www.facebook.com/worknow.center'>
+              <FacebookIcon className='icon me-4' />
+            </a>
+            <a href='https://twitter.com/WorkNowCenter'>
+              <TwitterIcon className='icon me-4 pt-2' />
+            </a>
+            {/* <YoutubeIcon className='icon me-4' /> */}
+            <a href='https://www.instagram.com/worknow.center'>
+              <InstagramIcon className='icon me-4' />
+            </a>
           </div>
         </div>
       </Container>

@@ -4,18 +4,18 @@ import FilterLocation from '../components/FilterLocation';
 import LocationCard from '../components/LocationCard';
 import { useEffect } from 'react';
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
-import MapWrapper from '../components/MapWrapper';
 import SortLocation from '../components/SortLocation';
 import { gql, useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import FilterSortLocationMobile from '../components/FilterSortLocationMobile';
-import { Avatar, List, Skeleton, Switch } from 'antd';
+import { Skeleton } from 'antd';
 import NoData from '../components/NoData';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { returnUrlParams } from '../helpers/helpers';
 
 export default function Locations() {
   const path = useLocation();
+  const navigate = useNavigate();
   const [urlParams] = useSearchParams();
   let currentParams = returnUrlParams(urlParams.entries());
   const handleInitFilterSort = (obj) => {
@@ -179,6 +179,8 @@ export default function Locations() {
                 result={locationsAmount}
                 sort={sortLocation}
                 setSort={setSortLocation}
+                allowFilter
+                allowSort
               />
             </div>
           </div>
@@ -187,11 +189,32 @@ export default function Locations() {
       <div className='locations_body page-container'>
         <div className='locations_body_left'>
           <div className='search-on-map'>
+            <div
+              onClick={() =>
+                navigate({
+                  pathname: '/locations/map',
+                  search: path.search,
+                })
+              }
+            >
+              Xem trên bản đồ
+            </div>
+          </div>
+          {/* <div className='search-on-map'>
             <div>
               <MapWrapper />
             </div>
-            <div>Xem trên bản đồ</div>
-          </div>
+            <div
+              onClick={() =>
+                navigate({
+                  pathname: '/locations/map',
+                  search: path.search,
+                })
+              }
+            >
+              Xem trên bản đồ
+            </div>
+          </div> */}
           <FilterLocation
             setFilterLocations={setFilterLocations}
             filterLocations={filterLocations}

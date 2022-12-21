@@ -15,15 +15,25 @@ import { Badge } from 'antd';
 import SortLocation from './SortLocation';
 import {
   createSearchParams,
+  useLocation,
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
 import { returnUrlParams } from '../helpers/helpers';
 
 export default function FilterSortLocationMobile(props) {
-  const { filterLocations, setFilterLocations, result, sort, setSort } = props;
+  const {
+    filterLocations,
+    setFilterLocations,
+    result,
+    sort,
+    setSort,
+    allowFilter,
+    allowSort,
+  } = props;
   const [urlParams] = useSearchParams();
   let currentParams = returnUrlParams(urlParams.entries());
+  const path = useLocation();
   const navigate = useNavigate();
   const [showFilterModal, setShowFilterModal] = useState(false);
   const GET_AMENITIES = gql`
@@ -250,7 +260,7 @@ export default function FilterSortLocationMobile(props) {
         }).toString(),
       });
     } else {
-      navigate('/locations');
+      navigate(path.pathname);
     }
   };
   const handleCheckFilter = () => {
@@ -267,21 +277,25 @@ export default function FilterSortLocationMobile(props) {
   };
   return (
     <div className='filter-sort-location-mobile'>
-      <div className='filter' onClick={() => setShowFilterModal(true)}>
-        <div>
-          <Badge dot={handleCheckFilter()} size='default'>
-            <FilterIcon className='icon' />
-          </Badge>
-          Lọc
+      {allowSort && (
+        <div className='sort'>
+          <SortLocation sort={sort} setSort={setSort} />
         </div>
-      </div>
-      <div className='sort'>
-        <SortLocation sort={sort} setSort={setSort} />
-      </div>
+      )}
+      {allowFilter && (
+        <div className='filter' onClick={() => setShowFilterModal(true)}>
+          <div>
+            <Badge dot={handleCheckFilter()} size='default'>
+              <FilterIcon className='icon' />
+            </Badge>
+            Lọc
+          </div>
+        </div>
+      )}
       <Offcanvas
         show={showFilterModal}
-        placement='start'
-        className='filter-location-modal w-100'
+        placement='end'
+        className='filter-location-modal'
       >
         <Offcanvas.Header>
           <div className='filter-location-modal_header'>
