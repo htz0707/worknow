@@ -40,9 +40,7 @@ export default function NewBusiness() {
                     BẤT CỨ KHI NÀO BẠN CẦN.
                   </h2>
                   <p>
-                    Cung cấp ghế linh hoạt, phòng họp, phòng hội nghị, sự kiện
-                    theo giờ ngày với mạng lưới địa điểm thuận tiện
-                    trong nhiều loại hình không gian làm việc.
+                  WorkNow là nền tảng tiên phong tại Việt Nam kết nối nhu cầu tìm kiếm không gian làm việc với mạng lưới địa điểm thuận tiện và nhiều loại hình không gian đa dạng.
                   </p>
                   {/* <button
                     onClick={handleClick}
@@ -60,7 +58,7 @@ export default function NewBusiness() {
         </div>
       </div>
       <div className='container-md'>
-        <h3 className='d-flex justify-content-center align-items center my-5'>TẠI SAO NÊN LÀ WORKNOW</h3>
+        <h3 className='d-flex justify-content-center align-items center pt-5 my-5 fw-bold'>TẠI SAO NÊN LÀ WORKNOW</h3>
         <div className='row'>
           <div className='col-lg-3'>
             <div className='d-flex justify-content-center align-items center'><Reason1 height={170} /></div>
@@ -86,7 +84,7 @@ export default function NewBusiness() {
       </div>
       <div className='container-md'>
         <div className='row mb-3'>
-          <h3 className='d-flex justify-content-center align-items center my-5'>LOẠI HÌNH NỔI BẬT</h3>
+          <h3 className='pt-5 my-5 fw-bold'>LOẠI HÌNH NỔI BẬT</h3>
           <div className='col-lg-6'>
             <div className='d-flex'>
               <div className='card-hl'>

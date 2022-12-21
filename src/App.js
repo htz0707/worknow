@@ -18,6 +18,8 @@ import BookingStatus from './pages/BookingStatus';
 import PublicRoute from './utils/PublicRoute';
 import User from './pages/User';
 import LocationsMap from './pages/LocationsMap';
+import Rules from './pages/Rules';
+import Privacy from './pages/Privacy';
 
 function App() {
   return (
@@ -35,6 +37,14 @@ function App() {
           <Route path='business' element={<Business />} />
           <Route path='space-partner' element={<SpacePartner />} />
           <Route path='/user/:currentTab' element={<User />} />
+          <Route
+            path='/rules'
+            element={<Rules />}
+          />
+          <Route
+            path='/privacy'
+            element={<Privacy />}
+          />
         </Route>
         <Route
           path='/create-booking/:location_id/:working_space_id'
