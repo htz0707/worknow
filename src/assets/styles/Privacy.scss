@@ -1,0 +1,12 @@
+@import '_setting.scss';
+
+.privacy {
+	width: 100vw;
+	min-height: calc(100vh - 221px);
+	padding-top: 100px;
+
+	.privacy-layout {
+		margin-left: 13%;
+		margin-right: 13%;
+	}
+}
