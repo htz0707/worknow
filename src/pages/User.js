@@ -203,7 +203,7 @@ export default function User() {
                                 <div className='mt-2 text-gray-2'>Bạn có 3 đơn đã đặt</div>
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -223,7 +223,7 @@ export default function User() {
                                 <hr />
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -243,7 +243,7 @@ export default function User() {
                                 <hr />
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -271,7 +271,7 @@ export default function User() {
                                 <div className='mt-2 text-gray-2'>Bạn có 3 đơn trong hàng chờ xác thực</div>
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -294,7 +294,7 @@ export default function User() {
                                 <hr />
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -317,7 +317,7 @@ export default function User() {
                                 <hr />
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -348,7 +348,7 @@ export default function User() {
                                 <div className='mt-2 text-gray-2'>Bạn có 3 đơn đã hoàn tất</div>
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -368,7 +368,7 @@ export default function User() {
                                 <hr />
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -388,7 +388,7 @@ export default function User() {
                                 <hr />
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -416,7 +416,7 @@ export default function User() {
                                 <div className='mt-2 text-gray-2'>Bạn có 3 đơn đã hủy</div>
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>
@@ -439,7 +439,7 @@ export default function User() {
                                 <hr />
                                 <div className='mx-1 row'>
                                   <div className='col-auto py-2 pe-0'>
-                                    <img src={Room} alt='room' />
+                                    <img className='card-image' src={Room} alt='room' />
                                   </div>
                                   <div className='col py-2'>
                                     <div className='text-header mb-2'>

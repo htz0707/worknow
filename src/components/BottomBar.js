@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { ReactComponent as FacebookIcon } from '../assets/icons/facebook_2.svg';
 import { ReactComponent as TwitterIcon } from '../assets/icons/twitter.svg';
@@ -7,6 +8,7 @@ import { ReactComponent as InstagramIcon } from '../assets/icons/instagram.svg';
 import '../assets/styles/BottomBar.scss';
 
 export default function BottomBar() {
+  const navigate = useNavigate();
   return (
     <Navbar
       bg='dark'
@@ -27,8 +29,8 @@ export default function BottomBar() {
           </div>
           <div className='bar-item col-md-4 col-12'>
             <div className='my-4 fw-bold'>Chính sách và Điều khoản</div>
-            <div className='link-text'>Điều khoản và Điều kiện</div>
-            <div className='link-text'>Chính sách Bảo mật </div>
+            <div className='link-text' onClick={() => navigate('/rules')} >Điều khoản và Điều kiện</div>
+            <div className='link-text' onClick={() => navigate('/privacy')}>Chính sách Bảo mật </div>
           </div>
           <div className='d-flex justify-content-center my-3'>
             <FacebookIcon className='icon me-4' />

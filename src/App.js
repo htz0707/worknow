@@ -17,6 +17,8 @@ import BookingPayment from './pages/BookingPayment';
 import BookingStatus from './pages/BookingStatus';
 import PublicRoute from './utils/PublicRoute';
 import User from './pages/User';
+import Rules from './pages/Rules';
+import Privacy from './pages/Privacy';
 
 function App() {
   return (
@@ -35,6 +37,14 @@ function App() {
           <Route
             path='/user/:currentTab'
             element={<User />}
+          />
+          <Route
+            path='/rules'
+            element={<Rules />}
+          />
+          <Route
+            path='/privacy'
+            element={<Privacy />}
           />
         </Route>
         <Route
