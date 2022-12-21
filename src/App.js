@@ -19,6 +19,7 @@ import PublicRoute from './utils/PublicRoute';
 import User from './pages/User';
 import Rules from './pages/Rules';
 import Privacy from './pages/Privacy';
+import AdminOrders from './pages/AdminOrders';
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
             element={<Privacy />}
           />
         </Route>
+        <Route
+          path='/admin/orders'
+          element={<AdminOrders />}
+        />
         <Route
           path='/create-booking/:location_id/:working_space_id'
           element={<CreateBooking />}

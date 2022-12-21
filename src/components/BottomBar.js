@@ -25,11 +25,11 @@ export default function BottomBar() {
           <div className='bar-item col-md-4 col-12'>
             <div className='my-4 fw-bold'>Liên hệ</div>
             <div className='link-text'>Trung tâm trợ giúp</div>
-            <div className='link-text'>Trở thành Đôi tác</div>
+            <div className='link-text' onClick={() => navigate('/space-partner')}>Trở thành Đối tác</div>
           </div>
           <div className='bar-item col-md-4 col-12'>
             <div className='my-4 fw-bold'>Chính sách và Điều khoản</div>
-            <div className='link-text' onClick={() => navigate('/rules')} >Điều khoản và Điều kiện</div>
+            <div className='link-text' onClick={() => navigate('/rules')}>Điều khoản và Điều kiện</div>
             <div className='link-text' onClick={() => navigate('/privacy')}>Chính sách Bảo mật </div>
           </div>
           <div className='d-flex justify-content-center my-3'>
