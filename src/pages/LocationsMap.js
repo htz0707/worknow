@@ -3,11 +3,51 @@ import '../assets/styles/LocationsMap.scss';
 import Map from '../components/Map';
 import { gql, useLazyQuery } from '@apollo/client';
 import { ReactComponent as BackIcon } from '../assets/icons/backArrow.svg';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import FilterSortLocationMobile from '../components/FilterSortLocationMobile';
+import { returnUrlParams } from '../helpers/helpers';
 export default function LocationsMap() {
   const path = useLocation();
   const navigate = useNavigate();
+  const [urlParams] = useSearchParams();
+  let currentParams = returnUrlParams(urlParams.entries());
+  const handleInitFilterSort = (obj) => {
+    if (obj.sort) {
+      setSortLocation(obj.sort);
+    } else {
+      setSortLocation('');
+    }
+    let filter_location = {};
+    if (obj.amenitiesLocationIds) {
+      filter_location.amenitiesLocationIds =
+        obj.amenitiesLocationIds.split(',');
+    } else {
+      filter_location.amenitiesLocationIds = [];
+    }
+    if (obj.amenitiesWorkingSpaceIds) {
+      filter_location.amenitiesWorkingSpaceIds =
+        obj.amenitiesWorkingSpaceIds.split(',');
+    } else {
+      filter_location.amenitiesWorkingSpaceIds = [];
+    }
+    if (obj.capacityIds) {
+      filter_location.capacityIds = obj.capacityIds.split(',');
+    } else {
+      filter_location.capacityIds = [];
+    }
+    if (obj.workingSpaceTypes) {
+      filter_location.workingSpaceTypes = obj.workingSpaceTypes.split(',');
+    } else {
+      filter_location.workingSpaceTypes = [];
+    }
+    setFilterLocations({
+      ...filterLocations,
+      ...filter_location,
+    });
+  };
+  useEffect(() => {
+    handleInitFilterSort(currentParams);
+  }, [path]);
   const GET_LOCATIONS = gql`
     query GetLocations(
       $amenitiesLocationIds: [UUID!]
