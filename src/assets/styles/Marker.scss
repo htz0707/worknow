@@ -1,0 +1,188 @@
+.marker {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  .arrow {
+    width: 24px;
+    height: 24px;
+    background: #0075ff;
+    border: none;
+    clip-path: polygon(50% 50%, 0 0, 100% 0);
+  }
+  .card {
+    position: relative;
+    z-index: 1;
+    position: absolute;
+    width: 150px;
+    max-width: 150px;
+    max-height: 100px;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    border: none;
+    transform: translateX(-50%) translateY(calc(-100% - 10px));
+    text-align: center;
+    transition: 0.3s;
+    .card-body {
+      background: #0075ff;
+      border: none;
+      padding: 10px;
+    }
+  }
+  &.active {
+    z-index: 2;
+    cursor: default;
+    .arrow {
+      background: white;
+    }
+    .card {
+      width: 300px;
+      max-width: 300px;
+      height: 400px;
+      max-height: 400px;
+      overflow-y: auto;
+      color: #000000;
+      border-radius: 16px;
+      text-align: left;
+      .card-body {
+        background: white;
+        .location-image {
+          width: 100%;
+          height: 150px;
+          margin-bottom: 10px;
+          .carousel {
+            width: 100%;
+            height: 100%;
+
+            .carousel-inner {
+              width: 100%;
+              height: 100%;
+
+              .carousel-item {
+                width: 100%;
+                height: 100%;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-position: center center;
+                  object-fit: cover;
+                  border-radius: 20px;
+                  user-select: none;
+                }
+              }
+            }
+          }
+        }
+        .location-name {
+          font-weight: 700;
+          font-size: 24px;
+          color: #282723;
+          margin-bottom: 10px;
+          cursor: pointer;
+        }
+        .location-address {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+          .text-address {
+            font-weight: 600;
+          }
+          .icon-badge {
+            margin-right: 5px;
+            width: 30px;
+            min-width: 30px;
+            min-height: 30px;
+            background: #e4f8ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .icon {
+              height: 20px;
+              width: 20px;
+            }
+          }
+        }
+        .location-type {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+
+          .icon-badge {
+            margin-right: 5px;
+            width: 30px;
+            min-width: 30px;
+            min-height: 30px;
+            background: #fff5e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .icon {
+              height: 20px;
+              width: 20px;
+
+              path {
+                fill: #ff5c00;
+              }
+            }
+          }
+        }
+
+        .location-authen {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+          .icon-badge {
+            margin-right: 5px;
+            width: 30px;
+            min-width: 30px;
+            min-height: 30px;
+            background: #cdffe1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .icon {
+              height: 20px;
+              width: 20px;
+
+              path {
+                fill: #00c95c;
+              }
+            }
+          }
+        }
+        .location-price {
+          font-weight: 400;
+          color: #282723;
+          .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff4f4f;
+          }
+        }
+      }
+    }
+  }
+}
+#style-1::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+#style-1::-webkit-scrollbar-thumb {
+  background-color: #a3a3a3;
+  border-radius: 10px;
+}
+#style-1::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
