@@ -25,7 +25,10 @@ import { BsPlayCircle } from 'react-icons/bs';
 export default function SpacePartner() {
   let navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/business`);
+    if (window.innerWidth < 768) {
+      window.scrollTo(0, 4200);
+    }
+    else window.scrollTo(0, 3300);
   };
   return (
     <div className='space-partner' >

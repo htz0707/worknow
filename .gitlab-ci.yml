@@ -33,7 +33,7 @@ deploy-dev:
     - chmod 644 ~/.ssh/known_hosts
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   script:
-    - ssh $SSH_HOST "cd $PROJECT_DIR; git stash save --keep-index --include-untracked; git pull; sudo npm i; docker stop $$(docker ps -q); sudo npm run build; docker start $$(docker ps -q -a)"
+    - ssh $SSH_HOST "cd $PROJECT_DIR; git stash save --keep-index --include-untracked; git pull; sudo npm i; docker stop \$\(docker ps -q\); sudo npm run build; docker start \$\(docker ps -q -a\)"
   environment:
     name: $DEV_ENV
     url: $DEV_URL

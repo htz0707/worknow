@@ -9,6 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as UserIcon } from '../assets/icons/User.svg';
 import LetteredAvatar from 'react-lettered-avatar';
 import { Button, Dropdown, Menu } from 'antd';
+import { ReactComponent as Info } from '../assets/icons/user_2.svg';
+import { ReactComponent as Voucher } from '../assets/icons/voucher_2.svg';
+import { ReactComponent as Giaodich } from '../assets/icons/history.svg';
+import { ReactComponent as Lockout } from '../assets/icons/lockout.svg';
+import { ReactComponent as Secure } from '../assets/icons/secure.svg';
 export default function Topbar() {
   const user = JSON.parse(localStorage.getItem('user'));
   const path = useLocation();
@@ -28,11 +33,21 @@ export default function Topbar() {
     navigate(`/sign-in`);
   };
   const handleLogout = () => {
+    navigate('/sign-in');
     localStorage.clear();
     window.location.reload();
   };
   const handleViewUserInfo = () => {
-    navigate('/user')
+    navigate('/user/profile')
+  }
+  const handleViewUserVoucher = () => {
+    navigate('/user/voucher')
+  }
+  const handleViewUserHistory = () => {
+    navigate('/user/history')
+  }
+  const handleViewUserSecurity = () => {
+    navigate('/user/security')
   }
   const menu = (
     <Menu>
@@ -41,6 +56,38 @@ export default function Topbar() {
       </Menu.Item>
       <Menu.Item style={{ width: '120px' }} onClick={handleLogout}>
         Logout
+      </Menu.Item>
+    </Menu>
+  );
+  const menuWeb = (
+    <Menu style={{ borderRadius: '20px' }}>
+      <div className='d-flex flex-column align-items-center' style={{ width: '300px' }}>
+        <div className='py-2'>
+          <LetteredAvatar
+            name={user?.fullname}
+            backgroundColor='#ffb31f80'
+            color='#282723'
+          />
+        </div>
+        <h5 className='fw-bold '>{user?.fullname}</h5>
+        <div className='text-gray'>{user?.email}</div>
+      </div>
+      <hr className='mx-2' />
+      <Menu.Item onClick={handleViewUserInfo} className='pt-2'>
+        <Info height={20} className='me-2 mb-1' /><span>Thông tin cá nhân</span>
+      </Menu.Item>
+      <Menu.Item onClick={handleViewUserVoucher} className='pt-2'>
+        <Voucher height={20} className='me-2 mb-1' /><span>Voucher của tôi</span>
+      </Menu.Item>
+      <Menu.Item onClick={handleViewUserHistory} className='pt-2'>
+        <Giaodich height={20} className='me-2 mb-1' /><span>Giao dịch của tôi</span>
+      </Menu.Item>
+      <Menu.Item onClick={handleViewUserSecurity} className='pt-2'>
+        <Secure height={20} className='me-2 mb-1' /><span>Bảo mật</span>
+      </Menu.Item>
+      <hr className='mx-2 mb-2' />
+      <Menu.Item onClick={handleLogout} className='mb-2 pt-2'>
+        <Lockout height={20} className='me-2 mb-1' /><span>Đăng xuất</span>
       </Menu.Item>
     </Menu>
   );
@@ -106,15 +153,26 @@ export default function Topbar() {
             <>
               <div className='isLoginWeb'>
                 <div className='text'>
-                  <div>Hi, {user?.fullname}</div>
+                  <div>
+                    <div>
+                      Hi,{' '}
+                      <Dropdown overlay={menuWeb} placement='bottomRight' forceRender trigger={['click']}>
+                        <span className='pointer'>{user?.fullname}</span>
+                      </Dropdown>
+                    </div>
+                  </div>
                   <div onClick={handleLogout}>Logout</div>
                 </div>
-                <div onClick={handleViewUserInfo}>
-                  <LetteredAvatar
-                    name={user?.fullname}
-                    backgroundColor='#ffb31f80'
-                    color='#282723'
-                  />
+                <div>
+                  <Dropdown overlay={menuWeb} placement='bottomRight' forceRender trigger={['click']}>
+                    <Button className='btn-avatar'>
+                      <LetteredAvatar
+                        name={user?.fullname}
+                        backgroundColor='#ffb31f80'
+                        color='#282723'
+                      />
+                    </Button>
+                  </Dropdown>
                 </div>
               </div>
               <div className='isLoginMobile'>

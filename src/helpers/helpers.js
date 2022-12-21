@@ -178,3 +178,32 @@ export const redirectAfterLogin = (navigate, defaultUrl) => {
     navigate(defaultUrl);
   }
 };
+export const returnUrlParams = (urlParams) => {
+  let arr = [];
+  for (const entry of urlParams) {
+    arr.push(entry);
+  }
+  const entries = new Map(arr);
+  const obj = Object.fromEntries(entries);
+  return obj;
+};
+export const returnLowestPrice = (priceByHour, priceByDay) => {
+  if (priceByHour && priceByDay) {
+    if (priceByHour <= priceByDay) {
+      let price = formatCurrency(priceByHour);
+      return price + '/H';
+    } else {
+      let price = formatCurrency(priceByDay);
+      return price + '/Ngày';
+    }
+  } else {
+    if (priceByHour) {
+      let price = formatCurrency(priceByHour);
+      return price + '/H';
+    }
+    if (priceByDay) {
+      let price = formatCurrency(priceByDay);
+      return price + '/Ngày';
+    }
+  }
+};

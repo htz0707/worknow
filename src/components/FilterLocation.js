@@ -10,8 +10,18 @@ import { ReactComponent as CapacityIcon } from '../assets/icons/sucChua.svg';
 import { ReactComponent as PolicyIcon } from '../assets/icons/chinhSach.svg';
 import { gql, useLazyQuery } from '@apollo/client';
 import ShowMore from './ShowMore';
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
+import { returnUrlParams } from '../helpers/helpers';
+import { ReactComponent as CloseIcon } from '../assets/icons/close.svg';
 
 export default function FilterLocation(props) {
+  const [urlParams] = useSearchParams();
+  let currentParams = returnUrlParams(urlParams.entries());
+  const navigate = useNavigate();
   const { filterLocations, setFilterLocations } = props;
   // const [serviceType, setServiceType] = useState([
   //   {
@@ -188,11 +198,23 @@ export default function FilterLocation(props) {
         ...filterLocations,
         amenitiesLocationIds: filter_arr,
       });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesLocationIds: filter_arr.toString(),
+        }).toString(),
+      });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
         amenitiesLocationIds: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesLocationIds: copy.toString(),
+        }).toString(),
       });
     }
   };
@@ -205,11 +227,23 @@ export default function FilterLocation(props) {
         ...filterLocations,
         amenitiesWorkingSpaceIds: filter_arr,
       });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesWorkingSpaceIds: filter_arr.toString(),
+        }).toString(),
+      });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
         amenitiesWorkingSpaceIds: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesWorkingSpaceIds: copy.toString(),
+        }).toString(),
       });
     }
   };
@@ -222,11 +256,23 @@ export default function FilterLocation(props) {
         ...filterLocations,
         capacityIds: filter_arr,
       });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          capacityIds: filter_arr.toString(),
+        }).toString(),
+      });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
         capacityIds: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          capacityIds: copy.toString(),
+        }).toString(),
       });
     }
   };
@@ -239,11 +285,23 @@ export default function FilterLocation(props) {
         ...filterLocations,
         workingSpaceTypes: filter_arr,
       });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          workingSpaceTypes: filter_arr.toString(),
+        }).toString(),
+      });
     } else {
       copy.push(id);
       setFilterLocations({
         ...filterLocations,
         workingSpaceTypes: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          workingSpaceTypes: copy.toString(),
+        }).toString(),
       });
     }
   };
@@ -251,9 +309,43 @@ export default function FilterLocation(props) {
     useState(false);
   const [showMoreAmenitiesWorkingSpace, setShowMoreAmenitiesWorkingSpace] =
     useState(false);
+  const handleClearFilter = () => {
+    setFilterLocations({
+      amenitiesLocationIds: [],
+      amenitiesWorkingSpaceIds: [],
+      capacityIds: [],
+      workingSpaceTypes: [],
+    });
+    if (currentParams.sort) {
+      navigate({
+        search: createSearchParams({
+          sort: currentParams.sort,
+        }).toString(),
+      });
+    } else {
+      navigate('/locations');
+    }
+  };
+  const handleCheckFilter = () => {
+    if (
+      filterLocations?.amenitiesLocationIds?.length > 0 ||
+      filterLocations?.amenitiesWorkingSpaceIds?.length > 0 ||
+      filterLocations?.capacityIds?.length > 0 ||
+      filterLocations?.workingSpaceTypes?.length > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   return (
     <div className='filter-location'>
       <div className='filter-location_card'>
+        {handleCheckFilter() && (
+          <div className='clear-filter' onClick={handleClearFilter}>
+            <CloseIcon className='icon' /> Loại bỏ bộ lọc
+          </div>
+        )}
         <div className='filter-location_card_title'>
           <ServiceIcon className='icon' /> Tiện ích tòa Nhà
         </div>
