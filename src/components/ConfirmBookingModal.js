@@ -14,6 +14,8 @@ import {
   toHoursAndMinutes,
 } from '../helpers/helpers';
 import { useNavigate } from 'react-router-dom';
+import '../assets/styles/ConfirmBookingModal.scss';
+import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrowdownfill.svg';
 
 export default function ConfirmBookingModal(props) {
   registerLocale('vi', vi);
@@ -128,6 +130,7 @@ export default function ConfirmBookingModal(props) {
       price: null,
       time_range: null,
     });
+    setShowCalendar(false);
   };
   const handleCaculateHour = () => {
     if (typeOfBooking === 'hour') {
@@ -170,6 +173,7 @@ export default function ConfirmBookingModal(props) {
     typeOfBooking,
   ]);
   const [error, setError] = useState('');
+  const [showCalendar, setShowCalendar] = useState(false);
   //
   const handleSubmit = () => {
     if (typeOfBooking === 'day') {
@@ -269,6 +273,7 @@ export default function ConfirmBookingModal(props) {
       date_range: moment(new Date()).format('DD/MM/YYYY'),
     });
     setError('');
+    setShowCalendar(false);
   }, [show]);
   return (
     <Modal
@@ -278,6 +283,7 @@ export default function ConfirmBookingModal(props) {
       keyboard={false}
       aria-labelledby='contained-modal-title-vcenter'
       centered
+      className='confirm-booking-modal'
     >
       <Modal.Header className='px-4 py-2 d-flex flex-column align-items-center justify-content-center'>
         <h3 className='modal-title fw-bold'>Chọn Thời Gian</h3>
@@ -332,39 +338,95 @@ export default function ConfirmBookingModal(props) {
         )}
         {typeOfBooking === 'hour' && (
           <>
-            <div className='mb-3'>
-              <div className='d-flex justify-content-center'>
-                <DatePicker
-                  selected={bookingInfoTypeHour.date}
-                  onChange={handleDateChange}
-                  inline
-                  locale={'vi'}
-                  minDate={moment().toDate()}
-                />
+            <div className='hour-web'>
+              <div className='mb-3'>
+                <div className='d-flex justify-content-center'>
+                  <DatePicker
+                    selected={bookingInfoTypeHour.date}
+                    onChange={handleDateChange}
+                    inline
+                    locale={'vi'}
+                    minDate={moment().toDate()}
+                  />
+                </div>
+              </div>
+              <div className='mb-3 px-4'>
+                <div className='fw-bold d-flex justify-content-center align-items-center'>
+                  Thời gian
+                </div>
+                <div>
+                  <TimeSlotView
+                    date={bookingInfoTypeHour.date}
+                    openTime={openTime}
+                    closeTime={closeTime}
+                    startTime={bookingInfoTypeHour.startTime}
+                    handleChangeTimeSlot={handleChangeBookingInfoTypeHour}
+                    endTime={bookingInfoTypeHour.endTime}
+                  />
+                </div>
+
+                <div>
+                  <label className='mt-2 form-label text-gray'>
+                    Thời gian:{' '}
+                    {moment(bookingInfoTypeHour.date).format('DD/MM/YYYY')}{' '}
+                    {bookingInfoTypeHour.time_range}
+                  </label>
+                </div>
+                {error && <div className='text-danger'>{error}</div>}
               </div>
             </div>
-            <div className='mb-3 px-4'>
-              <div className='fw-bold d-flex justify-content-center align-items-center'>
-                Thời gian
+            <div className='hour-mobile'>
+              {!showCalendar && (
+                <div
+                  className='date-dropdown px-4'
+                  onClick={() => setShowCalendar(true)}
+                >
+                  <span>
+                    {moment(bookingInfoTypeHour.date).format('DD/MM/YYYY')}
+                  </span>
+                  <ArrowDownIcon />
+                </div>
+              )}
+              {showCalendar && (
+                <div className='mb-3'>
+                  <div className='d-flex justify-content-center'>
+                    <DatePicker
+                      selected={bookingInfoTypeHour.date}
+                      onChange={handleDateChange}
+                      inline
+                      locale={'vi'}
+                      minDate={moment().toDate()}
+                    />
+                  </div>
+                </div>
+              )}
+              {!showCalendar && (
+                <div className='mb-3 px-4'>
+                  <div className='fw-bold d-flex justify-content-center align-items-center'>
+                    Thời gian
+                  </div>
+                  <div>
+                    <TimeSlotView
+                      date={bookingInfoTypeHour.date}
+                      openTime={openTime}
+                      closeTime={closeTime}
+                      startTime={bookingInfoTypeHour.startTime}
+                      handleChangeTimeSlot={handleChangeBookingInfoTypeHour}
+                      endTime={bookingInfoTypeHour.endTime}
+                    />
+                  </div>
+                </div>
+              )}
+              <div className='px-4'>
+                <div>
+                  <label className='mt-2 form-label text-gray'>
+                    Thời gian:{' '}
+                    {moment(bookingInfoTypeHour.date).format('DD/MM/YYYY')}{' '}
+                    {bookingInfoTypeHour.time_range}
+                  </label>
+                </div>
+                {error && <div className='text-danger'>{error}</div>}
               </div>
-              <div>
-                <TimeSlotView
-                  openTime={openTime}
-                  closeTime={closeTime}
-                  startTime={bookingInfoTypeHour.startTime}
-                  handleChangeTimeSlot={handleChangeBookingInfoTypeHour}
-                  endTime={bookingInfoTypeHour.endTime}
-                />
-              </div>
-
-              <div>
-                <label className='mt-2 form-label text-gray'>
-                  Thời gian:{' '}
-                  {moment(bookingInfoTypeHour.date).format('DD/MM/YYYY')}{' '}
-                  {bookingInfoTypeHour.time_range}
-                </label>
-              </div>
-              {error && <div className='text-danger'>{error}</div>}
             </div>
             <hr className='mx-4' />
             <div className='d-flex justify-content-between px-4'>
