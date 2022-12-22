@@ -65,7 +65,7 @@ export default function Business() {
             <div className='row'>
               <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
                 <div>
-                  <h2>
+                  <h2 className='fw-bold'>
                     TRỞ THÀNH KHÁCH HÀNG<br />DOANH NGHIỆP CỦA<br />WORKNOW VÀ TẬN HƯỞNG NHIỀU ƯU ĐÃI HƠN.
                   </h2>
                   <p>

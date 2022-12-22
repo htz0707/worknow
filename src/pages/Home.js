@@ -35,7 +35,7 @@ export default function NewBusiness() {
             <div className='row'>
               <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
                 <div>
-                  <h2>
+                  <h2 className='fw-bold'>
                     ĐẶT CHỖ LÀM VIỆC BẤT CỨ ĐÂU,
                     BẤT CỨ KHI NÀO BẠN CẦN.
                   </h2>
