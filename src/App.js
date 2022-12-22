@@ -20,6 +20,7 @@ import User from './pages/User';
 import LocationsMap from './pages/LocationsMap';
 import Rules from './pages/Rules';
 import Privacy from './pages/Privacy';
+import About from './pages/About';
 import AdminOrders from './pages/AdminOrders';
 
 function App() {
@@ -45,6 +46,10 @@ function App() {
           <Route
             path='/privacy'
             element={<Privacy />}
+          />
+          <Route
+            path='/about'
+            element={<About />}
           />
         </Route>
         <Route

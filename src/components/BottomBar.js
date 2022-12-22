@@ -15,7 +15,7 @@ export default function BottomBar() {
         <div className='row w-100'>
           <div className='bar-item col-md-4 col-12'>
             <div className='my-4 fw-bold'>WorkNow</div>
-            <div className='link-text'>Về chúng tôi</div>
+            <div className='link-text' onClick={() => navigate('/about')}>Về chúng tôi</div>
             <div className='link-text'>Truyền thông</div>
             <div className='link-text'>Tuyển dụng</div>
           </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import '../assets/styles/Rules.scss'
 
 export default function Rules() {
@@ -184,8 +183,7 @@ export default function Rules() {
           XIII. Khác
         </h5>
         <p>
-          Trừ khi được chúng tôi và bạn đồng ý rõ ràng, Điều khoản sử dụng này cấu thành toàn bộ thỏa thuận giữa chúng tôi và bạn về vấn đề này và thay thế tất cả các thoả thuận trước đó hoặc đương thời, dù bằng văn bản hay bằng miệng, giữa chúng tôi và bạn đối với vấn đề liên quan đến chủ đề. Các phần tiêu đề được cung cấp chỉ để thuận tiện và sẽ không được đưa vào tính hợp pháp. Điều khoản sử dụng này không thể chuyển nhượng hoặc chuyển đổi. Điều khoản sử dụng này sẽ mang lại lợi ích cho người kế thừa, chuyển giao, cấp phép, và người được cấp phép phụ của chúng tôi. Không có mối quan hệ đại lý, quan hệ đối tác, liên doanh hoặc việc làm nào được tạo ra như là kết quả của Điều khoản sử dụng này và không bên nào có bất kỳ quyền hạn nào để ràng buộc người khác theo bất kỳ khía cạnh nào. Trừ khi có quy định khác trong Điều khoản sử dụng này, tất cả các thông báo theo Điều khoản sử dụng này sẽ được lập thành văn bản và sẽ được coi là hợp lệ khi nhận được, nếu cá nhân gửi hoặc gửi bằng thư xác nhận hoặc đăng ký, yêu cầu gửi lại; khi nhận được xác nhận bằng điện tử, nếu được gửi qua fax hoặc e-mail; hoặc ngày sau khi được gửi, nếu được gửi cho ngày giao hàng tiếp theo bằng dịch vụ chuyển phát qua đêm được công nhận. Thông báo điện tử phải được gửi đến
-          <i>worknowcenter@gmail.com</i>
+          Trừ khi được chúng tôi và bạn đồng ý rõ ràng, Điều khoản sử dụng này cấu thành toàn bộ thỏa thuận giữa chúng tôi và bạn về vấn đề này và thay thế tất cả các thoả thuận trước đó hoặc đương thời, dù bằng văn bản hay bằng miệng, giữa chúng tôi và bạn đối với vấn đề liên quan đến chủ đề. Các phần tiêu đề được cung cấp chỉ để thuận tiện và sẽ không được đưa vào tính hợp pháp. Điều khoản sử dụng này không thể chuyển nhượng hoặc chuyển đổi. Điều khoản sử dụng này sẽ mang lại lợi ích cho người kế thừa, chuyển giao, cấp phép, và người được cấp phép phụ của chúng tôi. Không có mối quan hệ đại lý, quan hệ đối tác, liên doanh hoặc việc làm nào được tạo ra như là kết quả của Điều khoản sử dụng này và không bên nào có bất kỳ quyền hạn nào để ràng buộc người khác theo bất kỳ khía cạnh nào. Trừ khi có quy định khác trong Điều khoản sử dụng này, tất cả các thông báo theo Điều khoản sử dụng này sẽ được lập thành văn bản và sẽ được coi là hợp lệ khi nhận được, nếu cá nhân gửi hoặc gửi bằng thư xác nhận hoặc đăng ký, yêu cầu gửi lại; khi nhận được xác nhận bằng điện tử, nếu được gửi qua fax hoặc e-mail; hoặc ngày sau khi được gửi, nếu được gửi cho ngày giao hàng tiếp theo bằng dịch vụ chuyển phát qua đêm được công nhận. Thông báo điện tử phải được gửi đến <i>worknowcenter@gmail.com</i>
         </p>
         <h5 className='fw-bold'>
           XIV. Phản hồi và thông tin
