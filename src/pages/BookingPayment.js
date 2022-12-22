@@ -429,11 +429,11 @@ export default function BookingPayment() {
                             <div className='bank-details'>
                               <div>
                                 <span>Số tài khoản</span>
-                                <span>0331000468999</span>
+                                <span>0531002547497</span>
                               </div>
                               <div>
                                 <span>Chủ tài khoản</span>
-                                <span>Công ty TNHH WorkNow</span>
+                                <span>Công ty TNHH Rockship</span>
                               </div>
                               <div>
                                 <span>Nội dung chuyển khoản</span>

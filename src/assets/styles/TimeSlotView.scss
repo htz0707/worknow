@@ -12,11 +12,12 @@
     height: 35px;
     background: white;
     border-top: 1px solid rgb(217, 217, 217);
-    border-right: 1px solid rgb(217, 217, 217);
+    border-right: 0.5px solid rgb(217, 217, 217);
     border-bottom: 1px solid rgb(217, 217, 217);
-    border-left: none;
+    border-left: 0.5px solid rgb(217, 217, 217);
     box-sizing: border-box;
     margin-top: 16px;
+    margin-bottom: 10px;
     cursor: pointer;
     span {
       position: absolute;
@@ -28,12 +29,15 @@
       letter-spacing: 0.01em;
       color: rgb(191, 191, 191);
     }
+    @media (max-width: 575px) {
+      width: calc(100% / 9);
+    }
   }
-  .slot:nth-child(1) {
-    border-left: 1px solid rgb(217, 217, 217);
-  }
+
   .slot.over {
     background: rgb(240, 240, 240);
+    cursor: not-allowed;
+    pointer-events: none;
   }
   .slot.selected {
     background-color: #ffb31f !important;

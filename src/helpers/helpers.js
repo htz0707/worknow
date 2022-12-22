@@ -146,7 +146,7 @@ export const returnDescriptionStatusBooking = (status) => {
   }
 };
 export function compareTime(time1, time2) {
-  if (new Date('1/1/1999 ' + time1) >= new Date('1/1/1999 ' + time2)) {
+  if (time1 > time2) {
     return true;
   } else {
     return false;

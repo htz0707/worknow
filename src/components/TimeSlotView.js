@@ -2,13 +2,19 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import '../assets/styles/TimeSlotView.scss';
-import { createTimeSlot } from '../helpers/helpers';
+import { compareTime, createTimeSlot } from '../helpers/helpers';
 import cx from 'classnames';
 import moment from 'moment';
 
 export default function TimeSlotView(props) {
-  const { openTime, closeTime, startTime, endTime, handleChangeTimeSlot } =
-    props;
+  const {
+    openTime,
+    closeTime,
+    startTime,
+    endTime,
+    handleChangeTimeSlot,
+    date,
+  } = props;
   // const timeslot = [
   //   {
   //     date: '2022-09-08',
@@ -137,18 +143,19 @@ export default function TimeSlotView(props) {
     let time_slot = createTimeSlot(openTime, closeTime);
     let arr = [];
     let arr1 = [];
-    // let current_time = moment().format('HH:mm');
-    // console.log(current_time);
+    let currentDate = moment();
     time_slot?.forEach((item, index) => {
+      let selectDate = moment(date).format('YYYY-MM-DD') + 'T' + item;
+      let selectDateFormat = moment(selectDate);
       arr.push({
         id: index + 1,
         time: item,
-        available: true,
+        available: compareTime(selectDateFormat, currentDate),
       });
       arr1.push({
         id: index + 1,
         time: item,
-        available: true,
+        available: compareTime(selectDateFormat, currentDate),
       });
     });
     setTimeSlot(arr);
@@ -157,7 +164,7 @@ export default function TimeSlotView(props) {
   };
   useEffect(() => {
     handleCreateTimeSlot();
-  }, [openTime, closeTime]);
+  }, [openTime, closeTime, date]);
   const handleClick = async (index) => {
     // if (startTime.id && endTime.id) {
     //   handleChangeTimeSlot({

@@ -1,0 +1,25 @@
+.confirm-booking-modal {
+  .hour-web {
+    display: unset;
+  }
+  .hour-mobile {
+    display: none;
+    .date-dropdown {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      color: #0075ff;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  }
+  @media (max-width: 575px) {
+    .hour-web {
+      display: none;
+    }
+    .hour-mobile {
+      display: unset;
+    }
+  }
+}
