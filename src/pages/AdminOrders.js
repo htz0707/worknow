@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Dropdown, Space } from 'antd';
+import { Table, Dropdown, Space, Menu } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import Bcrumb from '../components/Bcrumb';
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import moment from 'moment';
+import { handleMessage } from '../helpers/helpers';
+import '../assets/styles/AdminOrders.scss';
 
 export default function AdminOrders() {
   const GET_ORDERS = gql`
-  query MyQuery{
+  query GetOrders{
     orders(
       params: {
         limit: 150
@@ -50,12 +53,16 @@ export default function AdminOrders() {
     }
   }
 `;
-  const [getOrders] = useLazyQuery(GET_ORDERS);
+  const [getOrders, { called, refetch }] = useLazyQuery(GET_ORDERS
+    , {
+      fetchPolicy: 'no-cache',
+    }
+  );
   const [orders, setOrders] = useState([]);
 
   const handleGetOrders = async () => {
     let res = await getOrders();
-
+    console.log('abcd')
     if (res.data) {
       let array = res.data.orders.edges.map((item, key) => ({ key, ...item }));
 
@@ -69,7 +76,6 @@ export default function AdminOrders() {
         item.locationName = item.orderDetails[0]?.workingSpaces?.locationName;
         item.bill = item.orderTransactions.bill;
       }
-      console.log(array)
       setOrders(array);
     }
   }
@@ -129,8 +135,8 @@ export default function AdminOrders() {
       title: 'Updated At',
       dataIndex: 'updatedAt',
       key: 'updatedAt',
-      render: (_, date) => (
-        moment(date.updatedAt).format('HH:mm, DD/MM/YYYY')
+      render: (_, data) => (
+        moment(data.updatedAt).format('HH:mm, DD/MM/YYYY')
       ),
       sorter: (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt)
     },
@@ -138,8 +144,8 @@ export default function AdminOrders() {
       title: 'Start Date',
       dataIndex: 'startDate',
       key: 'startDate',
-      render: (_, date) => (
-        moment(date.startDate).format('HH:mm, DD/MM/YYYY')
+      render: (_, data) => (
+        moment(data.startDate).format('HH:mm, DD/MM/YYYY')
       ),
       sorter: (a, b) => new Date(a.startDate) - new Date(b.startDate)
     },
@@ -147,8 +153,8 @@ export default function AdminOrders() {
       title: ' End Date',
       dataIndex: 'endDate',
       key: 'endDate',
-      render: (_, date) => (
-        moment(date.endDate).format('HH:mm, DD/MM/YYYY')
+      render: (_, data) => (
+        moment(data.endDate).format('HH:mm, DD/MM/YYYY')
       ),
       sorter: (a, b) => new Date(a.endDate) - new Date(b.endDate)
     },
@@ -176,44 +182,145 @@ export default function AdminOrders() {
       title: 'Bill',
       dataIndex: 'bill',
       key: 'bill',
-      render: (_, link) => (
-        <a href={link.bill ? link.bill : '#'}>Click To Open</a>
+      render: (_, data) => (
+        <a href={data.bill ? data.bill : '#'}>Click To Open</a>
       ),
     },
     {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      fixed: 'right'
+      fixed: 'right',
+      render: (_, data) => (
+        <>
+          {
+            (
+              data.status === 'booking' ||
+              data.status === 'extended' ||
+              data.status === 'booking_expired'
+            ) ? data.status :
+              (
+                data.status === 'confirming' ?
+                  <Dropdown
+                    overlay={
+                      <Menu>
+                        <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'payment_fail')}>
+                          payment_fail
+                        </Menu.Item>
+                        <Menu.Item key={'2'} onClick={() => handleUpdateOrder(data.id, 'confirmed')}>
+                          confirmed
+                        </Menu.Item>
+                      </Menu>
+                    }
+                    forceRender
+                    trigger={['click']}
+                  >
+                    <span className='pointer drop'>{data.status}</span>
+                  </Dropdown> :
+                  (
+                    data.status === 'confirmed' ?
+                      <Dropdown
+                        overlay={
+                          <Menu>
+                            <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'booking_successfull')}>
+                              booking_successfull
+                            </Menu.Item>
+                            <Menu.Item key={'2'} onClick={() => handleUpdateOrder(data.id, 'canceled')}>
+                              canceled
+                            </Menu.Item>
+                          </Menu>
+                        }
+                        forceRender
+                        trigger={['click']}
+                      >
+                        <span className='pointer drop'>{data.status}</span>
+                      </Dropdown> :
+                      (
+                        data.status === 'booking_successfull' ?
+                          <Dropdown
+                            overlay={
+                              <Menu>
+                                <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'canceled')}>
+                                  canceled
+                                </Menu.Item>
+                              </Menu>
+                            }
+                            forceRender
+                            trigger={['click']}
+                          >
+                            <span className='pointer drop'>{data.status}</span>
+                          </Dropdown> :
+                          (
+                            data.status === 'payment_failed' ?
+                              <Dropdown
+                                overlay={
+                                  <Menu>
+                                    <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'confirmed')}>
+                                      confirmed
+                                    </Menu.Item>
+                                  </Menu>
+                                }
+                                forceRender
+                                trigger={['click']}
+                              >
+                                <span className='pointer drop'>{data.status}</span>
+                              </Dropdown> : data.status
+                          )
+                      )
+                  )
+              )
+          }
+        </>
+      ),
+      sorter: (a, b) => a.status.length - b.status.length
     }
   ]
 
-  // const items = [
-  //   {
-  //     label: 'booking',
-  //     key: '0'
-  //   },
-  //   {
-  //     label: 'confirming',
-  //     key: '1'
-  //   },
-  //   {
-  //     label: 'confirmed',
-  //     key: '2'
-  //   },
-  //   {
-  //     label: 'booking_successful',
-  //     key: '3'
-  //   },
-  //   {
-  //     label: 'booking_expired',
-  //     key: '4'
-  //   },
-  //   {
-  //     label: 'payment_fail',
-  //     key: '5'
-  //   },
-  // ];
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        Profile
+      </Menu.Item>
+      <Menu.Item>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
+
+  const UPDATE_ORDER = gql`
+    mutation UpdateOrder(
+      $orderId: UUID!
+      $status: OrderStatus!
+    ) {
+      updateOrder(
+        data: {
+          orderId: $orderId
+          status: $status
+        }
+      ) {
+        id
+      }
+    }
+  `;
+  const [updateOrder] = useMutation(UPDATE_ORDER);
+
+  const handleUpdateOrder = async (id, status) => {
+    try {
+      let res = await updateOrder({
+        variables: {
+          orderId: id,
+          status: status,
+        }
+      });
+      if (res.data) {
+        await handleGetOrders();
+        handleMessage('success', 'Cập nhật thành công!');
+      }
+    } catch (error) {
+      console.log(error);
+      handleMessage('error', 'Cập nhật không thành công!');
+    }
+  };
 
   useEffect(() => {
     handleGetOrders();
@@ -235,7 +342,7 @@ export default function AdminOrders() {
           ]}
         />
       </div>
-      <Table columns={columns} dataSource={orders}
+      <Table columns={columns} dataSource={[...orders]}
         scroll={{
           x: 3500,
           y: 600
