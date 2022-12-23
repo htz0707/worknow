@@ -9,10 +9,14 @@ import '../assets/styles/AdminOrders.scss';
 
 export default function AdminOrders() {
   const GET_ORDERS = gql`
-  query GetOrders{
+  query GetOrders(
+    $page: Int!
+    $limit: Int!
+  ){
     orders(
       params: {
-        limit: 150
+        page: $page
+        limit: $limit
       }
     ) {
       edges {
@@ -27,6 +31,7 @@ export default function AdminOrders() {
         phoneCountryCode
         total
         totalDiscount
+        createdAt
         updatedAt
         userId
         orderDetails {
@@ -59,11 +64,21 @@ export default function AdminOrders() {
     }
   );
   const [orders, setOrders] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
-  const handleGetOrders = async () => {
-    let res = await getOrders();
-    console.log('abcd')
+  const handleGetOrders = async (number, size) => {
+    let res = await getOrders(
+      {
+        variables: {
+          page: number,
+          limit: size,
+        },
+      }
+    );
     if (res.data) {
+      setTotal(res.data.orders.pageInfo.count);
       let array = res.data.orders.edges.map((item, key) => ({ key, ...item }));
 
       for (const item of array) {
@@ -130,6 +145,15 @@ export default function AdminOrders() {
       title: 'User ID',
       dataIndex: 'userId',
       key: 'userId'
+    },
+    {
+      title: 'Created At',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (_, data) => (
+        moment(data.createdAt).format('HH:mm, DD/MM/YYYY')
+      ),
+      sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
     },
     {
       title: 'Updated At',
@@ -204,10 +228,10 @@ export default function AdminOrders() {
                   <Dropdown
                     overlay={
                       <Menu>
-                        <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'payment_fail')}>
+                        <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'payment_fail', pageNumber, pageSize)}>
                           payment_fail
                         </Menu.Item>
-                        <Menu.Item key={'2'} onClick={() => handleUpdateOrder(data.id, 'confirmed')}>
+                        <Menu.Item key={'2'} onClick={() => handleUpdateOrder(data.id, 'confirmed', pageNumber, pageSize)}>
                           confirmed
                         </Menu.Item>
                       </Menu>
@@ -222,10 +246,10 @@ export default function AdminOrders() {
                       <Dropdown
                         overlay={
                           <Menu>
-                            <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'booking_successfull')}>
+                            <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'booking_successfull', pageNumber, pageSize)}>
                               booking_successfull
                             </Menu.Item>
-                            <Menu.Item key={'2'} onClick={() => handleUpdateOrder(data.id, 'canceled')}>
+                            <Menu.Item key={'2'} onClick={() => handleUpdateOrder(data.id, 'canceled', pageNumber, pageSize)}>
                               canceled
                             </Menu.Item>
                           </Menu>
@@ -240,7 +264,7 @@ export default function AdminOrders() {
                           <Dropdown
                             overlay={
                               <Menu>
-                                <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'canceled')}>
+                                <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'canceled', pageNumber, pageSize)}>
                                   canceled
                                 </Menu.Item>
                               </Menu>
@@ -255,7 +279,7 @@ export default function AdminOrders() {
                               <Dropdown
                                 overlay={
                                   <Menu>
-                                    <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'confirmed')}>
+                                    <Menu.Item key={'1'} onClick={() => handleUpdateOrder(data.id, 'confirmed', pageNumber, pageSize)}>
                                       confirmed
                                     </Menu.Item>
                                   </Menu>
@@ -304,7 +328,7 @@ export default function AdminOrders() {
   `;
   const [updateOrder] = useMutation(UPDATE_ORDER);
 
-  const handleUpdateOrder = async (id, status) => {
+  const handleUpdateOrder = async (id, status, number, size) => {
     try {
       let res = await updateOrder({
         variables: {
@@ -313,7 +337,7 @@ export default function AdminOrders() {
         }
       });
       if (res.data) {
-        await handleGetOrders();
+        await handleGetOrders(number, size);
         handleMessage('success', 'Cập nhật thành công!');
       }
     } catch (error) {
@@ -323,7 +347,7 @@ export default function AdminOrders() {
   };
 
   useEffect(() => {
-    handleGetOrders();
+    handleGetOrders(pageNumber, pageSize);
   }, []);
 
   return (
@@ -342,10 +366,21 @@ export default function AdminOrders() {
           ]}
         />
       </div>
-      <Table columns={columns} dataSource={[...orders]}
+      <Table
+        columns={columns}
+        dataSource={[...orders]}
         scroll={{
           x: 3500,
           y: 600
+        }}
+        pagination={{
+          defaultCurrent: pageNumber,
+          total: total,
+          onChange: (value, pageSize) => {
+            setPageNumber(value);
+            setPageSize(pageSize);
+            handleGetOrders(value, pageSize);
+          }
         }}
       />
     </div>
