@@ -90,6 +90,7 @@ export default function SignIn() {
         <div className='row'>
           <div className='logo col-lg-5 d-flex justify-content-center align-items-center'>
             <img
+              className='pointer'
               src={Logo}
               width={200}
               alt='logo'
@@ -198,13 +199,13 @@ export default function SignIn() {
                 </button>
               </form> */}
               <div className='row mt-2'>
-                <div className='col-lg-8'>
+                <div className='col'>
                   Bạn chưa có tài khoản?{' '}
                   <span onClick={handleSignUp} className='link'>
                     Đăng ký
                   </span>
                 </div>
-                <div className='col-lg-auto text-end'>
+                <div className='col-auto text-end'>
                   <span className='link'>Quên mật khẩu?</span>
                 </div>
               </div>

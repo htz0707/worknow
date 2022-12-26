@@ -1,5 +1,4 @@
 import React from 'react';
-
 import '../assets/styles/Privacy.scss'
 
 export default function Privacy() {

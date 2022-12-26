@@ -1,0 +1,13 @@
+$primary: #fe7b50;
+
+.pointer {
+  cursor: pointer;
+}
+
+.drop {
+  color: blue;
+}
+
+.drop:hover {
+  color: $primary;
+}

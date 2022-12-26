@@ -26,6 +26,9 @@ import UserProfile from './pages/UserProfile';
 import OrderHistory from './pages/OrderHistory';
 import Voucher from './pages/Voucher';
 import ChangePassword from './pages/ChangePassword';
+import About from './pages/About';
+import AdminOrders from './pages/AdminOrders';
+
 
 function App() {
   return (
@@ -114,6 +117,14 @@ function App() {
                 <SignUp />
               </PublicRoute>
             }
+          />
+          <Route
+            path='/about'
+            element={<About />}
+          />
+          <Route
+            path='/admin/orders'
+            element={<AdminOrders />}
           />
         </Routes>
       </BrowserRouter>
