@@ -13,8 +13,10 @@ import {
 } from '../helpers/helpers';
 import { Form, Input } from 'antd';
 import { Spinner } from 'react-bootstrap';
+import { useAuthContext } from '../context/auth';
 
 export default function SignIn() {
+  const { login } = useAuthContext();
   const [form] = Form.useForm();
   const [userInfo, setUserInfo] = useState({
     email: '',
@@ -23,9 +25,12 @@ export default function SignIn() {
   const handleChangeInfo = (field, value) => {
     setUserInfo({ ...userInfo, [field]: value });
   };
-  const SIGN_IN_GUEST = gql`
-    mutation SignInGuest($email: String!, $password: String!) {
-      signInGuest(data: { email: $email, password: $password }) {
+  const SIGN_IN = gql`
+    mutation SignIn($email: String!, $password: String!) {
+      signIn(data: { email: $email, password: $password }) {
+        avatar
+        avatarId
+        birthday
         token
         email
         fullname
@@ -47,10 +52,10 @@ export default function SignIn() {
       }
     }
   `;
-  const [signInGuest, { loading }] = useMutation(SIGN_IN_GUEST, {
-    update(_, { data: { signInGuest: userData } }) {
+  const [signIn, { loading }] = useMutation(SIGN_IN, {
+    update(_, { data: { signIn: userData } }) {
       console.log(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
+      login(userData);
       redirectAfterLogin(navigate, '/');
     },
     onError(err) {
@@ -65,7 +70,7 @@ export default function SignIn() {
     },
   });
   const handleSubmit = async () => {
-    signInGuest({
+    signIn({
       variables: {
         email: userInfo.email,
         password: userInfo.password,

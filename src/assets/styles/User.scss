@@ -6,8 +6,8 @@
   padding-top: 100px;
 
   .user-layout {
-    margin-left: 13%;
-    margin-right: 13%;
+    // margin-left: 13%;
+    // margin-right: 13%;
 
     .rounded {
       border-radius: 16px !important;
@@ -44,7 +44,7 @@
 
       .user-avatar {
         width: 68px;
-        height: 68px
+        height: 68px;
       }
 
       .camera {
@@ -78,12 +78,12 @@
 
     .tab {
       cursor: pointer;
-      background: #E4E4E4;
+      background: #e4e4e4;
     }
 
     .tab-active,
     .tab:hover {
-      background: #FFB31F;
+      background: #ffb31f;
     }
 
     .text-secure {
@@ -92,34 +92,90 @@
     }
 
     .text-log-out {
-      color: #FF4F4F;
+      color: #ff4f4f;
     }
 
     .input-field {
       border-radius: 12px;
       color: #282723;
+      border: 1px solid #d9d9d9;
+      &:hover {
+        border: 1px solid #d9d9d9;
+      }
+      &:focus {
+        border: 1px solid #d9d9d9;
+        box-shadow: unset;
+      }
+      &.ant-input-status-error {
+        border: 1px solid #d9d9d9;
+        &:hover {
+          border: 1px solid #d9d9d9;
+        }
+        &:focus {
+          border: 1px solid #d9d9d9;
+          box-shadow: unset;
+        }
+      }
     }
+    .phone-input-engine {
+      input {
+        background: #ffffff;
+        border: 1px solid #d9d9d9;
+        border-radius: 12px;
 
+        box-shadow: none;
+      }
+      .react-tel-input {
+        .form-control {
+          width: 100%;
+          padding-top: 0.5rem !important;
+          padding-bottom: 0.5rem !important;
+          height: unset;
+        }
+        .flag-dropdown {
+          border-bottom-left-radius: 12.007px;
+          border-top-left-radius: 12.007px;
+
+          &.open {
+            border-bottom-left-radius: 12.007px;
+            border-top-left-radius: 12.007px;
+
+            .selected-flag {
+              border-bottom-left-radius: 12.007px;
+              border-top-left-radius: 12.007px;
+            }
+          }
+          .selected-flag {
+            &:hover {
+              border-bottom-left-radius: 12.007px;
+              border-top-left-radius: 12.007px;
+            }
+          }
+        }
+      }
+    }
     .ant-select-selector {
       border-radius: 12px;
       color: #282723;
     }
 
     .update-btn {
-      background: #FFB31F;
+      background: #ffb31f;
       border-radius: 50px;
       color: #282723;
-      border-color: #FFB31F;
+      border-color: #ffb31f;
+      border: none;
+      padding: 5px 15px;
     }
 
     .ant-tabs-tab:hover,
-    .ant-tabs-tab-active>div {
-      color: #FFB31F !important;
+    .ant-tabs-tab-active > div {
+      color: #ffb31f !important;
     }
 
     .ant-tabs-ink-bar {
       position: absolute;
-      background: #FFB31F;
+      background: #ffb31f;
       pointer-events: none;
     }
 
@@ -132,7 +188,7 @@
       font-size: 20px;
 
       .text-blue {
-        color: #0075FF;
+        color: #0075ff;
       }
     }
 
@@ -141,8 +197,8 @@
     }
 
     .history-card {
-      background: #F3FFEF;
-      border-left: 4px solid #6DBA31;
+      background: #f3ffef;
+      border-left: 4px solid #6dba31;
       box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.05);
 
       .card-image {
@@ -155,17 +211,17 @@
     }
 
     .text-gray-2 {
-      color: #98968D;
+      color: #98968d;
       font-weight: 600;
       font-size: 16px;
     }
 
     .text-orange {
-      color: #FF7A19;
+      color: #ff7a19;
     }
 
     .text-red {
-      color: #FF4F4F;
+      color: #ff4f4f;
     }
   }
 }

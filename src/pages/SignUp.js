@@ -13,8 +13,10 @@ import {
   redirectAfterLogin,
 } from '../helpers/helpers';
 import { Spinner } from 'react-bootstrap';
+import { useAuthContext } from '../context/auth';
 
 export default function SignUp() {
+  const { login } = useAuthContext();
   const [form] = Form.useForm();
   const [userInfo, setUserInfo] = useState({
     full_name: '',
@@ -27,9 +29,12 @@ export default function SignUp() {
     setUserInfo({ ...userInfo, [field]: value });
   };
   const [loading, setLoading] = useState(false);
-  const SIGN_IN_GUEST = gql`
-    mutation SignInGuest($email: String!, $password: String!) {
-      signInGuest(data: { email: $email, password: $password }) {
+  const SIGN_IN = gql`
+    mutation SignIn($email: String!, $password: String!) {
+      signIn(data: { email: $email, password: $password }) {
+        avatar
+        avatarId
+        birthday
         token
         email
         fullname
@@ -51,10 +56,10 @@ export default function SignUp() {
       }
     }
   `;
-  const [signInGuest] = useMutation(SIGN_IN_GUEST, {
-    update(_, { data: { signInGuest: userData } }) {
+  const [signIn] = useMutation(SIGN_IN, {
+    update(_, { data: { signIn: userData } }) {
       console.log(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
+      login(userData);
       redirectAfterLogin(navigate, '/');
       setLoading(false);
       // context.login(userData);
@@ -66,15 +71,15 @@ export default function SignUp() {
       // console.log(err.graphQLErrors[0].extensions.exception.errors);
     },
   });
-  const SIGN_UP_GUEST = gql`
-    mutation SignUpGuest(
+  const SIGN_UP_MEMBER = gql`
+    mutation SignUpMember(
       $fullname: String!
       $email: String!
       $phoneCountryCode: String
       $phoneNumber: String
       $password: String!
     ) {
-      signUpGuest(
+      signUpMember(
         data: {
           fullname: $fullname
           email: $email
@@ -87,9 +92,9 @@ export default function SignUp() {
       }
     }
   `;
-  const [signUpGuest] = useMutation(SIGN_UP_GUEST, {
-    update(_, { data: { signUpGuest: userData } }) {
-      signInGuest({
+  const [signUpMember] = useMutation(SIGN_UP_MEMBER, {
+    update(_, { data: { signUp: userData } }) {
+      signIn({
         variables: {
           email: userInfo.email,
           password: userInfo.password,
@@ -118,7 +123,7 @@ export default function SignUp() {
       bodyData.phoneCountryCode = parse_phone.countryCallingCode;
       bodyData.phoneNumber = parse_phone.nationalNumber;
     }
-    signUpGuest({
+    signUpMember({
       variables: bodyData,
     });
   };

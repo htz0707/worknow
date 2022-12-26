@@ -14,8 +14,9 @@ import { ReactComponent as Voucher } from '../assets/icons/voucher_2.svg';
 import { ReactComponent as Giaodich } from '../assets/icons/history.svg';
 import { ReactComponent as Lockout } from '../assets/icons/lockout.svg';
 import { ReactComponent as Secure } from '../assets/icons/secure.svg';
+import { useAuthContext } from '../context/auth';
 export default function Topbar() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const { user, logout } = useAuthContext();
   const path = useLocation();
   const { t } = useTranslation();
   function changeLanguage(value) {
@@ -33,22 +34,20 @@ export default function Topbar() {
     navigate(`/sign-in`);
   };
   const handleLogout = () => {
-    navigate('/sign-in');
-    localStorage.clear();
-    window.location.reload();
+    logout();
   };
   const handleViewUserInfo = () => {
-    navigate('/user/profile')
-  }
+    navigate('/user/profile');
+  };
   const handleViewUserVoucher = () => {
-    navigate('/user/voucher')
-  }
+    navigate('/user/voucher');
+  };
   const handleViewUserHistory = () => {
-    navigate('/user/history')
-  }
+    navigate('/user/history');
+  };
   const handleViewUserSecurity = () => {
-    navigate('/user/security')
-  }
+    navigate('/user/security');
+  };
   const menu = (
     <Menu>
       <Menu.Item style={{ width: '120px' }} onClick={handleViewUserInfo}>
@@ -61,7 +60,10 @@ export default function Topbar() {
   );
   const menuWeb = (
     <Menu style={{ borderRadius: '20px' }}>
-      <div className='d-flex flex-column align-items-center' style={{ width: '300px' }}>
+      <div
+        className='d-flex flex-column align-items-center'
+        style={{ width: '300px' }}
+      >
         <div className='py-2'>
           <LetteredAvatar
             name={user?.fullname}
@@ -74,20 +76,25 @@ export default function Topbar() {
       </div>
       <hr className='mx-2' />
       <Menu.Item onClick={handleViewUserInfo} className='pt-2'>
-        <Info height={20} className='me-2 mb-1' /><span>Thông tin cá nhân</span>
+        <Info height={20} className='me-2 mb-1' />
+        <span>Thông tin cá nhân</span>
       </Menu.Item>
       <Menu.Item onClick={handleViewUserVoucher} className='pt-2'>
-        <Voucher height={20} className='me-2 mb-1' /><span>Voucher của tôi</span>
+        <Voucher height={20} className='me-2 mb-1' />
+        <span>Voucher của tôi</span>
       </Menu.Item>
       <Menu.Item onClick={handleViewUserHistory} className='pt-2'>
-        <Giaodich height={20} className='me-2 mb-1' /><span>Giao dịch của tôi</span>
+        <Giaodich height={20} className='me-2 mb-1' />
+        <span>Giao dịch của tôi</span>
       </Menu.Item>
       <Menu.Item onClick={handleViewUserSecurity} className='pt-2'>
-        <Secure height={20} className='me-2 mb-1' /><span>Bảo mật</span>
+        <Secure height={20} className='me-2 mb-1' />
+        <span>Bảo mật</span>
       </Menu.Item>
       <hr className='mx-2 mb-2' />
       <Menu.Item onClick={handleLogout} className='mb-2 pt-2'>
-        <Lockout height={20} className='me-2 mb-1' /><span>Đăng xuất</span>
+        <Lockout height={20} className='me-2 mb-1' />
+        <span>Đăng xuất</span>
       </Menu.Item>
     </Menu>
   );
@@ -156,7 +163,12 @@ export default function Topbar() {
                   <div>
                     <div>
                       Hi,{' '}
-                      <Dropdown overlay={menuWeb} placement='bottomRight' forceRender trigger={['click']}>
+                      <Dropdown
+                        overlay={menuWeb}
+                        placement='bottomRight'
+                        forceRender
+                        trigger={['click']}
+                      >
                         <span className='pointer'>{user?.fullname}</span>
                       </Dropdown>
                     </div>
@@ -164,7 +176,12 @@ export default function Topbar() {
                   <div onClick={handleLogout}>Logout</div>
                 </div>
                 <div>
-                  <Dropdown overlay={menuWeb} placement='bottomRight' forceRender trigger={['click']}>
+                  <Dropdown
+                    overlay={menuWeb}
+                    placement='bottomRight'
+                    forceRender
+                    trigger={['click']}
+                  >
                     <Button className='btn-avatar'>
                       <LetteredAvatar
                         name={user?.fullname}
