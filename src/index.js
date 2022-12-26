@@ -9,12 +9,33 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  gql,
+  createHttpLink,
 } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: process.env.REACT_APP_API_URL,
+});
+const authLink = setContext((_, { headers }) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (headers?.noToken) {
+    return {
+      headers: {
+        ...headers,
+      },
+    };
+  } else {
+    return {
+      headers: {
+        ...headers,
+        authorization: user ? `Bearer ${user.token}` : '',
+      },
+    };
+  }
+});
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 root.render(
