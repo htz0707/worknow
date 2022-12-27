@@ -14,6 +14,7 @@ import { ReactComponent as Voucher } from '../assets/icons/voucher_2.svg';
 import { ReactComponent as Giaodich } from '../assets/icons/history.svg';
 import { ReactComponent as Lockout } from '../assets/icons/lockout.svg';
 import { ReactComponent as Secure } from '../assets/icons/secure.svg';
+import Avatar from '../assets/images/default_avatar.png';
 import { useAuthContext } from '../context/auth';
 export default function Topbar() {
   const { user, logout } = useAuthContext();
@@ -65,10 +66,10 @@ export default function Topbar() {
         style={{ width: '300px' }}
       >
         <div className='py-2'>
-          <LetteredAvatar
-            name={user?.fullname}
-            backgroundColor='#ffb31f80'
-            color='#282723'
+          <img
+            style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+            src={user?.avatar || Avatar}
+            alt='avatar'
           />
         </div>
         <h5 className='fw-bold '>{user?.fullname}</h5>
@@ -183,10 +184,10 @@ export default function Topbar() {
                     trigger={['click']}
                   >
                     <Button className='btn-avatar'>
-                      <LetteredAvatar
-                        name={user?.fullname}
-                        backgroundColor='#ffb31f80'
-                        color='#282723'
+                      <img
+                        className='avatar-image'
+                        src={user?.avatar || Avatar}
+                        alt='avatar'
                       />
                     </Button>
                   </Dropdown>
@@ -195,10 +196,10 @@ export default function Topbar() {
               <div className='isLoginMobile'>
                 <Dropdown overlay={menu} placement='bottomRight' forceRender>
                   <Button className='btn-avatar'>
-                    <LetteredAvatar
-                      name={user?.fullname}
-                      backgroundColor='#ffb31f80'
-                      color='#282723'
+                    <img
+                      className='avatar-image'
+                      src={user?.avatar || Avatar}
+                      alt='avatar'
                     />
                   </Button>
                 </Dropdown>
