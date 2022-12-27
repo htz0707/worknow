@@ -10,6 +10,8 @@ import {
   returnTypeOfBooking,
 } from '../helpers/helpers';
 import { useNavigate } from 'react-router-dom';
+import { ReactComponent as ThreeUserIcon } from '../assets/icons/three_user.svg';
+import { ReactComponent as ClockIcon } from '../assets/icons/clock.svg';
 
 export default function WorkSpaceCard(props) {
   const { data } = props;
@@ -42,6 +44,12 @@ export default function WorkSpaceCard(props) {
         </div>
         <div className='description'>
           <div>{data.description}</div>
+        </div>
+        <div className='capacity'>
+          <ThreeUserIcon className='icon' /> {data?.capacity?.name} Người
+        </div>
+        <div className='working-time'>
+          <ClockIcon className='icon' /> {props.workingTime}
         </div>
         <div className='amenity'>
           {data.amenities?.map((item, index) => {
