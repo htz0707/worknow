@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/UserLayout.scss';
 import Bcrumb from '../components/Bcrumb';
 import { useAuthContext } from '../context/auth';
@@ -11,6 +11,8 @@ import { ReactComponent as Camera } from '../assets/icons/camera.svg';
 import Avatar from '../assets/images/default_avatar.png';
 import cx from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { handleMessage } from '../helpers/helpers';
+import UploadAvatarModal from '../components/UploadAvatarModal';
 
 export default function UserLayout(props) {
   const { currentTab, children } = props;
@@ -22,6 +24,26 @@ export default function UserLayout(props) {
   };
   const handleNavigate = (url) => {
     navigate(url);
+  };
+  const [showUpload, setShowUpload] = useState(false);
+  const inputRef = React.useRef();
+  const triggerFileSelectPopup = () => {
+    inputRef.current.click();
+  };
+  const [file, setFile] = useState();
+  const onSelectFile = (event) => {
+    if (event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      if (file.size < 5242880) {
+        setFile(file);
+        setShowUpload(true);
+      } else {
+        handleMessage(
+          'error',
+          'Dung lượng ảnh quá lớn. Vui lòng chọn ảnh khác.'
+        );
+      }
+    }
   };
   return (
     <div className='user-layout page-container'>
@@ -38,12 +60,19 @@ export default function UserLayout(props) {
       <div className='user-layout_body container-fluid'>
         <div className='control-pannel py-2 px-4'>
           <div className='info-section'>
-            <div className='avatar-block'>
+            <div className='avatar-block' onClick={triggerFileSelectPopup}>
               <Camera className='position-absolute camera' />
               <img
                 className='avatar-image'
                 src={user.avatar || Avatar}
                 alt='avatar'
+              />
+              <input
+                type='file'
+                accept='image/*'
+                ref={inputRef}
+                onChange={onSelectFile}
+                style={{ display: 'none' }}
               />
             </div>
             <div className='info-block'>
@@ -96,6 +125,11 @@ export default function UserLayout(props) {
         </div>
         <div className='children'>{children}</div>
       </div>
+      <UploadAvatarModal
+        show={showUpload}
+        file={file}
+        handleClose={() => setShowUpload(false)}
+      />
     </div>
   );
 }
