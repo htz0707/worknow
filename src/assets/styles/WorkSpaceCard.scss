@@ -60,6 +60,31 @@
       display: flex;
       flex-wrap: wrap;
     }
+    .capacity {
+      display: flex;
+      align-items: center;
+      .icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+        path {
+          fill: #5e5b50;
+        }
+      }
+    }
+    .working-time {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      .icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+        path {
+          fill: #5e5b50;
+        }
+      }
+    }
   }
   > .right {
     width: 150px;

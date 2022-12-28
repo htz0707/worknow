@@ -115,6 +115,9 @@ export default function LocationDetails() {
           images {
             publicUrl
           }
+          capacity {
+            name
+          }
           locationId
           status
           type
@@ -526,7 +529,12 @@ export default function LocationDetails() {
           <div className='location-hours' id='section_2'>
             <div className='header'>Giờ làm việc</div>
             <div className='body'>
-              <div>{moment().format('dddd, LL')}</div>
+              <div>
+                Hôm nay:{' '}
+                <span className='today-text'>
+                  {moment().format('dddd, LL')}
+                </span>
+              </div>
               <div>
                 {dayArray.map((item, index) => {
                   return (
@@ -587,6 +595,10 @@ export default function LocationDetails() {
                     return (
                       <WorkSpaceCard
                         data={item}
+                        workingTime={renderWorkingHour(
+                          locationInfo?.openTime,
+                          locationInfo?.closeTime
+                        )}
                         handleClick={() => handleBooking(item)}
                         key={index}
                       />
