@@ -1,0 +1,46 @@
+.order-card {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  .order-card-left {
+    flex: 1;
+    max-width: 150px;
+    .image {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+  }
+  .order-card-right {
+    flex: 1;
+    .ordercode-locationname {
+      font-size: 20px;
+      font-weight: 600;
+      color: #282723;
+      text-transform: uppercase;
+      width: fit-content;
+      cursor: pointer;
+      > span:nth-child(1) {
+        color: #0075ff;
+      }
+    }
+    .workingspace-name {
+      font-weight: 600;
+    }
+    .date,
+    .time {
+      color: #5e5b50;
+      display: flex;
+      align-items: center;
+    }
+    .status {
+      &.pending {
+        color: #ff7a19;
+      }
+      &.cancelled {
+        color: #ff4f4f;
+      }
+    }
+  }
+}

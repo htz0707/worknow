@@ -14,6 +14,14 @@
     pointer-events: none;
   }
 
+  .order-history-body {
+    height: 500px;
+    overflow-y: auto;
+    .title {
+      font-weight: 600;
+      color: #98968d;
+    }
+  }
   .pointer {
     cursor: pointer;
   }
