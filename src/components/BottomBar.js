@@ -6,8 +6,10 @@ import { ReactComponent as TwitterIcon } from '../assets/icons/twitter.svg';
 import { ReactComponent as YoutubeIcon } from '../assets/icons/youtube.svg';
 import { ReactComponent as InstagramIcon } from '../assets/icons/instagram.svg';
 import '../assets/styles/BottomBar.scss';
+import { useTranslation } from 'react-i18next';
 
 export default function BottomBar() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <Navbar bg='dark' className='bottom-bar'>
@@ -15,22 +17,29 @@ export default function BottomBar() {
         <div className='row w-100'>
           <div className='bar-item col-md-4 col-12'>
             <div className='my-4 fw-bold'>WorkNow</div>
-            <div className='link-text' onClick={() => navigate('/about')}>Về chúng tôi</div>
-            <div className='link-text'>Truyền thông</div>
-            <div className='link-text'>Tuyển dụng</div>
+            <div className='link-text' onClick={() => navigate('/about')}>
+              {t('about_us')}
+            </div>
+            <div className='link-text'>{t('media')}</div>
+            <div className='link-text'>{t('recruitment')}</div>
           </div>
           <div className='bar-item col-md-4 col-12'>
-            <div className='my-4 fw-bold'>Liên hệ</div>
-            <div className='link-text'>Trung tâm trợ giúp</div>
-            <div className='link-text' onClick={() => navigate('/space-partner')}>Trở thành Đối tác</div>
+            <div className='my-4 fw-bold'>{t('contact')}</div>
+            <div className='link-text'>{t('help_center')}</div>
+            <div
+              className='link-text'
+              onClick={() => navigate('/space-partner')}
+            >
+              {t('become_partner')}
+            </div>
           </div>
           <div className='bar-item col-md-4 col-12'>
-            <div className='my-4 fw-bold'>Chính sách và Điều khoản</div>
+            <div className='my-4 fw-bold'>{t('policy_and_terms')}</div>
             <div className='link-text' onClick={() => navigate('/rules')}>
-              Điều khoản và Điều kiện
+              {t('term_and_condition')}
             </div>
             <div className='link-text' onClick={() => navigate('/privacy')}>
-              Chính sách Bảo mật{' '}
+              {t('privacy_policy')}
             </div>
           </div>
           <div className='d-flex justify-content-center my-3'>

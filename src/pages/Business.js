@@ -16,17 +16,18 @@ import circle1 from '../assets/images/smallcircle.svg';
 import circle2 from '../assets/images/normalcircle.svg';
 import circle3 from '../assets/images/largecircle.svg';
 import TwoPeople from '../assets/images/two_people.png';
+import { Trans, useTranslation, withTranslation } from 'react-i18next';
 
-export default function Business() {
+function Business() {
+  const { t } = useTranslation();
   let navigate = useNavigate();
   const handleClick = () => {
     if (window.innerWidth < 768) {
       window.scrollTo(0, 1200);
-    }
-    else window.scrollTo(0, 700);
+    } else window.scrollTo(0, 700);
   };
   return (
-    <div className='business' >
+    <div className='business'>
       {/* <div className='layout'>
         <section className='section-about'>
           <div className='container-md'>
@@ -66,16 +67,21 @@ export default function Business() {
               <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
                 <div>
                   <h2 className='fw-bold'>
-                    TRỞ THÀNH KHÁCH HÀNG<br />DOANH NGHIỆP CỦA<br />WORKNOW VÀ TẬN HƯỞNG NHIỀU ƯU ĐÃI HƠN.
+                    <Trans i18nKey='for_bussiness_title'>
+                      TRỞ THÀNH KHÁCH HÀNG
+                      <br />
+                      DOANH NGHIỆP CỦA
+                      <br />
+                      WORKNOW VÀ TẬN HƯỞNG NHIỀU ƯU ĐÃI HƠN.
+                    </Trans>
                   </h2>
-                  <p>
-                    Đăng Ký Với Chúng Tôi Để Nhận Ưu Đãi Ngay.
-                  </p>
+                  <p>{t('for_bussiness_description')}</p>
                   <button
                     onClick={handleClick}
                     className='btn btn-warning fw-bold'
                   >
-                    ĐĂNG KÝ KH DOANH NGHIỆP <BsPlayCircle className='ms-3 icon' fill='dark' size={25} />
+                    {t('signup_for_bussiness')}{' '}
+                    <BsPlayCircle className='ms-3 icon' fill='dark' size={25} />
                   </button>
                 </div>
               </div>
@@ -92,16 +98,19 @@ export default function Business() {
             </div>
           </section>
         </div>
-
       </div>
       <div className='container-md'>
         <div className='row'>
           <div className='col-lg-6'>
-            <img src={ThreePeople} alt='three-peole' className='layout-2 w-100' />
+            <img
+              src={ThreePeople}
+              alt='three-peole'
+              className='layout-2 w-100'
+            />
           </div>
           <div className='col-lg-6'>
             <div className='sign-up-block'>
-              <h2>Trải Nghiệm Ngay!</h2>
+              <h2>{t('experience_now')}</h2>
               <div className='sign-up-form'>
                 <Tabs
                   defaultActiveKey='1'
@@ -110,17 +119,18 @@ export default function Business() {
                   type='card'
                   items={[
                     {
-                      label: 'Đăng Ký Miễn Phí',
+                      label: t('free_signup'),
                       key: '1',
                       children: <SignUpForm free={true} />,
-                    }
+                    },
                   ]}
                 />
               </div>
             </div>
           </div>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }
+export default withTranslation()(Business);

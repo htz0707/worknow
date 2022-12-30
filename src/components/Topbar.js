@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import '../assets/styles/Topbar.scss';
@@ -16,13 +16,46 @@ import { ReactComponent as Lockout } from '../assets/icons/lockout.svg';
 import { ReactComponent as Secure } from '../assets/icons/secure.svg';
 import Avatar from '../assets/images/default_avatar.png';
 import { useAuthContext } from '../context/auth';
-export default function Topbar() {
+import cx from 'classnames';
+export default function Topbar(props) {
   const { user, logout } = useAuthContext();
   const path = useLocation();
   const { t } = useTranslation();
-  function changeLanguage(value) {
-    i18n.changeLanguage(value);
-  }
+  const [languageOptions, setLanguageOptions] = useState([
+    {
+      label: 'Vietnamese',
+      value: 'vi',
+    },
+    {
+      label: 'English',
+      value: 'en',
+    },
+  ]);
+
+  const [selectedLanguage, setSelectedLanguage] = useState({
+    label: 'Vietnamese',
+    value: 'vi',
+  });
+  useEffect(() => {
+    let init_lang = localStorage.getItem('language');
+    if (init_lang === 'en') {
+      setSelectedLanguage({
+        label: 'English',
+        value: 'en',
+      });
+    }
+    if (init_lang === 'vi') {
+      setSelectedLanguage({
+        label: 'Vietnamese',
+        value: 'vi',
+      });
+    }
+  }, []);
+  const handleChangeLanguage = (item) => {
+    setSelectedLanguage(item);
+    i18n.changeLanguage(item.value);
+    localStorage.setItem('language', item.value);
+  };
   let navigate = useNavigate();
   const handleClick = () => {
     localStorage.setItem(
@@ -52,10 +85,10 @@ export default function Topbar() {
   const menu = (
     <Menu>
       <Menu.Item style={{ width: '120px' }} onClick={handleViewUserInfo}>
-        Profile
+        {t('profile')}
       </Menu.Item>
       <Menu.Item style={{ width: '120px' }} onClick={handleLogout}>
-        Logout
+        {t('logout')}
       </Menu.Item>
     </Menu>
   );
@@ -78,24 +111,24 @@ export default function Topbar() {
       <hr className='mx-2' />
       <Menu.Item onClick={handleViewUserInfo} className='pt-2'>
         <Info height={20} className='me-2 mb-1' />
-        <span>Thông tin cá nhân</span>
+        <span> {t('personal_info')}</span>
       </Menu.Item>
       <Menu.Item onClick={handleViewUserVoucher} className='pt-2'>
         <Voucher height={20} className='me-2 mb-1' />
-        <span>Voucher của tôi</span>
+        <span> {t('my_voucher')}</span>
       </Menu.Item>
       <Menu.Item onClick={handleViewUserHistory} className='pt-2'>
         <Giaodich height={20} className='me-2 mb-1' />
-        <span>Giao dịch của tôi</span>
+        <span> {t('order_history')}</span>
       </Menu.Item>
       <Menu.Item onClick={handleViewUserSecurity} className='pt-2'>
         <Secure height={20} className='me-2 mb-1' />
-        <span>Bảo mật</span>
+        <span> {t('security')}</span>
       </Menu.Item>
       <hr className='mx-2 mb-2' />
       <Menu.Item onClick={handleLogout} className='mb-2 pt-2'>
         <Lockout height={20} className='me-2 mb-1' />
-        <span>Đăng xuất</span>
+        <span> {t('logout')}</span>
       </Menu.Item>
     </Menu>
   );
@@ -121,22 +154,22 @@ export default function Topbar() {
           <Nav>
             <Nav.Link eventKey='1'>
               <NavLink to='/' className='nav-item-link'>
-                {t('navbar.home')}
+                {t('home')}
               </NavLink>
             </Nav.Link>
             <Nav.Link eventKey='2'>
               <NavLink to='locations' className='nav-item-link'>
-                {t('navbar.locations')}
+                {t('locations')}
               </NavLink>
             </Nav.Link>
             <Nav.Link eventKey='3'>
               <NavLink to='business' className='nav-item-link'>
-                {t('navbar.for_business')}
+                {t('for_business')}
               </NavLink>
             </Nav.Link>
             <Nav.Link eventKey='4'>
               <NavLink to='space-partner' className='nav-item-link'>
-                {t('navbar.space_partner')}
+                {t('space_partner')}
               </NavLink>
             </Nav.Link>
             {/* <Nav.Link eventKey='5'>
@@ -144,16 +177,22 @@ export default function Topbar() {
                 {t('navbar.newsroom')}
               </NavLink>
             </Nav.Link> */}
-            {/* <Nav.Link className='nav-item-link'>
-              <NavDropdown title={t('navbar.language')} id='basic-nav-dropdown'>
-                <NavDropdown.Item onClick={() => changeLanguage('vi')}>
-                  Vietnamese
-                </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => changeLanguage('en')}>
-                  English
-                </NavDropdown.Item>
+            <Nav.Link className='nav-item-link'>
+              <NavDropdown title={t('language')} id='basic-nav-dropdown'>
+                {languageOptions.map((item, index) => {
+                  return (
+                    <NavDropdown.Item
+                      onClick={() => handleChangeLanguage(item)}
+                      className={cx('dropdown-item', {
+                        active: selectedLanguage.value === item.value,
+                      })}
+                    >
+                      {item.label}
+                    </NavDropdown.Item>
+                  );
+                })}
               </NavDropdown>
-            </Nav.Link> */}
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <div className='login-section'>
@@ -163,7 +202,7 @@ export default function Topbar() {
                 <div className='text'>
                   <div>
                     <div>
-                      Hi,{' '}
+                      {t('hi')},{' '}
                       <Dropdown
                         overlay={menuWeb}
                         placement='bottomRight'
@@ -174,7 +213,7 @@ export default function Topbar() {
                       </Dropdown>
                     </div>
                   </div>
-                  <div onClick={handleLogout}>Logout</div>
+                  <div onClick={handleLogout}>{t('logout')}</div>
                 </div>
                 <div>
                   <Dropdown
@@ -207,7 +246,7 @@ export default function Topbar() {
             </>
           ) : (
             <div className='isNotLogin' onClick={handleClick}>
-              <span className='text'>Đăng nhập</span>
+              <span className='text'> {t('login')}</span>
               <UserIcon />
             </div>
           )}

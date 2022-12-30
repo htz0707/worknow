@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import '../assets/styles/Home.scss'
+import '../assets/styles/Home.scss';
 
 import { Button } from 'react-bootstrap';
 import { BiPaperPlane } from 'react-icons/bi';
@@ -21,8 +21,10 @@ import hl1 from '../assets/images/highlight1.svg';
 import hl2 from '../assets/images/highlight2.svg';
 import hl3 from '../assets/images/highlight3.svg';
 import hl4 from '../assets/images/highlight4.svg';
+import { useTranslation } from 'react-i18next';
 
 export default function NewBusiness() {
+  const { t } = useTranslation();
   let navigate = useNavigate();
   const handleClick = () => {
     navigate(`/locations`);
@@ -35,13 +37,8 @@ export default function NewBusiness() {
             <div className='row'>
               <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
                 <div>
-                  <h2 className='fw-bold'>
-                    ĐẶT CHỖ LÀM VIỆC BẤT CỨ ĐÂU,
-                    BẤT CỨ KHI NÀO BẠN CẦN.
-                  </h2>
-                  <p>
-                  WorkNow là nền tảng tiên phong tại Việt Nam kết nối nhu cầu tìm kiếm không gian làm việc với mạng lưới địa điểm thuận tiện và nhiều loại hình không gian đa dạng.
-                  </p>
+                  <h2 className='fw-bold'>{t('home_title')}</h2>
+                  <p>{t('home_description')}</p>
                   {/* <button
                     onClick={handleClick}
                     className='btn btn-warning fw-bold rounded-pill d-flex justify-content-center'
@@ -58,50 +55,80 @@ export default function NewBusiness() {
         </div>
       </div>
       <div className='container-md'>
-        <h3 className='d-flex justify-content-center align-items center pt-5 my-5 fw-bold'>TẠI SAO NÊN LÀ WORKNOW</h3>
+        <h3 className='d-flex justify-content-center align-items center pt-5 my-5 fw-bold'>
+          {t('why_should_be_worknow')}
+        </h3>
         <div className='row'>
           <div className='col-lg-3'>
-            <div className='d-flex justify-content-center align-items center'><Reason1 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center mt-3' >Cải thiện năng suất</h5>
-            <p className='px-3 text-justify'>Tối ưu hóa hiệu suất công việc bằng cách khám phá không gian / môi trường tươi mới và sáng tạo cùng Worknow.</p>
+            <div className='d-flex justify-content-center align-items center'>
+              <Reason1 height={170} />
+            </div>
+            <h5 className='d-flex justify-content-center align-items center mt-3'>
+              {t('pros_1')}
+            </h5>
+            <p className='px-3 text-justify'>{t('pros_1_description')}</p>
           </div>
           <div className='col-lg-3'>
-            <div className='d-flex justify-content-center align-items center'><Reason2 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center mt-3' >Đa dạng vị trí</h5>
-            <p className='px-3 text-justify'>Không gian làm việc chung, Cao ốc văn phòng, Trung tâm mua sắm, Quán cà phê, Khách sạn,...</p>
+            <div className='d-flex justify-content-center align-items center'>
+              <Reason2 height={170} />
+            </div>
+            <h5 className='d-flex justify-content-center align-items center mt-3'>
+              {t('pros_2')}
+            </h5>
+            <p className='px-3 text-justify'>{t('pros_2_description')}</p>
           </div>
           <div className='col-lg-3'>
-            <div className='d-flex justify-content-center align-items center'><Reason1 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center mt-3' >Cho mọi doanh nghiệp</h5>
-            <p className='px-3 text-justify'>Giải pháp làm việc từ xa hoặc trực tiếp cho bất kỳ doanh nghiệp ở mọi lĩnh vực kinh doanh.</p>
+            <div className='d-flex justify-content-center align-items center'>
+              <Reason1 height={170} />
+            </div>
+            <h5 className='d-flex justify-content-center align-items center mt-3'>
+              {t('pros_3')}
+            </h5>
+            <p className='px-3 text-justify'>{t('pros_3_description')}</p>
           </div>
           <div className='col-lg-3'>
-            <div className='d-flex justify-content-center align-items center'><Reason2 height={170} /></div>
-            <h5 className='d-flex justify-content-center align-items center mt-3' >Tiết kiệm chi phí</h5>
-            <p className='px-3 text-justify'>Chi phí phải chăng và phù hợp, bạn sẽ chỉ thanh toán cho những tiện ích mà mình sử dụng.</p>
+            <div className='d-flex justify-content-center align-items center'>
+              <Reason2 height={170} />
+            </div>
+            <h5 className='d-flex justify-content-center align-items center mt-3'>
+              {t('pros_4')}
+            </h5>
+            <p className='px-3 text-justify'>{t('pros_4_description')}</p>
           </div>
         </div>
       </div>
       <div className='container-md'>
         <div className='row mb-3'>
-          <h3 className='pt-5 my-5 fw-bold'>LOẠI HÌNH NỔI BẬT</h3>
+          <h3 className='pt-5 my-5 fw-bold'> {t('outstanding_type')}</h3>
           <div className='col-lg-6'>
             <div className='d-flex'>
               <div className='card-hl'>
-                <h4 className='text-bottom-1 fw-bold'>BOOTH CÁ NHÂN</h4>
-                <p className='text-bottom-2'>Booth riêng có 1 chỗ đến 4 chỗ.</p>
-                <Button onClick={handleClick} className='btn-bottom rounded-pill' variant='secondary'>
-                  Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
+                <h4 className='text-bottom-1 fw-bold'>{t('private_booth')}</h4>
+                <p className='text-bottom-2'>
+                  {t('private_booth_description')}
+                </p>
+                <Button
+                  onClick={handleClick}
+                  className='btn-bottom rounded-pill'
+                  variant='secondary'
+                >
+                  {t('discover')} <BiPaperPlane className='mx-2 mb-1' />
                 </Button>
                 <img src={hl4} alt='hl-4' className='w-100 image-hl' />
               </div>
             </div>
             <div className='d-flex'>
               <div className='card-hl card-down'>
-                <h4 className='text-bottom-1 fw-bold'>GHẾ LINH HOẠT</h4>
-                <p className='text-bottom-2'>Tìm bàn làm việc ở bất cứ đâu.</p>
-                <Button onClick={handleClick} className='btn-bottom rounded-pill' variant='secondary'>
-                  Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
+                <h4 className='text-bottom-1 fw-bold'>{t('flexible_seat')}</h4>
+                <p className='text-bottom-2'>
+                  {t('flexible_seat_description')}
+                </p>
+                <Button
+                  onClick={handleClick}
+                  className='btn-bottom rounded-pill'
+                  variant='secondary'
+                >
+                  {t('discover')} <BiPaperPlane className='mx-2 mb-1' />
                 </Button>
                 <img src={hl1} alt='hl-1' className='w-100 image-hl' />
               </div>
@@ -110,21 +137,29 @@ export default function NewBusiness() {
           <div className='col-lg-6 col-right'>
             <div className='d-flex'>
               <div className='card-hl'>
-                <h4 className='text-bottom-1 fw-bold'>PHÒNG HỌP</h4>
-                <p className='text-bottom-2'>Phòng riêng với tất cả các tiện nghi bạn cần.</p>
-                <Button onClick={handleClick} className='btn-bottom rounded-pill' variant='secondary'>
-                  Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
+                <h4 className='text-bottom-1 fw-bold'>{t('meeting_room')}</h4>
+                <p className='text-bottom-2'>{t('meeting_room_description')}</p>
+                <Button
+                  onClick={handleClick}
+                  className='btn-bottom rounded-pill'
+                  variant='secondary'
+                >
+                  {t('discover')} <BiPaperPlane className='mx-2 mb-1' />
                 </Button>
                 <img src={hl2} alt='hl-2' className='w-100 image-hl' />
               </div>
             </div>
             <div className='d-flex'>
               <div className='card-hl card-down'>
-                <h4 className='text-bottom-1 fw-bold'>SẢNH SỰ KIỆN</h4>
-                <p className='text-bottom-2'>Tổ chức bài giảng, buổi họp mặt hoặc talkshow</p>
-                <p className='text-bottom-3'><br />theo nhu cầu của bạn. </p>
-                <Button onClick={handleClick} className='btn-bottom rounded-pill' variant='secondary'>
-                  Khám Phá {' '} <BiPaperPlane className='mx-2 mb-1' />
+                <h4 className='text-bottom-1 fw-bold'>{t('event_hall')}</h4>
+                <p className='text-bottom-2'>{t('event_hall_description')}</p>
+                <p className='text-bottom-3'></p>
+                <Button
+                  onClick={handleClick}
+                  className='btn-bottom rounded-pill'
+                  variant='secondary'
+                >
+                  {t('discover')} <BiPaperPlane className='mx-2 mb-1' />
                 </Button>
                 <img src={hl3} alt='hl-3' className='w-100 image-hl' />
               </div>
@@ -151,7 +186,6 @@ export default function NewBusiness() {
           </div>
         </div>
       </div> */}
-
     </div>
   );
 }
