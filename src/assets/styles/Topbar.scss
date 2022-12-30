@@ -29,6 +29,17 @@
   .nav-link.active {
     border-bottom: none;
   }
+  .dropdown {
+    .dropdown-item {
+      &.active {
+        background: rgba(255, 179, 31, 0.5);
+        color: #282723;
+      }
+      &:active {
+        background-color: #ffffff;
+      }
+    }
+  }
   .btn-login {
     width: 116px;
     height: 33px;

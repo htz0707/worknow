@@ -3,7 +3,7 @@ import '../assets/styles/SpacePartner.scss';
 import { useEffect } from 'react';
 import { Tabs } from 'antd';
 import SignUpForm from '../components/SignUpFormForSpacePartner';
-import layout1 from '../assets/images/space_partner_1.png'
+import layout1 from '../assets/images/space_partner_1.png';
 import room1 from '../assets/images/room_1.svg';
 import room2 from '../assets/images/room_2.svg';
 import room3 from '../assets/images/room_3.svg';
@@ -21,38 +21,45 @@ import data4 from '../assets/images/data4.svg';
 import { useNavigate } from 'react-router-dom';
 
 import { BsPlayCircle } from 'react-icons/bs';
+import { Trans, useTranslation, withTranslation } from 'react-i18next';
 
-export default function SpacePartner() {
+function SpacePartner() {
+  const { t } = useTranslation();
   let navigate = useNavigate();
   const handleClick = () => {
     if (window.innerWidth < 768) {
       window.scrollTo(0, 4200);
-    }
-    else window.scrollTo(0, 3300);
+    } else window.scrollTo(0, 3300);
   };
   return (
-    <div className='space-partner' >
+    <div className='space-partner'>
       <div className='layout-1'>
         <div className='container-md'>
           <section>
             <div className='row'>
               <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
                 <div>
-                  <h2 className='fw-bold'>
-                    ĐĂNG KÝ ĐỐI TÁC VỚI WORKNOW ĐỂ TRỞ THÀNH MỘT PHẦN CỦA VĂN HÓA “LÀM VIỆC BẤT CỨ ĐÂU, BẤT CỨ KHI NÀO BẠN CẦN”
+                  <h2 className='fw-bold text-uppercase'>
+                    {t('space_provider_title')}
                   </h2>
                   <p className='description'>
-                    Nắm bắt được xu hương làm việc tương lai, worknow là nền tảng tiên phong ở việt nam dành cho không gian làm 
-                    việc theo yêu cầu. giúp bạn kết nối với những người có nhu cầu tìm kiếm không gian làm việc ở bất kỳ đâu, bất
-                    kỳ lúc nào.
+                    {t('space_provider_description')}
                   </p>
-                  <button className='btn btn-warning fw-bold' onClick={handleClick}>
-                    TRỞ THÀNH ĐỐI TÁC<BsPlayCircle className='ms-3 icon' fill='dark' size={25} />
+                  <button
+                    className='btn btn-warning fw-bold text-uppercase'
+                    onClick={handleClick}
+                  >
+                    {t('become_partner')}
+                    <BsPlayCircle className='ms-3 icon' fill='dark' size={25} />
                   </button>
                 </div>
               </div>
               <div className='col-lg-7 right-layout-1'>
-                <img src={layout1} className='w-100 right-picture-1' alt='image' />
+                <img
+                  src={layout1}
+                  className='w-100 right-picture-1'
+                  alt='image'
+                />
               </div>
             </div>
           </section>
@@ -60,71 +67,87 @@ export default function SpacePartner() {
       </div>
       <div className='container-md mt-5'>
         <div className=''>
-          <h2 className='text-center'>CÁC LOẠI HÌNH</h2>
-          <p className='text-center'>Tìm kiếm nguồn nhu cầu không giới hạn, lấp đầy các không gian làm việc của bạn <br />
-            và cung cấp dịch vụ ở bất cứ đâu.</p>
+          <h2 className='text-center text-uppercase'>
+            {t('working_space_types')}
+          </h2>
+          <p className='text-center'>
+            <Trans i18nKey='working_space_types_description'>
+              Tìm kiếm nguồn nhu cầu không giới hạn, lấp đầy các không gian làm
+              việc của bạn <br /> và cung cấp dịch vụ ở bất cứ đâu.
+            </Trans>
+          </p>
           <div className='image-card-group-1'>
             <div className='image-card'>
               <img src={room2} className='image-scale' />
-              <h3>PHÒNG HỌP</h3>
-              <p>Phòng họp từ 2 khách đến 15 khách.</p>
+              <h3 className='text-uppercase'>{t('meeting_room')}</h3>
+              <p>{t('meeting_room_description_1')}</p>
             </div>
             <div className='image-card'>
               <img src={room1} className='image-scale' />
-              <h3>BOOTH CÁ NHÂN</h3>
-              <p>Booth riêng 1 chỗ.</p>
+              <h3 className='text-uppercase'>{t('private_booth')}</h3>
+              <p>{t('private_booth_description_1')}</p>
             </div>
           </div>
           <div className='image-card-group-2'>
             <div className='image-card'>
               <img src={room3} className='image-scale' />
-              <h3>BÀN LÀM VIỆC CÁ NHÂN</h3>
-              <p>Môi trường làm việc chuyên nghiệp.</p>
+              <h3 className='text-uppercase'>{t('private_desk')}</h3>
+              <p>{t('private_desk_description')}</p>
             </div>
             <div className='image-card'>
               <img src={room4} className='image-scale' />
-              <h3>PHÒNG SỰ KIỆN</h3>
-              <p>Phòng hội thảo sức chứa lên đến 45 khách.</p>
+              <h3 className='text-uppercase'>{t('event_room')}</h3>
+              <p>{t('event_room_description')}</p>
             </div>
             <div className='image-card'>
               <img src={room5} className='image-scale' />
-              <h3>PHÒNG LÀM VIỆC</h3>
-              <p>Giải pháp văn phòng tối ưu cho doanh nghiệp.</p>
+              <h3 className='text-uppercase'>{t('working_room')}</h3>
+              <p>{t('working_room_description')}</p>
             </div>
           </div>
         </div>
         <div className='mt-5'>
-          <h2 className='fw-bold text-center'>GIẢI PHÁP TỐI ƯU NƠI LÀM VIỆC DÀNH MỌI DOANH NGHIỆP</h2>
-          <p className='text-center'>Cung Cấp Đủ Chỗ Ngồi Với Lực Lượng Lao Động Doanh Nghiệp, Khách Đi Công Tác, Doanh Nhân Và Nhân Viên Di Động.</p>
+          <h2 className='fw-bold text-center text-uppercase'>
+            {t('space_provider_title_1')}
+          </h2>
+          <p className='text-center'>{t('space_provider_description_1')}</p>
           <img src={solution} className='w-100 my-3' />
         </div>
         <div className='align-center'>
-          <h2 className='fw-bold text-center'>QUAN HỆ ĐỐI TÁC CHIẾN LƯỢC </h2>
+          <h2 className='fw-bold text-center text-uppercase'>
+            {t('space_provider_title_2')}{' '}
+          </h2>
           <div className='row solution-group'>
             <div className='col-lg-3 solution-card border rounded p-4'>
               <div className='mb-3 border rounded-circle relationship-icon'>
                 <img src={money} className='image-icon' />
               </div>
-              <h4>GIÁ CẢ</h4>
-              <p className='text-solution'>Bạn kiểm soát việc định giá không gian của mình. WorkNow sẽ cung cấp cho bạn các đề xuất về cách tối ưu hóa doanh thu của bạn.</p>
+              <h4 className='text-uppercase'>{t('space_provider_pros_1')}</h4>
+              <p className='text-solution'>
+                {t('space_provider_pros_1_description')}
+              </p>
             </div>
             <div className='col-lg-3 solution-card border rounded p-4'>
               <div className='mb-3 border rounded-circle relationship-icon'>
                 <img src={clock} className='image-icon' />
               </div>
-              <h4>THỜI GIAN MỞ CỬA</h4>
-              <p className='text-solution'>Bạn kiểm soát giờ mở cửa, ngày nghỉ và thời gian đóng cửa tạm thời của không gian của mình.</p>
+              <h4 className='text-uppercase'>{t('space_provider_pros_2')}</h4>
+              <p className='text-solution'>
+                {t('space_provider_pros_2_description')}
+              </p>
             </div>
             <div className='col-lg-3 solution-card border rounded p-4'>
               <div className='mb-3 border rounded-circle relationship-icon'>
                 <img src={chart} className='image-icon' />
               </div>
-              <h4>DỮ LIỆU</h4>
-              <p className='text-solution'>Khả năng hiển thị dữ liệu theo thời gian thực. Truy cập thanh toán và tạo báo cáo qua Cổng đối tác WorkNow.</p>
+              <h4 className='text-uppercase'>{t('space_provider_pros_3')}</h4>
+              <p className='text-solution'>
+                {t('space_provider_pros_3_description')}
+              </p>
             </div>
           </div>
         </div>
-      </div >
+      </div>
       {/* <div className='data-layout'>
         <section className='section-about'>
           <div className='container-md'>
@@ -156,12 +179,14 @@ export default function SpacePartner() {
             <div className='row'>
               <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
                 <div>
-                  <h2 className='fw-bold'>
-                    BÁO CÁO DỮ LIỆU <br />
-                    THEO THỜI GIAN THỰC
+                  <h2 className='fw-bold text-uppercase'>
+                    <Trans i18nKey='space_provider_title_3'>
+                      BÁO CÁO DỮ LIỆU <br />
+                      THEO THỜI GIAN THỰC
+                    </Trans>
                   </h2>
                   <p className='description'>
-                    Nhận thông tin chi tiết về đăng ký và thanh toán của từng đặt chỗ, quản lý doanh thu và xác định các báo cáo của riêng bạn về việc sử dụng, doanh thu, theo địa điểm, không gian làm việc, theo phạm thời gian.
+                    {t('space_provider_description_3')}
                   </p>
                 </div>
               </div>
@@ -176,7 +201,7 @@ export default function SpacePartner() {
         </div>
       </div>
       <div className='sign-up-block'>
-        <h2 className='fw-bold'>LIÊN HỆ VỚI WORKNOW</h2>
+        <h2 className='fw-bold text-uppercase'>{t('contact_with_worknow')}</h2>
         <div className='sign-up-form'>
           <Tabs
             defaultActiveKey='1'
@@ -184,7 +209,7 @@ export default function SpacePartner() {
             type='card'
             items={[
               {
-                label: 'Trở thành Đối tác với chúng tôi',
+                label: t('become_partner_with_us'),
                 key: '1',
                 children: <SignUpForm free={true} />,
               },
@@ -192,6 +217,7 @@ export default function SpacePartner() {
           />
         </div>
       </div>
-    </div >
+    </div>
   );
 }
+export default withTranslation()(SpacePartner);

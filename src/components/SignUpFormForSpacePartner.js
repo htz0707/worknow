@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Form, Button, Input, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-import '../assets/styles/SignUpForm.scss'
+import '../assets/styles/SignUpForm.scss';
 
 export default function SignUpForm(props) {
   const { Option } = Select;
@@ -32,7 +32,8 @@ export default function SignUpForm(props) {
           ]}
         >
           <label className='fw-bold'>
-            Tên Công Ty<span className='required'>*</span>
+            {t('company_name')}
+            <span className='required'>*</span>
           </label>
           <Input />
         </Form.Item>
@@ -45,9 +46,7 @@ export default function SignUpForm(props) {
             },
           ]}
         >
-          <label className='fw-bold'>
-            Địa Chỉ Công Ty
-          </label>
+          <label className='fw-bold'>{t('company_address')}</label>
           <Input />
         </Form.Item>
         <div className='d-flex'>
@@ -62,7 +61,7 @@ export default function SignUpForm(props) {
             ]}
           >
             <label className='fw-bold'>
-              {t('business.section_signup.last-name')}
+              {t('last_name')}
               <span className='required'>*</span>
             </label>
             <Input />
@@ -77,7 +76,7 @@ export default function SignUpForm(props) {
             ]}
           >
             <label className='fw-bold'>
-              {t('business.section_signup.first-name')}
+              {t('first_name')}
               <span className='required'>*</span>
             </label>
             <Input />
@@ -85,7 +84,7 @@ export default function SignUpForm(props) {
         </div>
         <div className='row'>
           <label className='fw-bold'>
-            {t('business.section_signup.phone')} <span className='required'>*</span>
+            {t('phone_number')} <span className='required'>*</span>
           </label>
           <div className='col-2'>
             <Form.Item name='phone-code'>
@@ -119,7 +118,7 @@ export default function SignUpForm(props) {
           ]}
         >
           <label className='fw-bold'>
-            {t('business.section_signup.email')}
+            {t('email')}
             <span className='required'>*</span>
           </label>
           <Input />
@@ -133,9 +132,7 @@ export default function SignUpForm(props) {
             },
           ]}
         >
-          <label className='fw-bold'>
-            Chức Danh
-          </label>
+          <label className='fw-bold'>{t('job_title')}</label>
           <Input />
         </Form.Item>
         <Form.Item
@@ -147,9 +144,7 @@ export default function SignUpForm(props) {
             },
           ]}
         >
-          <label className='fw-bold'>
-            Tin Nhắn
-          </label>
+          <label className='fw-bold'>{t('message')}</label>
           <Input />
         </Form.Item>
         {/* {props.free ? (
@@ -197,12 +192,8 @@ export default function SignUpForm(props) {
         )} */}
 
         <Form.Item>
-          <Button
-            type='primary'
-            htmlType='submit'
-            className='sign-up-btn'
-          >
-            {t('business.section_signup.submit')}
+          <Button type='primary' htmlType='submit' className='sign-up-btn'>
+            {t('submit')}
           </Button>
         </Form.Item>
       </Form>
