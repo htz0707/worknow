@@ -7,7 +7,7 @@ import Img2 from '../assets/images/location_img2.jpg';
 import { Slide } from 'react-slideshow-image';
 import { AiOutlineClose } from 'react-icons/ai';
 export default function SlideshowImage(props) {
-  const { show, handleClose } = props;
+  const { show, handleClose, images } = props;
   const zoomOutProperties = {
     duration: 5000,
     transitionDuration: 500,
@@ -17,14 +17,7 @@ export default function SlideshowImage(props) {
     scale: 0.4,
     arrows: true,
   };
-  const images = [
-    Img1,
-    Img2,
-    Img1,
-    Img2,
-    Img1,
-    'https://www.cgv.vn/media/catalog/product/cache/3/image/c5f0a1eff4c394a251036189ccddaacd/r/s/rsz_conan_movie_2022-_vnese_poster_1_.jpg',
-  ];
+
   return (
     <>
       {show && (
@@ -44,7 +37,7 @@ export default function SlideshowImage(props) {
                 </div>
               )}
             >
-              {images.map((slide, index) => {
+              {images?.map((slide, index) => {
                 return (
                   <div className='each-slide-effect' key={index}>
                     <div>

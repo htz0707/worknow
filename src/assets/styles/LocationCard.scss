@@ -1,107 +1,261 @@
+@import '_setting.scss';
+
 .location-card {
   display: flex;
   width: 100%;
   margin-bottom: 20px;
-  .left {
-    width: 200px;
-    height: 168px;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  .location-card_left {
+    width: 250px;
+    height: 200px;
     position: relative;
     background: rgb(252, 249, 245);
-    border-radius: 4px;
+    border-radius: 20px;
     margin-right: 15px;
+
     .carousel {
       width: 100%;
       height: 100%;
+
       .carousel-inner {
         width: 100%;
         height: 100%;
+
         .carousel-item {
           width: 100%;
           height: 100%;
+
           img {
             width: 100%;
             height: 100%;
             object-position: center center;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 20px;
             user-select: none;
           }
         }
       }
     }
   }
-  .right {
+
+  .location-card_right {
     flex: 1;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
     > div:nth-child(1) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       .location-name {
+        cursor: pointer;
         font-size: 20px;
         line-height: 23px;
         font-weight: 700;
-        cursor: pointer;
+        text-transform: uppercase;
+        color: #282723;
+        margin-bottom: 5px;
       }
-    }
-    > div:nth-child(2) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: rgb(89, 89, 89);
-    }
-    > div:nth-child(4) {
-      width: 100%;
-      display: flex;
-      overflow: hidden;
-      .location-feature {
+
+      .location-review {
+        display: flex;
+        align-items: flex-end;
         font-weight: 400;
         font-size: 14px;
-        display: inline-block;
-        width: fit-content;
-        padding-right: 4px;
-        margin: 0px 4px 4px 0px;
-        vertical-align: middle;
-        line-height: 24px;
-        height: 24px;
-        padding-left: 4px;
-        border-radius: 2px;
-        color: rgb(244, 110, 74);
-        background-color: rgb(252, 249, 245);
-        white-space: nowrap;
+        color: #595959;
+        margin-bottom: 16px;
+
+        .icon {
+          width: 20px;
+          height: 20px;
+        }
+
+        span {
+          margin-left: 10px;
+        }
+      }
+
+      .location-address {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+
+        .text-address {
+          font-weight: 600;
+        }
+
+        .icon-badge {
+          margin-right: 5px;
+          width: 30px;
+          min-width: 30px;
+          min-height: 30px;
+          background: #e4f8ff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .icon {
+            height: 20px;
+            width: 20px;
+          }
+        }
+      }
+
+      .location-type {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+
+        .icon-badge {
+          margin-right: 5px;
+          width: 30px;
+          min-width: 30px;
+          min-height: 30px;
+          background: #fff5e5;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .icon {
+            height: 20px;
+            width: 20px;
+
+            path {
+              fill: #ff5c00;
+            }
+          }
+        }
+      }
+
+      .location-authen {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+
+        .icon-badge {
+          margin-right: 5px;
+          width: 30px;
+          min-width: 30px;
+          min-height: 30px;
+          background: #cdffe1;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .icon {
+            height: 20px;
+            width: 20px;
+
+            path {
+              fill: #00c95c;
+            }
+          }
+        }
+      }
+
+      .location-service {
+        display: flex;
+        flex-wrap: wrap;
       }
     }
-    > div:nth-child(5) {
-      margin-top: auto;
-      .location-price {
-        > span {
-          color: rgb(245, 85, 35);
-          font-size: 24px;
-          line-height: 28px;
-          font-weight: bold;
+
+    > div:nth-child(2) {
+      min-width: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .price-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: auto;
+        .old-price {
+          font-size: 20px;
+          font-weight: 400;
+          color: #5e5b50;
+          text-decoration: line-through;
+          text-decoration-color: #ff4f4f;
+        }
+
+        .new-price {
+          > span {
+            color: #282723;
+            font-weight: 600;
+            font-size: 14px;
+          }
+          font-size: 22px;
+          font-weight: 700;
+          color: #282723;
+          margin-bottom: 8px;
+        }
+
+        button {
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 16px;
+          text-align: center;
+          letter-spacing: 0.01em;
+          user-select: none;
+          background: #ffb31f;
+          border-radius: 50px;
+          color: black;
+          padding: 8px 20px;
+          border: none;
         }
       }
     }
   }
 }
-@media (max-width: 768px) {
-  .location-card {
-    .left {
-      width: 102px !important;
-      height: 102px;
-      overflow: hidden;
-    }
-  }
-}
-@media (max-width: 525px) {
+
+@media (max-width: 1024px) {
   .location-card {
     flex-direction: column;
-    .left {
+    position: relative;
+    padding: 10px;
+
+    .location-card_left {
       width: 100% !important;
-      height: 150px;
+      height: 210px;
       overflow: hidden;
       margin-bottom: 20px;
+    }
+
+    .location-card_right {
+      flex-direction: column;
+
+      > div:nth-child(1) {
+        max-width: 100%;
+      }
+
+      > div:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .price-section {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+
+          button {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 16px;
+            text-align: center;
+            letter-spacing: 0.01em;
+            user-select: none;
+            background: #ffb31f;
+            border-radius: 50px;
+            color: black;
+            padding: 8px 20px;
+            border: none;
+          }
+        }
+      }
     }
   }
 }

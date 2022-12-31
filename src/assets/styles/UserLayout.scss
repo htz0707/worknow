@@ -1,0 +1,121 @@
+.user-layout {
+  margin-top: 80px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  .user-layout_header {
+    margin-bottom: 20px;
+    .bcrumb {
+      a {
+        &.active {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  .user-layout_body {
+    display: flex;
+    gap: 20px;
+    .control-pannel {
+      flex: 1;
+      max-width: 450px;
+      min-width: 350px;
+      background: #ffffff;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+      border-radius: 16px;
+      .info-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        .avatar-block {
+          position: relative;
+          cursor: pointer;
+          .avatar-image {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+          }
+          .camera {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 1;
+          }
+          &:hover {
+            .avatar-image {
+              filter: blur(2px);
+            }
+            .camera {
+              display: initial !important;
+            }
+          }
+        }
+        .info-block {
+          .fullname {
+            font-size: 20px;
+            font-weight: 600;
+          }
+          .email {
+            font-weight: 400;
+            color: #666968;
+          }
+        }
+      }
+      .control-section {
+        margin-bottom: 10px;
+        padding: 15px 0;
+        border-top: 1px solid rgba(153, 155, 155, 0.3);
+        border-bottom: 1px solid rgba(153, 155, 155, 0.3);
+        .tab {
+          display: flex;
+          align-items: center;
+          gap: 10;
+          background: #e4e4e4;
+          cursor: pointer;
+          margin-bottom: 10px;
+          &:last-child {
+            margin-bottom: 0px;
+          }
+          &:hover {
+            background: #ffb31f;
+          }
+          &.active {
+            background: #ffb31f;
+          }
+          .tab-icon-1 {
+            margin-top: 7px;
+            height: 40px;
+          }
+          .tab-icon-2 {
+            margin-top: 5px;
+            height: 40px;
+          }
+        }
+      }
+      .footer-section {
+        .item {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 10px;
+          width: fit-content;
+          &.logout {
+            color: #ff4f4f;
+          }
+        }
+      }
+    }
+    .children {
+      flex: 1;
+    }
+    @media (max-width: 992px) {
+      flex-direction: column;
+      .control-pannel {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}

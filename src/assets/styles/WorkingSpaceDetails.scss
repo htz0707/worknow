@@ -1,0 +1,195 @@
+.working-space-details {
+  margin-top: 80px;
+  .working-space-details_header {
+    padding: 15px 0px;
+  }
+  .working-space-details_body {
+    padding-bottom: 50px;
+    .working-space-name {
+      font-weight: 500;
+      font-size: 32px;
+      text-transform: uppercase;
+      color: #282723;
+      margin-bottom: 5px;
+    }
+    .working-space-address {
+      margin-bottom: 10px;
+      .icon {
+        path {
+          fill: #5e5b50;
+        }
+        margin-right: 5px;
+      }
+      .text {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+    .working-space-image {
+      margin-bottom: 20px;
+      .swiper {
+        height: 300px;
+        .swiper-wrapper {
+          .swiper-slide {
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+    .working-space-info {
+      margin-bottom: 20px;
+      .title {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 37px;
+        text-transform: capitalize;
+        color: #282723;
+        margin-bottom: 10px;
+      }
+      .content {
+        color: #282723;
+        border: 1px solid #ffb31f;
+        border-radius: 36px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .content-info {
+          > div:nth-child(1) {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 27px;
+            margin-bottom: 8px;
+          }
+          > div:nth-child(2) {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 22px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            .icon {
+              width: 18px;
+              height: 18px;
+              margin-right: 5px;
+              path {
+                fill: #5e5b50;
+              }
+            }
+          }
+          > div:nth-child(3) {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 22px;
+            display: flex;
+            align-items: center;
+            .icon {
+              width: 18px;
+              height: 18px;
+              margin-right: 5px;
+              path {
+                fill: #5e5b50;
+              }
+            }
+          }
+        }
+        .content-booking {
+          min-width: 150px;
+          .price {
+            text-align: right;
+            font-size: 25px;
+            font-weight: 700;
+            color: #ff4f4f;
+            margin-bottom: 15px;
+          }
+          .btn-booking {
+            width: 100%;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            letter-spacing: 0.01em;
+            user-select: none;
+            background: #ffb31f;
+            border-radius: 50px;
+            color: black;
+            padding: 8px 20px;
+            border: none;
+          }
+        }
+      }
+    }
+    .working-space-condition {
+      margin-bottom: 20px;
+      .title {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 37px;
+        text-transform: capitalize;
+        color: #282723;
+        margin-bottom: 10px;
+      }
+      .listing {
+        padding-left: 20px;
+        font-weight: 400;
+        font-size: 16px;
+        text-align: justify;
+        color: #282723;
+        > li {
+          margin-bottom: 5px;
+        }
+      }
+    }
+    .working-space-amenity {
+      margin-bottom: 20px;
+      .title {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 37px;
+        text-transform: capitalize;
+        color: #282723;
+        margin-bottom: 10px;
+      }
+      .listing {
+        font-weight: 400;
+        font-size: 16px;
+        text-align: justify;
+        color: #282723;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+        overflow-x: auto;
+        .item {
+          margin-right: 20px;
+          white-space: nowrap;
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 576px) {
+  .working-space-details {
+    .working-space-details_body {
+      .working-space-info {
+        .content {
+          flex-direction: column;
+          .content-info {
+            width: 100%;
+          }
+          .content-booking {
+            width: 100%;
+            .price {
+              text-align: left;
+              margin-bottom: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

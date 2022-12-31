@@ -1,0 +1,793 @@
+@import '_setting.scss';
+
+.create-booking {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  a {
+    text-decoration: none;
+    color: #0075ff;
+    font-weight: 600;
+  }
+
+  .create-booking_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+      margin-bottom: 10px;
+    }
+
+    > div:nth-child(2) {
+      width: 100%;
+    }
+
+    .logo {
+      width: 100px;
+      cursor: pointer;
+    }
+
+    .booking-step {
+      min-width: 500px;
+
+      .ant-steps-item-content {
+        margin-top: 0px;
+
+        .ant-steps-item-title {
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .booking-step {
+        min-width: 300px;
+
+        .ant-steps-item-title {
+          font-size: 10px !important;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  > .create-booking_body {
+    margin-top: 20px;
+
+    .info-customer {
+      > div {
+        background: #ffffff;
+        box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+      }
+
+      > .box-1 {
+        display: flex;
+        align-items: center;
+      }
+
+      > .box-2 {
+        .title {
+          font-weight: 600;
+          font-size: 25px;
+          margin-bottom: 10px;
+        }
+
+        .content {
+          font-weight: 700;
+          font-size: 20px;
+          color: #ffb31f;
+          text-transform: uppercase;
+        }
+      }
+
+      > .box-3 {
+        > .header {
+          font-weight: 600;
+          font-size: 25px;
+          margin-bottom: 20px;
+        }
+
+        label {
+          font-weight: 600;
+          color: #282723;
+
+          > span {
+            color: #ff4f4f;
+          }
+        }
+
+        input,
+        textarea {
+          background: #ffffff;
+          border: 1.00058px solid #a7a49a;
+          box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+          border-radius: 12.007px;
+        }
+        .phone-input-engine {
+          .react-tel-input {
+            .form-control {
+              width: 100%;
+            }
+            .flag-dropdown {
+              border-bottom-left-radius: 12.007px;
+              border-top-left-radius: 12.007px;
+
+              &.open {
+                border-bottom-left-radius: 12.007px;
+                border-top-left-radius: 12.007px;
+
+                .selected-flag {
+                  border-bottom-left-radius: 12.007px;
+                  border-top-left-radius: 12.007px;
+                }
+              }
+              .selected-flag {
+                &:hover {
+                  border-bottom-left-radius: 12.007px;
+                  border-top-left-radius: 12.007px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .info-workspace {
+      > div {
+        background: #ffffff;
+        box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
+        margin-bottom: 20px;
+      }
+
+      > .box-1 {
+        overflow: hidden;
+
+        > img {
+          width: 100%;
+          max-height: 200px;
+        }
+
+        > div {
+          padding: 20px;
+
+          > div:nth-child(1) {
+            font-size: 20px;
+            line-height: 23px;
+            font-weight: 700;
+            text-transform: uppercase;
+          }
+
+          > div:nth-child(2) {
+            font-size: 14px;
+          }
+
+          > div:nth-child(3) {
+            font-weight: 600;
+          }
+
+          ul {
+            list-style: none;
+            padding: 0;
+          }
+        }
+      }
+
+      > .box-2 {
+        padding: 10px 20px;
+
+        .title {
+          font-weight: 600;
+          font-size: 25px;
+          margin-bottom: 20px;
+        }
+
+        .selected-workspace {
+          display: flex;
+          flex-shrink: 0;
+
+          > span {
+            font-weight: 600;
+            color: #ff7a19;
+            margin-right: 10px;
+          }
+
+          > img {
+            width: 100px;
+            max-height: 80px;
+            margin-right: 10px;
+          }
+        }
+      }
+
+      > .box-3 {
+        padding: 10px 20px;
+
+        .title {
+          font-weight: 600;
+          font-size: 25px;
+          margin-bottom: 20px;
+        }
+
+        .price-detail {
+          padding-bottom: 10px;
+          border-bottom: 1px solid #b0b0b0;
+          margin-bottom: 10px;
+
+          > div {
+            display: flex;
+            justify-content: space-between;
+
+            > span:nth-child(1) {
+              font-weight: 600;
+            }
+          }
+        }
+
+        .price-total {
+          display: flex;
+          justify-content: space-between;
+          font-weight: 700;
+          font-size: 25px;
+          text-transform: uppercase;
+        }
+
+        .policy {
+          margin-top: 10px;
+          font-size: 14px;
+        }
+      }
+
+      > .payment-button {
+        width: 100%;
+        padding: 10px;
+        background: #ffb31f;
+        border-radius: 100px;
+        border: none;
+        font-weight: 700;
+        font-size: 20px;
+      }
+    }
+
+    .info-payment {
+      > .box-1 {
+        background: #ffffff;
+        box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      > .box-2 {
+        margin-bottom: 20px;
+
+        .left {
+          background: #ffffff;
+          box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+          border-radius: 20px;
+          padding: 10px 20px;
+
+          .title {
+            font-weight: 600;
+            font-size: 25px;
+            margin-bottom: 10px;
+          }
+
+          .content {
+            font-weight: 700;
+            font-size: 20px;
+            color: #ffb31f;
+            text-transform: uppercase;
+          }
+        }
+
+        .right {
+          background: #ffe1e1;
+          box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+          border-radius: 20px;
+          padding: 10px 20px;
+
+          .title {
+            font-weight: 600;
+            font-size: 25px;
+            margin-bottom: 10px;
+          }
+          .content {
+            font-weight: 700;
+            font-size: 20px;
+            color: #ff4f4f;
+            .btn-extend-time {
+              font-weight: 400;
+              font-size: 13px;
+              line-height: 18px;
+              display: flex;
+              align-items: center;
+              color: #0075ff;
+              margin-left: 5px;
+              border: none;
+              background: transparent;
+              &:disabled {
+                opacity: 50%;
+              }
+            }
+          }
+        }
+      }
+
+      > .box-3 {
+        background: #ffffff;
+        box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+
+        .title {
+          font-weight: 600;
+          font-size: 25px;
+          margin-bottom: 10px;
+        }
+        .payment-method-title {
+          font-weight: 700;
+          margin-bottom: 15px;
+          display: block;
+          input {
+            height: 20px;
+            width: 20px;
+            margin-right: 10px;
+            vertical-align: middle;
+          }
+          span {
+            vertical-align: middle;
+          }
+        }
+        .content {
+          .confirm-text {
+            font-style: italic;
+            font-weight: 400;
+            color: #5e5b50;
+            font-size: 14px;
+            margin-bottom: 10px;
+          }
+
+          .according-bank {
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            .accordion {
+              .accordion-item {
+                border-radius: 10px;
+                border: none;
+
+                .accordion-button {
+                  background-color: white;
+                  border-radius: 10px;
+                  border: 1px solid #a7a49a;
+                  box-shadow: none;
+                  padding: 10px 20px;
+                }
+
+                .accordion-collapse {
+                  background: #f3f3f3;
+                  border-radius: 10px;
+                  margin-top: 10px;
+                  padding: 0;
+
+                  .accordion-body {
+                    padding: 0;
+                  }
+                }
+              }
+            }
+
+            .according-bank_header {
+              color: #282723;
+            }
+
+            .according-bank_body {
+              padding: 10px 20px;
+
+              .bank-name {
+                font-weight: 600;
+                font-size: 20px;
+                padding-bottom: 10px;
+                border-bottom: 0.5px solid #a7a49a;
+                margin-bottom: 10px;
+              }
+
+              .bank-details {
+                padding-bottom: 10px;
+                border-bottom: 0.5px solid #a7a49a;
+                margin-bottom: 10px;
+
+                > div {
+                  display: flex;
+                  justify-content: space-between;
+
+                  > span:nth-child(1) {
+                    font-weight: 600;
+                  }
+                }
+              }
+
+              .bank-amount {
+                display: flex;
+                justify-content: space-between;
+
+                > span:nth-child(1) {
+                  font-weight: 600;
+                }
+
+                > span:nth-child(2) {
+                  color: #ff4f4f;
+                }
+              }
+            }
+          }
+
+          .upload-bill {
+            color: #0075ff;
+            font-weight: 600;
+            text-decoration-line: underline;
+            cursor: pointer;
+            margin-bottom: 20px;
+          }
+
+          .according-ewallet {
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            .accordion {
+              .accordion-item {
+                border-radius: 10px;
+                border: none;
+
+                .accordion-button {
+                  background-color: white;
+                  border-radius: 10px;
+                  border: 1px solid #a7a49a;
+                  box-shadow: none;
+                  padding: 10px 20px;
+                }
+
+                .accordion-collapse {
+                  background: #f3f3f3;
+                  border-radius: 10px;
+                  margin-top: 10px;
+                  padding: 0;
+
+                  .accordion-body {
+                    padding: 0;
+                  }
+                }
+              }
+            }
+
+            .according-ewallet_header {
+              color: #282723;
+            }
+
+            .according-ewallet_body {
+              padding: 10px 20px;
+
+              .select-ewallet {
+                display: flex;
+                padding-bottom: 10px;
+                border-bottom: 0.5px solid #a7a49a;
+                margin-bottom: 10px;
+
+                .ewallet {
+                  cursor: pointer;
+                  display: flex;
+                  align-items: center;
+                  border: 1px solid #ffb31f;
+                  font-weight: 600;
+                  border-radius: 100px;
+                  color: #ffb31f;
+                  min-width: 55px;
+                  width: fit-content;
+                  padding: 5px 15px;
+                  margin-right: 10px;
+
+                  .logo-container {
+                    width: 28px;
+                    height: 28px;
+                    background: #ffffff;
+                    border-radius: 100px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                    margin-right: 8px;
+
+                    img {
+                      width: 24px;
+                      height: 24px;
+                    }
+                  }
+                }
+
+                .ewallet.active {
+                  color: #282723;
+                  background: #ffb31f;
+                }
+              }
+
+              .ewallet-details {
+                padding-bottom: 10px;
+                border-bottom: 0.5px solid #a7a49a;
+                margin-bottom: 10px;
+
+                > div {
+                  display: flex;
+                  justify-content: space-between;
+
+                  > span:nth-child(1) {
+                    font-weight: 600;
+                  }
+                }
+              }
+
+              .amount {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+
+                > span:nth-child(1) {
+                  font-weight: 600;
+                }
+
+                > span:nth-child(2) {
+                  color: #ff4f4f;
+                }
+              }
+
+              .qrcode {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                > div:nth-child(1) {
+                  color: #a7a49a;
+                }
+
+                > div:nth-child(2) {
+                  font-weight: 600;
+                  margin-bottom: 10px;
+                }
+
+                > div:nth-child(3) {
+                  width: 250px;
+                  height: 250px;
+                  padding: 15px;
+                  background-color: #ffffff;
+                  border-radius: 10px;
+
+                  img {
+                    width: 100%;
+                    height: 100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .info-booking {
+      > div:nth-child(1) {
+        background: #ffffff;
+        box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
+        padding: 20px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .title {
+          font-weight: 600;
+          font-size: 25px;
+          margin-bottom: 10px;
+        }
+
+        .status-booking {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+
+          > div:nth-child(1) {
+            width: 150px;
+            margin-right: 20px;
+            text-align: center;
+            font-weight: 600;
+          }
+
+          > div:nth-child(2) {
+            width: 160px;
+            display: flex;
+            justify-content: center;
+          }
+
+          .status {
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-align: center;
+          }
+
+          .status.confirming {
+            background: #ffefe3;
+            color: #ff7a19;
+          }
+          .status.confirmed {
+            background: #eafaff;
+            color: #0075ff;
+          }
+          .status.booking_successfull {
+            background: #edffde;
+            color: #6dba31;
+          }
+          .status.payment_fail {
+            background: #ffe8e8;
+            color: #ff4f4f;
+          }
+          .status.canceled {
+            background: #f3f3f3;
+            color: #5e5b50;
+          }
+        }
+
+        .code-booking {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+
+          > div:nth-child(1) {
+            width: 150px;
+            margin-right: 20px;
+            text-align: center;
+            font-weight: 600;
+          }
+
+          > div:nth-child(2) {
+            width: 160px;
+            text-align: center;
+          }
+        }
+        .btn-refresh {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 22px;
+          color: #0075ff;
+          margin-bottom: 20px;
+          cursor: pointer;
+        }
+        .confirm-booking {
+          width: 100%;
+          background: #fff1f1;
+          border-radius: 4px;
+          padding: 10px 10px;
+          margin-bottom: 20px;
+
+          p {
+            text-align: center;
+          }
+
+          div {
+            color: #ff4f4f;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+          }
+        }
+
+        .location-info {
+          width: 100%;
+          margin-bottom: 20px;
+
+          .location-name {
+            font-size: 20px;
+            line-height: 23px;
+            font-weight: 700;
+            text-transform: uppercase;
+          }
+
+          .workspace-item {
+            display: flex;
+            flex-shrink: 0;
+            margin-top: 10px;
+
+            img {
+              width: 180px;
+              max-height: 120px;
+              border-radius: 10px;
+              margin-right: 10px;
+            }
+          }
+        }
+
+        .summary {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .title {
+            font-weight: 600;
+            font-size: 25px;
+            margin-bottom: 20px;
+          }
+
+          .price-detail {
+            width: 100%;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #b0b0b0;
+            margin-bottom: 10px;
+
+            > div {
+              display: flex;
+              justify-content: space-between;
+
+              > span:nth-child(1) {
+                font-weight: 600;
+              }
+            }
+          }
+
+          .price-total {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 25px;
+            text-transform: uppercase;
+          }
+        }
+      }
+
+      > div:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title {
+          font-weight: 700;
+          font-size: 25px;
+          margin-bottom: 10px;
+        }
+
+        .phone-button {
+          padding: 8px 12px;
+          background: #ffb31f;
+          border-radius: 100px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          color: #282723;
+        }
+      }
+    }
+  }
+
+  .ant-steps-item-finish
+    > .ant-steps-item-container
+    > .ant-steps-item-tail::after {
+    background-color: #ffb31f;
+  }
+
+  .ant-steps-item-finish .ant-steps-icon-dot,
+  .ant-steps-item-active .ant-steps-icon-dot {
+    background-color: #ffb31f !important;
+  }
+}

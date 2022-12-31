@@ -1,0 +1,78 @@
+# List of ENVVAR
+# - SSH_PRIVATE_KEY: The pem key that aws/google cloud provided when create instance
+# - PROJECT_DIR: which directory this project is located on the server
+# - SSH_HOST: <name>@<host>
+
+variables:
+  SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+  PROJECT_DIR: $PROJECT_DIR
+  SSH_HOST: $SSH_HOST
+
+stages:
+  - deploy
+  # - test
+
+deploy-dev:
+  image: ubuntu:18.04
+  stage: deploy
+  when: manual
+  only:
+    - dev
+  before_script:
+    - echo "$SSH_PRIVATE_KEY" and "$SSH_HOST"
+    - test -n "$SSH_PRIVATE_KEY" || ( echo "missing variable SSH_PRIVATE_KEY" && exit 1)
+    - test -n "$SSH_HOST" || ( echo "missing variable SSH_HOST" && exit 1)
+    - test -n "$PROJECT_DIR" || ( echo "missing variable PROJECT_DIR" && exit 1)
+    - apt-get update -qq && apt-get install -qq curl
+    - which ssh-agent || apt-get install -qq openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - touch ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+    - ssh $SSH_HOST "cd $PROJECT_DIR; git stash save --keep-index --include-untracked; git pull; sudo npm i; docker ps -aq | xargs docker stop; sudo npm run build; docker ps -aq | xargs docker start"
+  environment:
+    name: $DEV_ENV
+    url: $DEV_URL
+
+# run_test:
+#   image: python:3.7.13-slim
+#   stage: test
+#   only:
+#     - dev
+#   script:
+#     - apt-get update && apt-get install -y apt-utils git vim make netcat wget gcc g++
+#     - pip install --upgrade pip
+#     - touch .env
+#     - cat .env.template > .env
+#     - pip install -r requirement.txt
+#     - echo "to be update"
+
+release:
+  image: ubuntu:18.04
+  stage: deploy
+  when: manual
+  only:
+    - main
+  before_script:
+    - echo "$PROD_SSH_PRIVATE_KEY" and "$PROD_SSH_HOST"
+    - test -n "$PROD_SSH_PRIVATE_KEY" || ( echo "missing variable PROD_SSH_PRIVATE_KEY" && exit 1)
+    - test -n "$PROD_SSH_HOST" || ( echo "missing variable PROD_SSH_HOST" && exit 1)
+    - test -n "$PROD_PROJECT_DIR" || ( echo "missing variable PROD_PROJECT_DIR" && exit 1)
+    - apt-get update -qq && apt-get install -qq curl
+    - which ssh-agent || apt-get install -qq openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$PROD_SSH_PRIVATE_KEY" | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - touch ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+    - ssh $SSH_HOST "cd $PROJECT_DIR; git stash save --keep-index --include-untracked; git pull; sudo npm i; docker ps -aq | xargs docker stop; sudo npm run build; docker ps -aq | xargs docker start"
+  environment:
+    name: $PROD_ENV
+    url: $PROD_URL

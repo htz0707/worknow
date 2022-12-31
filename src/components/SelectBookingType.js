@@ -5,24 +5,20 @@ export default function SelectBookingType() {
   return (
     <div className='select-booking-type'>
       <div className='item active'>
-        <img src={Desk} className='image' />
-        <span className='title'>Desk</span>
+        <img alt='' src={Desk} className='image' />
+        <span className='title'>Bàn làm việc cá nhân</span>
       </div>
       <div className='item'>
-        <img src={Desk} className='image' />
-        <span className='title'>Booth</span>
+        <img alt='' src={Desk} className='image' />
+        <span className='title'>Phòng họp</span>
       </div>
       <div className='item'>
-        <img src={Desk} className='image' />
-        <span className='title'>Private Office</span>
+        <img alt='' src={Desk} className='image' />
+        <span className='title'>Văn phòng riêng</span>
       </div>
       <div className='item'>
-        <img src={Desk} className='image' />
-        <span className='title'>Meeting Room</span>
-      </div>
-      <div className='item'>
-        <img src={Desk} className='image' />
-        <span className='title'>Event & Lifestyle</span>
+        <img alt='' src={Desk} className='image' />
+        <span className='title'>Sự kiện</span>
       </div>
     </div>
   );

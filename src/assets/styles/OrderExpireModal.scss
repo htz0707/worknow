@@ -1,0 +1,59 @@
+.order-expire-modal {
+  .modal-content {
+    border-radius: 15px;
+  }
+  .order-expire-modal_body {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .icon-container {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(228.37deg, #e23d3d 48.99%, #b92e2e 94.4%);
+      box-shadow: -2px 6px 6px rgba(255, 0, 0, 0.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+    .title {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 27px;
+      text-transform: capitalize;
+      color: #ff4040;
+      margin-bottom: 16px;
+    }
+    .description {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+      text-align: center;
+      color: #5e5e65;
+      margin-bottom: 36px;
+      > span {
+        font-weight: 600;
+      }
+    }
+    .btn-home {
+      padding: 10px;
+      width: 160px;
+      height: 41px;
+      background: #ffb31f;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 22px;
+      color: #282723;
+      text-transform: capitalize;
+      border: none;
+    }
+  }
+}

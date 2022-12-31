@@ -1,0 +1,40 @@
+@import '_setting.scss';
+.sort-location {
+  .sort-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+  }
+  .dropdown {
+    button {
+      background: #ffffff;
+      box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+      border: none;
+      border-radius: 30px;
+      outline: none;
+      min-width: 160px;
+      text-align: left;
+      padding-right: 30px;
+      &:focus {
+        box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+  .dropdown-toggle::after {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+  .dropdown-menu {
+    min-width: 250px;
+    .dropdown-item {
+      margin-bottom: 8px;
+      padding: 12px 16px;
+    }
+    .dropdown-item.active {
+      background-color: rgb(255, 242, 236);
+      color: $primary;
+    }
+  }
+}

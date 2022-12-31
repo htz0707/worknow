@@ -1,0 +1,30 @@
+.date-picker-custom {
+  .ant-picker {
+    width: 100%;
+    height: 45px;
+    border-radius: 5px;
+    &:hover {
+      border-color: rgba(0, 0, 0, 0.125) !important;
+    }
+  }
+  .ant-picker-focused {
+    border-color: #819fbd;
+    box-shadow: 0 0 0 0.25rem #033f7a40;
+  }
+  .ant-picker-active-bar {
+    background-color: #819fbd;
+  }
+}
+.ant-picker-dropdown {
+  z-index: 1075 !important;
+}
+.form-check-input {
+  cursor: pointer;
+}
+.form-check-input:checked {
+  background-color: #ffb31f !important;
+  border-color: #ffb31f !important;
+}
+.ant-message {
+  z-index: 9999 !important;
+}
