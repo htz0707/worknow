@@ -12,8 +12,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as ThreeUserIcon } from '../assets/icons/three_user.svg';
 import { ReactComponent as ClockIcon } from '../assets/icons/clock.svg';
+import { useTranslation } from 'react-i18next';
 
 export default function WorkSpaceCard(props) {
+  const { t } = useTranslation();
   const { data } = props;
   const handleClick = () => {
     props.handleClick();
@@ -46,7 +48,8 @@ export default function WorkSpaceCard(props) {
           <div>{data.description}</div>
         </div>
         <div className='capacity'>
-          <ThreeUserIcon className='icon' /> {data?.capacity?.name} Người
+          <ThreeUserIcon className='icon' /> {data?.capacity?.name}{' '}
+          {t('person')}
         </div>
         <div className='working-time'>
           <ClockIcon className='icon' /> {props.workingTime}
@@ -71,7 +74,7 @@ export default function WorkSpaceCard(props) {
             {formatCurrency(data?.priceByDay)}/{renderHourOrDay(data?.type)}
           </div>
         )}
-        <button onClick={handleClick}>Đặt ngay</button>
+        <button onClick={handleClick}>{t('book_now')}</button>
       </div>
     </div>
   );

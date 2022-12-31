@@ -12,8 +12,10 @@ import { Skeleton } from 'antd';
 import NoData from '../components/NoData';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { returnUrlParams } from '../helpers/helpers';
+import { Trans, useTranslation, withTranslation } from 'react-i18next';
 
-export default function Locations() {
+function Locations() {
+  const { t } = useTranslation();
   const path = useLocation();
   const navigate = useNavigate();
   const [urlParams] = useSearchParams();
@@ -164,7 +166,7 @@ export default function Locations() {
                 <SearchIcon />
                 <input
                   type='text'
-                  placeholder='Tìm kiếm địa điểm'
+                  placeholder={t('search_for_locations')}
                   onChange={(e) => handleTypeSearch(e.target.value)}
                 />
               </div>
@@ -197,7 +199,7 @@ export default function Locations() {
                 })
               }
             >
-              Xem trên bản đồ
+              {t('view_on_map')}
             </div>
           </div>
           {/* <div className='search-on-map'>
@@ -223,10 +225,10 @@ export default function Locations() {
         <div className='locations_body_right'>
           <div className='header'>
             <div>
-              <span className='fw-bold'>
-                {locationsAmount} văn phòng làm việc
-              </span>{' '}
-              tại TP. Hồ Chí Minh
+              <Trans i18nKey='locations_amount_at_hcm' count={locationsAmount}>
+                <strong>{{ locationsAmount }} văn phòng làm việc</strong> tại
+                TP.Hồ Chí Minh
+              </Trans>
             </div>
             <div className='sort-location'>
               <SortLocation sort={sortLocation} setSort={setSortLocation} />
@@ -295,3 +297,4 @@ export default function Locations() {
     </div>
   );
 }
+export default withTranslation()(Locations);
