@@ -20,6 +20,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 import { returnUrlParams } from '../helpers/helpers';
+import { useTranslation } from 'react-i18next';
 
 export default function FilterSortLocationMobile(props) {
   const {
@@ -31,6 +32,7 @@ export default function FilterSortLocationMobile(props) {
     allowFilter,
     allowSort,
   } = props;
+  const { t } = useTranslation();
   const [urlParams] = useSearchParams();
   let currentParams = returnUrlParams(urlParams.entries());
   const path = useLocation();
@@ -89,31 +91,31 @@ export default function FilterSortLocationMobile(props) {
   const [roomType, setRoomType] = useState([
     {
       id: 'flexible_desk',
-      name: 'Bàn làm việc linh hoạt',
+      name: t('flexible_desk'),
     },
     {
       id: 'fixed_desk',
-      name: 'Bàn làm việc cố định',
+      name: t('fixed_desk'),
     },
     {
       id: 'private_room',
-      name: 'Phòng làm việc riêng',
+      name: t('private_room'),
     },
     {
       id: 'meeting_room',
-      name: 'Phòng họp',
+      name: t('meeting_room'),
     },
     {
       id: 'convience_room',
-      name: 'Phòng hội nghị',
+      name: t('convience_room'),
     },
     {
       id: 'event',
-      name: 'Sảnh sự kiện',
+      name: t('event_hall'),
     },
     {
       id: 'booth',
-      name: 'Phone booth',
+      name: t('phone_booth'),
     },
   ]);
   // function get all data
@@ -288,7 +290,7 @@ export default function FilterSortLocationMobile(props) {
             <Badge dot={handleCheckFilter()} size='default'>
               <FilterIcon className='icon' />
             </Badge>
-            Lọc
+            {t('filter')}
           </div>
         </div>
       )}
@@ -303,9 +305,9 @@ export default function FilterSortLocationMobile(props) {
               className='icon'
               onClick={() => setShowFilterModal(false)}
             />
-            <div className='main-title'>Lọc</div>
+            <div className='main-title'>{t('filter')}</div>
             <div className='clear-title' onClick={handleClearFilter}>
-              {handleCheckFilter() && <>Xóa hết</>}
+              {handleCheckFilter() && <>{t('clear_all')}</>}
             </div>
           </div>
         </Offcanvas.Header>
@@ -313,7 +315,7 @@ export default function FilterSortLocationMobile(props) {
           <div className='filter-location-modal_body'>
             <div className='filter-location_card'>
               <div className='filter-location_card_title'>
-                <ServiceIcon className='icon' /> Tiện Ích Tòa Nhà
+                <ServiceIcon className='icon' /> {t('location_amenity')}
               </div>
               <div className='filter-location_card_list'>
                 {amenitiesLocations.map((item, index) => {
@@ -371,7 +373,7 @@ export default function FilterSortLocationMobile(props) {
             </div>
             <div className='filter-location_card'>
               <div className='filter-location_card_title'>
-                <OfficeIcon className='icon' /> Tiện Ích Văn Phòng
+                <OfficeIcon className='icon' /> {t('working_space_amenity')}
               </div>
               <div className='filter-location_card_list'>
                 {amenitiesWorkingSpace.map((item, index) => {
@@ -431,7 +433,7 @@ export default function FilterSortLocationMobile(props) {
             </div>
             <div className='filter-location_card'>
               <div className='filter-location_card_title'>
-                <CapacityIcon className='icon' /> Sức chứa
+                <CapacityIcon className='icon' /> {t('capacity')}
               </div>
               <div className='filter-location_card_list'>
                 {capacity.map((item, index) => {
@@ -448,7 +450,7 @@ export default function FilterSortLocationMobile(props) {
                         className='form-check-label'
                         for={'service' + item.id}
                       >
-                        {item.name} người
+                        {item.name} {t('person')}
                       </label>
                     </div>
                   );
@@ -457,7 +459,7 @@ export default function FilterSortLocationMobile(props) {
             </div>
             <div className='filter-location_card'>
               <div className='filter-location_card_title'>
-                <RoomIcon className='icon' /> Loại văn phòng
+                <RoomIcon className='icon' /> {t('working_space_type')}
               </div>
               <div className='filter-location_card_list'>
                 {roomType.map((item, index) => {
@@ -485,12 +487,12 @@ export default function FilterSortLocationMobile(props) {
             </div>
           </div>
           <div className='filter-location-modal_footer'>
-            <div className='text'>Tổng cộng {result} kết quả</div>
+            <div className='text'>{t('result_amount', { amount: result })}</div>
             <button
               className='btn-show'
               onClick={() => setShowFilterModal(false)}
             >
-              Hiển thị kết quả
+              {t('show_result')}
             </button>
           </div>
         </Offcanvas.Body>
