@@ -8,8 +8,10 @@ import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
 import { ReactComponent as BuildingIcon } from '../assets/icons/building.svg';
 import { ReactComponent as AuthenIcon } from '../assets/icons/shield.svg';
 import { renderAddress, returnLowestPrice } from '../helpers/helpers';
+import { useTranslation } from 'react-i18next';
 
 export default function LocationCard(props) {
+  const { t } = useTranslation();
   const { data } = props;
   let navigate = useNavigate();
   const handleClick = (id) => {
@@ -49,7 +51,7 @@ export default function LocationCard(props) {
             </div>
             <div>
               <div className='text-address'>{renderAddress(data)}</div>
-              <div>Cách tôi 0,2km</div>
+              <div>{t('from_me')} 0,2km</div>
             </div>
           </div>
           <div className='location-type'>
@@ -62,7 +64,7 @@ export default function LocationCard(props) {
             <div className='icon-badge'>
               <AuthenIcon className='icon' />
             </div>
-            <div>Đã xác thực bởi WORKNOW</div>
+            <div>{t('verified_by_worknow')}</div>
           </div>
           <div className='location-service'>
             {data.amenities?.map((item, index) => {
@@ -76,10 +78,12 @@ export default function LocationCard(props) {
           <div className='price-section'>
             {/* <div className='old-price'>250,000Đ/H</div> */}
             <div className='new-price'>
-              <span>Chỉ từ </span>
+              <span>{t('just_from')} </span>
               {returnLowestPrice(data.priceByHour, data.priceByDay)}
             </div>
-            <button onClick={() => handleClick(data.id)}>Xem chi tiết</button>
+            <button onClick={() => handleClick(data.id)}>
+              {t('view_detail')}
+            </button>
           </div>
         </div>
       </div>

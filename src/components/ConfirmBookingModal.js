@@ -16,9 +16,11 @@ import {
 import { useNavigate } from 'react-router-dom';
 import '../assets/styles/ConfirmBookingModal.scss';
 import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrowdownfill.svg';
+import { useTranslation } from 'react-i18next';
 
 export default function ConfirmBookingModal(props) {
   registerLocale('vi', vi);
+  const { t } = useTranslation();
   const {
     show,
     handleClose,
@@ -214,7 +216,7 @@ export default function ConfirmBookingModal(props) {
           },
         });
       } else {
-        setError('Vui lòng chọn thời gian bạn muốn đặt chỗ.');
+        setError(t('please_select_booking_time'));
       }
     }
     if (typeOfBooking === 'hour') {
@@ -251,7 +253,7 @@ export default function ConfirmBookingModal(props) {
           },
         });
       } else {
-        setError('Vui lòng chọn thời gian bạn muốn đặt chỗ.');
+        setError(t('please_select_booking_time'));
       }
     }
   };
@@ -286,7 +288,7 @@ export default function ConfirmBookingModal(props) {
       className='confirm-booking-modal'
     >
       <Modal.Header className='px-4 py-2 d-flex flex-column align-items-center justify-content-center'>
-        <h3 className='modal-title fw-bold'>Chọn Thời Gian</h3>
+        <h3 className='modal-title fw-bold'>{t('select_time')}</h3>
       </Modal.Header>
       <Modal.Body className='modal-body px-0 py-4'>
         {typeOfBooking === 'day' && (
@@ -314,22 +316,24 @@ export default function ConfirmBookingModal(props) {
 
               <div>
                 <label className='mt-2 form-label text-gray'>
-                  Thời gian: {bookingInfoTypeDay.date_range}
+                  {t('time')}: {bookingInfoTypeDay.date_range}
                 </label>
               </div>
               {error && <div className='text-danger'>{error}</div>}
             </div>
             <hr className='mx-4' />
             <div className='d-flex justify-content-between px-4'>
-              <div className='text-gray'>Tổng thời gian:</div>
+              <div className='text-gray'>{t('total_time')}:</div>
               <div className='text-end'>
                 {bookingInfoTypeDay.totalDay && (
-                  <>{bookingInfoTypeDay.totalDay} ngày</>
+                  <>
+                    {bookingInfoTypeDay.totalDay} {t('day')}
+                  </>
                 )}
               </div>
             </div>
             <div className='d-flex justify-content-between px-4'>
-              <div className='text-gray'>Giá:</div>
+              <div className='text-gray'>{t('price')}:</div>
               <div className='text-red'>
                 <h4>{formatCurrency(bookingInfoTypeDay.price)}</h4>
               </div>
@@ -352,7 +356,7 @@ export default function ConfirmBookingModal(props) {
               </div>
               <div className='mb-3 px-4'>
                 <div className='fw-bold d-flex justify-content-center align-items-center'>
-                  Thời gian
+                  {t('time')}
                 </div>
                 <div>
                   <TimeSlotView
@@ -367,7 +371,7 @@ export default function ConfirmBookingModal(props) {
 
                 <div>
                   <label className='mt-2 form-label text-gray'>
-                    Thời gian:{' '}
+                    {t('time')}:{' '}
                     {moment(bookingInfoTypeHour.date).format('DD/MM/YYYY')}{' '}
                     {bookingInfoTypeHour.time_range}
                   </label>
@@ -403,7 +407,7 @@ export default function ConfirmBookingModal(props) {
               {!showCalendar && (
                 <div className='mb-3 px-4'>
                   <div className='fw-bold d-flex justify-content-center align-items-center'>
-                    Thời gian
+                    {t('time')}
                   </div>
                   <div>
                     <TimeSlotView
@@ -420,7 +424,7 @@ export default function ConfirmBookingModal(props) {
               <div className='px-4'>
                 <div>
                   <label className='mt-2 form-label text-gray'>
-                    Thời gian:{' '}
+                    {t('time')}:{' '}
                     {moment(bookingInfoTypeHour.date).format('DD/MM/YYYY')}{' '}
                     {bookingInfoTypeHour.time_range}
                   </label>
@@ -430,11 +434,11 @@ export default function ConfirmBookingModal(props) {
             </div>
             <hr className='mx-4' />
             <div className='d-flex justify-content-between px-4'>
-              <div className='text-gray'>Tổng thời gian:</div>
+              <div className='text-gray'>{t('total_time')}:</div>
               <div className='text-end'>{bookingInfoTypeHour.totalTime}</div>
             </div>
             <div className='d-flex justify-content-between px-4'>
-              <div className='text-gray'>Giá:</div>
+              <div className='text-gray'>{t('price')}:</div>
               <div className='text-red'>
                 <h4>{formatCurrency(bookingInfoTypeHour.price)}</h4>
               </div>
@@ -450,7 +454,7 @@ export default function ConfirmBookingModal(props) {
               className='w-100 btn btn-outline-dark rounded-pill'
               onClick={handleClose}
             >
-              Hủy
+              {t('cancel')}
             </button>
           </div>
           <div className='col-6 px-1'>
@@ -459,7 +463,7 @@ export default function ConfirmBookingModal(props) {
               className='w-100 btn btn-orange rounded-pill'
               onClick={handleSubmit}
             >
-              Đặt Ngay
+              {t('book_now')}
             </button>
           </div>
         </div>

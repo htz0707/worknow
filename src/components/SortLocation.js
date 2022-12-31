@@ -9,8 +9,10 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 import { returnUrlParams } from '../helpers/helpers';
+import { useTranslation } from 'react-i18next';
 
 export default function SortLocation(props) {
+  const { t } = useTranslation();
   const [urlParams] = useSearchParams();
   let currentParams = returnUrlParams(urlParams.entries());
   const navigate = useNavigate();
@@ -27,13 +29,13 @@ export default function SortLocation(props) {
   const handleRenderTitle = (value) => {
     switch (value) {
       case '-name':
-        return 'Tên A-Z';
+        return t('name_a_z');
       case 'name':
-        return 'Tên Z-A';
+        return t('name_z_a');
       case 'price':
-        return 'Giá thấp nhất';
+        return t('lowest_price');
       case '-price':
-        return 'Giá cao nhất';
+        return t('highest_price');
       default:
         return null;
     }
@@ -43,7 +45,7 @@ export default function SortLocation(props) {
       <Dropdown className='dropdown'>
         <Dropdown.Toggle id='dropdown-basic'>
           <SortIcon className='sort-icon' />
-          {handleRenderTitle(sort) || 'Sắp xếp theo'}
+          {handleRenderTitle(sort) || t('sort_by')}
         </Dropdown.Toggle>
         <Dropdown.Menu className='dropdown-menu'>
           <Dropdown.Item
@@ -52,7 +54,7 @@ export default function SortLocation(props) {
             }
             onClick={() => handleSelectSort('-name')}
           >
-            Từ A-Z
+            {t('from_a_z')}
           </Dropdown.Item>
           <Dropdown.Item
             className={
@@ -60,7 +62,7 @@ export default function SortLocation(props) {
             }
             onClick={() => handleSelectSort('name')}
           >
-            Từ Z-A
+            {t('from_z_a')}
           </Dropdown.Item>
           <Dropdown.Item
             className={
@@ -68,7 +70,7 @@ export default function SortLocation(props) {
             }
             onClick={() => handleSelectSort('price')}
           >
-            Giá thấp nhất
+            {t('lowest_price')}
           </Dropdown.Item>
           <Dropdown.Item
             className={
@@ -76,7 +78,7 @@ export default function SortLocation(props) {
             }
             onClick={() => handleSelectSort('-price')}
           >
-            Giá cao nhất
+            {t('highest_price')}
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

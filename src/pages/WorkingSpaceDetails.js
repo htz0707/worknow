@@ -39,8 +39,10 @@ import {
   returnTypeOfBooking,
 } from '../helpers/helpers';
 import ConfirmBookingModal from '../components/ConfirmBookingModal';
+import { useTranslation } from 'react-i18next';
 
 export default function WorkingSpaceDetails() {
+  const { t } = useTranslation();
   const { location_id, working_space_id } = useParams();
   const GET_WORKING_SPACE_DETAILS = gql`
     query GetWorkingSpaceDetails(
@@ -107,102 +109,102 @@ export default function WorkingSpaceDetails() {
   const amenities = [
     {
       id: '26989fe3-a02a-4e11-8970-27b2fa35fad8',
-      name: 'Tủ đồ cá nhân',
+      name: t('personal_locker'),
       icon: <BookIcon />,
     },
     {
       id: 'eef072cc-b73c-40a8-8fe0-36d5d6c39024',
-      name: 'Máy chiếu',
+      name: t('projector'),
       icon: <ProjectorsIcon />,
     },
     {
       id: 'f41c821a-759c-4c28-b198-fe952cfa2adc',
-      name: 'Máy lạnh',
+      name: t('air_conditioner'),
       icon: <AirIcon />,
     },
     {
       id: 'fd4580ae-7fe1-4742-a762-4c0dcce3a15f',
-      name: 'Tủ chứa đồ cá nhân',
+      name: t('personal_locker_1'),
       icon: <BookIcon />,
     },
     {
       id: 'c0c37835-6661-4841-8f77-f33cc36cdfa3',
-      name: 'Ghế xoay',
+      name: t('spin_chair'),
       icon: <OfficeChairIcon />,
     },
     {
       id: '3f8f2381-17ac-48e2-86b7-71f3d027a476',
-      name: 'Bảng trắng',
+      name: t('white_board'),
       icon: <BoardIcon />,
     },
     {
       id: '298eb9f8-874c-42d3-9fa0-bd66623a2e58',
-      name: 'Ổ điện cá nhân',
+      name: t('personal_power_outlet'),
       icon: <ElectricityIcon />,
     },
     {
       id: '102d09c0-08e4-4454-a858-ec77a0bacf24',
-      name: 'Dọn vệ sinh hằng ngày',
+      name: t('daily_clean'),
       icon: <CleanIcon />,
     },
     {
       id: 'e03adc7b-5bfc-40f1-9f70-ebdd0da6ed69',
-      name: 'Nước uống miễn phí',
+      name: t('free_beverage'),
       icon: <WaterIcon />,
     },
     {
       id: 'ad54aa43-9fb1-4165-9424-d24738f30e21',
-      name: 'Internet tốc độ cao',
+      name: t('high_speed_internet'),
       icon: <WifiIcon />,
     },
     {
       id: 'f333738a-85f0-4064-ad28-459f5ecf2584',
-      name: 'Phòng cách âm',
+      name: t('soundprooding'),
       icon: <MuteIcon />,
     },
     {
       id: 'be34c93f-421f-4307-9469-e32afa1d71f8',
-      name: 'Bảo vệ 24/7',
+      name: t('24_7_security'),
       icon: <SecurityIcon />,
     },
     {
       id: '3b6464af-0bf2-40e3-8326-1b04183353ea',
-      name: 'Có cửa sổ',
+      name: t('window'),
       icon: <WindowIcon />,
     },
     {
       id: '2665ba21-1563-4ae7-8e09-02a03a094037',
-      name: 'Thiết bị teleconference',
+      name: t('teleconference'),
       icon: <ConferenceIcon />,
     },
     {
       id: '3be8472b-1a2a-4659-85c3-98a4e7538929',
-      name: 'Máy chiếu',
+      name: t('projector'),
       icon: <ProjectorsIcon />,
     },
     {
       id: '8747a5c5-025d-4618-b479-8f7fa72d8eef',
-      name: 'Tivi',
+      name: t('tivi'),
       icon: <TvIcon />,
     },
     {
       id: 'bb741d17-64ef-4214-bae7-e4ca9bcdc378',
-      name: 'Bảng trắng',
+      name: t('white_board'),
       icon: <BoardIcon />,
     },
     {
       id: '54cf8fc4-b66a-40f1-b74b-77afe456c5e1',
-      name: 'Giấy Notes',
+      name: t('note_paper'),
       icon: <NotesIcon />,
     },
     {
       id: '6d33adda-b3de-442c-a1d9-cc6ae80f0270',
-      name: 'Văn phòng phẩm',
+      name: t('stationery'),
       icon: <OfficeSuppliesIcon />,
     },
     {
       id: '5082303d-bdca-45bd-b564-06497088d9f3',
-      name: 'Màn chiếu',
+      name: t('screen_projector'),
       icon: <ProjectorBoardIcon />,
     },
   ];
@@ -275,10 +277,10 @@ export default function WorkingSpaceDetails() {
           </Swiper>
         </div>
         <div className='working-space-info'>
-          <div className='title'>Đặt Chỗ</div>
+          <div className='title'>{t('reserve')}</div>
           <div className='content'>
             <div className='content-info'>
-              <div>Thông tin chỗ ngồi</div>
+              <div>{t('seat_info')}</div>
               {workingSpaceInfo?.description && (
                 <div>
                   <TickIcon className='icon' /> {workingSpaceInfo?.description}
@@ -286,7 +288,7 @@ export default function WorkingSpaceDetails() {
               )}
               <div>
                 <ThreeUserIcon className='icon' />
-                {workingSpaceInfo?.capacity?.name} Người
+                {workingSpaceInfo?.capacity?.name} {t('person')}
               </div>
               <div>
                 <ClockIcon className='icon' />{' '}
@@ -310,33 +312,25 @@ export default function WorkingSpaceDetails() {
                 </div>
               )}
               <button className='btn-booking' onClick={handleBooking}>
-                Đặt ngay
+                {t('book_now')}
               </button>
             </div>
           </div>
         </div>
         <div className='working-space-condition'>
-          <div className='title'>Điều Kiện Đặt Bàn</div>
+          <div className='title'>{t('condition_booking')}</div>
           <ul className='listing'>
             <li>
-              Giờ đặt tối thiểu: {workingSpaceInfo?.minHourBooking || 1} tiếng
+              {t('minimum_booking_hour')}:{' '}
+              {workingSpaceInfo?.minHourBooking || 1} tiếng
             </li>
-            <li>
-              Sau khi đặt chỗ, vui lòng chờ đến khi WorkNow và Nhà cung cấp xác
-              nhận đặt chỗ thành công.
-            </li>
-            <li>
-              Liên hệ chúng tôi qua số hotline: (+84)2836205144 hoặc email:
-              worknowcenter@gmail.com nếu bạn có yêu cầu hủy đặt chỗ.
-            </li>
-            <li>
-              Khi bạn đến nơi, vui lòng đưa mã đặt chỗ cho tiếp tân để nhận
-              phòng.
-            </li>
+            <li>{t('condition_booking_des_1')}</li>
+            <li>{t('condition_booking_des_2')}</li>
+            <li>{t('condition_booking_des_3')}</li>
           </ul>
         </div>
         <div className='working-space-amenity'>
-          <div className='title'>Tiện Nghi</div>
+          <div className='title'>{t('amenity')}</div>
           <div className='listing'>
             {workingSpaceInfo?.amenities?.map((item, index) => {
               return (

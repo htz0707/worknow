@@ -22,9 +22,11 @@ import cx from 'classnames';
 import 'moment/locale/vi'; // without this line it didn't work
 import ShowMore from '../components/ShowMore';
 import { renderAddress, renderWorkingHour } from '../helpers/helpers';
+import { useTranslation } from 'react-i18next';
 moment.locale('vi');
 
 export default function LocationDetails() {
+  const { t } = useTranslation();
   const { id } = useParams();
   let navigate = useNavigate();
   const showInMapClicked = (your_lat, your_lng) => {
@@ -182,31 +184,31 @@ export default function LocationDetails() {
   const dayArray = [
     {
       id: 1,
-      name: 'Thứ Hai',
+      name: t('monday'),
     },
     {
       id: 2,
-      name: 'Thứ Ba',
+      name: t('tuesday'),
     },
     {
       id: 3,
-      name: 'Thứ Tư',
+      name: t('wednesday'),
     },
     {
       id: 4,
-      name: 'Thứ Năm',
+      name: t('thursday'),
     },
     {
       id: 5,
-      name: 'Thứ Sáu',
+      name: t('friday'),
     },
     {
       id: 6,
-      name: 'Thứ Bảy',
+      name: t('saturday'),
     },
     {
       id: 0,
-      name: 'Chủ Nhật',
+      name: t('sunday'),
     },
   ];
   // //
@@ -243,13 +245,13 @@ export default function LocationDetails() {
   //   handleGetWorkingSpace();
   // }, [id]);
   const defineWorkingType = {
-    flexible_desk: 'Bàn làm việc linh hoạt',
-    fixed_desk: 'Bàn làm việc cố định',
-    private_room: 'Phòng làm việc riêng',
-    meeting_room: 'Phòng họp',
-    event: 'Sảnh sự kiện',
-    convience_room: 'Phòng hội nghị',
-    booth: 'Phone booth',
+    flexible_desk: t('flexible_desk'),
+    fixed_desk: t('fixed_desk'),
+    private_room: t('private_room'),
+    meeting_room: t('meeting_room'),
+    event: t('event_hall'),
+    convience_room: t('convience_room'),
+    booth: t('phone_booth'),
   };
   const [selectedWorkingSpace, setSelectedWorkingSpace] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -313,30 +315,30 @@ export default function LocationDetails() {
             <Bcrumb
               data={[
                 {
-                  label: 'Danh sách địa điểm',
+                  label: t('location_list'),
                   path: '/locations',
                 },
                 {
-                  label: 'Thông tin văn phòng',
+                  label: t('office_info'),
                   active: true,
                 },
               ]}
             />
           </div>
           <div className='row-2'>
-            {locationInfo?.name} <span>+1200 lượt đặt</span>
+            {locationInfo?.name} <span>+1200 {t('booking_amount')}</span>
           </div>
           <div className='row-3'>
             <div>
               <GoLocation /> {renderAddress(locationInfo)}.{' '}
-              <span className='distance'>cách tôi 0.2km</span>
+              <span className='distance'>{t('from_me')} 0.2km</span>
               <span
                 className='view-on-map'
                 onClick={() =>
                   showInMapClicked(locationInfo.lat, locationInfo.long)
                 }
               >
-                xem trên bản đồ
+                {t('view_on_map')}
               </span>
             </div>
             <div>
@@ -347,7 +349,7 @@ export default function LocationDetails() {
                 <StarIcon />
                 <StarIcon />
               </div>
-              <div>120 đánh giá từ khách hàng</div>
+              <div>120 {t('comment_from_customer')}</div>
             </div>
           </div>
           <div className='row-4'>
@@ -372,7 +374,7 @@ export default function LocationDetails() {
                     />
                     {imageUrl.length > 3 && (
                       <div className='view-more' onClick={handleShowMoreImage}>
-                        <button>Xem thêm</button>
+                        <button>{t('read_more')}</button>
                       </div>
                     )}
                   </div>
@@ -417,7 +419,7 @@ export default function LocationDetails() {
             )}
             <div className='location-services'>
               <div className='outstanding'>
-                <div className='title'>Nổi bật</div>
+                <div className='title'>{t('outstanding')}</div>
                 <div className='content'>
                   <div>
                     <CheckIcon className='icon' /> Hơn 1200 lượt đặt chỗ
@@ -431,11 +433,11 @@ export default function LocationDetails() {
                   <div>
                     <CheckIcon className='icon' /> Môi trường yên tĩnh
                   </div>
-                  <div className='show-more'>Xem thêm</div>
+                  <div className='show-more'>{t('read_more')}</div>
                 </div>
               </div>
               <div className='amenity'>
-                <div className='title'>Tiện nghi</div>
+                <div className='title'>{t('amenity')}</div>
                 <div className='content'>
                   {locationInfo?.amenities?.map((item, index) => {
                     if (showMoreAmenities) {
@@ -481,8 +483,7 @@ export default function LocationDetails() {
                 </div>
               </div> */}
               <div className='policy'>
-                Chính sách hủy đặt chỗ và hoàn tiền dựa trên chính sách của
-                WorkNow. <span>Xem chính sách</span>
+                {t('policy_booking_and_refund')} <span>{t('view_policy')}</span>
               </div>
             </div>
           </div>
@@ -505,32 +506,34 @@ export default function LocationDetails() {
             className='navbar-custom page-container'
           >
             <li className='nav-item'>
-              <a href='#section_1'>Tổng quan</a>
+              <a href='#section_1'>{t('overview')}</a>
             </li>
             <li className='nav-item'>
-              <a href='#section_2'>Giờ làm việc</a>
+              <a href='#section_2'>{t('working_hour')}</a>
             </li>
             <li className='nav-item'>
-              <a href='#section_3'>Không gian làm việc</a>
+              <a href='#section_3'>{t('working_space')}</a>
             </li>
             <li className='nav-item'>
-              <a href='#section_4'>Đánh giá</a>
+              <a href='#section_4'>{t('evaluation')}</a>
             </li>
             <li className='nav-item'>
-              <a href='#section_5'>Hỗ trợ</a>
+              <a href='#section_5'>{t('support')}</a>
             </li>
           </ul>
         </ScrollspyNav>
         <div className='scrollspy-body page-container' id='scrollspy-body'>
           <div className='about-location' id='section_1'>
-            <div className='header'>Tổng quan về {locationInfo?.name}</div>
+            <div className='header'>
+              {t('overview_about')} {locationInfo?.name}
+            </div>
             <p className='body'>{locationInfo?.description}</p>
           </div>
           <div className='location-hours' id='section_2'>
-            <div className='header'>Giờ làm việc</div>
+            <div className='header'>{t('working_hour')} </div>
             <div className='body'>
               <div>
-                Hôm nay:{' '}
+                {t('today')}:{' '}
                 <span className='today-text'>
                   {moment().format('dddd, LL')}
                 </span>
@@ -546,7 +549,7 @@ export default function LocationDetails() {
                     >
                       <div className='day'>{item.name}</div>
                       <div className='time-range'>
-                        <div>Giờ hoạt động</div>
+                        <div>{t('operation_hour')}</div>
                         <div>
                           {renderWorkingHour(
                             locationInfo?.openTime,
@@ -561,7 +564,7 @@ export default function LocationDetails() {
             </div>
           </div>
           <div className='workspace' id='section_3'>
-            <div className='header'>Không gian làm việc</div>
+            <div className='header'>{t('working_space')}</div>
             <div className='body'>
               <div className='left'>
                 <div className='filter-workspace'>
@@ -683,7 +686,7 @@ export default function LocationDetails() {
             </div>
           </div> */}
           <div className='support' id='section_5'>
-            <div className='header'>Hỗ trợ</div>
+            <div className='header'>{t('support')}</div>
             <div className='body'>
               <div className='support-item'>
                 <span>How to Check In</span> <AiOutlineRight />
