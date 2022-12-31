@@ -1,0 +1,112 @@
+@import '_setting.scss';
+
+.sign-in-page {
+  width: 100vw;
+  background-image: url('../images/sign-in-bg.png');
+  min-height: 100vh;
+  background-size: cover;
+
+  .logo {
+    .pointer {
+      cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+      min-height: 100vh;
+    }
+  }
+
+  .sign-in-form {
+    background-color: white;
+    min-width: 35vw;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    min-height: 50vh;
+
+    label {
+      font-weight: 600;
+      color: #282723;
+
+      >span {
+        color: #ff4f4f;
+      }
+    }
+
+    .custom-input {
+      background: #ffffff;
+      border: 1.00058px solid #a7a49a;
+      box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+      border-radius: 12.007px;
+    }
+
+    .ant-form-item-control-input-content {
+      .ant-input-affix-wrapper {
+        background: #ffffff;
+        border: 1.00058px solid #a7a49a;
+        box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
+        border-radius: 12.007px;
+        padding: 0.375rem 0.75rem;
+      }
+
+      .ant-input-affix-wrapper:hover {
+        border: 1.00058px solid #a7a49a;
+      }
+    }
+
+    .btn {
+      background: #ffb31f;
+      font-weight: 500;
+    }
+
+    .btn-white {
+      background: white;
+      font-weight: 400;
+
+      .icon {
+        width: 35px;
+      }
+    }
+
+    .password-field {
+      display: flex !important;
+
+      .eye-icon {
+        margin-bottom: -30px;
+        margin-top: 10px;
+        margin-left: -30px;
+        cursor: pointer;
+      }
+    }
+
+    .link {
+      text-decoration: none;
+      color: #0075ff;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .text-gray {
+      color: gray;
+    }
+
+    .single-line-input {
+      background-color: white;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+      border-bottom: 2px solid #eeeeee;
+      min-height: 40px;
+    }
+
+    .single-line-input:focus {
+      background-color: white;
+      outline: none;
+      box-shadow: none;
+      border-bottom: 2px solid #eeeeee;
+      padding: 0;
+    }
+  }
+}

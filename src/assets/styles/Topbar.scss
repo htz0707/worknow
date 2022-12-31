@@ -1,20 +1,108 @@
 @import '_setting.scss';
 .topbar {
   padding: 0;
+  background-color: #f3f3f3;
   .navbar-collapse {
     padding: 0px 10px;
   }
-  .nav-link {
+  .nav-item-link {
+    text-decoration: none;
+    color: #282723;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    padding: 7px 12px;
     &:hover {
-      color: $primary !important;
+      background: rgba(171, 171, 171, 0.5);
+      border-radius: 8px;
     }
   }
-  .nav-link.active {
+  .nav-item-link.active {
     font-weight: 700;
-    color: #595959;
-    border-bottom: 4px solid $primary;
-    .nav-link.active {
-      border-bottom: none;
+    background: rgba(255, 179, 31, 0.5);
+    border-radius: 8px;
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+  }
+  .nav-link.active {
+    border-bottom: none;
+  }
+  .dropdown {
+    .dropdown-item {
+      &.active {
+        background: rgba(255, 179, 31, 0.5);
+        color: #282723;
+      }
+      &:active {
+        background-color: #ffffff;
+      }
     }
+  }
+  .btn-login {
+    width: 116px;
+    height: 33px;
+    color: #ffffff;
+    background: #282723;
+    border-radius: 100px;
+  }
+  .login-section {
+    .isNotLogin {
+      cursor: pointer;
+      .text {
+        margin-right: 10px;
+      }
+    }
+    .isLoginWeb {
+      display: flex;
+      align-items: center;
+      .text {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+        > div:nth-child(2) {
+          cursor: pointer;
+        }
+      }
+    }
+    .isLoginMobile {
+      display: none;
+    }
+  }
+  @media (max-width: 992px) {
+    .navbar-collapse {
+      order: 4 !important;
+    }
+    .login-section {
+      order: 3 !important;
+      .isNotLogin {
+        cursor: pointer;
+        .text {
+          display: none;
+        }
+      }
+      .isLoginWeb {
+        display: none;
+      }
+      .isLoginMobile {
+        display: unset;
+      }
+    }
+  }
+  .btn-avatar {
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+  .avatar-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .pointer {
+    cursor: pointer;
   }
 }

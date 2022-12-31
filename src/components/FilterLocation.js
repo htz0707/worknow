@@ -1,83 +1,625 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../assets/styles/FilterLocation.scss';
 import { IoLocationOutline } from 'react-icons/io5';
 import { Dropdown, Button } from 'react-bootstrap';
+import { ReactComponent as ServiceIcon } from '../assets/icons/tienichtoanha.svg';
+import { ReactComponent as OfficeIcon } from '../assets/icons/tienichvanphong.svg';
+import { ReactComponent as DistanceIcon } from '../assets/icons/ganToiNhat.svg';
+import { ReactComponent as RoomIcon } from '../assets/icons/loaiVanPhong.svg';
+import { ReactComponent as CapacityIcon } from '../assets/icons/sucChua.svg';
+import { ReactComponent as PolicyIcon } from '../assets/icons/chinhSach.svg';
+import { gql, useLazyQuery } from '@apollo/client';
+import ShowMore from './ShowMore';
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
+import { returnUrlParams } from '../helpers/helpers';
+import { ReactComponent as CloseIcon } from '../assets/icons/close.svg';
 
 export default function FilterLocation(props) {
-  const [sort, setSort] = useState('Nearest Location');
-  const handleSelectSort = (value) => {
-    setSort(value);
+  const [urlParams] = useSearchParams();
+  let currentParams = returnUrlParams(urlParams.entries());
+  const navigate = useNavigate();
+  const { filterLocations, setFilterLocations } = props;
+  // const [serviceType, setServiceType] = useState([
+  //   {
+  //     id: 1,
+  //     name: 'Cafe',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Miễn phí đậu xe',
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Phòng tập',
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'Massage tại chỗ',
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'Bếp, tiệm ăn',
+  //   },
+  //   {
+  //     id: 6,
+  //     name: 'Dọn dẹp',
+  //   },
+  // ]);
+  // const [distanceType, setDistanceType] = useState([
+  //   {
+  //     id: 1,
+  //     name: 'Dưới 1km',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Dưới 3km',
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Dưới 7km',
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'Dưới 20km',
+  //   },
+  // ]);
+  // const [capacityType, setCapacityType] = useState([
+  //   {
+  //     id: 1,
+  //     name: '1 người',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: '2-4 người',
+  //   },
+  //   {
+  //     id: 3,
+  //     name: '5-10 người',
+  //   },
+  //   {
+  //     id: 4,
+  //     name: '10-20 người',
+  //   },
+  //   {
+  //     id: 5,
+  //     name: '+ 20 người',
+  //   },
+  // ]);
+  // const [policyType, setPolicyType] = useState([
+  //   {
+  //     id: 1,
+  //     name: 'Xác nhận tức thời',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Miễn phí hủy',
+  //   },
+  // ]);
+  // handle get list amenity location
+  const GET_AMENITIES = gql`
+    query GetAmenities($type: AmenityType) {
+      amenities(params: { type: $type }) {
+        id
+        name
+      }
+    }
+  `;
+  const [getAmenities] = useLazyQuery(GET_AMENITIES);
+  const [amenitiesLocations, setAmenitiesLocations] = useState([]);
+  const handleGetAmenitiesLocations = async () => {
+    let res = await getAmenities({
+      variables: {
+        type: 'location',
+      },
+    });
+    if (res.data) {
+      setAmenitiesLocations(res.data.amenities);
+    }
   };
-  const [showDistance, setShowDistance] = useState(false);
-  const [distance, setDistance] = useState(null);
-  const [selectedDistance, setSelectedDistance] = useState(null);
-  const handleSelectDistance = (value) => {
-    setSelectedDistance(value);
+  // handle get list amenity working space
+  const [amenitiesWorkingSpace, setAmenitiesWorkingSpace] = useState([]);
+  const handleGetAmenitiesWorkingSpace = async () => {
+    let res = await getAmenities({
+      variables: {
+        type: 'working_space',
+      },
+    });
+    if (res.data) {
+      setAmenitiesWorkingSpace(res.data.amenities);
+    }
   };
-  const handleClearDistance = () => {
-    console.log('abced');
-    setSelectedDistance(null);
+  // handle get list capacity
+  const GET_CAPACITY = gql`
+    query GetCapacity {
+      capacity {
+        id
+        name
+      }
+    }
+  `;
+  const [getCapacity] = useLazyQuery(GET_CAPACITY);
+  const [capacity, setCapacity] = useState([]);
+  const handleGetCapacity = async () => {
+    let res = await getCapacity();
+    if (res.data) {
+      setCapacity(res.data.capacity);
+    }
   };
-  const handleApplyDistance = () => {
-    setShowDistance(false);
-    console.log('aaa');
-    setDistance(selectedDistance);
+  //
+  const [roomType, setRoomType] = useState([
+    {
+      id: 'flexible_desk',
+      name: 'Bàn làm việc linh hoạt',
+    },
+    {
+      id: 'fixed_desk',
+      name: 'Bàn làm việc cố định',
+    },
+    {
+      id: 'private_room',
+      name: 'Phòng làm việc riêng',
+    },
+    {
+      id: 'meeting_room',
+      name: 'Phòng họp',
+    },
+    {
+      id: 'convience_room',
+      name: 'Phòng hội nghị',
+    },
+    {
+      id: 'event',
+      name: 'Sảnh sự kiện',
+    },
+    {
+      id: 'booth',
+      name: 'Phone booth',
+    },
+  ]);
+  // function get all data
+  const handleGetData = async () => {
+    await handleGetAmenitiesLocations();
+    await handleGetAmenitiesWorkingSpace();
+    await handleGetCapacity();
+  };
+  useEffect(() => {
+    handleGetData();
+  }, []);
+  // handle filter by amenity
+  const onClickAmenitiesLocation = (id) => {
+    let copy = [...filterLocations.amenitiesLocationIds];
+    if (copy.includes(id)) {
+      let filter_arr = copy.filter((item) => item !== id);
+      setFilterLocations({
+        ...filterLocations,
+        amenitiesLocationIds: filter_arr,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesLocationIds: filter_arr.toString(),
+        }).toString(),
+      });
+    } else {
+      copy.push(id);
+      setFilterLocations({
+        ...filterLocations,
+        amenitiesLocationIds: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesLocationIds: copy.toString(),
+        }).toString(),
+      });
+    }
+  };
+  // handle filter by amenity
+  const onClickAmenitiesWorkingSpace = (id) => {
+    let copy = [...filterLocations.amenitiesWorkingSpaceIds];
+    if (copy.includes(id)) {
+      let filter_arr = copy.filter((item) => item !== id);
+      setFilterLocations({
+        ...filterLocations,
+        amenitiesWorkingSpaceIds: filter_arr,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesWorkingSpaceIds: filter_arr.toString(),
+        }).toString(),
+      });
+    } else {
+      copy.push(id);
+      setFilterLocations({
+        ...filterLocations,
+        amenitiesWorkingSpaceIds: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          amenitiesWorkingSpaceIds: copy.toString(),
+        }).toString(),
+      });
+    }
+  };
+  // handle filter by capacity
+  const onClickCapacity = (id) => {
+    let copy = [...filterLocations.capacityIds];
+    if (copy.includes(id)) {
+      let filter_arr = copy.filter((item) => item !== id);
+      setFilterLocations({
+        ...filterLocations,
+        capacityIds: filter_arr,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          capacityIds: filter_arr.toString(),
+        }).toString(),
+      });
+    } else {
+      copy.push(id);
+      setFilterLocations({
+        ...filterLocations,
+        capacityIds: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          capacityIds: copy.toString(),
+        }).toString(),
+      });
+    }
+  };
+  // handle filter by room type
+  const onClickRoomType = (id) => {
+    let copy = [...filterLocations.workingSpaceTypes];
+    if (copy.includes(id)) {
+      let filter_arr = copy.filter((item) => item !== id);
+      setFilterLocations({
+        ...filterLocations,
+        workingSpaceTypes: filter_arr,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          workingSpaceTypes: filter_arr.toString(),
+        }).toString(),
+      });
+    } else {
+      copy.push(id);
+      setFilterLocations({
+        ...filterLocations,
+        workingSpaceTypes: copy,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          workingSpaceTypes: copy.toString(),
+        }).toString(),
+      });
+    }
+  };
+  const [showMoreAmenitiesLocation, setShowMoreAmenitiesLocation] =
+    useState(false);
+  const [showMoreAmenitiesWorkingSpace, setShowMoreAmenitiesWorkingSpace] =
+    useState(false);
+  const handleClearFilter = () => {
+    setFilterLocations({
+      amenitiesLocationIds: [],
+      amenitiesWorkingSpaceIds: [],
+      capacityIds: [],
+      workingSpaceTypes: [],
+    });
+    if (currentParams.sort) {
+      navigate({
+        search: createSearchParams({
+          sort: currentParams.sort,
+        }).toString(),
+      });
+    } else {
+      navigate('/locations');
+    }
+  };
+  const handleCheckFilter = () => {
+    if (
+      filterLocations?.amenitiesLocationIds?.length > 0 ||
+      filterLocations?.amenitiesWorkingSpaceIds?.length > 0 ||
+      filterLocations?.capacityIds?.length > 0 ||
+      filterLocations?.workingSpaceTypes?.length > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   };
   return (
     <div className='filter-location'>
-      <div className='select-sort'>
+      <div className='filter-location_card'>
+        {handleCheckFilter() && (
+          <div className='clear-filter' onClick={handleClearFilter}>
+            <CloseIcon className='icon' /> Loại bỏ bộ lọc
+          </div>
+        )}
+        <div className='filter-location_card_title'>
+          <ServiceIcon className='icon' /> Tiện ích tòa Nhà
+        </div>
+        <div className='filter-location_card_list'>
+          {amenitiesLocations.map((item, index) => {
+            if (showMoreAmenitiesLocation) {
+              return (
+                <div className='item form-check' key={index}>
+                  <input
+                    className='form-check-input'
+                    type='checkbox'
+                    id={'service' + item.id}
+                    checked={filterLocations.amenitiesLocationIds?.includes(
+                      item.id
+                    )}
+                    onChange={() => onClickAmenitiesLocation(item.id)}
+                  />
+                  <label className='form-check-label' for={'service' + item.id}>
+                    {item.name}
+                  </label>
+                </div>
+              );
+            } else {
+              if (index < 5) {
+                return (
+                  <div className='item form-check' key={index}>
+                    <input
+                      className='form-check-input'
+                      type='checkbox'
+                      id={'service' + item.id}
+                      checked={filterLocations.amenitiesLocationIds?.includes(
+                        item.id
+                      )}
+                      onChange={() => onClickAmenitiesLocation(item.id)}
+                    />
+                    <label
+                      className='form-check-label'
+                      for={'service' + item.id}
+                    >
+                      {item.name}
+                    </label>
+                  </div>
+                );
+              }
+            }
+          })}
+        </div>
+        {amenitiesLocations?.length > 5 && (
+          <ShowMore
+            show={showMoreAmenitiesLocation}
+            setShow={setShowMoreAmenitiesLocation}
+          />
+        )}
+      </div>
+      <div className='filter-location_card'>
+        <div className='filter-location_card_title'>
+          <OfficeIcon className='icon' /> Tiện ích văn phòng
+        </div>
+        <div className='filter-location_card_list'>
+          {amenitiesWorkingSpace.map((item, index) => {
+            if (showMoreAmenitiesWorkingSpace) {
+              return (
+                <div className='item form-check' key={index}>
+                  <input
+                    className='form-check-input'
+                    type='checkbox'
+                    id={'service' + item.id}
+                    checked={filterLocations.amenitiesWorkingSpaceIds?.includes(
+                      item.id
+                    )}
+                    onChange={() => onClickAmenitiesWorkingSpace(item.id)}
+                  />
+                  <label className='form-check-label' for={'service' + item.id}>
+                    {item.name}
+                  </label>
+                </div>
+              );
+            } else {
+              if (index < 5) {
+                return (
+                  <div className='item form-check' key={index}>
+                    <input
+                      className='form-check-input'
+                      type='checkbox'
+                      id={'service' + item.id}
+                      checked={filterLocations.amenitiesWorkingSpaceIds?.includes(
+                        item.id
+                      )}
+                      onChange={() => onClickAmenitiesWorkingSpace(item.id)}
+                    />
+                    <label
+                      className='form-check-label'
+                      for={'service' + item.id}
+                    >
+                      {item.name}
+                    </label>
+                  </div>
+                );
+              }
+            }
+          })}
+        </div>
+        {amenitiesWorkingSpace?.length > 5 && (
+          <ShowMore
+            show={showMoreAmenitiesWorkingSpace}
+            setShow={setShowMoreAmenitiesWorkingSpace}
+          />
+        )}
+      </div>
+      <div className='filter-location_card'>
+        <div className='filter-location_card_title'>
+          <CapacityIcon className='icon' /> Sức chứa
+        </div>
+        <div className='filter-location_card_list'>
+          {capacity.map((item, index) => {
+            return (
+              <div className='item form-check' key={index}>
+                <input
+                  className='form-check-input'
+                  type='checkbox'
+                  id={'service' + item.id}
+                  checked={filterLocations.capacityIds?.includes(item.id)}
+                  onChange={() => onClickCapacity(item.id)}
+                />
+                <label className='form-check-label' for={'service' + item.id}>
+                  {item.name} người
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className='filter-location_card'>
+        <div className='filter-location_card_title'>
+          <RoomIcon className='icon' /> Loại văn phòng
+        </div>
+        <div className='filter-location_card_list'>
+          {roomType.map((item, index) => {
+            return (
+              <div className='item form-check' key={index}>
+                <input
+                  className='form-check-input'
+                  type='checkbox'
+                  id={'service' + item.id}
+                  checked={filterLocations.workingSpaceTypes?.includes(item.id)}
+                  onChange={() => onClickRoomType(item.id)}
+                />
+                <label className='form-check-label' for={'service' + item.id}>
+                  {item.name}
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* <div className='filter-location_card'>
+        <div className='filter-location_card_title'>
+          <DistanceIcon className='icon' /> Gần tôi nhất
+        </div>
+        <div className='filter-location_card_list'>
+          {distanceType.map((item, index) => {
+            return (
+              <div className='item form-check' key={index}>
+                <input
+                  className='form-check-input'
+                  type='checkbox'
+                  value=''
+                  id={'service' + item.id}
+                />
+                <label className='form-check-label' for={'service' + item.id}>
+                  {item.name}
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className='filter-location_card'>
+        <div className='filter-location_card_title'>
+          <RoomIcon className='icon' /> Loại văn phòng
+        </div>
+        <div className='filter-location_card_list'>
+          {roomType.map((item, index) => {
+            return (
+              <div className='item form-check' key={index}>
+                <input
+                  className='form-check-input'
+                  type='checkbox'
+                  value=''
+                  id={'service' + item.id}
+                />
+                <label className='form-check-label' for={'service' + item.id}>
+                  {item.name}
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className='filter-location_card'>
+        <div className='filter-location_card_title'>
+          <PolicyIcon className='icon' /> chính sách
+        </div>
+        <div className='filter-location_card_list'>
+          {policyType.map((item, index) => {
+            return (
+              <div className='item form-check' key={index}>
+                <input
+                  className='form-check-input'
+                  type='checkbox'
+                  value=''
+                  id={'service' + item.id}
+                />
+                <label className='form-check-label' for={'service' + item.id}>
+                  {item.name}
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </div> */}
+      {/* <div className='select-sort'>
         <Dropdown className='dropdown'>
-          <Dropdown.Toggle id='dropdown-basic'>Sort: {sort}</Dropdown.Toggle>
+          <Dropdown.Toggle id='dropdown-basic'>Sắp xếp: {sort}</Dropdown.Toggle>
           <Dropdown.Menu className='dropdown-menu'>
             <Dropdown.Item
               className={
-                sort === 'Alphabetical'
+                sort === 'Thứ tự bảng chữ cái'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Alphabetical')}
+              onClick={() => handleSelectSort('Thứ tự bảng chữ cái')}
             >
-              Alphabetical
+              Thứ tự bảng chữ cái
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                sort === 'Nearest Location'
+                sort === 'Vị trí gần nhất'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Nearest Location')}
+              onClick={() => handleSelectSort('Vị trí gần nhất')}
             >
-              Nearest Location
+              Vị trí gần nhất
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                sort === 'Many Seats First'
+                sort === 'Nhiều chỗ ngồi'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Many Seats First')}
+              onClick={() => handleSelectSort('Nhiều chỗ ngồi')}
             >
-              Many Seats First
+              Nhiều chỗ ngồi
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                sort === 'Lowest Price First'
+                sort === 'Giá thấp nhất'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Lowest Price First')}
+              onClick={() => handleSelectSort('Giá thấp nhất')}
             >
-              Lowest Price First
+              Giá thấp nhất
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                sort === 'Highest Price First'
+                sort === 'Giá cao nhất'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectSort('Highest Price First')}
+              onClick={() => handleSelectSort('Giá cao nhất')}
             >
-              Highest Price First
+              Giá cao nhất
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
@@ -92,7 +634,7 @@ export default function FilterLocation(props) {
             id='dropdown-basic'
             onClick={() => setShowDistance(true)}
           >
-            {distance || 'Distance'}
+            {distance || 'Khoảng cách'}
           </Dropdown.Toggle>
           <Dropdown.Menu
             className='dropdown-menu'
@@ -100,45 +642,45 @@ export default function FilterLocation(props) {
           >
             <Dropdown.Item
               className={
-                selectedDistance === '<500 m(~ 7 min walk)'
+                selectedDistance === 'Dưới 500m'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectDistance('<500 m(~ 7 min walk)')}
+              onClick={() => handleSelectDistance('Dưới 500m')}
             >
-              {'<500 m(~ 7 min walk)'}
+              {'Dưới 500m'}
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                selectedDistance === '<1 km(~ 13 min walk)'
+                selectedDistance === 'Dưới 1km'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectDistance('<1 km(~ 13 min walk)')}
+              onClick={() => handleSelectDistance('Dưới 1km')}
             >
-              {'<1 km(~ 13 min walk)'}
+              {'Dưới 1km'}
             </Dropdown.Item>
             <Dropdown.Item
               className={
-                selectedDistance === '<2 km(~ 18 min walk)'
+                selectedDistance === 'Dưới 2km'
                   ? 'dropdown-item active'
                   : 'dropdown-item'
               }
-              onClick={() => handleSelectDistance('<2 km(~ 18 min walk)')}
+              onClick={() => handleSelectDistance('Dưới 2km')}
             >
-              {'<2 km(~ 18 min walk)'}
+              {'Dưới 2km'}
             </Dropdown.Item>
             <div className='dropdown-item-footer'>
               <Button className='clear' onClick={handleClearDistance}>
-                Clear
+                Xóa
               </Button>
               <Button className='apply' onClick={handleApplyDistance}>
-                Apply
+                Áp dụng
               </Button>
             </div>
           </Dropdown.Menu>
         </Dropdown>
-      </div>
+      </div> */}
     </div>
   );
 }

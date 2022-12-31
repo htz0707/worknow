@@ -1,0 +1,31 @@
+@import '_setting.scss';
+
+.bottom-bar {
+  color: white;
+
+  .container-bottom-bar {
+    min-height: 80px;
+    width: 100%;
+
+    .title {
+      margin-bottom: 100px;
+    }
+
+    .bar-item {
+     @media (min-width: 768px) {
+      padding-left: 12%;
+     }
+    }
+
+    .link-text {
+      font-weight: 100;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .icon {
+      width: 30px;
+      cursor: pointer;
+    }
+  }
+}

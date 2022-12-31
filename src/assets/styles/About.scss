@@ -1,0 +1,16 @@
+@import '_setting.scss';
+
+.about {
+  width: 100vw;
+  min-height: calc(100vh - 221px);
+  padding-top: 100px;
+
+  .about-layout {
+    margin-left: 13%;
+    margin-right: 13%;
+
+    h5 {
+      font-weight: 700;
+    }
+  }
+}
