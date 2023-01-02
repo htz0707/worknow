@@ -17,11 +17,13 @@ import {
 } from '../helpers/helpers';
 import moment from 'moment';
 import { ReactComponent as RefreshIcon } from '../assets/icons/refresh.svg';
+import { useTranslation } from 'react-i18next';
 const { Step } = Steps;
 
 export default function BookingStatus() {
   const { location_id, order_id } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(2);
   //get order details
   const GET_ORDER_DETAILS = gql`
@@ -122,15 +124,15 @@ export default function BookingStatus() {
           <Bcrumb
             data={[
               {
-                label: 'Danh Sách',
+                label: t('list'),
                 path: '/locations',
               },
               {
-                label: 'Thông tin văn phòng',
+                label: t('office_info'),
                 path: `/locations/${location_id}/working-space/${workingSpaceInfo.id}`,
               },
               {
-                label: 'Tiến hành đặt chỗ',
+                label: t('make_reservation'),
                 active: true,
               },
             ]}
@@ -143,9 +145,9 @@ export default function BookingStatus() {
             current={currentStep}
             labelPlacement='vertical'
           >
-            <Step title='Thông tin đặt chỗ' />
-            <Step title='Thanh toán' />
-            <Step title='Trạng thái' />
+            <Step title={t('reservation_info')} />
+            <Step title={t('payment')} />
+            <Step title={t('status')} />
           </Steps>
         </div>
       </div>
@@ -153,9 +155,9 @@ export default function BookingStatus() {
         <div className='row'>
           <div className='mx-auto col-xl-5 col-lg-7 info-booking'>
             <div>
-              <div className='title'>Đơn đặt của bạn</div>
+              <div className='title'>{t('my_order')}</div>
               <div className='status-booking'>
-                <div>Trạng thái chỗ đặt:</div>
+                <div>{t('order_status')}:</div>
                 <div>
                   <div className={`status ${orderInfo.status}`}>
                     {returnStatusBooking(orderInfo.status)}
@@ -163,7 +165,7 @@ export default function BookingStatus() {
                 </div>
               </div>
               <div className='code-booking'>
-                <div>Mã đơn đặt:</div>
+                <div>{t('order_code')}:</div>
                 <div>#{orderInfo?.orderId}</div>
               </div>
               <div
@@ -172,7 +174,7 @@ export default function BookingStatus() {
                   window.location.reload();
                 }}
               >
-                <RefreshIcon /> Tải lại trang
+                <RefreshIcon /> {t('refresh_page')}
               </div>
               <div className='confirm-booking'>
                 <p>{returnDescriptionStatusBooking(orderInfo.status)}</p>
@@ -230,10 +232,10 @@ export default function BookingStatus() {
                 </div>
               </div>
               <div className='summary'>
-                <div className='title'>Tóm tắt thanh toán</div>
+                <div className='title'>{t('payment_summary')}</div>
                 <div className='price-detail'>
                   <div>
-                    <span>Giá gốc</span>
+                    <span>{t('price_origin')}</span>
                     <span>{formatCurrency(orderInfo?.total)}</span>
                   </div>
                   {/* <div>
@@ -246,14 +248,14 @@ export default function BookingStatus() {
                   </div> */}
                 </div>
                 <div className='price-total'>
-                  <span>Tổng cộng</span>
+                  <span>{t('total')}</span>
                   <span>{formatCurrency(orderInfo?.finalTotal)}</span>
                 </div>
               </div>
             </div>
             <div>
-              <div className='title'>Hỗ trợ</div>
-              <p>Gọi ngay cho chúng tôi ngay nếu bạn cần trợ giúp</p>
+              <div className='title'>{t('support')}</div>
+              <p>{t('contact_me')}</p>
               <a href='tel:+842836205144' className='phone-button'>
                 <PhoneIcon className='me-2' /> +84 28 3620 5144
               </a>
