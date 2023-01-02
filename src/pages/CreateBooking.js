@@ -17,11 +17,13 @@ import { Form } from 'antd';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import parsePhoneNumber from 'libphonenumber-js';
+import { useTranslation } from 'react-i18next';
 const { Step } = Steps;
 
 export default function CreateBooking() {
   const user = JSON.parse(localStorage.getItem('user'));
   const path = useLocation();
+  const { t } = useTranslation();
   let navigate = useNavigate();
   const { location_id, working_space_id } = useParams();
   const orderInfo = useLocation()?.state?.orderInfo;
@@ -212,15 +214,15 @@ export default function CreateBooking() {
           <Bcrumb
             data={[
               {
-                label: 'Danh Sách',
+                label: t('list'),
                 path: '/locations',
               },
               {
-                label: 'Thông tin văn phòng',
+                label: t('office_info'),
                 path: `/locations/${location_id}`,
               },
               {
-                label: 'Tiến hành đặt chỗ',
+                label: t('make_reservation'),
                 active: true,
               },
             ]}
@@ -233,9 +235,9 @@ export default function CreateBooking() {
             current={currentStep}
             labelPlacement='vertical'
           >
-            <Step title='Thông tin đặt chỗ' />
-            <Step title='Thanh toán' />
-            <Step title='Trạng thái' />
+            <Step title={t('reservation_info')} />
+            <Step title={t('payment')} />
+            <Step title={t('status')} />
           </Steps>
         </div>
       </div>
@@ -247,7 +249,7 @@ export default function CreateBooking() {
                 <WavingIcon />
                 <div>
                   <div className='fw-bold'>
-                    Bạn là nhân viên của Doanh nghiệp đối tác với WorkNow?
+                    {t("create_booking_title")}
                   </div>
                   <div>
                     <a
@@ -263,9 +265,9 @@ export default function CreateBooking() {
                         navigate(`/sign-in`);
                       }}
                     >
-                      Đăng nhập
+                      {t("login")}
                     </a>{' '}
-                    để thanh toán bằng tài khoản Doanh nghiệp. Hoặc{' '}
+                      {t("create_booking_signin_des")} {t("Or")}{' '}
                     <a
                       href='#'
                       onClick={() => {
@@ -279,9 +281,9 @@ export default function CreateBooking() {
                         navigate(`/sign-up`);
                       }}
                     >
-                      Đăng ký
+                      {t("signup")}
                     </a>{' '}
-                    để tận hưởng những ưu đãi thành viên.
+                    {t("create_booking_signup_des")}
                   </div>
                 </div>
               </div>
@@ -291,7 +293,7 @@ export default function CreateBooking() {
               <div className='content'>#123456</div>
             </div> */}
             <div className='box-3'>
-              <div className='header'>Thông tin khách hàng</div>
+              <div className='header'>{t("user_info")}</div>
               <Form
                 id='my_form'
                 autoComplete='off'
@@ -301,14 +303,14 @@ export default function CreateBooking() {
               >
                 <div className='mb-0'>
                   <label>
-                    Họ và tên <span>*</span>
+                    {t("first_last_name")} <span>*</span>
                   </label>
                   <Form.Item
                     name='full_name'
                     rules={[
                       {
                         required: true,
-                        message: 'Vui lòng điền vào trường này.',
+                        message: t("required_field"),
                       },
                     ]}
                   >
@@ -326,7 +328,7 @@ export default function CreateBooking() {
                 </div>
                 <div className='mb-0'>
                   <label>
-                    Di động <span>*</span>
+                  {t("phone")} <span>*</span>
                   </label>
                   <Form.Item
                     name='phone'
@@ -338,7 +340,7 @@ export default function CreateBooking() {
                           );
                           if (parse_phone?.isValid() !== true) {
                             return Promise.reject(
-                              new Error('Số điện thoại không hợp lệ')
+                              new Error(t("phone_invalid"))
                             );
                           }
                           return Promise.resolve();
@@ -370,11 +372,11 @@ export default function CreateBooking() {
                     rules={[
                       {
                         type: 'email',
-                        message: 'Email không hợp lệ.',
+                        message: t("email_invalid"),
                       },
                       {
                         required: true,
-                        message: 'Vui lòng điền vào trường này.',
+                        message: t("required_field"),
                       },
                     ]}
                   >
@@ -391,7 +393,7 @@ export default function CreateBooking() {
                   </Form.Item>
                 </div>
                 <div className='mb-0'>
-                  <label>Ghi chú</label>
+                  <label>{t("note")}</label>
                   <textarea
                     className='form-control'
                     style={{ resize: 'none' }}
@@ -447,7 +449,7 @@ export default function CreateBooking() {
               </div>
             </div>
             <div className='box-2'>
-              <div className='title'>Vị trí đã chọn</div>
+              <div className='title'>{t("position_selected")}</div>
               <div>
                 <div className='selected-workspace'>
                   <span>x1</span>
@@ -476,10 +478,10 @@ export default function CreateBooking() {
               </div>
             </div>
             <div className='box-3'>
-              <div className='title'>Chi tiết giá</div>
+              <div className='title'>{t("price_detail")}</div>
               <div className='price-detail'>
                 <div>
-                  <span>Giá gốc</span>
+                  <span>{t("price_origin")}</span>
                   <span>{formatCurrency(orderInfo?.price)}</span>
                 </div>
                 {/* <div>
@@ -492,19 +494,17 @@ export default function CreateBooking() {
                 </div> */}
               </div>
               <div className='price-total'>
-                <span>Tổng cộng</span>
+                <span>{t("total")}</span>
                 <span>{formatCurrency(orderInfo?.price)}</span>
               </div>
               <p className='policy'>
-                Giá trên không bao gồm các chi phí khi bạn sử dụng các dịch vụ
-                và tiện ích khác của tòa nhà. Khi bạn muốn hủy hoặc hoàn tiền
-                cho vị trí đã đặt vui lòng kiểm tra kỹ{' '}
-                <b>chính sách hủy và hoàn tiền của WorkNow</b>{' '}
-                <a href='#'>tại đây</a>
+                {t("total_des")}{' '}
+                <b>{t("total_des1")}</b>{' '}
+                <a href='#'>{t("here")}</a>
               </p>
             </div>
             <button type='submit' form='my_form' className='payment-button'>
-              Thanh toán
+              {t("payment")}
             </button>
           </div>
         </div>

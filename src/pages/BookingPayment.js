@@ -25,6 +25,7 @@ import Countdown from 'react-countdown';
 import axios from 'axios';
 import { ReactComponent as CountDownIcon } from '../assets/icons/CountDownClock.svg';
 import OrderExpireModal from '../components/OrderExpireModal';
+import { t } from 'i18next';
 const { Step } = Steps;
 
 export default function BookingPayment() {
@@ -303,15 +304,15 @@ export default function BookingPayment() {
           <Bcrumb
             data={[
               {
-                label: 'Danh Sách',
+                label: t('list'),
                 path: '/locations',
               },
               {
-                label: 'Thông tin văn phòng',
+                label: t('office_info'),
                 path: `/locations/${location_id}/working-space/${workingSpaceInfo.id}`,
               },
               {
-                label: 'Tiến hành đặt chỗ',
+                label: t('make_reservation'),
                 active: true,
               },
             ]}
@@ -324,9 +325,9 @@ export default function BookingPayment() {
             current={currentStep}
             labelPlacement='vertical'
           >
-            <Step title='Thông tin đặt chỗ' />
-            <Step title='Thanh toán' />
-            <Step title='Trạng thái' />
+            <Step title={t('reservation_info')} />
+            <Step title={t('payment')} />
+            <Step title={t('status')} />
           </Steps>
         </div>
       </div>
@@ -338,7 +339,7 @@ export default function BookingPayment() {
                 <WavingIcon />
                 <div>
                   <div className='fw-bold'>
-                    Bạn là nhân viên của Doanh nghiệp đối tác với WorkNow?
+                    {t("create_booking_title")}
                   </div>
                   <div>
                     <a
@@ -354,9 +355,9 @@ export default function BookingPayment() {
                         navigate(`/sign-in`);
                       }}
                     >
-                      Đăng nhập
+                      {t("login")}
                     </a>{' '}
-                    để thanh toán bằng tài khoản Doanh nghiệp. Hoặc{' '}
+                      {t("create_booking_signin_des")} {t("Or")}{' '}
                     <a
                       href='#'
                       onClick={() => {
@@ -370,9 +371,9 @@ export default function BookingPayment() {
                         navigate(`/sign-up`);
                       }}
                     >
-                      Đăng ký
+                      {t("signup")}
                     </a>{' '}
-                    để tận hưởng những ưu đãi thành viên.
+                    {t("create_booking_signup_des")}
                   </div>
                 </div>
               </div>
@@ -381,13 +382,13 @@ export default function BookingPayment() {
               <div className='row g-3'>
                 <div className='col-md-6'>
                   <div className='left'>
-                    <div className='title'>Mã đơn đặt</div>
+                    <div className='title'>{t('order_code')}</div>
                     <div className='content'>#{orderInfo?.orderId}</div>
                   </div>
                 </div>
                 <div className='col-md-6'>
                   <div className='right'>
-                    <div className='title'>Hết hạn thanh toán sau</div>
+                    <div className='title'>{t('payment_expired')}</div>
                     <div className='content'>
                       <Countdown
                         date={new Date(orderInfo.bookingExpiredTime)}
@@ -399,11 +400,10 @@ export default function BookingPayment() {
               </div>
             </div>
             <div className='box-3'>
-              <div className='title'>Phương thức thanh toán</div>
+              <div className='title'>{t('payment_method')}</div>
               <div className='content'>
                 <div className='confirm-text'>
-                  Thư xác nhận sẽ được gửi đến email của bạn ngay sau khi chúng
-                  tôi hoàn tất quá trình kiểm tra.
+                  {t('payment_email_confirm')}
                 </div>
                 <div className='payment-method-title'>
                   <input
@@ -412,7 +412,7 @@ export default function BookingPayment() {
                     checked={paymentMethod === 'bank_account'}
                     onChange={() => setPaymentMethod('bank_account')}
                   />
-                  <span>Chuyển khoản qua ngân hàng</span>
+                  <span>{t('bank_transfer')}</span>
                 </div>
                 {paymentMethod === 'bank_account' && (
                   <div className='according-bank'>
@@ -420,7 +420,7 @@ export default function BookingPayment() {
                       <Accordion.Item eventKey='0'>
                         <Accordion.Header>
                           <div className='according-bank_header'>
-                            Thông tin thanh toán
+                            {t('payment_info')}
                           </div>
                         </Accordion.Header>
                         <Accordion.Body>
@@ -428,22 +428,22 @@ export default function BookingPayment() {
                             <div className='bank-name'>Vietcombank</div>
                             <div className='bank-details'>
                               <div>
-                                <span>Số tài khoản</span>
+                                <span>{t('account_number')}</span>
                                 <span>0531002547497</span>
                               </div>
                               <div>
-                                <span>Chủ tài khoản</span>
+                                <span>{t('account_holder')}</span>
                                 <span>Công ty TNHH Rockship</span>
                               </div>
                               <div>
-                                <span>Nội dung chuyển khoản</span>
+                                <span>{t('transfer_content')}</span>
                                 <span>
                                   Thanh toan dat cho #{orderInfo?.orderId}
                                 </span>
                               </div>
                             </div>
                             <div className='bank-amount'>
-                              <span>Số tiền</span>
+                              <span>{t('amount_money')}</span>
                               <span>
                                 {formatCurrency(orderInfo?.finalTotal)}
                               </span>
@@ -461,7 +461,7 @@ export default function BookingPayment() {
                     checked={paymentMethod === 'e_wallet'}
                     onChange={() => setPaymentMethod('e_wallet')}
                   />
-                  <span>Ví điện tử</span>
+                  <span>{t('e_wallet')}</span>
                 </div>
                 {paymentMethod === 'e_wallet' && (
                   <div className='according-ewallet'>
@@ -530,7 +530,7 @@ export default function BookingPayment() {
                   onChange={handleUploadImage}
                   onRemove={onRemove}
                 >
-                  <div className='upload-bill'>Tải hóa đơn chuyển khoản</div>
+                  <div className='upload-bill'>{t('transfer_invoice')}</div>
                 </Upload>
               </div>
             </div>
@@ -574,7 +574,7 @@ export default function BookingPayment() {
               </div>
             </div>
             <div className='box-2'>
-              <div className='title'>Vị trí đã chọn</div>
+              <div className='title'>{t("position_selected")}</div>
               <div>
                 <div className='selected-workspace'>
                   <span>x1</span>
@@ -626,10 +626,10 @@ export default function BookingPayment() {
               </div>
             </div>
             <div className='box-3'>
-              <div className='title'>Chi tiết giá</div>
+              <div className='title'>{t("price_detail")}</div>
               <div className='price-detail'>
                 <div>
-                  <span>Giá gốc</span>
+                  <span>{t("price_origin")}</span>
                   <span>{formatCurrency(orderInfo?.total)}</span>
                 </div>
                 {/* <div>
@@ -642,15 +642,13 @@ export default function BookingPayment() {
                 </div> */}
               </div>
               <div className='price-total'>
-                <span>Tổng cộng</span>
+                <span>{t("total")}</span>
                 <span>{formatCurrency(orderInfo?.finalTotal)}</span>
               </div>
               <p className='policy'>
-                Giá trên không bao gồm các chi phí khi bạn sử dụng các dịch vụ
-                và tiện ích khác của tòa nhà. Khi bạn muốn hủy hoặc hoàn tiền
-                cho vị trí đã đặt vui lòng kiểm tra kỹ{' '}
-                <b>chính sách hủy và hoàn tiền của WorkNow</b>{' '}
-                <a href='#'>tại đây</a>
+                {t("total_des")}{' '}
+                <b>{t("total_des1")}</b>{' '}
+                <a href='#'>{t("here")}</a>
               </p>
             </div>
             <button
@@ -658,7 +656,7 @@ export default function BookingPayment() {
               className='payment-button'
               onClick={handleFinish}
             >
-              Tôi đã hoàn tất
+              {t('payment_done')}
             </button>
           </div>
         </div>
