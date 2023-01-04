@@ -6,7 +6,7 @@ export default function ShowMore(props) {
   const { show, setShow } = props;
   return (
     <div className='show-more' onClick={() => setShow(!show)}>
-      {show ? t('collapse') : t('readmore')}
+      {show ? t('collapse') : t('read_more')}
     </div>
   );
 }

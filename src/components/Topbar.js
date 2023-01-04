@@ -52,6 +52,7 @@ export default function Topbar(props) {
     }
   }, []);
   const handleChangeLanguage = (item) => {
+    window.location.reload();
     setSelectedLanguage(item);
     i18n.changeLanguage(item.value);
     localStorage.setItem('language', item.value);
@@ -141,7 +142,7 @@ export default function Topbar(props) {
       className='topbar'
     >
       <Container
-        className='page-container'
+        className='topbar-container'
         style={{ minHeight: '80px', maxWidth: '100%' }}
       >
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -199,7 +200,7 @@ export default function Topbar(props) {
           {user ? (
             <>
               <div className='isLoginWeb'>
-                <div className='text'>
+                {/* <div className='text'>
                   <div>
                     <div>
                       {t('hi')},{' '}
@@ -214,7 +215,7 @@ export default function Topbar(props) {
                     </div>
                   </div>
                   <div onClick={handleLogout}>{t('logout')}</div>
-                </div>
+                </div> */}
                 <div>
                   <Dropdown
                     overlay={menuWeb}

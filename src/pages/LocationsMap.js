@@ -6,7 +6,9 @@ import { ReactComponent as BackIcon } from '../assets/icons/backArrow.svg';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import FilterSortLocationMobile from '../components/FilterSortLocationMobile';
 import { returnUrlParams } from '../helpers/helpers';
+import { useTranslation } from 'react-i18next';
 export default function LocationsMap() {
+  const { t } = useTranslation();
   const path = useLocation();
   const navigate = useNavigate();
   const [urlParams] = useSearchParams();
@@ -168,7 +170,7 @@ export default function LocationsMap() {
             }
           >
             <BackIcon className='icon' />
-            <span className='text'>Trở về danh sách</span>
+            <span className='text'>{t('back_to_list')}</span>
           </div>
           <div className='filter-section'>
             <FilterSortLocationMobile

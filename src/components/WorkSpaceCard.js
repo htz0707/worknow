@@ -4,11 +4,7 @@ import Img1 from '../assets/images/location_img1.png';
 import Tag from './Tag';
 import TimeSlotView from './TimeSlotView';
 import { Carousel } from 'react-bootstrap';
-import {
-  formatCurrency,
-  renderHourOrDay,
-  returnTypeOfBooking,
-} from '../helpers/helpers';
+import { formatCurrency, returnTypeOfBooking } from '../helpers/helpers';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as ThreeUserIcon } from '../assets/icons/three_user.svg';
 import { ReactComponent as ClockIcon } from '../assets/icons/clock.svg';
@@ -23,6 +19,24 @@ export default function WorkSpaceCard(props) {
   let navigate = useNavigate();
   const handleGoToWorkingSpaceDetail = (location_id, working_space_id) => {
     navigate(`/locations/${location_id}/working-space/${working_space_id}`);
+  };
+  const renderHourOrDay = (value) => {
+    if (
+      value === 'flexible_desk' ||
+      value === 'fixed_desk' ||
+      value === 'private_room'
+    ) {
+      return t('day');
+    } else if (
+      value === 'meeting_room' ||
+      value === 'event' ||
+      value === 'convience_room' ||
+      value === 'booth'
+    ) {
+      return 'H';
+    } else {
+      return 'H';
+    }
   };
   return (
     <div className='workspace-card'>

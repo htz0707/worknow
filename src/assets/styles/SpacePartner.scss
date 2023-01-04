@@ -1,351 +1,120 @@
 @import '_setting.scss';
 
 .space-partner {
-  margin-top: 200px;
-
-  @media (max-width: 768px),
-  (max-height: 600px) {
-    margin-top: 100px;
-  }
-
-  .layout-1 {
-    width: 99vw;
+  margin-top: 80px;
+  .section-1 {
+    width: 100%;
     background: url('../images/layout.png');
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
-
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
+  .section-2 {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .section-3 {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .section-4 {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .feature-card {
+      width: 100%;
+      background: linear-gradient(
+        137.25deg,
+        #eeeeee 3.09%,
+        #ebebeb 41.75%,
+        #ffffff 100%
+      );
+      border-radius: 10px;
+      text-align: center;
+      height: 100%;
+      .relationship-icon {
+        margin-left: auto;
+        margin-right: auto;
+        width: 60px;
+        background-color: white;
 
-  .right-layout-1 {
-    max-width: 50vw;
-    min-height: 500px;
-    position: relative;
-    text-align: center;
-
-    .right-picture-1 {
-      display: flex;
-      position: absolute;
-      bottom: -30px;
-      right: -100px;
-    }
-
-    @media (max-width: 768px),
-    (max-height: 600px) {
-      max-width: 90vw;
-      min-height: 270px;
-
-      .right-picture-1 {
-        left: 0px;
+        .image-icon {
+          height: 55px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+      .text-solution {
+        text-align: justify;
       }
     }
-
-    @media (max-height: 600px) {
-      margin-top: 250px;
-    }
   }
-
-  .icon {
-    border-radius: 50%;
-    background: linear-gradient(265.95deg, rgba(186, 123, 29, 0.8) -59.03%, rgba(255, 224, 178, 0.8) 6.24%, rgba(255, 191, 67, 0.8) 111.24%);
-  }
-
-
-  .button-gray {
-    background-color: rgba(171, 171, 171, 0.5);
-    border: 0;
-
-    &:hover {
-      color: white !important;
-    }
-  }
-
-  .nav-link.active.no-underline {
-    border: 0 !important;
-  }
-
-  .text-pointer {
-    cursor: pointer !important;
-
-    &:hover {
-      color: $primary !important;
-    }
-  }
-
-  .sign-up-block {
+  .section-5 {
     width: 100%;
-    text-align: center;
-
-    h2 {
-      font-weight: bold;
-      font-size: 48px;
-      line-height: 52px;
-      color: rgb(20, 20, 20);
-      margin: 120px 0px 40px;
-    }
-
-    .sign-up-form {
-      max-width: 672px;
-      margin: 0 auto;
-
-      .sign-up-tabs {
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 8px;
-        background: #F3F3F3;
-        margin-bottom: 60px;
-
-        .ant-tabs-nav-list {
-          width: 100%;
-        }
-
-        .ant-tabs-tab {
-          width: 100%;
-          height: 88px;
-          display: flex;
-          justify-content: center;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 26px;
-          line-height: 32px;
-          color: rgb(67, 67, 67);
-          background-color: #F3F3F3;
-          padding: 28px 0px 20px;
-          margin-left: 0;
-        }
-
-        .ant-tabs-tab-active {
-          background-color: #F3F3F3;
-          color: rgb(44, 44, 44);
-          border: 0;
-          justify-content: left;
-          padding-left: 45px;
-
-          .ant-tabs-tab-btn {
+    background: url('../images/layout.png');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .section-6 {
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    .sign-up-block {
+      h2 {
+        margin-bottom: 20px;
+      }
+      width: 100%;
+      text-align: center;
+      .sign-up-form {
+        width: 100%;
+        .sign-up-tabs {
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          border-radius: 8px;
+          background: #f3f3f3;
+          margin-bottom: 60px;
+          .ant-tabs-nav-list {
+            width: 100%;
+          }
+          .ant-tabs-tab {
+            width: 100%;
+            height: 88px;
+            display: flex;
+            justify-content: center;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 32px;
+            color: rgb(67, 67, 67);
+            background-color: #f3f3f3;
+            margin-left: 0;
+            margin-right: 0;
+          }
+          @media (max-width: 768px) {
+            .ant-tabs-tab {
+              font-size: 16px;
+            }
+          }
+          .ant-tabs-tab-active {
+            background-color: #f3f3f3;
             color: rgb(44, 44, 44);
-            border-bottom: 4px solid black;
-            padding-bottom: 4px;
+            border: 0;
+            justify-content: left;
+            padding-left: 20px;
+
+            .ant-tabs-tab-btn {
+              color: rgb(44, 44, 44);
+              border-bottom: 4px solid black;
+              padding-bottom: 4px;
+            }
           }
         }
-      }
-    }
-
-    @media (max-width: 768px) {
-      max-width: 99vw;
-
-      .ant-tabs-tab-btn {
-        max-width: 55vw !important;
-        overflow: hidden;
-      }
-    }
-  }
-
-  .image-card-group-1 {
-    margin-left: 28%;
-    display: flex;
-
-    .image-card {
-      text-align: left;
-      margin-right: 50px;
-
-      .image-scale {
-        height: 200px;
-      }
-
-      h3 {
-        margin-top: 12px;
-      }
-    }
-
-    @media (max-width: 768px),
-    (max-height: 600px) {
-
-      display: initial;
-      margin-left: 0;
-
-      .image-card {
-        margin-right: 0;
-
-        .image-scale {
-          width: 100%;
-        }
-
-        h3,
-        p {
-          text-align: center;
-        }
-      }
-    }
-  }
-
-  .image-card-group-2 {
-    display: flex;
-    margin-left: 17%;
-
-    .image-card {
-      text-align: left;
-      margin-right: 50px;
-
-      .image-scale {
-        height: 200px;
-      }
-
-      h3 {
-        margin-top: 12px;
-      }
-    }
-
-    @media (max-width: 768px),
-    (max-height: 600px) {
-      display: initial;
-      margin-left: 0;
-
-      .image-card {
-        margin-right: 0;
-
-        .image-scale {
-          width: 100%;
-        }
-
-        h3,
-        p {
-          text-align: center;
-        }
-      }
-    }
-  }
-
-  .align-center {
-    text-align: center;
-
-    .solution-group {
-      margin-left: 200px;
-      margin-top: 50px;
-      margin-bottom: 100px;
-
-      .solution-card {
-        background: linear-gradient(137.25deg, #EEEEEE 3.09%, #EBEBEB 41.75%, #FFFFFF 100%);
-        margin-right: 50px;
-
-        .text-solution {
-          text-align: left;
-        }
-
-        .relationship-icon {
-          margin-left: auto;
-          margin-right: auto;
-          width: 60px;
-          background-color: white;
-
-          .image-icon {
-            height: 55px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-          }
-        }
-      }
-
-      @media (max-width: 768px),
-      (max-height: 600px) {
-        margin-left: 0;
-        margin-right: 0;
-
-        .solution-card {
-          margin-left: auto;
-          margin-bottom: 50px;
-          margin-right: auto;
-          width: 250px;
-        }
-      }
-    }
-
-    .solution {
-      margin-top: 100px;
-      height: 500px;
-    }
-  }
-
-  .data-layout {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    background: #F3F3F3;
-  }
-
-  .right-picture-data {
-    max-width: 50vw;
-    min-height: 500px;
-    position: relative;
-    text-align: center;
-
-    .data-1 {
-      height: 600px;
-      display: flex;
-      position: absolute;
-      top: -75px;
-      right: -100px;
-    }
-
-    .data-2 {
-      height: 200px;
-      display: flex;
-      position: absolute;
-      top: 160px;
-      left: 200px;
-    }
-
-    .data-3 {
-      height: 200px;
-      display: flex;
-      position: absolute;
-      top: 20px;
-      right: -100px;
-    }
-
-    .data-4 {
-      height: 200px;
-      display: flex;
-      position: absolute;
-      bottom: 0px;
-      right: -100px;
-    }
-
-    @media (max-width: 768px) {
-      max-width: 90vw;
-      min-height: 200px;
-
-      .data-1 {
-        height: 200px;
-        right: 0;
-        top: 40px;
-      }
-
-      .data-2,
-      .data-3,
-      .data-4 {
-        height: 50px;
-        left: 0;
-      }
-
-      .data-2 {
-        left: 120px;
-        top: 120px
-      }
-
-      .data-3 {
-        left: 270px;
-        top: 60px;
-      }
-
-      .data-4 {
-        left: 280px;
-      }
-    }
-
-    @media (max-height: 600px) {
-      margin-left: 100px;
-
-      .data-2 {
-        left: -100px;
       }
     }
   }

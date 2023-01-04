@@ -1,9 +1,11 @@
 .slideshow-image {
   position: fixed;
+  top: 0;
+  left: 0;
   inset: 0px;
   z-index: 1075;
   background: rgb(0, 0, 0);
-  padding: 64px;
+  padding: 20px;
   font-family: Roboto, sans-serif;
   color: rgb(0, 0, 0);
   font-size: 16px;
@@ -12,11 +14,13 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  height: 100%;
+  width: 100%;
   .slide-header {
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
-    > button {
+    > button:nth-child(1) {
       color: white;
       font-size: 30px;
       background-color: transparent;
@@ -25,24 +29,60 @@
   }
   .slide-container {
     max-width: 100%;
-    .each-slide-effect {
-      > div {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        > img {
-          height: 375px;
-          width: auto !important;
-          max-width: 700px;
+    height: calc(100% - 87px);
+    > div {
+      height: 100%;
+      .react-slideshow-container {
+        height: calc(100% - 112px);
+        button {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &:first-child {
+            svg {
+              margin-right: 5px;
+            }
+          }
+          &:last-child {
+            svg {
+              margin-left: 5px;
+            }
+          }
+        }
+        .react-slideshow-wrapper.slide {
+          height: 100%;
+          .images-wrap {
+            height: 100%;
+            > div {
+              height: 100%;
+              .each-slide-effect {
+                height: 100%;
+                > div {
+                  display: flex;
+                  justify-content: center;
+                  width: 100%;
+                  height: 100%;
+                  > img {
+                    height: 100%;
+                    width: auto !important;
+                    max-width: calc(100% - 80px);
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
+
     .indicators {
       overflow: auto;
       flex-wrap: nowrap;
       justify-content: flex-start;
       > .indicator {
-        min-width: 114px;
+        width: 114px;
         margin-right: 8px;
         height: 72px;
         background: rgb(255, 255, 255);

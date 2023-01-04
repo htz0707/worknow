@@ -23,10 +23,13 @@ import 'moment/locale/vi'; // without this line it didn't work
 import ShowMore from '../components/ShowMore';
 import { renderAddress, renderWorkingHour } from '../helpers/helpers';
 import { useTranslation } from 'react-i18next';
-moment.locale('vi');
 
 export default function LocationDetails() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    moment.locale(i18n.language);
+  }, [i18n.language]);
+
   const { id } = useParams();
   let navigate = useNavigate();
   const showInMapClicked = (your_lat, your_lng) => {
@@ -341,7 +344,7 @@ export default function LocationDetails() {
                 {t('view_on_map')}
               </span>
             </div>
-            <div>
+            {/* <div>
               <div>
                 <StarIcon />
                 <StarIcon />
@@ -350,7 +353,7 @@ export default function LocationDetails() {
                 <StarIcon />
               </div>
               <div>120 {t('comment_from_customer')}</div>
-            </div>
+            </div> */}
           </div>
           <div className='row-4'>
             {imageUrl.length >= 3 && (

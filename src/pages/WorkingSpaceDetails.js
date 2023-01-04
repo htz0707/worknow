@@ -34,7 +34,6 @@ import { useState } from 'react';
 import {
   formatCurrency,
   renderAddress,
-  renderHourOrDay,
   renderWorkingHour,
   returnTypeOfBooking,
 } from '../helpers/helpers';
@@ -214,6 +213,24 @@ export default function WorkingSpaceDetails() {
   const [showModal, setShowModal] = useState(false);
   const handleBooking = (item) => {
     setShowModal(true);
+  };
+  const renderHourOrDay = (value) => {
+    if (
+      value === 'flexible_desk' ||
+      value === 'fixed_desk' ||
+      value === 'private_room'
+    ) {
+      return t('day');
+    } else if (
+      value === 'meeting_room' ||
+      value === 'event' ||
+      value === 'convience_room' ||
+      value === 'booth'
+    ) {
+      return 'H';
+    } else {
+      return 'H';
+    }
   };
   return (
     <div className='working-space-details page-container'>
