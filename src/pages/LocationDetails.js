@@ -23,10 +23,13 @@ import 'moment/locale/vi'; // without this line it didn't work
 import ShowMore from '../components/ShowMore';
 import { renderAddress, renderWorkingHour } from '../helpers/helpers';
 import { useTranslation } from 'react-i18next';
-moment.locale('vi');
 
 export default function LocationDetails() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    moment.locale(i18n.language);
+  }, [i18n.language]);
+
   const { id } = useParams();
   let navigate = useNavigate();
   const showInMapClicked = (your_lat, your_lng) => {
@@ -262,6 +265,9 @@ export default function LocationDetails() {
   const handleConfirmBooking = () => {
     navigate(`/create-booking/${id}/${selectedWorkingSpace.id}`);
   };
+  function replaceWithBr(haiku) {
+    return haiku?.replace(/\n/g, '<br />');
+  }
   return (
     <div className='location-details'>
       <div className='location-details_header'></div>
@@ -341,7 +347,7 @@ export default function LocationDetails() {
                 {t('view_on_map')}
               </span>
             </div>
-            <div>
+            {/* <div>
               <div>
                 <StarIcon />
                 <StarIcon />
@@ -350,7 +356,7 @@ export default function LocationDetails() {
                 <StarIcon />
               </div>
               <div>120 {t('comment_from_customer')}</div>
-            </div>
+            </div> */}
           </div>
           <div className='row-4'>
             {imageUrl.length >= 3 && (
@@ -527,7 +533,12 @@ export default function LocationDetails() {
             <div className='header'>
               {t('overview_about')} {locationInfo?.name}
             </div>
-            <p className='body'>{locationInfo?.description}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: replaceWithBr(locationInfo?.description),
+              }}
+              className='body'
+            />
           </div>
           <div className='location-hours' id='section_2'>
             <div className='header'>{t('working_hour')} </div>

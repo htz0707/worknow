@@ -1,14 +1,16 @@
 import React from 'react';
 import '../assets/styles/Marker.scss';
-import { renderAddress, returnLowestPrice } from '../helpers/helpers';
+import { formatCurrency, renderAddress } from '../helpers/helpers';
 import cx from 'classnames';
 import { Carousel } from 'react-bootstrap';
 import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
 import { ReactComponent as BuildingIcon } from '../assets/icons/building.svg';
 import { ReactComponent as AuthenIcon } from '../assets/icons/shield.svg';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Marker(props) {
+  const { t } = useTranslation();
   const { data, activeLocation, setActiveLocation } = props;
   const handleClick = (item) => {
     console.log(item);
@@ -17,6 +19,26 @@ export default function Marker(props) {
   let navigate = useNavigate();
   const handleRedirect = (id) => {
     navigate(`/locations/${id}`);
+  };
+  const returnLowestPrice = (priceByHour, priceByDay) => {
+    if (priceByHour && priceByDay) {
+      if (priceByHour <= priceByDay) {
+        let price = formatCurrency(priceByHour);
+        return price + '/H';
+      } else {
+        let price = formatCurrency(priceByDay);
+        return price + '/' + t('day');
+      }
+    } else {
+      if (priceByHour) {
+        let price = formatCurrency(priceByHour);
+        return price + '/H';
+      }
+      if (priceByDay) {
+        let price = formatCurrency(priceByDay);
+        return price + '/' + t('day');
+      }
+    }
   };
   return (
     <div
@@ -67,10 +89,10 @@ export default function Marker(props) {
               <div className='icon-badge'>
                 <AuthenIcon className='icon' />
               </div>
-              <div>Đã xác thực bởi WORKNOW</div>
+              <div>{t('verified_by_worknow')}</div>
             </div>
             <div className='location-price'>
-              Chỉ từ
+              {t('just_from')}
               <div className='price'>
                 {returnLowestPrice(data.priceByHour, data.priceByDay)}
               </div>
@@ -78,7 +100,8 @@ export default function Marker(props) {
           </div>
         ) : (
           <div className='card-body'>
-            Từ {returnLowestPrice(data.priceByHour, data.priceByDay)}
+            {t('just_from')}{' '}
+            {returnLowestPrice(data.priceByHour, data.priceByDay)}
           </div>
         )}
       </div>
