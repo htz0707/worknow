@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import {
+  NavLink,
+  Link,
+  useLocation,
+  createSearchParams,
+} from 'react-router-dom';
 import '../assets/styles/Topbar.scss';
 import { useTranslation } from 'react-i18next';
 import i18n from '../translation/i18n';
