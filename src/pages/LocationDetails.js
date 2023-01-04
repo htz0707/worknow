@@ -265,6 +265,9 @@ export default function LocationDetails() {
   const handleConfirmBooking = () => {
     navigate(`/create-booking/${id}/${selectedWorkingSpace.id}`);
   };
+  function replaceWithBr(haiku) {
+    return haiku?.replace(/\n/g, '<br />');
+  }
   return (
     <div className='location-details'>
       <div className='location-details_header'></div>
@@ -530,7 +533,12 @@ export default function LocationDetails() {
             <div className='header'>
               {t('overview_about')} {locationInfo?.name}
             </div>
-            <p className='body'>{locationInfo?.description}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: replaceWithBr(locationInfo?.description),
+              }}
+              className='body'
+            />
           </div>
           <div className='location-hours' id='section_2'>
             <div className='header'>{t('working_hour')} </div>
