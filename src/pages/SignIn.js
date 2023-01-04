@@ -55,8 +55,17 @@ export default function SignIn() {
   const [signIn, { loading }] = useMutation(SIGN_IN, {
     update(_, { data: { signIn: userData } }) {
       console.log(userData);
-      login(userData);
-      redirectAfterLogin(navigate, '/');
+      if (userData?.roles[0]?.name === 'Space provider') {
+        handleMessage(
+          'error',
+          'Tài khoản Đối tác không thể đăng nhập trang này. Vui lòng đăng ký tài khoản K/H.'
+        );
+        return;
+      }
+      if (userData?.roles[0]?.name === 'Member') {
+        login(userData);
+        redirectAfterLogin(navigate, '/');
+      }
     },
     onError(err) {
       console.log(err);

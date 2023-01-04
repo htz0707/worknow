@@ -29,7 +29,6 @@ import ChangePassword from './pages/ChangePassword';
 import About from './pages/About';
 import AdminOrders from './pages/AdminOrders';
 
-
 function App() {
   return (
     <AuthProvider>
@@ -88,6 +87,7 @@ function App() {
             />
             <Route path='/rules' element={<Rules />} />
             <Route path='/privacy' element={<Privacy />} />
+            <Route path='/about' element={<About />} />
           </Route>
           <Route
             path='/create-booking/:location_id/:working_space_id'
@@ -118,14 +118,8 @@ function App() {
               </PublicRoute>
             }
           />
-          <Route
-            path='/about'
-            element={<About />}
-          />
-          <Route
-            path='/admin/orders'
-            element={<AdminOrders />}
-          />
+
+          <Route path='/admin/orders' element={<AdminOrders />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

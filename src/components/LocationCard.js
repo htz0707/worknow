@@ -7,7 +7,7 @@ import { ReactComponent as StarIcon } from '../assets/icons/start.svg';
 import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
 import { ReactComponent as BuildingIcon } from '../assets/icons/building.svg';
 import { ReactComponent as AuthenIcon } from '../assets/icons/shield.svg';
-import { renderAddress, returnLowestPrice } from '../helpers/helpers';
+import { formatCurrency, renderAddress } from '../helpers/helpers';
 import { useTranslation } from 'react-i18next';
 
 export default function LocationCard(props) {
@@ -16,6 +16,26 @@ export default function LocationCard(props) {
   let navigate = useNavigate();
   const handleClick = (id) => {
     navigate(`/locations/${id}`);
+  };
+  const returnLowestPrice = (priceByHour, priceByDay) => {
+    if (priceByHour && priceByDay) {
+      if (priceByHour <= priceByDay) {
+        let price = formatCurrency(priceByHour);
+        return price + '/H';
+      } else {
+        let price = formatCurrency(priceByDay);
+        return price + '/' + t('day');
+      }
+    } else {
+      if (priceByHour) {
+        let price = formatCurrency(priceByHour);
+        return price + '/H';
+      }
+      if (priceByDay) {
+        let price = formatCurrency(priceByDay);
+        return price + '/' + t('day');
+      }
+    }
   };
   return (
     <div className='location-card'>

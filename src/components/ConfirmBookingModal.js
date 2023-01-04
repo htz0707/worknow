@@ -5,6 +5,7 @@ import TimeSlotView from './TimeSlotView';
 import DatePicker from 'react-datepicker';
 import { registerLocale, setDefaultLocale } from 'react-datepicker';
 import vi from 'date-fns/locale/vi';
+import en from 'date-fns/locale/en-US';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/DatePicker.scss';
 import {
@@ -19,8 +20,15 @@ import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrowdownfill.s
 import { useTranslation } from 'react-i18next';
 
 export default function ConfirmBookingModal(props) {
-  registerLocale('vi', vi);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    if (i18n.language === 'en') {
+      registerLocale('en', en);
+    }
+    if (i18n.language === 'vi') {
+      registerLocale('vi', vi);
+    }
+  }, [i18n.language]);
   const {
     show,
     handleClose,
