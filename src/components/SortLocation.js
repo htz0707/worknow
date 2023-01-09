@@ -28,9 +28,9 @@ export default function SortLocation(props) {
   };
   const handleRenderTitle = (value) => {
     switch (value) {
-      case '-name':
-        return t('name_a_z');
       case 'name':
+        return t('name_a_z');
+      case '-name':
         return t('name_z_a');
       case 'price':
         return t('lowest_price');
@@ -50,17 +50,17 @@ export default function SortLocation(props) {
         <Dropdown.Menu className='dropdown-menu'>
           <Dropdown.Item
             className={
-              sort === '-name' ? 'dropdown-item active' : 'dropdown-item'
+              sort === 'name' ? 'dropdown-item active' : 'dropdown-item'
             }
-            onClick={() => handleSelectSort('-name')}
+            onClick={() => handleSelectSort('name')}
           >
             {t('from_a_z')}
           </Dropdown.Item>
           <Dropdown.Item
             className={
-              sort === 'name' ? 'dropdown-item active' : 'dropdown-item'
+              sort === '-name' ? 'dropdown-item active' : 'dropdown-item'
             }
-            onClick={() => handleSelectSort('name')}
+            onClick={() => handleSelectSort('-name')}
           >
             {t('from_z_a')}
           </Dropdown.Item>
