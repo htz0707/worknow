@@ -6,8 +6,17 @@ import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import moment from 'moment';
 import { handleMessage } from '../helpers/helpers';
 import '../assets/styles/AdminOrders.scss';
+import { useAuthContext } from '../context/auth';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminOrders() {
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user?.roles[0]?.name === 'Member') {
+      navigate('/');
+    }
+  }, [user]);
   const GET_ORDERS = gql`
     query GetOrders($page: Int!, $limit: Int!, $sort: String) {
       orders(params: { page: $page, limit: $limit, sort: $sort }) {
@@ -373,37 +382,41 @@ export default function AdminOrders() {
 
   return (
     <div className='h-100 w-100 p-2'>
-      <div>
-        <Bcrumb
-          data={[
-            {
-              label: 'Trang Chủ',
-              path: '/',
-            },
-            {
-              label: 'Admin Orders',
-              active: true,
-            },
-          ]}
-        />
-      </div>
-      <Table
-        columns={columns}
-        dataSource={[...orders]}
-        scroll={{
-          x: 3500,
-          y: 600,
-        }}
-        pagination={{
-          defaultCurrent: pageNumber,
-          total: total,
-          onChange: (value, pageSize) => {
-            setPageNumber(value);
-            setPageSize(pageSize);
-            handleGetOrders(value, pageSize);
-          },
-        }}
-      />
+      {user?.roles[0]?.name === 'WorkNow admin' && (
+        <>
+          <div>
+            <Bcrumb
+              data={[
+                {
+                  label: 'Trang Chủ',
+                  path: '/',
+                },
+                {
+                  label: 'Admin Orders',
+                  active: true,
+                },
+              ]}
+            />
+          </div>
+          <Table
+            columns={columns}
+            dataSource={[...orders]}
+            scroll={{
+              x: 3500,
+              y: 600,
+            }}
+            pagination={{
+              defaultCurrent: pageNumber,
+              total: total,
+              onChange: (value, pageSize) => {
+                setPageNumber(value);
+                setPageSize(pageSize);
+                handleGetOrders(value, pageSize);
+              },
+            }}
+          />
+        </>
+      )}
     </div>
   );
 }
