@@ -62,6 +62,10 @@ export default function SignIn() {
         );
         return;
       }
+      if (userData?.roles[0]?.name === 'WorkNow admin') {
+        login(userData);
+        navigate('/admin/orders');
+      }
       if (userData?.roles[0]?.name === 'Member') {
         login(userData);
         redirectAfterLogin(navigate, '/');

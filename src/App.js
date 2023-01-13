@@ -119,7 +119,14 @@ function App() {
             }
           />
 
-          <Route path='/admin/orders' element={<AdminOrders />} />
+          <Route
+            path='/admin/orders'
+            element={
+              <PrivateRoute>
+                <AdminOrders />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
