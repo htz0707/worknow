@@ -299,15 +299,15 @@ export default function WorkingSpaceDetails() {
             <div className='content-info'>
               <div>{t('seat_info')}</div>
               {workingSpaceInfo?.description && (
-                <div>
+                <div className='description'>
                   <TickIcon className='icon' /> {workingSpaceInfo?.description}
                 </div>
               )}
-              <div>
+              <div className='capacity'>
                 <ThreeUserIcon className='icon' />
                 {workingSpaceInfo?.capacity?.name} {t('person')}
               </div>
-              <div>
+              <div className='working-hour'>
                 <ClockIcon className='icon' />{' '}
                 {renderWorkingHour(
                   locationInfo?.openTime,
