@@ -23,6 +23,7 @@ import 'moment/locale/vi'; // without this line it didn't work
 import ShowMore from '../components/ShowMore';
 import { renderAddress, renderWorkingHour } from '../helpers/helpers';
 import { useTranslation } from 'react-i18next';
+import WarningContactModal from '../components/WarningContactModal';
 
 export default function LocationDetails() {
   const { t, i18n } = useTranslation();
@@ -85,6 +86,7 @@ export default function LocationDetails() {
       location(id: $id) {
         id
         name
+        isVerified
         address
         city {
           name
@@ -261,6 +263,10 @@ export default function LocationDetails() {
   const handleBooking = (item) => {
     setSelectedWorkingSpace(item);
     setShowModal(true);
+  };
+  const [showContactModal, setShowContactModal] = useState(false);
+  const handleShowWarningContact = () => {
+    setShowContactModal(true);
   };
   const handleConfirmBooking = () => {
     navigate(`/create-booking/${id}/${selectedWorkingSpace.id}`);
@@ -613,7 +619,14 @@ export default function LocationDetails() {
                           locationInfo?.openTime,
                           locationInfo?.closeTime
                         )}
-                        handleClick={() => handleBooking(item)}
+                        isVerified={locationInfo?.isVerified}
+                        handleClick={() => {
+                          if (locationInfo.isVerified) {
+                            handleBooking(item);
+                          } else {
+                            handleShowWarningContact();
+                          }
+                        }}
                         key={index}
                       />
                     );
@@ -722,6 +735,10 @@ export default function LocationDetails() {
         openTime={locationInfo?.openTime}
         closeTime={locationInfo?.closeTime}
         handleClose={() => setShowModal(false)}
+      />
+      <WarningContactModal
+        show={showContactModal}
+        handleClose={() => setShowContactModal(false)}
       />
       <SlideshowImage
         show={showMoreImage}

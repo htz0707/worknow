@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function WorkSpaceCard(props) {
   const { t } = useTranslation();
-  const { data } = props;
+  const { data, isVerified } = props;
   const handleClick = () => {
     props.handleClick();
   };
@@ -88,7 +88,9 @@ export default function WorkSpaceCard(props) {
             {formatCurrency(data?.priceByDay)}/{renderHourOrDay(data?.type)}
           </div>
         )}
-        <button onClick={handleClick}>{t('book_now')}</button>
+        <button onClick={handleClick}>
+          {isVerified ? t('book_now') : t('contact_now')}
+        </button>
       </div>
     </div>
   );

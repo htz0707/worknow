@@ -39,6 +39,7 @@ import {
 } from '../helpers/helpers';
 import ConfirmBookingModal from '../components/ConfirmBookingModal';
 import { useTranslation } from 'react-i18next';
+import WarningContactModal from '../components/WarningContactModal';
 
 export default function WorkingSpaceDetails() {
   const { t } = useTranslation();
@@ -51,6 +52,7 @@ export default function WorkingSpaceDetails() {
       location(id: $location_id) {
         id
         name
+        isVerified
         address
         ward {
           name
@@ -214,6 +216,10 @@ export default function WorkingSpaceDetails() {
   const handleBooking = (item) => {
     setShowModal(true);
   };
+  const [showContactModal, setShowContactModal] = useState(false);
+  const handleShowWarningContact = () => {
+    setShowContactModal(true);
+  };
   const renderHourOrDay = (value) => {
     if (
       value === 'flexible_desk' ||
@@ -328,8 +334,17 @@ export default function WorkingSpaceDetails() {
                   {renderHourOrDay(workingSpaceInfo?.type)}
                 </div>
               )}
-              <button className='btn-booking' onClick={handleBooking}>
-                {t('book_now')}
+              <button
+                className='btn-booking'
+                onClick={() => {
+                  if (locationInfo.isVerified) {
+                    handleBooking();
+                  } else {
+                    handleShowWarningContact();
+                  }
+                }}
+              >
+                {locationInfo.isVerified ? t('book_now') : t('contact_now')}
               </button>
             </div>
           </div>
@@ -369,6 +384,10 @@ export default function WorkingSpaceDetails() {
         openTime={locationInfo?.openTime}
         closeTime={locationInfo?.closeTime}
         handleClose={() => setShowModal(false)}
+      />
+      <WarningContactModal
+        show={showContactModal}
+        handleClose={() => setShowContactModal(false)}
       />
     </div>
   );

@@ -93,6 +93,7 @@ function Locations() {
             name
           }
           id
+          isVerified
           priceByDay
           priceByHour
           images {

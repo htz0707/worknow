@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import '../assets/styles/ConfirmBookingModal.scss';
 import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrowdownfill.svg';
 import { useTranslation } from 'react-i18next';
+import { gql, useLazyQuery } from '@apollo/client';
 
 export default function ConfirmBookingModal(props) {
   const { t, i18n } = useTranslation();
@@ -285,6 +286,63 @@ export default function ConfirmBookingModal(props) {
     setError('');
     setShowCalendar(false);
   }, [show]);
+  const GET_WORKINGSPACE_AVAILABLE = gql`
+    query GetWorkingspaceAvailable(
+      $bookingType: BookingType!
+      $startDate: datetime!
+      $endDate: datetime!
+      $workingSpaceId: UUID!
+    ) {
+      workingSpaceAvailable(
+        params: {
+          bookingType: $bookingType
+          startDate: $startDate
+          endDate: $endDate
+          workingSpaceId: $workingSpaceId
+        }
+      ) {
+        available
+        over
+        time
+      }
+    }
+  `;
+  const [getWorkingspaceAvailable] = useLazyQuery(GET_WORKINGSPACE_AVAILABLE, {
+    fetchPolicy: 'no-cache',
+    onError(err) {
+      console.log(err);
+    },
+  });
+  const [timeslot, setTimeSlot] = useState([]);
+  const handleGetTimeSlot = async () => {
+    let start_date_join_time =
+      moment(bookingInfoTypeHour.date).format('YYYY-MM-DD') + 'T' + openTime;
+    let start_date_utc = moment
+      .utc(new Date(start_date_join_time).toUTCString())
+      .format();
+    let end_date_join_time =
+      moment(bookingInfoTypeHour.date).format('YYYY-MM-DD') + 'T' + closeTime;
+    let end_date_utc = moment
+      .utc(new Date(end_date_join_time).toUTCString())
+      .format();
+    let bodyData = {
+      bookingType: 'hour',
+      workingSpaceId: selectedWorkingSpace.id,
+      startDate: start_date_utc,
+      endDate: end_date_utc,
+    };
+    let res = await getWorkingspaceAvailable({
+      variables: bodyData,
+    });
+    if (res.data) {
+      setTimeSlot(res.data.workingSpaceAvailable);
+    }
+  };
+  useEffect(() => {
+    if (selectedWorkingSpace.id) {
+      handleGetTimeSlot();
+    }
+  }, [bookingInfoTypeHour.date]);
   return (
     <Modal
       show={show}
@@ -368,6 +426,7 @@ export default function ConfirmBookingModal(props) {
                 </div>
                 <div>
                   <TimeSlotView
+                    dataTimeslot={timeslot}
                     date={bookingInfoTypeHour.date}
                     openTime={openTime}
                     closeTime={closeTime}
@@ -419,6 +478,7 @@ export default function ConfirmBookingModal(props) {
                   </div>
                   <div>
                     <TimeSlotView
+                      dataTimeslot={timeslot}
                       date={bookingInfoTypeHour.date}
                       openTime={openTime}
                       closeTime={closeTime}
