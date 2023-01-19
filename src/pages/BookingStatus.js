@@ -120,7 +120,7 @@ export default function BookingStatus() {
         <div>
           <Logo className='logo' onClick={() => navigate('/locations')} />
         </div>
-        <div>
+        {/* <div>
           <Bcrumb
             data={[
               {
@@ -137,7 +137,7 @@ export default function BookingStatus() {
               },
             ]}
           />
-        </div>
+        </div> */}
         <div className='booking-step'>
           <Steps
             responsive={false}
