@@ -157,6 +157,15 @@ export default function LocationDetails() {
       }
     }
   };
+  const defaultType = [
+    'flexible_desk',
+    'fixed_desk',
+    'private_room',
+    'meeting_room',
+    'convience_room',
+    'event',
+    'booth',
+  ];
   const handleCreateTypeWorkingSpace = (data) => {
     let arr = [];
     data.forEach((item) => {
@@ -165,8 +174,14 @@ export default function LocationDetails() {
       }
     });
     if (arr.length) {
-      setTypeWorkingSpace(arr);
-      handleSelectTypeWorkingSpace(arr[0]);
+      let real_arr = [];
+      defaultType.forEach((item) => {
+        if (arr.includes(item)) {
+          real_arr.push(item);
+        }
+      });
+      setTypeWorkingSpace(real_arr);
+      handleSelectTypeWorkingSpace(real_arr[0]);
     } else {
       setTypeWorkingSpace([]);
       setCurrentWorkingSpace([]);
