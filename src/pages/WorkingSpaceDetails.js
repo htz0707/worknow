@@ -387,6 +387,7 @@ export default function WorkingSpaceDetails() {
       />
       <WarningContactModal
         show={showContactModal}
+        selectedWorkingSpace={workingSpaceInfo}
         handleClose={() => setShowContactModal(false)}
       />
     </div>

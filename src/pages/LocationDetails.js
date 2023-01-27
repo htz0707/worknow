@@ -280,7 +280,8 @@ export default function LocationDetails() {
     setShowModal(true);
   };
   const [showContactModal, setShowContactModal] = useState(false);
-  const handleShowWarningContact = () => {
+  const handleShowWarningContact = (item) => {
+    setSelectedWorkingSpace(item);
     setShowContactModal(true);
   };
   const handleConfirmBooking = () => {
@@ -639,7 +640,7 @@ export default function LocationDetails() {
                           if (locationInfo.isVerified) {
                             handleBooking(item);
                           } else {
-                            handleShowWarningContact();
+                            handleShowWarningContact(item);
                           }
                         }}
                         key={index}
@@ -753,6 +754,7 @@ export default function LocationDetails() {
       />
       <WarningContactModal
         show={showContactModal}
+        selectedWorkingSpace={selectedWorkingSpace}
         handleClose={() => setShowContactModal(false)}
       />
       <SlideshowImage

@@ -5,34 +5,38 @@ import { ReactComponent as Calendar } from '../assets/icons/calendar_2.svg';
 import { ReactComponent as Clock } from '../assets/icons/clock_2.svg';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function OrderCard(props) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { data } = props;
   const renderStatus = (status) => {
     if (status === 'confirming') {
       return (
-        <div className='status pending'>Chờ xác thực từ WorkNow Admin</div>
+        <div className='status pending'>
+          {t('wait_for_confirm_from_worknow')}
+        </div>
       );
     }
     if (status === 'confirmed') {
       return (
         <div className='status pending'>
-          Đã xác thực bởi Admin, đang chờ NCC duyệt
+          {t('wait_for_confirm_from_provider')}
         </div>
       );
     }
     if (status === 'extended') {
-      return <div className='status pending'>Chờ thanh toán</div>;
+      return <div className='status pending'>{t('wait_for_payment')}</div>;
     }
     if (status === 'booking') {
-      return <div className='status pending'>Chờ thanh toán</div>;
+      return <div className='status pending'>{t('wait_for_payment')}</div>;
     }
     if (status === 'payment_fail') {
-      return <div className='status cancelled'>Thanh toán thất bại</div>;
+      return <div className='status cancelled'>{t('payment_failed')}</div>;
     }
     if (status === 'canceled') {
-      return <div className='status cancelled'>Chỗ đặt bị hủy</div>;
+      return <div className='status cancelled'>{t('order_cancelled')}</div>;
     }
   };
   const handleClick = (status) => {

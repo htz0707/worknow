@@ -14,8 +14,10 @@ import {
 import { Form, Input } from 'antd';
 import { Spinner } from 'react-bootstrap';
 import { useAuthContext } from '../context/auth';
+import { useTranslation } from 'react-i18next';
 
 export default function SignIn() {
+  const { t } = useTranslation();
   const { login } = useAuthContext();
   const [form] = Form.useForm();
   const [userInfo, setUserInfo] = useState({
@@ -56,10 +58,7 @@ export default function SignIn() {
     update(_, { data: { signIn: userData } }) {
       console.log(userData);
       if (userData?.roles[0]?.name === 'Space provider') {
-        handleMessage(
-          'error',
-          'Tài khoản Đối tác không thể đăng nhập trang này. Vui lòng đăng ký tài khoản K/H.'
-        );
+        handleMessage('error', t('account_provider_not_sign_in_this_page'));
         return;
       }
       if (userData?.roles[0]?.name === 'WorkNow admin') {
@@ -75,10 +74,7 @@ export default function SignIn() {
       console.log(err);
       handleMessage(
         'error',
-        handleError(
-          err.graphQLErrors[0]?.message,
-          'Đăng nhập không thành công.'
-        )
+        handleError(err.graphQLErrors[0]?.message, t('sign_in_not_success'))
       );
     },
   });
@@ -112,11 +108,11 @@ export default function SignIn() {
           </div>
           <div className='col-lg-7 d-flex justify-content-center align-items-center'>
             <div className='sign-in-form rounded px-3 py-4'>
-              <h3 className='d-flex justify-content-center fw-bold'>
-                ĐĂNG NHẬP
+              <h3 className='d-flex justify-content-center fw-bold text-uppercase'>
+                {t('sign_in')}
               </h3>
               <p className='d-flex justify-content-center'>
-                Đăng nhập để nhận được nhiều ưu đãi hơn!
+                {t('sign_in_to_receive_more_promotions')}
               </p>
               <Form
                 id='my_form'
@@ -126,18 +122,19 @@ export default function SignIn() {
               >
                 <div className='mb-0'>
                   <label>
-                    Email <span>*</span>
+                    {t('email')}
+                    <span>*</span>
                   </label>
                   <Form.Item
                     name='email'
                     rules={[
                       {
                         type: 'email',
-                        message: 'Email không hợp lệ.',
+                        message: t('email_invalid'),
                       },
                       {
                         required: true,
-                        message: 'Vui lòng điền vào trường này.',
+                        message: t('required_field'),
                       },
                     ]}
                   >
@@ -152,14 +149,14 @@ export default function SignIn() {
                 </div>
                 <div className='mb-0'>
                   <label>
-                    Mật khẩu <span>*</span>
+                    {t('password')} <span>*</span>
                   </label>
                   <Form.Item
                     name='password'
                     rules={[
                       {
                         required: true,
-                        message: 'Vui lòng điền vào trường này.',
+                        message: t('required_field'),
                       },
                     ]}
                   >
@@ -180,7 +177,7 @@ export default function SignIn() {
                   {loading ? (
                     <Spinner animation='border' size='sm' />
                   ) : (
-                    'Đăng nhập'
+                    t('sign_in')
                   )}
                 </button>
               </Form>
@@ -213,13 +210,13 @@ export default function SignIn() {
               </form> */}
               <div className='row mt-2'>
                 <div className='col'>
-                  Bạn chưa có tài khoản?{' '}
+                  {t('dont_have_an_account')}{' '}
                   <span onClick={handleSignUp} className='link'>
-                    Đăng ký
+                    {t('sign_up')}
                   </span>
                 </div>
                 <div className='col-auto text-end'>
-                  <span className='link'>Quên mật khẩu?</span>
+                  <span className='link'>{t('forgot_password')}?</span>
                 </div>
               </div>
               {/* <div className='d-flex justify-content-center my-2 text-gray'>

@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { message } from 'antd';
+import i18n from '../translation/i18n';
 export const spliceSplit = (str, index, count, add) => {
   var ar = str.split('');
   ar.splice(index, count, add);
@@ -110,21 +111,21 @@ export function handleMessage(kind, content) {
 export const returnStatusBooking = (status) => {
   switch (status) {
     case 'booking':
-      return 'Đã tạo đơn';
+      return i18n.t('created_booking');
     case 'confirming':
-      return 'Chờ xác thực thanh toán';
+      return i18n.t('wait_for_confirm_payment');
     case 'confirmed':
-      return 'Đã xác thực thanh toán';
+      return i18n.t('confirmed_payment');
     case 'booking_successfull':
-      return 'Đặt chỗ thành công';
+      return i18n.t('booking_successfull');
     case 'payment_fail':
-      return 'Thanh toán thất bại';
+      return i18n.t('payment_failed');
     case 'canceled':
-      return 'Đặt chỗ bị huỷ';
+      return i18n.t('booking_canceled');
     case 'booking_expired':
-      return 'Đơn hết hiệu lực';
+      return i18n.t('booking_expired');
     case 'extended':
-      return 'Đơn được gia hạn';
+      return i18n.t('booking_extended');
     default:
       return null;
   }
@@ -155,13 +156,13 @@ export function compareTime(time1, time2) {
 export const handleError = (value, defaultMessage) => {
   switch (value) {
     case 'USER_IS_EXIST':
-      return `Tài khoản email này đã tồn tại. Vui lòng kiểm tra lại`;
+      return i18n.t('user_is_exist');
       break;
     case 'PASSWORD_INVALID':
-      return `Mật khẩu của bạn không chính xác, vui lòng kiểm tra lại.`;
+      return i18n.t('password_invalid');
       break;
     case 'USER_NOT_FOUND':
-      return `Chưa có tài khoản email này, vui lòng tạo tài khoản.`;
+      return i18n.t('user_not_found');
       break;
     default:
       return defaultMessage;
