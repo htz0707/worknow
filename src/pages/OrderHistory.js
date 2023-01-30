@@ -13,9 +13,11 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 import NoData from '../components/NoData';
+import { useTranslation } from 'react-i18next';
 const { TabPane } = Tabs;
 
 export default function OrderHistory() {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const tab = searchParams.get('tab');
   const navigate = useNavigate();
@@ -112,27 +114,35 @@ export default function OrderHistory() {
       return;
     }
     if (activeTab === 'upcoming') {
-      return `Bạn có ${total} đơn đã đặt`;
+      return t('you_have_number_upcoming_order', {
+        number: total,
+      });
     }
     if (activeTab === 'pending') {
-      return `Bạn có ${total} đơn trong hàng chờ xác thực`;
+      return t('you_have_number_pending_order', {
+        number: total,
+      });
     }
     if (activeTab === 'completed') {
-      return `Bạn có ${total} đơn đã hoàn tất`;
+      return t('you_have_number_completed_order', {
+        number: total,
+      });
     }
     if (activeTab === 'cancelled') {
-      return `Bạn có ${total} đơn đã hủy`;
+      return t('you_have_number_cancelled_order', {
+        number: total,
+      });
     }
   };
   return (
     <UserLayout currentTab='history'>
       <div className='order-history p-4'>
-        <h4 className='fw-bold'>GIAO DỊCH CỦA TÔI</h4>
+        <h4 className='fw-bold text-uppercase'>{t('order_history')}</h4>
         <Tabs activeKey={activeTab} onChange={handleNavigateTab}>
-          <TabPane tab='Sắp Diễn Ra' key='upcoming'></TabPane>
-          <TabPane tab='Hàng Chờ Xác Thực' key='pending'></TabPane>
-          <TabPane tab='Đã Hoàn Tất' key='completed'></TabPane>
-          <TabPane tab='Đã Hủy' key='cancelled'></TabPane>
+          <TabPane tab={t('upcoming')} key='upcoming'></TabPane>
+          <TabPane tab={t('pending')} key='pending'></TabPane>
+          <TabPane tab={t('completed')} key='completed'></TabPane>
+          <TabPane tab={t('cancelled')} key='cancelled'></TabPane>
         </Tabs>
         <div className='order-history-body'>
           <div className='title'>{renderTotal()}</div>

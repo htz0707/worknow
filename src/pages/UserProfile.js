@@ -10,8 +10,10 @@ import { handleError, handleMessage } from '../helpers/helpers';
 import { useAuthContext } from '../context/auth';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function UserProfile() {
+  const { t } = useTranslation();
   const { updateUser } = useAuthContext();
   const [form] = Form.useForm();
   const GET_ME = gql`
@@ -90,14 +92,14 @@ export default function UserProfile() {
   const [updateMe] = useMutation(UPDATE_ME, {
     update(_, { data: { updateMe: userData } }) {
       handleGetMe();
-      handleMessage('success', 'Cập nhật thành công.');
+      handleMessage('success', t('update_success'));
       updateUser(userData);
     },
     onError(err) {
       console.log(err);
       handleMessage(
         'error',
-        handleError(err.graphQLErrors[0]?.message, 'Cập nhật không thành công.')
+        handleError(err.graphQLErrors[0]?.message, t('update_not_success'))
       );
     },
   });
@@ -118,7 +120,7 @@ export default function UserProfile() {
   return (
     <UserLayout currentTab='profile'>
       <div className='user-profile p-4'>
-        <h4 className='fw-bold'>THÔNG TIN CÁ NHÂN</h4>
+        <h4 className='fw-bold text-uppercase'>{t('personal_info')}</h4>
         <Form
           id='user_info_form'
           autoComplete='off'
@@ -127,7 +129,7 @@ export default function UserProfile() {
           form={form}
         >
           <div className='mb-0'>
-            <label className='fw-bold'>Email</label>
+            <label className='fw-bold'>{t('email')}</label>
             <Form.Item name='email'>
               <Input
                 className='input-field py-2'
@@ -137,19 +139,19 @@ export default function UserProfile() {
             </Form.Item>
           </div>
           <div className='mb-0'>
-            <label className='fw-bold'>Họ Tên</label>
+            <label className='fw-bold'>{t('first_last_name')}</label>
             <Form.Item
               name='full_name'
               rules={[
                 {
                   required: true,
-                  message: 'Vui lòng điền vào trường này.',
+                  message: t('required_field'),
                 },
               ]}
             >
               <Input
                 className='input-field py-2'
-                placeholder='Nhập vào tên của bạn'
+                placeholder={t('enter_your_full_name')}
                 value={userInfo.full_name}
                 onChange={(e) => handleChangeInfo('full_name', e.target.value)}
               />
@@ -177,7 +179,7 @@ export default function UserProfile() {
                           </Select>
                         </Form.Item> */}
           <div className='mb-0'>
-            <label className='fw-bold'>Số điện thoại</label>
+            <label className='fw-bold'>{t('phone_number')}</label>
             <Form.Item
               name='phone'
               rules={[
@@ -188,16 +190,12 @@ export default function UserProfile() {
                         '+' + userInfo.phone_number
                       );
                       if (parse_phone?.isValid() !== true) {
-                        return Promise.reject(
-                          new Error('Số điện thoại không hợp lệ')
-                        );
+                        return Promise.reject(new Error(t('phone_invalid')));
                       }
                       return Promise.resolve();
                     } else {
                       if (alreadyHasPhone) {
-                        return Promise.reject(
-                          new Error('Vui lòng điền vào trường này.')
-                        );
+                        return Promise.reject(new Error(t('required_field')));
                       } else {
                         return Promise.resolve();
                       }
@@ -223,7 +221,7 @@ export default function UserProfile() {
           </div>
           <Form.Item className='text-end'>
             <button type='submit' form='user_info_form' className='update-btn'>
-              Cập Nhật
+              {t('update')}
             </button>
           </Form.Item>
         </Form>

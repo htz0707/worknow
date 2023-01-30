@@ -14,8 +14,10 @@ import {
 } from '../helpers/helpers';
 import { Spinner } from 'react-bootstrap';
 import { useAuthContext } from '../context/auth';
+import { useTranslation } from 'react-i18next';
 
 export default function SignUp() {
+  const { t } = useTranslation();
   const { login } = useAuthContext();
   const [form] = Form.useForm();
   const [userInfo, setUserInfo] = useState({
@@ -66,7 +68,7 @@ export default function SignUp() {
       // props.history.push('/');
     },
     onError(err) {
-      handleMessage('error', 'Đăng nhập không thành công');
+      handleMessage('error', t('sign_in_not_success'));
       setLoading(false);
       // console.log(err.graphQLErrors[0].extensions.exception.errors);
     },
@@ -105,7 +107,7 @@ export default function SignUp() {
       console.log(err);
       handleMessage(
         'error',
-        handleError(err.graphQLErrors[0]?.message, 'Đăng kí không thành công.')
+        handleError(err.graphQLErrors[0]?.message, t('sign_up_not_success'))
       );
       setLoading(false);
       // console.log(err.graphQLErrors[0].extensions.exception.errors);
@@ -142,13 +144,20 @@ export default function SignUp() {
       <div className='container-md'>
         <div className='row'>
           <div className='logo col-lg-5 d-flex justify-content-center align-items-center'>
-            <img className='pointer' src={Logo} width={200} onClick={handleRedirectToHome} />
+            <img
+              className='pointer'
+              src={Logo}
+              width={200}
+              onClick={handleRedirectToHome}
+            />
           </div>
           <div className='col-lg-7 d-flex justify-content-center align-items-center'>
             <div className='sign-up-form rounded px-3 py-4'>
-              <h3 className='d-flex justify-content-center fw-bold'>ĐĂNG KÝ</h3>
+              <h3 className='d-flex justify-content-center fw-bold text-uppercase'>
+                {t('sign_up')}
+              </h3>
               <p className='d-flex justify-content-center'>
-                Trở thành thành viên của WorkNow!
+                {t('become_member_of_worknow')}
               </p>
               <Form
                 id='my_form'
@@ -158,14 +167,14 @@ export default function SignUp() {
               >
                 <div className='mb-0'>
                   <label>
-                    Họ và tên <span>*</span>
+                    {t('first_last_name')} <span>*</span>
                   </label>
                   <Form.Item
                     name='full_name'
                     rules={[
                       {
                         required: true,
-                        message: 'Vui lòng điền vào trường này.',
+                        message: t('required_field'),
                       },
                     ]}
                   >
@@ -180,18 +189,18 @@ export default function SignUp() {
                 </div>
                 <div className='mb-0'>
                   <label>
-                    Email <span>*</span>
+                    {t('email')} <span>*</span>
                   </label>
                   <Form.Item
                     name='email'
                     rules={[
                       {
                         type: 'email',
-                        message: 'Email không hợp lệ.',
+                        message: t('email_invalid'),
                       },
                       {
                         required: true,
-                        message: 'Vui lòng điền vào trường này.',
+                        message: t('required_field'),
                       },
                     ]}
                   >
@@ -205,7 +214,7 @@ export default function SignUp() {
                   </Form.Item>
                 </div>
                 <div className='mb-0'>
-                  <label>Di động</label>
+                  <label>{t('phone')}</label>
                   <Form.Item
                     name='phone'
                     rules={[
@@ -217,7 +226,7 @@ export default function SignUp() {
                             );
                             if (parse_phone?.isValid() !== true) {
                               return Promise.reject(
-                                new Error('Số điện thoại không hợp lệ')
+                                new Error(t('phone_invalid'))
                               );
                             }
                             return Promise.resolve();
@@ -246,18 +255,18 @@ export default function SignUp() {
                 </div>
                 <div className='mb-0'>
                   <label>
-                    Mật khẩu <span>*</span>
+                    {t('password')} <span>*</span>
                   </label>
                   <Form.Item
                     name='password'
                     rules={[
                       {
                         required: true,
-                        message: 'Vui lòng điền vào trường này.',
+                        message: t('required_field'),
                       },
                       {
                         min: 6,
-                        message: 'Mật khẩu yêu cầu tối thiểu 6 kí tự',
+                        message: t('password_require_minimum_6_character'),
                       },
                     ]}
                   >
@@ -271,14 +280,14 @@ export default function SignUp() {
                 </div>
                 <div className='mb-0'>
                   <label>
-                    Xác nhận mật khẩu <span>*</span>
+                    {t('confirm_password')} <span>*</span>
                   </label>
                   <Form.Item
                     name='confirm_password'
                     rules={[
                       {
                         required: true,
-                        message: 'Vui lòng điền vào trường này.',
+                        message: t('required_field'),
                       },
                       ({ getFieldValue }) => ({
                         validator(_, value) {
@@ -286,7 +295,7 @@ export default function SignUp() {
                             return Promise.resolve();
                           }
                           return Promise.reject(
-                            new Error('Hai mật khẩu bạn đã nhập không khớp!')
+                            new Error(t('password_not_match'))
                           );
                         },
                       }),
@@ -309,7 +318,7 @@ export default function SignUp() {
                   {loading ? (
                     <Spinner animation='border' size='sm' />
                   ) : (
-                    'Đăng Kí'
+                    t('sign_up')
                   )}
                 </button>
               </Form>
@@ -348,7 +357,7 @@ export default function SignUp() {
               </form> */}
               <div className='d-flex justify-content-center my-2'>
                 <p className='link' onClick={handleSignIn}>
-                  Tôi đã có tài khoản!
+                  {t('already_have_account')}
                 </p>
               </div>
             </div>
