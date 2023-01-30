@@ -268,5 +268,9 @@
   "male": "Anh",
   "female": "Chị",
   "create_inquiry_success": "Thành công: Cảm ơn bạn! Chúng tôi sẽ liên hệ lại trong thời gian nhanh nhất.",
-  "create_inquiry_failed": "Thất bại: Đã xảy ra lỗi! Vui lòng thử lại sau."
+  "create_inquiry_failed": "Thất bại: Đã xảy ra lỗi! Vui lòng thử lại sau.",
+  "security_info": "Thông tin bảo mật",
+  "old_password": "Mật khẩu cũ",
+  "new_password": "Mật khẩu mới",
+  "confirm_new_password": "Xác nhận mật khẩu mới"
 }
