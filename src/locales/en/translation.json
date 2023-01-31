@@ -268,5 +268,9 @@
   "male": "Mr.",
   "female": "Ms.",
   "create_inquiry_success": "Success: Thank you! We will get back in touch as soon as possible.",
-  "create_inquiry_failed": "Error: Something went wrong! Please try again later."
+  "create_inquiry_failed": "Error: Something went wrong! Please try again later.",
+  "security_info": "Confidential information",
+  "old_password": "Old password",
+  "new_password": "New password",
+  "confirm_new_password": "Confirm new password"
 }
