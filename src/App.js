@@ -28,6 +28,9 @@ import Voucher from './pages/Voucher';
 import ChangePassword from './pages/ChangePassword';
 import About from './pages/About';
 import AdminOrders from './pages/AdminOrders';
+import ForgetPassword from './pages/ForgetPassword';
+import ForgetPasswordSent from './pages/ForgetPasswordSent';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -118,7 +121,30 @@ function App() {
               </PublicRoute>
             }
           />
-
+          <Route
+            path='forget-password'
+            element={
+              <PublicRoute>
+                <ForgetPassword />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='forget-password-sent'
+            element={
+              <PublicRoute>
+                <ForgetPasswordSent />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='reset-password'
+            element={
+              <PublicRoute>
+                <ResetPassword />
+              </PublicRoute>
+            }
+          />
           <Route
             path='/admin/orders'
             element={

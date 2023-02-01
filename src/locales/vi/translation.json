@@ -272,5 +272,15 @@
   "security_info": "Thông tin bảo mật",
   "old_password": "Mật khẩu cũ",
   "new_password": "Mật khẩu mới",
-  "confirm_new_password": "Xác nhận mật khẩu mới"
+  "confirm_new_password": "Xác nhận mật khẩu mới",
+  "reset_password_failed": "Khôi phục mật khẩu không thành công.",
+  "reset_pasword": "khôi phục mật khẩu",
+  "verify": "Xác thực",
+  "reset_password_email_will_sent_to_you": "Email khôi phục mật khẩu sẽ được gửi đến email của bạn.",
+  "continue": "Tiếp theo",
+  "verified_email_sent": "Đã gửi email xác thực",
+  "verified_email_sent_description": "Chúng tôi đã gửi Email khôi phục mật khẩu đến hộp thư của bạn. Vui lòng kiểm tra để hoàn tất khôi phục.",
+  "reset": "Đặt lại",
+  "reset_password_description": "Tài khoản của bạn đã được khôi phục. Nhập mật khẩu mới",
+  "exit": "Thoát"
 }
