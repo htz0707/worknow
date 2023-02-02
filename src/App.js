@@ -5,6 +5,7 @@ import { AuthProvider } from './context/auth';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import DashboardLayout from './layouts/DashboardLayout';
+import AdminLayout from './layouts/AdminLayout';
 import Locations from './pages/Locations';
 import LocationDetails from './pages/LocationDetails';
 import CreateBooking from './pages/CreateBooking';
@@ -28,6 +29,8 @@ import Voucher from './pages/Voucher';
 import ChangePassword from './pages/ChangePassword';
 import About from './pages/About';
 import AdminOrders from './pages/AdminOrders';
+import ListCompany from './pages/ListCompany';
+import CreateCompany from './pages/CreateCompany';
 
 function App() {
   return (
@@ -45,14 +48,6 @@ function App() {
             />
             <Route path='business' element={<Business />} />
             <Route path='space-partner' element={<SpacePartner />} />
-            {/* <Route
-              path='/user/:currentTab'
-              element={
-                <PrivateRoute>
-                  <User />
-                </PrivateRoute>
-              }
-            /> */}
             <Route
               path='/user/profile'
               element={
@@ -118,15 +113,32 @@ function App() {
               </PublicRoute>
             }
           />
-
-          <Route
-            path='/admin/orders'
-            element={
-              <PrivateRoute>
-                <AdminOrders />
-              </PrivateRoute>
-            }
-          />
+          <Route path='/admin/' element={<AdminLayout />}>
+            <Route
+              path='orders'
+              element={
+                <PrivateRoute>
+                  <AdminOrders />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='space/companies'
+              element={
+                <PrivateRoute>
+                  <ListCompany />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='space/company/new'
+              element={
+                <PrivateRoute>
+                  <CreateCompany />
+                </PrivateRoute>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
