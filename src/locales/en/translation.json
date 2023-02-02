@@ -272,5 +272,15 @@
   "security_info": "Confidential information",
   "old_password": "Old password",
   "new_password": "New password",
-  "confirm_new_password": "Confirm new password"
+  "confirm_new_password": "Confirm new password",
+  "reset_password_failed": "Password recovery failed.",
+  "reset_pasword": "recover password",
+  "verify": "Verify",
+  "reset_password_email_will_sent_to_you": "Password recovery email will be sent to your email.",
+  "continue": "Next",
+  "verified_email_sent": "Verification email sent",
+  "verified_email_sent_description": "We've sent a Password Recovery Email to your inbox. Please check to reset your password.",
+  "reset": "Reset",
+  "reset_password_description": "Your account has been restored. Enter your new password",
+  "exit": "Exit"
 }

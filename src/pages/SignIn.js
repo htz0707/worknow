@@ -216,7 +216,12 @@ export default function SignIn() {
                   </span>
                 </div>
                 <div className='col-auto text-end'>
-                  <span className='link'>{t('forgot_password')}?</span>
+                  <span
+                    className='link'
+                    onClick={() => navigate('/forget-password')}
+                  >
+                    {t('forgot_password')}?
+                  </span>
                 </div>
               </div>
               {/* <div className='d-flex justify-content-center my-2 text-gray'>
