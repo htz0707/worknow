@@ -13,8 +13,10 @@ import cx from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { handleMessage } from '../helpers/helpers';
 import UploadAvatarModal from '../components/UploadAvatarModal';
+import { useTranslation } from 'react-i18next';
 
 export default function UserLayout(props) {
+  const { t } = useTranslation();
   const { currentTab, children } = props;
   const { user, logout } = useAuthContext();
   const navigate = useNavigate();
@@ -38,10 +40,7 @@ export default function UserLayout(props) {
         setFile(file);
         setShowUpload(true);
       } else {
-        handleMessage(
-          'error',
-          'Dung lượng ảnh quá lớn. Vui lòng chọn ảnh khác.'
-        );
+        handleMessage('error', t('size_image_too_large'));
       }
     }
   };
@@ -51,7 +50,7 @@ export default function UserLayout(props) {
         <Bcrumb
           data={[
             {
-              label: 'Thông tin tài khoản',
+              label: t('account_info'),
               path: true,
             },
           ]}
@@ -88,7 +87,7 @@ export default function UserLayout(props) {
               onClick={() => handleNavigate('/user/profile')}
             >
               <Info className='tab-icon-1' />
-              <div className='text'>Thông Tin Cá Nhân</div>
+              <div className='text'>{t('personal_info')}</div>
             </div>
             <div
               className={cx('tab rounded-pill', {
@@ -97,7 +96,7 @@ export default function UserLayout(props) {
               onClick={() => handleNavigate('/user/voucher')}
             >
               <Voucher className='tab-icon-2' />
-              <div className='text'>Voucher Của Tôi</div>
+              <div className='text'>{t('my_voucher')}</div>
             </div>
             <div
               className={cx('tab rounded-pill', {
@@ -106,7 +105,7 @@ export default function UserLayout(props) {
               onClick={() => handleNavigate('/user/history')}
             >
               <Giaodich className='tab-icon-2' />
-              <div className='text'>Giao Dịch Của Tôi</div>
+              <div className='text'> {t('order_history')}</div>
             </div>
           </div>
           <div className='footer-section'>
@@ -115,11 +114,11 @@ export default function UserLayout(props) {
               onClick={() => handleNavigate('/user/security')}
             >
               <Secure className='icon' />
-              <div>Bảo mật</div>
+              <div>{t('security')}</div>
             </div>
             <div className='item logout' onClick={handleLogout}>
               <Lockout className='icon' />
-              <div>Đăng xuẩt</div>
+              <div>{t('logout')}</div>
             </div>
           </div>
         </div>

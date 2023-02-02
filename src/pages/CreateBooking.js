@@ -210,7 +210,7 @@ export default function CreateBooking() {
         <div>
           <Logo className='logo' onClick={() => navigate('/locations')} />
         </div>
-        <div>
+        {/* <div>
           <Bcrumb
             data={[
               {
@@ -227,7 +227,7 @@ export default function CreateBooking() {
               },
             ]}
           />
-        </div>
+        </div> */}
         <div className='booking-step'>
           <Steps
             responsive={false}
@@ -248,9 +248,7 @@ export default function CreateBooking() {
               <div className='box-1'>
                 <WavingIcon />
                 <div>
-                  <div className='fw-bold'>
-                    {t("create_booking_title")}
-                  </div>
+                  <div className='fw-bold'>{t('create_booking_title')}</div>
                   <div>
                     <a
                       href='#'
@@ -265,9 +263,9 @@ export default function CreateBooking() {
                         navigate(`/sign-in`);
                       }}
                     >
-                      {t("login")}
+                      {t('login')}
                     </a>{' '}
-                      {t("create_booking_signin_des")} {t("Or")}{' '}
+                    {t('create_booking_signin_des')} {t('Or')}{' '}
                     <a
                       href='#'
                       onClick={() => {
@@ -281,9 +279,9 @@ export default function CreateBooking() {
                         navigate(`/sign-up`);
                       }}
                     >
-                      {t("signup")}
+                      {t('signup')}
                     </a>{' '}
-                    {t("create_booking_signup_des")}
+                    {t('create_booking_signup_des')}
                   </div>
                 </div>
               </div>
@@ -293,7 +291,7 @@ export default function CreateBooking() {
               <div className='content'>#123456</div>
             </div> */}
             <div className='box-3'>
-              <div className='header'>{t("user_info")}</div>
+              <div className='header'>{t('user_info')}</div>
               <Form
                 id='my_form'
                 autoComplete='off'
@@ -303,14 +301,14 @@ export default function CreateBooking() {
               >
                 <div className='mb-0'>
                   <label>
-                    {t("first_last_name")} <span>*</span>
+                    {t('first_last_name')} <span>*</span>
                   </label>
                   <Form.Item
                     name='full_name'
                     rules={[
                       {
                         required: true,
-                        message: t("required_field"),
+                        message: t('required_field'),
                       },
                     ]}
                   >
@@ -328,7 +326,7 @@ export default function CreateBooking() {
                 </div>
                 <div className='mb-0'>
                   <label>
-                  {t("phone")} <span>*</span>
+                    {t('phone')} <span>*</span>
                   </label>
                   <Form.Item
                     name='phone'
@@ -340,7 +338,7 @@ export default function CreateBooking() {
                           );
                           if (parse_phone?.isValid() !== true) {
                             return Promise.reject(
-                              new Error(t("phone_invalid"))
+                              new Error(t('phone_invalid'))
                             );
                           }
                           return Promise.resolve();
@@ -372,11 +370,11 @@ export default function CreateBooking() {
                     rules={[
                       {
                         type: 'email',
-                        message: t("email_invalid"),
+                        message: t('email_invalid'),
                       },
                       {
                         required: true,
-                        message: t("required_field"),
+                        message: t('required_field'),
                       },
                     ]}
                   >
@@ -393,7 +391,7 @@ export default function CreateBooking() {
                   </Form.Item>
                 </div>
                 <div className='mb-0'>
-                  <label>{t("note")}</label>
+                  <label>{t('note')}</label>
                   <textarea
                     className='form-control'
                     style={{ resize: 'none' }}
@@ -449,7 +447,7 @@ export default function CreateBooking() {
               </div>
             </div>
             <div className='box-2'>
-              <div className='title'>{t("position_selected")}</div>
+              <div className='title'>{t('position_selected')}</div>
               <div>
                 <div className='selected-workspace'>
                   <span>x1</span>
@@ -478,10 +476,10 @@ export default function CreateBooking() {
               </div>
             </div>
             <div className='box-3'>
-              <div className='title'>{t("price_detail")}</div>
+              <div className='title'>{t('price_detail')}</div>
               <div className='price-detail'>
                 <div>
-                  <span>{t("price_origin")}</span>
+                  <span>{t('price_origin')}</span>
                   <span>{formatCurrency(orderInfo?.price)}</span>
                 </div>
                 {/* <div>
@@ -494,17 +492,16 @@ export default function CreateBooking() {
                 </div> */}
               </div>
               <div className='price-total'>
-                <span>{t("total")}</span>
+                <span>{t('total')}</span>
                 <span>{formatCurrency(orderInfo?.price)}</span>
               </div>
               <p className='policy'>
-                {t("total_des")}{' '}
-                <b>{t("total_des1")}</b>{' '}
-                <a href='#'>{t("here")}</a>
+                {t('total_des')} <b>{t('total_des1')}</b>{' '}
+                <a href='#'>{t('here')}</a>
               </p>
             </div>
             <button type='submit' form='my_form' className='payment-button'>
-              {t("payment")}
+              {t('payment')}
             </button>
           </div>
         </div>
