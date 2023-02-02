@@ -111,6 +111,11 @@ export default function LocationDetails() {
         }
         closeTime
         description
+        worksHour {
+          closeHour
+          day
+          openHour
+        }
       }
       workingSpaces(params: { locationId: $id }) {
         edges {
@@ -572,27 +577,28 @@ export default function LocationDetails() {
                 </span>
               </div>
               <div>
-                {dayArray.map((item, index) => {
-                  return (
-                    <div
-                      className={cx('time-box', {
-                        active: item.id == moment().day(),
-                      })}
-                      key={index}
-                    >
-                      <div className='day'>{item.name}</div>
-                      <div className='time-range'>
-                        <div>{t('operation_hour')}</div>
-                        <div>
-                          {renderWorkingHour(
-                            locationInfo?.openTime,
-                            locationInfo?.closeTime
-                          )}
+                {locationInfo.worksHour &&
+                  dayArray.map((item, index) => {
+                    return (
+                      <div
+                        className={cx('time-box', {
+                          active: item.id == moment().day(),
+                        })}
+                        key={index}
+                      >
+                        <div className='day'>{item.name}</div>
+                        <div className='time-range'>
+                          <div>{t('operation_hour')}</div>
+                          <div>
+                            {renderWorkingHour(
+                              locationInfo?.worksHour[item.id]?.openHour,
+                              locationInfo?.worksHour[item.id]?.closeHour
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -751,6 +757,7 @@ export default function LocationDetails() {
         openTime={locationInfo?.openTime}
         closeTime={locationInfo?.closeTime}
         handleClose={() => setShowModal(false)}
+        worksHour={locationInfo?.worksHour}
       />
       <WarningContactModal
         show={showContactModal}
