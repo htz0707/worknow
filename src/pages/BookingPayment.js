@@ -300,7 +300,7 @@ export default function BookingPayment() {
         <div>
           <Logo className='logo' onClick={() => navigate('/locations')} />
         </div>
-        <div>
+        {/* <div>
           <Bcrumb
             data={[
               {
@@ -317,7 +317,7 @@ export default function BookingPayment() {
               },
             ]}
           />
-        </div>
+        </div> */}
         <div className='booking-step'>
           <Steps
             responsive={false}
@@ -338,9 +338,7 @@ export default function BookingPayment() {
               <div className='box-1'>
                 <WavingIcon />
                 <div>
-                  <div className='fw-bold'>
-                    {t("create_booking_title")}
-                  </div>
+                  <div className='fw-bold'>{t('create_booking_title')}</div>
                   <div>
                     <a
                       href='#'
@@ -355,9 +353,9 @@ export default function BookingPayment() {
                         navigate(`/sign-in`);
                       }}
                     >
-                      {t("login")}
+                      {t('login')}
                     </a>{' '}
-                      {t("create_booking_signin_des")} {t("Or")}{' '}
+                    {t('create_booking_signin_des')} {t('Or')}{' '}
                     <a
                       href='#'
                       onClick={() => {
@@ -371,9 +369,9 @@ export default function BookingPayment() {
                         navigate(`/sign-up`);
                       }}
                     >
-                      {t("signup")}
+                      {t('signup')}
                     </a>{' '}
-                    {t("create_booking_signup_des")}
+                    {t('create_booking_signup_des')}
                   </div>
                 </div>
               </div>
@@ -402,9 +400,7 @@ export default function BookingPayment() {
             <div className='box-3'>
               <div className='title'>{t('payment_method')}</div>
               <div className='content'>
-                <div className='confirm-text'>
-                  {t('payment_email_confirm')}
-                </div>
+                <div className='confirm-text'>{t('payment_email_confirm')}</div>
                 <div className='payment-method-title'>
                   <input
                     className='form-check-input'
@@ -574,7 +570,7 @@ export default function BookingPayment() {
               </div>
             </div>
             <div className='box-2'>
-              <div className='title'>{t("position_selected")}</div>
+              <div className='title'>{t('position_selected')}</div>
               <div>
                 <div className='selected-workspace'>
                   <span>x1</span>
@@ -626,10 +622,10 @@ export default function BookingPayment() {
               </div>
             </div>
             <div className='box-3'>
-              <div className='title'>{t("price_detail")}</div>
+              <div className='title'>{t('price_detail')}</div>
               <div className='price-detail'>
                 <div>
-                  <span>{t("price_origin")}</span>
+                  <span>{t('price_origin')}</span>
                   <span>{formatCurrency(orderInfo?.total)}</span>
                 </div>
                 {/* <div>
@@ -642,13 +638,12 @@ export default function BookingPayment() {
                 </div> */}
               </div>
               <div className='price-total'>
-                <span>{t("total")}</span>
+                <span>{t('total')}</span>
                 <span>{formatCurrency(orderInfo?.finalTotal)}</span>
               </div>
               <p className='policy'>
-                {t("total_des")}{' '}
-                <b>{t("total_des1")}</b>{' '}
-                <a href='#'>{t("here")}</a>
+                {t('total_des')} <b>{t('total_des1')}</b>{' '}
+                <a href='#'>{t('here')}</a>
               </p>
             </div>
             <button

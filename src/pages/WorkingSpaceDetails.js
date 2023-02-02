@@ -39,6 +39,7 @@ import {
 } from '../helpers/helpers';
 import ConfirmBookingModal from '../components/ConfirmBookingModal';
 import { useTranslation } from 'react-i18next';
+import WarningContactModal from '../components/WarningContactModal';
 
 export default function WorkingSpaceDetails() {
   const { t } = useTranslation();
@@ -51,6 +52,7 @@ export default function WorkingSpaceDetails() {
       location(id: $location_id) {
         id
         name
+        isVerified
         address
         ward {
           name
@@ -66,6 +68,11 @@ export default function WorkingSpaceDetails() {
         }
         closeTime
         openTime
+        worksHour {
+          closeHour
+          day
+          openHour
+        }
       }
       workingSpace(id: $working_space_id) {
         id
@@ -214,6 +221,10 @@ export default function WorkingSpaceDetails() {
   const handleBooking = (item) => {
     setShowModal(true);
   };
+  const [showContactModal, setShowContactModal] = useState(false);
+  const handleShowWarningContact = () => {
+    setShowContactModal(true);
+  };
   const renderHourOrDay = (value) => {
     if (
       value === 'flexible_desk' ||
@@ -299,15 +310,15 @@ export default function WorkingSpaceDetails() {
             <div className='content-info'>
               <div>{t('seat_info')}</div>
               {workingSpaceInfo?.description && (
-                <div>
+                <div className='description'>
                   <TickIcon className='icon' /> {workingSpaceInfo?.description}
                 </div>
               )}
-              <div>
+              <div className='capacity'>
                 <ThreeUserIcon className='icon' />
                 {workingSpaceInfo?.capacity?.name} {t('person')}
               </div>
-              <div>
+              <div className='working-hour'>
                 <ClockIcon className='icon' />{' '}
                 {renderWorkingHour(
                   locationInfo?.openTime,
@@ -328,8 +339,17 @@ export default function WorkingSpaceDetails() {
                   {renderHourOrDay(workingSpaceInfo?.type)}
                 </div>
               )}
-              <button className='btn-booking' onClick={handleBooking}>
-                {t('book_now')}
+              <button
+                className='btn-booking'
+                onClick={() => {
+                  if (locationInfo.isVerified) {
+                    handleBooking();
+                  } else {
+                    handleShowWarningContact();
+                  }
+                }}
+              >
+                {locationInfo.isVerified ? t('book_now') : t('contact_now')}
               </button>
             </div>
           </div>
@@ -369,6 +389,12 @@ export default function WorkingSpaceDetails() {
         openTime={locationInfo?.openTime}
         closeTime={locationInfo?.closeTime}
         handleClose={() => setShowModal(false)}
+        worksHour={locationInfo?.worksHour}
+      />
+      <WarningContactModal
+        show={showContactModal}
+        selectedWorkingSpace={workingSpaceInfo}
+        handleClose={() => setShowContactModal(false)}
       />
     </div>
   );

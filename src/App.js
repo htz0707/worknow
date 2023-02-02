@@ -31,6 +31,9 @@ import About from './pages/About';
 import AdminOrders from './pages/AdminOrders';
 import ListCompany from './pages/ListCompany';
 import CreateCompany from './pages/CreateCompany';
+import ForgetPassword from './pages/ForgetPassword';
+import ForgetPasswordSent from './pages/ForgetPasswordSent';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -139,6 +142,38 @@ function App() {
               }
             />
           </Route>
+          <Route
+            path='forget-password'
+            element={
+              <PublicRoute>
+                <ForgetPassword />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='forget-password-sent'
+            element={
+              <PublicRoute>
+                <ForgetPasswordSent />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='reset-password'
+            element={
+              <PublicRoute>
+                <ResetPassword />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='/admin/orders'
+            element={
+              <PrivateRoute>
+                <AdminOrders />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

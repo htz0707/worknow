@@ -23,6 +23,7 @@ import 'moment/locale/vi'; // without this line it didn't work
 import ShowMore from '../components/ShowMore';
 import { renderAddress, renderWorkingHour } from '../helpers/helpers';
 import { useTranslation } from 'react-i18next';
+import WarningContactModal from '../components/WarningContactModal';
 
 export default function LocationDetails() {
   const { t, i18n } = useTranslation();
@@ -85,6 +86,7 @@ export default function LocationDetails() {
       location(id: $id) {
         id
         name
+        isVerified
         address
         city {
           name
@@ -109,6 +111,11 @@ export default function LocationDetails() {
         }
         closeTime
         description
+        worksHour {
+          closeHour
+          day
+          openHour
+        }
       }
       workingSpaces(params: { locationId: $id }) {
         edges {
@@ -155,6 +162,15 @@ export default function LocationDetails() {
       }
     }
   };
+  const defaultType = [
+    'flexible_desk',
+    'fixed_desk',
+    'private_room',
+    'meeting_room',
+    'convience_room',
+    'event',
+    'booth',
+  ];
   const handleCreateTypeWorkingSpace = (data) => {
     let arr = [];
     data.forEach((item) => {
@@ -163,8 +179,14 @@ export default function LocationDetails() {
       }
     });
     if (arr.length) {
-      setTypeWorkingSpace(arr);
-      handleSelectTypeWorkingSpace(arr[0]);
+      let real_arr = [];
+      defaultType.forEach((item) => {
+        if (arr.includes(item)) {
+          real_arr.push(item);
+        }
+      });
+      setTypeWorkingSpace(real_arr);
+      handleSelectTypeWorkingSpace(real_arr[0]);
     } else {
       setTypeWorkingSpace([]);
       setCurrentWorkingSpace([]);
@@ -261,6 +283,11 @@ export default function LocationDetails() {
   const handleBooking = (item) => {
     setSelectedWorkingSpace(item);
     setShowModal(true);
+  };
+  const [showContactModal, setShowContactModal] = useState(false);
+  const handleShowWarningContact = (item) => {
+    setSelectedWorkingSpace(item);
+    setShowContactModal(true);
   };
   const handleConfirmBooking = () => {
     navigate(`/create-booking/${id}/${selectedWorkingSpace.id}`);
@@ -550,27 +577,28 @@ export default function LocationDetails() {
                 </span>
               </div>
               <div>
-                {dayArray.map((item, index) => {
-                  return (
-                    <div
-                      className={cx('time-box', {
-                        active: item.id == moment().day(),
-                      })}
-                      key={index}
-                    >
-                      <div className='day'>{item.name}</div>
-                      <div className='time-range'>
-                        <div>{t('operation_hour')}</div>
-                        <div>
-                          {renderWorkingHour(
-                            locationInfo?.openTime,
-                            locationInfo?.closeTime
-                          )}
+                {locationInfo.worksHour &&
+                  dayArray.map((item, index) => {
+                    return (
+                      <div
+                        className={cx('time-box', {
+                          active: item.id == moment().day(),
+                        })}
+                        key={index}
+                      >
+                        <div className='day'>{item.name}</div>
+                        <div className='time-range'>
+                          <div>{t('operation_hour')}</div>
+                          <div>
+                            {renderWorkingHour(
+                              locationInfo?.worksHour[item.id]?.openHour,
+                              locationInfo?.worksHour[item.id]?.closeHour
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -613,7 +641,14 @@ export default function LocationDetails() {
                           locationInfo?.openTime,
                           locationInfo?.closeTime
                         )}
-                        handleClick={() => handleBooking(item)}
+                        isVerified={locationInfo?.isVerified}
+                        handleClick={() => {
+                          if (locationInfo.isVerified) {
+                            handleBooking(item);
+                          } else {
+                            handleShowWarningContact(item);
+                          }
+                        }}
                         key={index}
                       />
                     );
@@ -722,6 +757,12 @@ export default function LocationDetails() {
         openTime={locationInfo?.openTime}
         closeTime={locationInfo?.closeTime}
         handleClose={() => setShowModal(false)}
+        worksHour={locationInfo?.worksHour}
+      />
+      <WarningContactModal
+        show={showContactModal}
+        selectedWorkingSpace={selectedWorkingSpace}
+        handleClose={() => setShowContactModal(false)}
       />
       <SlideshowImage
         show={showMoreImage}

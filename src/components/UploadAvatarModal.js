@@ -11,8 +11,10 @@ import { handleError, handleMessage } from '../helpers/helpers';
 import { ReactComponent as PictureIcon } from '../assets/icons/picture.svg';
 import { ReactComponent as BigPictureIcon } from '../assets/icons/bigpicture.svg';
 import { useAuthContext } from '../context/auth';
+import { useTranslation } from 'react-i18next';
 
 export default function UploadAvatarModal(props) {
+  const { t } = useTranslation();
   const { updateUser } = useAuthContext();
   const { show, file, handleClose } = props;
   const [image, setImage] = useState(null);
@@ -128,14 +130,14 @@ export default function UploadAvatarModal(props) {
   `;
   const [updateMe] = useMutation(UPDATE_ME, {
     update(_, { data: { updateMe: userData } }) {
-      handleMessage('success', 'Cập nhật thành công.');
+      handleMessage('success', t('update_success'));
       updateUser(userData);
     },
     onError(err) {
       console.log(err);
       handleMessage(
         'error',
-        handleError(err.graphQLErrors[0]?.message, 'Cập nhật không thành công.')
+        handleError(err.graphQLErrors[0]?.message, t('update_not_success'))
       );
     },
   });
@@ -197,7 +199,7 @@ export default function UploadAvatarModal(props) {
       console.log(err);
       setLoading(false);
       handleClose();
-      handleMessage('error', 'Tải ảnh không thành công.');
+      handleMessage('error', t('upload_image_not_success'));
     }
   };
   const handleInit = (file) => {
@@ -224,7 +226,7 @@ export default function UploadAvatarModal(props) {
       className='upload-avatar-modal'
     >
       <Modal.Header className='modal-header'>
-        <div className='title'>Upload Ảnh</div>
+        <div className='title'>{t('upload_image')}</div>
       </Modal.Header>
       <Modal.Body className='modal-body p-3'>
         <div className='mb-2'>
@@ -264,10 +266,10 @@ export default function UploadAvatarModal(props) {
       </Modal.Body>
       <Modal.Footer className='modal-footer'>
         <button className='btn-cancel' onClick={handleClose}>
-          Hủy
+          {t('cancel')}
         </button>
         <button className='btn-save' onClick={onDownload}>
-          {loading ? <Spinner animation='border' size='sm' /> : 'Lưu'}
+          {loading ? <Spinner animation='border' size='sm' /> : t('save')}
         </button>
       </Modal.Footer>
     </Modal>
