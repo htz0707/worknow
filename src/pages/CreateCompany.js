@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Bcrumb from '../components/Bcrumb';
 import { gql, useMutation, useLazyQuery } from '@apollo/client';
-import { Form, Input, Modal, Upload, Select, Checkbox, Button, InputNumber } from 'antd';
+import { Form, Input } from 'antd';
 import { handleMessage } from '../helpers/helpers';
 import '../assets/styles/AdminOrders.scss';
 import { useAuthContext } from '../context/auth';
@@ -147,40 +147,6 @@ export default function ListCompany() {
   }
   const handleSubmit = async () => {
     try {
-      // let parse_phone = await parsePhoneNumber('+' + phone);
-
-      // let copyArray = [...workingSpaceList];
-      // copyArray.forEach(object => {
-      //   delete object.fileList;
-      //   delete object.status;
-      // });
-
-      // let copyWorksHour = [...worksHour]
-
-      // if (!allDate) {
-      //   if (!monday) {
-      //     copyWorksHour[1] = { ...copyWorksHour[1], openHour: null, closeHour: null };
-      //   }
-      //   if (!tuesday) {
-      //     copyWorksHour[2] = { ...copyWorksHour[2], openHour: null, closeHour: null };
-      //   }
-      //   if (!wednesday) {
-      //     copyWorksHour[3] = { ...copyWorksHour[3], openHour: null, closeHour: null };
-      //   }
-      //   if (!thursday) {
-      //     copyWorksHour[4] = { ...copyWorksHour[4], openHour: null, closeHour: null };
-      //   }
-      //   if (!friday) {
-      //     copyWorksHour[5] = { ...copyWorksHour[5], openHour: null, closeHour: null };
-      //   }
-      //   if (!saturday) {
-      //     copyWorksHour[6] = { ...copyWorksHour[6], openHour: null, closeHour: null };
-      //   }
-      //   if (!sunday) {
-      //     copyWorksHour[0] = { ...copyWorksHour[0], openHour: null, closeHour: null };
-      //   }
-      // }
-
       let formData = {
         name: data.name,
         address: data.address,
@@ -189,9 +155,6 @@ export default function ListCompany() {
         cityId: data.cityId,
         countryId: data.countryId
       }
-
-      // if (formData.wardId === '') delete formData.wardId;
-
       await createCompany({
         variables: formData
       });
