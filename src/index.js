@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,6 +15,17 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { ProSidebarProvider } from 'react-pro-sidebar';
+
+Sentry.init({
+  dsn: "https://0ea7fc0daeb84fd6ad3f656ec5cf362e@o4504121129304064.ingest.sentry.io/4504614273155072",
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const httpLink = createHttpLink({
