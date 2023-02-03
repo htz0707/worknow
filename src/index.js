@@ -12,6 +12,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { ProSidebarProvider } from 'react-pro-sidebar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const httpLink = createHttpLink({
@@ -39,11 +40,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 root.render(
-  <I18nextProvider i18n={i18n}>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </I18nextProvider>
+  <ProSidebarProvider>
+    <I18nextProvider i18n={i18n}>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </I18nextProvider>
+  </ProSidebarProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
