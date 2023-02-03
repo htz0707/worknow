@@ -31,6 +31,7 @@ import About from './pages/About';
 import AdminOrders from './pages/AdminOrders';
 import ListCompany from './pages/ListCompany';
 import CreateCompany from './pages/CreateCompany';
+import * as Sentry from '@sentry/react';
 
 function App() {
   return (
@@ -145,4 +146,4 @@ function App() {
   );
 }
 
-export default App;
+export default Sentry.withProfiler(App);
