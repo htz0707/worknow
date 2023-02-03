@@ -80,12 +80,14 @@ export default function LocationCard(props) {
             </div>
             <div>Working space</div>
           </div>
-          <div className='location-authen'>
-            <div className='icon-badge'>
-              <AuthenIcon className='icon' />
+          {data.isVerified && (
+            <div className='location-authen'>
+              <div className='icon-badge'>
+                <AuthenIcon className='icon' />
+              </div>
+              <div>{t('verified_by_worknow')}</div>
             </div>
-            <div>{t('verified_by_worknow')}</div>
-          </div>
+          )}
           <div className='location-service'>
             {data.amenities?.map((item, index) => {
               if (index < 3) {

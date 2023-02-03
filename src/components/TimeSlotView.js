@@ -14,6 +14,7 @@ export default function TimeSlotView(props) {
     endTime,
     handleChangeTimeSlot,
     date,
+    dataTimeslot,
   } = props;
   // const timeslot = [
   //   {
@@ -140,31 +141,66 @@ export default function TimeSlotView(props) {
   const [timeSlot, setTimeSlot] = useState([]);
   const [timeSlotDisplay, setTimeSlotDisplay] = useState([]);
   const handleCreateTimeSlot = () => {
-    let time_slot = createTimeSlot(openTime, closeTime);
+    // let time_slot = createTimeSlot(openTime, closeTime);
+    // let arr = [];
+    // let arr1 = [];
+    // let currentDate = moment();
+    // time_slot?.forEach((item, index) => {
+    //   let selectDate = moment(date).format('YYYY-MM-DD') + 'T' + item;
+    //   let selectDateFormat = moment(selectDate);
+    //   arr.push({
+    //     id: index + 1,
+    //     time: item,
+    //     available: compareTime(selectDateFormat, currentDate),
+    //   });
+    //   arr1.push({
+    //     id: index + 1,
+    //     time: item,
+    //     available: compareTime(selectDateFormat, currentDate),
+    //   });
+    // });
     let arr = [];
     let arr1 = [];
-    let currentDate = moment();
-    time_slot?.forEach((item, index) => {
-      let selectDate = moment(date).format('YYYY-MM-DD') + 'T' + item;
-      let selectDateFormat = moment(selectDate);
-      arr.push({
-        id: index + 1,
-        time: item,
-        available: compareTime(selectDateFormat, currentDate),
+    if (dataTimeslot?.length) {
+      dataTimeslot?.forEach((item, index) => {
+        if (item.over === true || item.available === false) {
+          arr.push({
+            id: index + 1,
+            time: item.time,
+            available: false,
+          });
+          arr1.push({
+            id: index + 1,
+            time: item.time,
+            available: false,
+          });
+        } else {
+          arr.push({
+            id: index + 1,
+            time: item.time,
+            available: true,
+          });
+          arr1.push({
+            id: index + 1,
+            time: item.time,
+            available: true,
+          });
+        }
       });
-      arr1.push({
-        id: index + 1,
-        time: item,
-        available: compareTime(selectDateFormat, currentDate),
-      });
-    });
-    setTimeSlot(arr);
-    arr1.pop();
-    setTimeSlotDisplay(arr1);
+      let add_slot = {
+        id: arr[arr.length - 1].id + 1,
+        time: moment(closeTime, 'HH:mm').format('HH:mm'),
+        available: true,
+      };
+      arr.push(add_slot);
+      setTimeSlot(arr);
+      // arr1.pop();
+      setTimeSlotDisplay(arr1);
+    }
   };
   useEffect(() => {
     handleCreateTimeSlot();
-  }, [openTime, closeTime, date]);
+  }, [dataTimeslot]);
   const handleClick = async (index) => {
     // if (startTime.id && endTime.id) {
     //   handleChangeTimeSlot({
@@ -184,6 +220,15 @@ export default function TimeSlotView(props) {
     // handleChangeTimeSlot({ startTime: item });
     if (endTime.id) {
       if (timeSlot[index].id >= endTime.id) {
+        for (let i = startTime.id; i <= timeSlot[index].id; i++) {
+          if (timeSlot[i - 1].available === false) {
+            handleChangeTimeSlot({
+              startTime: timeSlot[index],
+              endTime: timeSlot[index + 1],
+            });
+            return;
+          }
+        }
         handleChangeTimeSlot({ endTime: timeSlot[index + 1] });
       } else {
         handleChangeTimeSlot({
@@ -201,8 +246,8 @@ export default function TimeSlotView(props) {
   const [hoverSlot, setHoverSlot] = useState(null);
   return (
     <div className='timeslot-view'>
-      {timeSlotDisplay.map((item, index) => {
-        if (index % 2 == 0) {
+      {timeSlotDisplay?.map((item, index) => {
+        if (parseInt(item.time?.split(':')?.[1]) === 0) {
           return (
             <div
               key={index}

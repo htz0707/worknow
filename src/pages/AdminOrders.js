@@ -87,7 +87,7 @@ export default function AdminOrders() {
         item.locationId = item.orderDetails[0]?.workingSpaces?.locationId;
         item.phoneNumber = '+' + item.phoneCountryCode + item.phoneNumber;
         item.locationName = item.orderDetails[0]?.workingSpaces?.locationName;
-        item.bill = item.orderTransactions.bill;
+        item.bill = item.orderTransactions[0]?.bill;
       }
       setOrders(array);
     }
@@ -197,7 +197,7 @@ export default function AdminOrders() {
       dataIndex: 'bill',
       key: 'bill',
       render: (_, data) => (
-        <a href={data.bill ? data.bill : '#'}>Click To Open</a>
+        <a href={data?.bill} target="_blank" >Click To Open</a>
       ),
     },
     {
@@ -208,8 +208,8 @@ export default function AdminOrders() {
       render: (_, data) => (
         <>
           {data.status === 'booking' ||
-          data.status === 'extended' ||
-          data.status === 'booking_expired' ? (
+            data.status === 'extended' ||
+            data.status === 'booking_expired' ? (
             data.status
           ) : data.status === 'confirming' ? (
             <Dropdown
