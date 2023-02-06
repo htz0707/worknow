@@ -177,7 +177,7 @@ export default function ListCompany() {
 
 
   return (
-    <div className='h-100 w-100 p-5'>
+    <div className='create-company h-100 w-100 p-5'>
       {user?.roles[0]?.name === 'WorkNow admin' && (
         <>
           <div>
@@ -336,7 +336,6 @@ export default function ListCompany() {
             >
               Lưu
             </button>
-
           </Form>
         </>
       )}
