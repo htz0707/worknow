@@ -17,7 +17,7 @@ import { setContext } from '@apollo/client/link/context';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 
 Sentry.init({
-  dsn: "https://0ea7fc0daeb84fd6ad3f656ec5cf362e@o4504121129304064.ingest.sentry.io/4504614273155072",
+  dsn: process.env.REACT_APP_SENTRY_DEV_DNS,
   integrations: [new BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%
