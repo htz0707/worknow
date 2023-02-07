@@ -43,9 +43,9 @@ export default function ConfirmBookingModal(props) {
   const [typeOfBooking, setTypeBooking] = useState('');
   useEffect(() => {
     if (selectedWorkingSpace) {
-      setTypeBooking(returnTypeOfBooking(selectedWorkingSpace.type));
+      setTypeBooking(returnTypeOfBooking(selectedWorkingSpace?.type));
     }
-  }, [selectedWorkingSpace]);
+  }, [selectedWorkingSpace, show]);
   // const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(null);
   // const onChange = (dates) => {
@@ -62,8 +62,32 @@ export default function ConfirmBookingModal(props) {
     price: null,
     date_range: null,
   });
+  function checkForBlockedDates(start, end, dates) {
+    const dateFormat = 'YYYY-MM-DD';
+    const diff = moment(end).diff(start, 'days') + 1;
+
+    for (let i = 0; i < diff; i++) {
+      const checkDate = moment(start).add(i, 'd').format(dateFormat);
+
+      if (dates.find((item) => moment(item).format(dateFormat) === checkDate)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
   const handleDateRangeChange = (dates) => {
     const [start, end] = dates;
+    if (end) {
+      if (checkForBlockedDates(start, end, excludeDates)) {
+        setBookingInfoTypeDay({
+          ...bookingInfoTypeDay,
+          startDate: end,
+          endDate: null,
+        });
+        return;
+      }
+    }
     setBookingInfoTypeDay({
       ...bookingInfoTypeDay,
       startDate: start,
@@ -297,7 +321,7 @@ export default function ConfirmBookingModal(props) {
     query GetWorkingspaceAvailable(
       $bookingType: BookingType!
       $startDate: datetime!
-      $endDate: datetime!
+      $endDate: datetime
       $workingSpaceId: UUID!
     ) {
       workingSpaceAvailable(
@@ -355,13 +379,50 @@ export default function ConfirmBookingModal(props) {
   };
   useEffect(() => {
     if (selectedWorkingSpace.id) {
-      handleGetTimeSlot();
+      if (typeOfBooking === 'hour') {
+        handleGetTimeSlot();
+      }
     }
-  }, [bookingInfoTypeHour.date]);
+  }, [bookingInfoTypeHour.date, typeOfBooking]);
+  const [excludeDates, setExcludeDate] = useState([]);
+  const handleGetExcludeDates = async () => {
+    let day = moment().day();
+    let working_hour = worksHour.find((item) => item.day === day);
+    let start_date_join_time =
+      moment().format('YYYY-MM-DD') + 'T' + working_hour.openHour;
+    let start_date_utc = moment
+      .utc(new Date(start_date_join_time).toUTCString())
+      .format();
+    let bodyData = {
+      bookingType: 'day',
+      workingSpaceId: selectedWorkingSpace.id,
+      startDate: start_date_utc,
+    };
+    let res = await getWorkingspaceAvailable({
+      variables: bodyData,
+    });
+    if (res.data) {
+      let data = res.data.workingSpaceAvailable;
+      let arr = data.map((item) => new Date(item.time));
+      setExcludeDate(arr);
+    }
+  };
+  useEffect(() => {
+    if (selectedWorkingSpace.id) {
+      if (typeOfBooking === 'day') {
+        handleGetExcludeDates();
+      }
+    }
+  }, [typeOfBooking, selectedWorkingSpace]);
+  //
+  const handleCancel = () => {
+    setTypeBooking('');
+    handleClose();
+  };
   return (
     <Modal
       show={show}
-      onHide={handleClose}
+      onHide={handleCancel}
       backdrop='static'
       keyboard={false}
       aria-labelledby='contained-modal-title-vcenter'
@@ -384,6 +445,7 @@ export default function ConfirmBookingModal(props) {
                   inline
                   locale={'vi'}
                   minDate={moment().add(1, 'd').toDate()}
+                  excludeDates={excludeDates}
                 />
               </div>
             </div>
@@ -535,7 +597,7 @@ export default function ConfirmBookingModal(props) {
             <button
               type='button'
               className='w-100 btn btn-outline-dark rounded-pill'
-              onClick={handleClose}
+              onClick={handleCancel}
             >
               {t('cancel')}
             </button>
