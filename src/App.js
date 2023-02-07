@@ -2,7 +2,7 @@ import 'antd/dist/antd.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.scss';
 import { AuthProvider } from './context/auth';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import DashboardLayout from './layouts/DashboardLayout';
 import AdminLayout from './layouts/AdminLayout';
@@ -35,8 +35,15 @@ import * as Sentry from '@sentry/react';
 import ForgetPassword from './pages/ForgetPassword';
 import ForgetPasswordSent from './pages/ForgetPasswordSent';
 import ResetPassword from './pages/ResetPassword';
+import ReactGA from 'react-ga';
+import { useEffect } from 'react';
+const TRACKING_ID = 'G-V97R1Y882R'; // OUR_TRACKING_ID
 
+ReactGA.initialize(TRACKING_ID);
 function App() {
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   return (
     <AuthProvider>
       <BrowserRouter>
