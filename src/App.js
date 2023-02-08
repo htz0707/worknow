@@ -35,15 +35,9 @@ import * as Sentry from '@sentry/react';
 import ForgetPassword from './pages/ForgetPassword';
 import ForgetPasswordSent from './pages/ForgetPasswordSent';
 import ResetPassword from './pages/ResetPassword';
-import ReactGA from 'react-ga';
-import { useEffect } from 'react';
-const TRACKING_ID = 'G-V97R1Y882R'; // OUR_TRACKING_ID
-
-ReactGA.initialize(TRACKING_ID);
+import ReactGA from 'react-ga4';
+ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
   return (
     <AuthProvider>
       <BrowserRouter>
