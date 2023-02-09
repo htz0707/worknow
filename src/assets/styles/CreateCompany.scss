@@ -1,0 +1,53 @@
+.create-company {
+  .ant-form {
+    .custom-label-input {
+      font-weight: 600;
+    }
+
+    .custom-label-input>span {
+      color: red;
+    }
+
+    .submit-button {
+      font-weight: 600;
+      width: 150px;
+      background: #FFB31F;
+      border-radius: 8px;
+    }
+
+    .delete-button {
+      color: red;
+    }
+
+    .text-black {
+      color: #282723;
+      font-weight: 600;
+    }
+
+    .ant-input[disabled],
+    .ant-select-disabled .ant-select-selection-item {
+      color: #282723;
+    }
+
+    .phone-input-engine {
+      input {
+        background: #ffffff;
+      }
+
+      .react-tel-input {
+        .form-control {
+          width: 100%;
+        }
+      }
+    }
+
+    // .ant-form-item {
+    //   margin-bottom: 0;
+    // }
+
+    .text-view-more {
+      color: #0075FF;
+      cursor: pointer;
+    }
+  }
+}

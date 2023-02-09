@@ -68,6 +68,11 @@ export default function WorkingSpaceDetails() {
         }
         closeTime
         openTime
+        worksHour {
+          closeHour
+          day
+          openHour
+        }
       }
       workingSpace(id: $working_space_id) {
         id
@@ -384,6 +389,7 @@ export default function WorkingSpaceDetails() {
         openTime={locationInfo?.openTime}
         closeTime={locationInfo?.closeTime}
         handleClose={() => setShowModal(false)}
+        worksHour={locationInfo?.worksHour}
       />
       <WarningContactModal
         show={showContactModal}

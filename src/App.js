@@ -2,9 +2,10 @@ import 'antd/dist/antd.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.scss';
 import { AuthProvider } from './context/auth';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import DashboardLayout from './layouts/DashboardLayout';
+import AdminLayout from './layouts/AdminLayout';
 import Locations from './pages/Locations';
 import LocationDetails from './pages/LocationDetails';
 import CreateBooking from './pages/CreateBooking';
@@ -28,10 +29,14 @@ import Voucher from './pages/Voucher';
 import ChangePassword from './pages/ChangePassword';
 import About from './pages/About';
 import AdminOrders from './pages/AdminOrders';
+import ListCompany from './pages/ListCompany';
+import CreateCompany from './pages/CreateCompany';
+import * as Sentry from '@sentry/react';
 import ForgetPassword from './pages/ForgetPassword';
 import ForgetPasswordSent from './pages/ForgetPasswordSent';
 import ResetPassword from './pages/ResetPassword';
-
+import ReactGA from 'react-ga4';
+ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
   return (
     <AuthProvider>
@@ -48,14 +53,6 @@ function App() {
             />
             <Route path='business' element={<Business />} />
             <Route path='space-partner' element={<SpacePartner />} />
-            {/* <Route
-              path='/user/:currentTab'
-              element={
-                <PrivateRoute>
-                  <User />
-                </PrivateRoute>
-              }
-            /> */}
             <Route
               path='/user/profile'
               element={
@@ -121,6 +118,32 @@ function App() {
               </PublicRoute>
             }
           />
+          <Route path='/admin/' element={<AdminLayout />}>
+            <Route
+              path='orders'
+              element={
+                <PrivateRoute>
+                  <AdminOrders />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='space/companies'
+              element={
+                <PrivateRoute>
+                  <ListCompany />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='space/company/new'
+              element={
+                <PrivateRoute>
+                  <CreateCompany />
+                </PrivateRoute>
+              }
+            />
+          </Route>
           <Route
             path='forget-password'
             element={
@@ -159,4 +182,4 @@ function App() {
   );
 }
 
-export default App;
+export default Sentry.withProfiler(App);

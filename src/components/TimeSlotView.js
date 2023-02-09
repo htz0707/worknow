@@ -247,7 +247,7 @@ export default function TimeSlotView(props) {
   return (
     <div className='timeslot-view'>
       {timeSlotDisplay?.map((item, index) => {
-        if (index % 2 == 0) {
+        if (parseInt(item.time?.split(':')?.[1]) === 0) {
           return (
             <div
               key={index}
