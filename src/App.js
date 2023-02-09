@@ -2,7 +2,7 @@ import 'antd/dist/antd.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.scss';
 import { AuthProvider } from './context/auth';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import DashboardLayout from './layouts/DashboardLayout';
 import AdminLayout from './layouts/AdminLayout';
@@ -35,7 +35,8 @@ import * as Sentry from '@sentry/react';
 import ForgetPassword from './pages/ForgetPassword';
 import ForgetPasswordSent from './pages/ForgetPasswordSent';
 import ResetPassword from './pages/ResetPassword';
-
+import ReactGA from 'react-ga4';
+ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
   return (
     <AuthProvider>
