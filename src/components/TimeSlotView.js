@@ -138,6 +138,108 @@ export default function TimeSlotView(props) {
   //   //   available: true,
   //   // },
   // ];
+  const timeSlotDefault = [
+    {
+      id: 1,
+      time: '09:00',
+      available: false,
+    },
+    {
+      id: 2,
+      time: '09:30',
+      available: false,
+    },
+    {
+      id: 3,
+      time: '10:00',
+      available: false,
+    },
+    {
+      id: 4,
+      time: '10:30',
+      available: false,
+    },
+    {
+      id: 5,
+      time: '11:00',
+      available: false,
+    },
+    {
+      id: 6,
+      time: '11:30',
+      available: false,
+    },
+    {
+      id: 7,
+      time: '12:00',
+      available: false,
+    },
+    {
+      id: 8,
+      time: '12:30',
+      available: false,
+    },
+    {
+      id: 9,
+      time: '13:00',
+      available: false,
+    },
+    {
+      id: 10,
+      time: '13:30',
+      available: false,
+    },
+    {
+      id: 11,
+      time: '14:00',
+      available: false,
+    },
+    {
+      id: 12,
+      time: '14:30',
+      available: false,
+    },
+    {
+      id: 13,
+      time: '15:00',
+      available: false,
+    },
+    {
+      id: 14,
+      time: '15:30',
+      available: false,
+    },
+    {
+      id: 15,
+      time: '16:00',
+      available: false,
+    },
+    {
+      id: 16,
+      time: '16:30',
+      available: false,
+    },
+    {
+      id: 17,
+      time: '17:00',
+      available: false,
+    },
+    {
+      id: 18,
+      time: '17:30',
+      available: false,
+    },
+    {
+      id: 19,
+      time: '18:00',
+      available: false,
+    },
+    {
+      id: 20,
+      time: '18:30',
+      available: false,
+    },
+  ];
   const [timeSlot, setTimeSlot] = useState([]);
   const [timeSlotDisplay, setTimeSlotDisplay] = useState([]);
   const handleCreateTimeSlot = () => {
@@ -196,6 +298,10 @@ export default function TimeSlotView(props) {
       setTimeSlot(arr);
       // arr1.pop();
       setTimeSlotDisplay(arr1);
+      console.log(arr1);
+    } else {
+      setTimeSlot(timeSlotDefault);
+      setTimeSlotDisplay(timeSlotDefault);
     }
   };
   useEffect(() => {

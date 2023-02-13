@@ -282,5 +282,6 @@
   "verified_email_sent_description": "Chúng tôi đã gửi Email khôi phục mật khẩu đến hộp thư của bạn. Vui lòng kiểm tra để hoàn tất khôi phục.",
   "reset": "Đặt lại",
   "reset_password_description": "Tài khoản của bạn đã được khôi phục. Nhập mật khẩu mới",
-  "exit": "Thoát"
+  "exit": "Thoát",
+  "close_today": "Đóng cửa hôm nay"
 }
