@@ -15,6 +15,7 @@ export default function LocationCard(props) {
   const { data } = props;
   let navigate = useNavigate();
   const handleClick = (id) => {
+    localStorage.removeItem('selectedWspaceType');
     navigate(`/locations/${id}`);
   };
   const returnLowestPrice = (priceByHour, priceByDay) => {
