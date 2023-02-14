@@ -186,6 +186,15 @@ export default function LocationDetails() {
         }
       });
       setTypeWorkingSpace(real_arr);
+      console.log(real_arr);
+      let save_wspace_type = localStorage.getItem('selectedWspaceType');
+      if (save_wspace_type) {
+        let find = real_arr.find((item) => item === save_wspace_type);
+        if (find) {
+          handleSelectTypeWorkingSpace(find);
+          return;
+        }
+      }
       handleSelectTypeWorkingSpace(real_arr[0]);
     } else {
       setTypeWorkingSpace([]);
@@ -193,6 +202,7 @@ export default function LocationDetails() {
     }
   };
   const handleSelectTypeWorkingSpace = (value) => {
+    localStorage.setItem('selectedWspaceType', value);
     setSelectedTypeWorkingSpace(value);
     let arr = workingSpaces.filter((item) => item.type === value);
     setCurrentWorkingSpace(arr);
