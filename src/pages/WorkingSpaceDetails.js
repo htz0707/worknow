@@ -40,6 +40,7 @@ import {
 import ConfirmBookingModal from '../components/ConfirmBookingModal';
 import { useTranslation } from 'react-i18next';
 import WarningContactModal from '../components/WarningContactModal';
+import moment from 'moment';
 
 export default function WorkingSpaceDetails() {
   const { t } = useTranslation();
@@ -243,6 +244,17 @@ export default function WorkingSpaceDetails() {
       return 'H';
     }
   };
+  const returnWorkingHour = () => {
+    let day = moment().day();
+    let working_hour = locationInfo?.worksHour?.find(
+      (item) => item.day === day
+    );
+    if (working_hour?.openHour && working_hour?.closeHour) {
+      return renderWorkingHour(working_hour?.openHour, working_hour?.closeHour);
+    } else {
+      return t('close_today');
+    }
+  };
   return (
     <div className='working-space-details page-container'>
       <div className='working-space-details_header'>
@@ -319,11 +331,7 @@ export default function WorkingSpaceDetails() {
                 {workingSpaceInfo?.capacity?.name} {t('person')}
               </div>
               <div className='working-hour'>
-                <ClockIcon className='icon' />{' '}
-                {renderWorkingHour(
-                  locationInfo?.openTime,
-                  locationInfo?.closeTime
-                )}
+                <ClockIcon className='icon' /> {returnWorkingHour()}
               </div>
             </div>
             <div className='content-booking'>

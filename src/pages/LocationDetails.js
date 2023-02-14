@@ -295,6 +295,17 @@ export default function LocationDetails() {
   function replaceWithBr(haiku) {
     return haiku?.replace(/\n/g, '<br />');
   }
+  const returnWorkingHour = () => {
+    let day = moment().day();
+    let working_hour = locationInfo?.worksHour?.find(
+      (item) => item.day === day
+    );
+    if (working_hour?.openHour && working_hour?.closeHour) {
+      return renderWorkingHour(working_hour?.openHour, working_hour?.closeHour);
+    } else {
+      return t('close_today');
+    }
+  };
   return (
     <div className='location-details'>
       <div className='location-details_header'></div>
@@ -583,6 +594,7 @@ export default function LocationDetails() {
                       <div
                         className={cx('time-box', {
                           active: item.id == moment().day(),
+                          close: !locationInfo?.worksHour[index]?.openHour,
                         })}
                         key={index}
                       >
@@ -590,9 +602,13 @@ export default function LocationDetails() {
                         <div className='time-range'>
                           <div>{t('operation_hour')}</div>
                           <div>
-                            {renderWorkingHour(
-                              locationInfo?.worksHour[item.id]?.openHour,
-                              locationInfo?.worksHour[item.id]?.closeHour
+                            {locationInfo?.worksHour[index]?.openHour ? (
+                              renderWorkingHour(
+                                locationInfo?.worksHour[index]?.openHour,
+                                locationInfo?.worksHour[index]?.closeHour
+                              )
+                            ) : (
+                              <>Đóng cửa</>
                             )}
                           </div>
                         </div>
@@ -637,10 +653,7 @@ export default function LocationDetails() {
                     return (
                       <WorkSpaceCard
                         data={item}
-                        workingTime={renderWorkingHour(
-                          locationInfo?.openTime,
-                          locationInfo?.closeTime
-                        )}
+                        workingTime={returnWorkingHour()}
                         isVerified={locationInfo?.isVerified}
                         handleClick={() => {
                           if (locationInfo.isVerified) {

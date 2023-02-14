@@ -282,5 +282,6 @@
   "verified_email_sent_description": "We've sent a Password Recovery Email to your inbox. Please check to reset your password.",
   "reset": "Reset",
   "reset_password_description": "Your account has been restored. Enter your new password",
-  "exit": "Exit"
+  "exit": "Exit",
+  "close_today": "Closed today"
 }
