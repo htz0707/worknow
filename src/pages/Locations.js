@@ -24,7 +24,7 @@ function Locations() {
     if (obj.sort) {
       setSortLocation(obj.sort);
     } else {
-      setSortLocation('');
+      setSortLocation('-is_verified');
     }
     let filter_location = {};
     if (obj.amenitiesLocationIds) {
@@ -49,6 +49,15 @@ function Locations() {
     } else {
       filter_location.workingSpaceTypes = [];
     }
+    if (obj.isVerified) {
+      if (obj.isVerified === 'true') {
+        filter_location.isVerified = true;
+      } else {
+        filter_location.isVerified = '';
+      }
+    } else {
+      filter_location.isVerified = '';
+    }
     setFilterLocations({
       ...filterLocations,
       ...filter_location,
@@ -63,6 +72,7 @@ function Locations() {
       $amenitiesWorkingSpaceIds: [UUID!]
       $workingSpaceCapacityIds: [UUID!]
       $workingSpaceTypes: [WorkingSpaceType!]
+      $isVerified: Boolean
       $keyword: String!
       $sort: String!
     ) {
@@ -72,6 +82,7 @@ function Locations() {
           amenitiesWorkingSpaceIds: $amenitiesWorkingSpaceIds
           workingSpaceCapacityIds: $workingSpaceCapacityIds
           workingSpaceTypes: $workingSpaceTypes
+          isVerified: $isVerified
           keyword: $keyword
           sort: $sort
         }
@@ -126,15 +137,19 @@ function Locations() {
   const [loading, setLoading] = useState(true);
   const getLocationsList = async () => {
     setLoading(true);
+    let paramsData = {
+      amenitiesLocationIds: filterLocations.amenitiesLocationIds,
+      amenitiesWorkingSpaceIds: filterLocations.amenitiesWorkingSpaceIds,
+      workingSpaceCapacityIds: filterLocations.capacityIds,
+      workingSpaceTypes: filterLocations.workingSpaceTypes,
+      keyword: searchData,
+      sort: sortLocation,
+    };
+    if (filterLocations.isVerified !== '') {
+      paramsData.isVerified = filterLocations.isVerified;
+    }
     let res = await getLocation({
-      variables: {
-        amenitiesLocationIds: filterLocations.amenitiesLocationIds,
-        amenitiesWorkingSpaceIds: filterLocations.amenitiesWorkingSpaceIds,
-        workingSpaceCapacityIds: filterLocations.capacityIds,
-        workingSpaceTypes: filterLocations.workingSpaceTypes,
-        keyword: searchData,
-        sort: sortLocation,
-      },
+      variables: paramsData,
     });
     if (res.data) {
       setLocations(res.data?.locations?.edges);
@@ -149,8 +164,9 @@ function Locations() {
     amenitiesWorkingSpaceIds: [],
     capacityIds: [],
     workingSpaceTypes: [],
+    isVerified: '',
   });
-  const [sortLocation, setSortLocation] = useState('');
+  const [sortLocation, setSortLocation] = useState('-is_verified');
   useEffect(() => {
     getLocationsList();
   }, [filterLocations, searchData, sortLocation]);

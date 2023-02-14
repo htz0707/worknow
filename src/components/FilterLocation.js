@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../assets/styles/FilterLocation.scss';
-import { IoLocationOutline } from 'react-icons/io5';
-import { Dropdown, Button } from 'react-bootstrap';
 import { ReactComponent as ServiceIcon } from '../assets/icons/tienichtoanha.svg';
 import { ReactComponent as OfficeIcon } from '../assets/icons/tienichvanphong.svg';
 import { ReactComponent as DistanceIcon } from '../assets/icons/ganToiNhat.svg';
@@ -307,6 +305,32 @@ export default function FilterLocation(props) {
       });
     }
   };
+  // handle filter by isVerified
+  const onClickIsVerified = (value) => {
+    if (value) {
+      setFilterLocations({
+        ...filterLocations,
+        isVerified: true,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          isVerified: value.toString(),
+        }).toString(),
+      });
+    } else {
+      setFilterLocations({
+        ...filterLocations,
+        isVerified: '',
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          isVerified: '',
+        }).toString(),
+      });
+    }
+  };
   const [showMoreAmenitiesLocation, setShowMoreAmenitiesLocation] =
     useState(false);
   const [showMoreAmenitiesWorkingSpace, setShowMoreAmenitiesWorkingSpace] =
@@ -317,6 +341,7 @@ export default function FilterLocation(props) {
       amenitiesWorkingSpaceIds: [],
       capacityIds: [],
       workingSpaceTypes: [],
+      isVerified: '',
     });
     if (currentParams.sort) {
       navigate({
@@ -333,7 +358,8 @@ export default function FilterLocation(props) {
       filterLocations?.amenitiesLocationIds?.length > 0 ||
       filterLocations?.amenitiesWorkingSpaceIds?.length > 0 ||
       filterLocations?.capacityIds?.length > 0 ||
-      filterLocations?.workingSpaceTypes?.length > 0
+      filterLocations?.workingSpaceTypes?.length > 0 ||
+      filterLocations?.isVerified === true
     ) {
       return true;
     } else {
@@ -501,6 +527,25 @@ export default function FilterLocation(props) {
               </div>
             );
           })}
+        </div>
+      </div>
+      <div className='filter-location_card'>
+        <div className='filter-location_card_title'>
+          <PolicyIcon className='icon' /> {t('policy')}
+        </div>
+        <div className='filter-location_card_list'>
+          <div className='item form-check'>
+            <input
+              className='form-check-input'
+              type='checkbox'
+              id='is_verified'
+              checked={filterLocations.isVerified === true}
+              onChange={(e) => onClickIsVerified(e.target.checked)}
+            />
+            <label className='form-check-label' for='is_verified'>
+              {t('worknow_verified')}
+            </label>
+          </div>
         </div>
       </div>
       {/* <div className='filter-location_card'>

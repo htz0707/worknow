@@ -283,5 +283,8 @@
   "reset": "Đặt lại",
   "reset_password_description": "Tài khoản của bạn đã được khôi phục. Nhập mật khẩu mới",
   "exit": "Thoát",
-  "close_today": "Đóng cửa hôm nay"
+  "close_today": "Đóng cửa hôm nay",
+  "verified": "Đã xác thực",
+  "policy": "Chính sách",
+  "worknow_verified": "WorkNow đã xác thực"
 }

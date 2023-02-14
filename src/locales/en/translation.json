@@ -283,5 +283,8 @@
   "reset": "Reset",
   "reset_password_description": "Your account has been restored. Enter your new password",
   "exit": "Exit",
-  "close_today": "Closed today"
+  "close_today": "Closed today",
+  "verified": "Verified",
+  "policy": "Policy",
+  "worknow_verified": "Verified by WorkNow"
 }
