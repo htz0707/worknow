@@ -348,7 +348,7 @@ export default function WorkingSpaceDetails() {
                 </div>
               )}
               <button
-                className='btn-booking'
+                className='btn-primary w-100'
                 onClick={() => {
                   if (locationInfo.isVerified) {
                     handleBooking();

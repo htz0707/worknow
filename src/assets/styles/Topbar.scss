@@ -73,6 +73,16 @@
   .login-section {
     .isNotLogin {
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      &:hover {
+        color: #ffb31f;
+        svg {
+          path {
+            fill: #ffb31f;
+          }
+        }
+      }
       .text {
         margin-right: 10px;
       }

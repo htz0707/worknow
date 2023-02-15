@@ -13,7 +13,7 @@ import ScrollspyNav from 'react-scrollspy-nav';
 import ConfirmBookingModal from '../components/ConfirmBookingModal';
 import { ReactComponent as StarIcon } from '../assets/icons/start.svg';
 import { ReactComponent as CheckIcon } from '../assets/icons/check.svg';
-import { ReactComponent as QuoteIcon } from '../assets/icons/quote.svg';
+import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
 import { Avatar } from 'antd';
 import moment from 'moment';
 import Bcrumb from '../components/Bcrumb';
@@ -316,6 +316,12 @@ export default function LocationDetails() {
       return t('close_today');
     }
   };
+  useEffect(() => {
+    if (document.getElementById('location_hour_active')) {
+      var leftPos = document.getElementById('location_hour_active').offsetLeft;
+      document.getElementById('location_hours').scrollLeft = leftPos - 40;
+    }
+  }, [document.getElementById('location_hour_active')]);
   return (
     <div className='location-details'>
       <div className='location-details_header'></div>
@@ -351,16 +357,16 @@ export default function LocationDetails() {
           <div className='location-address'>
             <div>
               <div>{renderAddress(locationInfo)}</div>
-              <div>{'>10km'}</div>
             </div>
             <div>
-              <button
+              <div
+                className='btn-location'
                 onClick={() =>
                   showInMapClicked(locationInfo.lat, locationInfo.long)
                 }
               >
-                <GoLocation />
-              </button>
+                <LocationIcon />
+              </div>
             </div>
           </div>
         </div>
@@ -385,7 +391,7 @@ export default function LocationDetails() {
           <div className='row-3'>
             <div>
               <GoLocation /> {renderAddress(locationInfo)}.{' '}
-              <span className='distance'>{t('from_me')} 0.2km</span>
+              {/* <span className='distance'>{t('from_me')} 0.2km</span> */}
               <span
                 className='view-on-map'
                 onClick={() =>
@@ -597,7 +603,7 @@ export default function LocationDetails() {
                   {moment().format('dddd, LL')}
                 </span>
               </div>
-              <div>
+              <div id='location_hours'>
                 {locationInfo.worksHour &&
                   dayArray.map((item, index) => {
                     return (
@@ -607,6 +613,11 @@ export default function LocationDetails() {
                           close: !locationInfo?.worksHour[index]?.openHour,
                         })}
                         key={index}
+                        id={
+                          item.id == moment().day()
+                            ? 'location_hour_active'
+                            : 'location_hour_inactive'
+                        }
                       >
                         <div className='day'>{item.name}</div>
                         <div className='time-range'>

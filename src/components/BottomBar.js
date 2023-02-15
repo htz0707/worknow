@@ -16,7 +16,7 @@ export default function BottomBar() {
       <Container className='container-bottom-bar'>
         <div className='row w-100'>
           <div className='bar-item col-md-4 col-12'>
-            <div className='my-4 fw-bold'>WorkNow</div>
+            <div className='title'>WorkNow</div>
             <div className='link-text' onClick={() => navigate('/about')}>
               {t('about_us')}
             </div>
@@ -24,7 +24,7 @@ export default function BottomBar() {
             <div className='link-text'>{t('recruitment')}</div>
           </div>
           <div className='bar-item col-md-4 col-12'>
-            <div className='my-4 fw-bold'>{t('contact')}</div>
+            <div className='title'>{t('contact')}</div>
             <div className='link-text'>{t('help_center')}</div>
             <div
               className='link-text'
@@ -34,7 +34,7 @@ export default function BottomBar() {
             </div>
           </div>
           <div className='bar-item col-md-4 col-12'>
-            <div className='my-4 fw-bold'>{t('policy_and_terms')}</div>
+            <div className='title'>{t('policy_and_terms')}</div>
             <div className='link-text' onClick={() => navigate('/rules')}>
               {t('term_and_condition')}
             </div>

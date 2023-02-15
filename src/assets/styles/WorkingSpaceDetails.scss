@@ -45,17 +45,17 @@
       margin-bottom: 20px;
       .title {
         font-weight: 500;
-        font-size: 32px;
+        font-size: 24px;
         line-height: 37px;
         text-transform: capitalize;
         color: #282723;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
       }
       .content {
         color: #282723;
         border: 1px solid #ffb31f;
-        border-radius: 36px;
-        padding: 15px;
+        border-radius: 16px;
+        padding: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -108,19 +108,19 @@
             margin-bottom: 15px;
             text-transform: capitalize;
           }
-          .btn-booking {
-            width: 100%;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            letter-spacing: 0.01em;
-            user-select: none;
-            background: #ffb31f;
-            border-radius: 50px;
-            color: black;
-            padding: 8px 20px;
-            border: none;
-          }
+          // .btn-booking {
+          //   width: 100%;
+          //   font-size: 14px;
+          //   line-height: 16px;
+          //   text-align: center;
+          //   letter-spacing: 0.01em;
+          //   user-select: none;
+          //   background: #ffb31f;
+          //   border-radius: 50px;
+          //   color: black;
+          //   padding: 8px 20px;
+          //   border: none;
+          // }
         }
       }
     }
@@ -128,11 +128,11 @@
       margin-bottom: 20px;
       .title {
         font-weight: 500;
-        font-size: 32px;
+        font-size: 24px;
         line-height: 37px;
         text-transform: capitalize;
         color: #282723;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
       }
       .listing {
         padding-left: 20px;
@@ -149,11 +149,11 @@
       margin-bottom: 20px;
       .title {
         font-weight: 500;
-        font-size: 32px;
+        font-size: 24px;
         line-height: 37px;
         text-transform: capitalize;
         color: #282723;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
       }
       .listing {
         font-weight: 400;
