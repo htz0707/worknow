@@ -73,7 +73,7 @@ function SpacePartner() {
               </p>
             </div>
           </div>
-          <div className='row gx-5'>
+          <div className='row'>
             <div className='col-xl-3 col-lg-4 ms-auto'>
               <div className='type-card'>
                 <img src={room2} className='w-100' />
@@ -89,7 +89,7 @@ function SpacePartner() {
               </div>
             </div>
           </div>
-          <div className='row gx-5'>
+          <div className='row'>
             <div className='col-xl-3 col-lg-4 ms-auto'>
               <div className='type-card'>
                 <img src={room3} className='w-100' />
@@ -136,7 +136,7 @@ function SpacePartner() {
               </h2>
             </div>
           </div>
-          <div className='row gx-5 gy-3'>
+          <div className='row gy-3'>
             <div className='col-xl-3 col-lg-4 ms-auto'>
               <div className='feature-card p-3'>
                 <div className='mb-3 border rounded-circle relationship-icon'>
