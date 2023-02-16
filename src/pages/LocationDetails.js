@@ -322,6 +322,21 @@ export default function LocationDetails() {
       document.getElementById('location_hours').scrollLeft = leftPos - 40;
     }
   }, [document.getElementById('location_hour_active')]);
+  const handleOnClick = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: locationInfo?.name,
+          url: window.location.href,
+        })
+        .then(() => {
+          console.log('Successfully shared');
+        })
+        .catch((error) => {
+          console.error('Something went wrong sharing', error);
+        });
+    }
+  };
   return (
     <div className='location-details'>
       <div className='location-details_header'></div>
@@ -345,7 +360,7 @@ export default function LocationDetails() {
             <div className='back-icon' onClick={handleGoback}>
               <MdKeyboardArrowLeft size={25} />
             </div>
-            <div className='share-icon'>
+            <div className='share-icon' onClick={handleOnClick}>
               <IoShareOutline size={20} />
             </div>
           </div>
