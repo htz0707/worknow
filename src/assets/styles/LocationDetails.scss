@@ -517,11 +517,12 @@
           font-size: 14px;
           line-height: 16px;
           margin-bottom: 20px;
+          width: fit-content;
           span {
             margin-right: 10px;
           }
           &:hover {
-            color: $primary;
+            color: #ffb31f;
           }
         }
       }
