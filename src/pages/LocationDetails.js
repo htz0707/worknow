@@ -783,17 +783,23 @@ export default function LocationDetails() {
           <div className='support' id='section_5'>
             <div className='header'>{t('support')}</div>
             <div className='body'>
-              <div className='support-item'>
-                <span>How to Check In</span> <AiOutlineRight />
+              <div
+                className='support-item'
+                onClick={() => {
+                  navigate('/faq');
+                }}
+              >
+                <span>{t('how_to_checkin_checkout')}</span>
+                <AiOutlineRight />
               </div>
-              <div className='support-item'>
-                <span>How to Check Out</span> <AiOutlineRight />
-              </div>
-              <div className='support-item'>
-                <span>Customer support</span> <AiOutlineRight />
-              </div>
-              <div className='support-item'>
-                <span>House Rules</span> <AiOutlineRight />
+              <div
+                className='support-item'
+                onClick={() => {
+                  navigate('/contact');
+                }}
+              >
+                <span>{t('contact_support')}</span>
+                <AiOutlineRight />
               </div>
             </div>
           </div>

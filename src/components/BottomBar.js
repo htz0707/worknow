@@ -25,7 +25,9 @@ export default function BottomBar() {
           </div>
           <div className='bar-item col-md-4 col-12'>
             <div className='title'>{t('contact')}</div>
-            <div className='link-text'>{t('help_center')}</div>
+            <div className='link-text' onClick={() => navigate('/contact')}>
+              {t('help_center')}
+            </div>
             <div
               className='link-text'
               onClick={() => navigate('/space-partner')}

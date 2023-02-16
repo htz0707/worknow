@@ -90,10 +90,10 @@ export default function Topbar(props) {
   };
   const menu = (
     <Menu>
-      <Menu.Item style={{ width: '120px' }} onClick={handleViewUserInfo}>
+      <Menu.Item style={{ width: '150px' }} onClick={handleViewUserInfo}>
         {t('profile')}
       </Menu.Item>
-      <Menu.Item style={{ width: '120px' }} onClick={handleLogout}>
+      <Menu.Item style={{ width: '150px' }} onClick={handleLogout}>
         {t('logout')}
       </Menu.Item>
     </Menu>
@@ -221,9 +221,30 @@ export default function Topbar(props) {
                   </div>
                   <div onClick={handleLogout}>{t('logout')}</div>
                 </div> */}
-                <div>
+                <div id='container-dropdown'>
                   <Dropdown
                     overlay={menuWeb}
+                    placement='bottomRight'
+                    forceRender
+                    trigger={['click']}
+                    getPopupContainer={() =>
+                      document.getElementById('container-dropdown')
+                    }
+                  >
+                    <Button className='btn-avatar'>
+                      <img
+                        className='avatar-image'
+                        src={user?.avatar || Avatar}
+                        alt='avatar'
+                      />
+                    </Button>
+                  </Dropdown>
+                </div>
+              </div>
+              <div className='isLoginMobile'>
+                <div id='container-dropdown-moblie'>
+                  <Dropdown
+                    overlay={menu}
                     placement='bottomRight'
                     forceRender
                     trigger={['click']}
@@ -237,17 +258,6 @@ export default function Topbar(props) {
                     </Button>
                   </Dropdown>
                 </div>
-              </div>
-              <div className='isLoginMobile'>
-                <Dropdown overlay={menu} placement='bottomRight' forceRender>
-                  <Button className='btn-avatar'>
-                    <img
-                      className='avatar-image'
-                      src={user?.avatar || Avatar}
-                      alt='avatar'
-                    />
-                  </Button>
-                </Dropdown>
               </div>
             </>
           ) : (
