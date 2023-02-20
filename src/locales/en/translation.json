@@ -282,5 +282,15 @@
   "verified_email_sent_description": "We've sent a Password Recovery Email to your inbox. Please check to reset your password.",
   "reset": "Reset",
   "reset_password_description": "Your account has been restored. Enter your new password",
-  "exit": "Exit"
+  "exit": "Exit",
+  "close_today": "Closed today",
+  "verified": "Verified",
+  "policy": "Policy",
+  "worknow_verified": "Verified by WorkNow",
+  "profile": "My profile",
+  "how_to_checkin_checkout": "How to checkin - checkout?",
+  "contact_support": "Contact support",
+  "support_center": "Customer support",
+  "vietnam": "Vietnam",
+  "response_mail_description": "We will reply you within 1-2 days."
 }

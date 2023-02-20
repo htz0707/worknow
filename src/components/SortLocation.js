@@ -36,6 +36,8 @@ export default function SortLocation(props) {
         return t('lowest_price');
       case '-price':
         return t('highest_price');
+      case '-is_verified':
+        return t('verified');
       default:
         return null;
     }
@@ -79,6 +81,14 @@ export default function SortLocation(props) {
             onClick={() => handleSelectSort('-price')}
           >
             {t('highest_price')}
+          </Dropdown.Item>
+          <Dropdown.Item
+            className={
+              sort === '-is_verified' ? 'dropdown-item active' : 'dropdown-item'
+            }
+            onClick={() => handleSelectSort('-is_verified')}
+          >
+            {t('verified_by_worknow')}
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

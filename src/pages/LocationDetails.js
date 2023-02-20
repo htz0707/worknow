@@ -13,7 +13,7 @@ import ScrollspyNav from 'react-scrollspy-nav';
 import ConfirmBookingModal from '../components/ConfirmBookingModal';
 import { ReactComponent as StarIcon } from '../assets/icons/start.svg';
 import { ReactComponent as CheckIcon } from '../assets/icons/check.svg';
-import { ReactComponent as QuoteIcon } from '../assets/icons/quote.svg';
+import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
 import { Avatar } from 'antd';
 import moment from 'moment';
 import Bcrumb from '../components/Bcrumb';
@@ -186,6 +186,15 @@ export default function LocationDetails() {
         }
       });
       setTypeWorkingSpace(real_arr);
+      console.log(real_arr);
+      let save_wspace_type = localStorage.getItem('selectedWspaceType');
+      if (save_wspace_type) {
+        let find = real_arr.find((item) => item === save_wspace_type);
+        if (find) {
+          handleSelectTypeWorkingSpace(find);
+          return;
+        }
+      }
       handleSelectTypeWorkingSpace(real_arr[0]);
     } else {
       setTypeWorkingSpace([]);
@@ -193,6 +202,7 @@ export default function LocationDetails() {
     }
   };
   const handleSelectTypeWorkingSpace = (value) => {
+    localStorage.setItem('selectedWspaceType', value);
     setSelectedTypeWorkingSpace(value);
     let arr = workingSpaces.filter((item) => item.type === value);
     setCurrentWorkingSpace(arr);
@@ -295,6 +305,38 @@ export default function LocationDetails() {
   function replaceWithBr(haiku) {
     return haiku?.replace(/\n/g, '<br />');
   }
+  const returnWorkingHour = () => {
+    let day = moment().day();
+    let working_hour = locationInfo?.worksHour?.find(
+      (item) => item.day === day
+    );
+    if (working_hour?.openHour && working_hour?.closeHour) {
+      return renderWorkingHour(working_hour?.openHour, working_hour?.closeHour);
+    } else {
+      return t('close_today');
+    }
+  };
+  useEffect(() => {
+    if (document.getElementById('location_hour_active')) {
+      var leftPos = document.getElementById('location_hour_active').offsetLeft;
+      document.getElementById('location_hours').scrollLeft = leftPos - 40;
+    }
+  }, [document.getElementById('location_hour_active')]);
+  const handleOnClick = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: locationInfo?.name,
+          url: window.location.href,
+        })
+        .then(() => {
+          console.log('Successfully shared');
+        })
+        .catch((error) => {
+          console.error('Something went wrong sharing', error);
+        });
+    }
+  };
   return (
     <div className='location-details'>
       <div className='location-details_header'></div>
@@ -318,7 +360,7 @@ export default function LocationDetails() {
             <div className='back-icon' onClick={handleGoback}>
               <MdKeyboardArrowLeft size={25} />
             </div>
-            <div className='share-icon'>
+            <div className='share-icon' onClick={handleOnClick}>
               <IoShareOutline size={20} />
             </div>
           </div>
@@ -330,16 +372,16 @@ export default function LocationDetails() {
           <div className='location-address'>
             <div>
               <div>{renderAddress(locationInfo)}</div>
-              <div>{'>10km'}</div>
             </div>
             <div>
-              <button
+              <div
+                className='btn-location'
                 onClick={() =>
                   showInMapClicked(locationInfo.lat, locationInfo.long)
                 }
               >
-                <GoLocation />
-              </button>
+                <LocationIcon />
+              </div>
             </div>
           </div>
         </div>
@@ -364,7 +406,7 @@ export default function LocationDetails() {
           <div className='row-3'>
             <div>
               <GoLocation /> {renderAddress(locationInfo)}.{' '}
-              <span className='distance'>{t('from_me')} 0.2km</span>
+              {/* <span className='distance'>{t('from_me')} 0.2km</span> */}
               <span
                 className='view-on-map'
                 onClick={() =>
@@ -576,23 +618,33 @@ export default function LocationDetails() {
                   {moment().format('dddd, LL')}
                 </span>
               </div>
-              <div>
+              <div id='location_hours'>
                 {locationInfo.worksHour &&
                   dayArray.map((item, index) => {
                     return (
                       <div
                         className={cx('time-box', {
                           active: item.id == moment().day(),
+                          close: !locationInfo?.worksHour[index]?.openHour,
                         })}
                         key={index}
+                        id={
+                          item.id == moment().day()
+                            ? 'location_hour_active'
+                            : 'location_hour_inactive'
+                        }
                       >
                         <div className='day'>{item.name}</div>
                         <div className='time-range'>
                           <div>{t('operation_hour')}</div>
                           <div>
-                            {renderWorkingHour(
-                              locationInfo?.worksHour[item.id]?.openHour,
-                              locationInfo?.worksHour[item.id]?.closeHour
+                            {locationInfo?.worksHour[index]?.openHour ? (
+                              renderWorkingHour(
+                                locationInfo?.worksHour[index]?.openHour,
+                                locationInfo?.worksHour[index]?.closeHour
+                              )
+                            ) : (
+                              <>Đóng cửa</>
                             )}
                           </div>
                         </div>
@@ -637,10 +689,7 @@ export default function LocationDetails() {
                     return (
                       <WorkSpaceCard
                         data={item}
-                        workingTime={renderWorkingHour(
-                          locationInfo?.openTime,
-                          locationInfo?.closeTime
-                        )}
+                        workingTime={returnWorkingHour()}
                         isVerified={locationInfo?.isVerified}
                         handleClick={() => {
                           if (locationInfo.isVerified) {
@@ -734,17 +783,23 @@ export default function LocationDetails() {
           <div className='support' id='section_5'>
             <div className='header'>{t('support')}</div>
             <div className='body'>
-              <div className='support-item'>
-                <span>How to Check In</span> <AiOutlineRight />
+              <div
+                className='support-item'
+                onClick={() => {
+                  navigate('/faq');
+                }}
+              >
+                <span>{t('how_to_checkin_checkout')}</span>
+                <AiOutlineRight />
               </div>
-              <div className='support-item'>
-                <span>How to Check Out</span> <AiOutlineRight />
-              </div>
-              <div className='support-item'>
-                <span>Customer support</span> <AiOutlineRight />
-              </div>
-              <div className='support-item'>
-                <span>House Rules</span> <AiOutlineRight />
+              <div
+                className='support-item'
+                onClick={() => {
+                  navigate('/contact');
+                }}
+              >
+                <span>{t('contact_support')}</span>
+                <AiOutlineRight />
               </div>
             </div>
           </div>

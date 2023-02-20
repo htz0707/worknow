@@ -282,5 +282,15 @@
   "verified_email_sent_description": "Chúng tôi đã gửi Email khôi phục mật khẩu đến hộp thư của bạn. Vui lòng kiểm tra để hoàn tất khôi phục.",
   "reset": "Đặt lại",
   "reset_password_description": "Tài khoản của bạn đã được khôi phục. Nhập mật khẩu mới",
-  "exit": "Thoát"
+  "exit": "Thoát",
+  "close_today": "Đóng cửa hôm nay",
+  "verified": "Đã xác thực",
+  "policy": "Chính sách",
+  "worknow_verified": "WorkNow đã xác thực",
+  "profile": "Thông tin của tôi",
+  "how_to_checkin_checkout": "Làm sao để checkin - checkout?",
+  "contact_support": "Liên hệ hỗ trợ",
+  "support_center": "Trung tâm trợ giúp",
+  "vietnam": "Việt Nam",
+  "response_mail_description": "Chúng tôi sẽ trả lời trong vòng 1-2 ngày làm việc."
 }

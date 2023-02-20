@@ -88,7 +88,7 @@ export default function WorkSpaceCard(props) {
             {formatCurrency(data?.priceByDay)}/{renderHourOrDay(data?.type)}
           </div>
         )}
-        <button onClick={handleClick}>
+        <button className='btn-primary' onClick={handleClick}>
           {isVerified ? t('book_now') : t('contact_now')}
         </button>
       </div>

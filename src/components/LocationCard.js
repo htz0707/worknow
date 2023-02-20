@@ -15,6 +15,7 @@ export default function LocationCard(props) {
   const { data } = props;
   let navigate = useNavigate();
   const handleClick = (id) => {
+    localStorage.removeItem('selectedWspaceType');
     navigate(`/locations/${id}`);
   };
   const returnLowestPrice = (priceByHour, priceByDay) => {
@@ -71,7 +72,6 @@ export default function LocationCard(props) {
             </div>
             <div>
               <div className='text-address'>{renderAddress(data)}</div>
-              <div>{t('from_me')} 0,2km</div>
             </div>
           </div>
           <div className='location-type'>
@@ -103,7 +103,10 @@ export default function LocationCard(props) {
               <span>{t('just_from')} </span>
               {returnLowestPrice(data.priceByHour, data.priceByDay)}
             </div>
-            <button onClick={() => handleClick(data.id)}>
+            <button
+              className='btn-primary'
+              onClick={() => handleClick(data.id)}
+            >
               {t('view_detail')}
             </button>
           </div>
