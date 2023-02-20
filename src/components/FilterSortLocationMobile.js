@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import '../assets/styles/FilterSortLocationMobile.scss';
-import { ReactComponent as SortIcon } from '../assets/icons/sort.svg';
 import { ReactComponent as FilterIcon } from '../assets/icons/filter.svg';
 import { ReactComponent as CloseIcon } from '../assets/icons/close.svg';
 import { ReactComponent as ServiceIcon } from '../assets/icons/tienichtoanha.svg';
 import { ReactComponent as OfficeIcon } from '../assets/icons/tienichvanphong.svg';
 import { ReactComponent as CapacityIcon } from '../assets/icons/sucChua.svg';
 import { ReactComponent as RoomIcon } from '../assets/icons/loaiVanPhong.svg';
+import { ReactComponent as PolicyIcon } from '../assets/icons/chinhSach.svg';
 import { Offcanvas } from 'react-bootstrap';
 import { gql, useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
@@ -243,6 +243,32 @@ export default function FilterSortLocationMobile(props) {
       });
     }
   };
+  // handle filter by isVerified
+  const onClickIsVerified = (value) => {
+    if (value) {
+      setFilterLocations({
+        ...filterLocations,
+        isVerified: true,
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          isVerified: value.toString(),
+        }).toString(),
+      });
+    } else {
+      setFilterLocations({
+        ...filterLocations,
+        isVerified: '',
+      });
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          isVerified: '',
+        }).toString(),
+      });
+    }
+  };
   const [showMoreAmenitiesLocation, setShowMoreAmenitiesLocation] =
     useState(false);
   const [showMoreAmenitiesWorkingSpace, setShowMoreAmenitiesWorkingSpace] =
@@ -254,6 +280,7 @@ export default function FilterSortLocationMobile(props) {
       amenitiesWorkingSpaceIds: [],
       capacityIds: [],
       workingSpaceTypes: [],
+      isVerified: '',
     });
     if (currentParams.sort) {
       navigate({
@@ -270,7 +297,8 @@ export default function FilterSortLocationMobile(props) {
       filterLocations?.amenitiesLocationIds?.length > 0 ||
       filterLocations?.amenitiesWorkingSpaceIds?.length > 0 ||
       filterLocations?.capacityIds?.length > 0 ||
-      filterLocations?.workingSpaceTypes?.length > 0
+      filterLocations?.workingSpaceTypes?.length > 0 ||
+      filterLocations?.isVerified === true
     ) {
       return true;
     } else {
@@ -483,6 +511,25 @@ export default function FilterSortLocationMobile(props) {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+            <div className='filter-location_card'>
+              <div className='filter-location_card_title'>
+                <PolicyIcon className='icon' /> {t('policy')}
+              </div>
+              <div className='filter-location_card_list'>
+                <div className='item form-check'>
+                  <input
+                    className='form-check-input'
+                    type='checkbox'
+                    id='is_verified'
+                    checked={filterLocations.isVerified === true}
+                    onChange={(e) => onClickIsVerified(e.target.checked)}
+                  />
+                  <label className='form-check-label' for='is_verified'>
+                    {t('worknow_verified')}
+                  </label>
+                </div>
               </div>
             </div>
           </div>

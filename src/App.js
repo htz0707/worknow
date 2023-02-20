@@ -36,6 +36,8 @@ import ForgetPassword from './pages/ForgetPassword';
 import ForgetPasswordSent from './pages/ForgetPasswordSent';
 import ResetPassword from './pages/ResetPassword';
 import ReactGA from 'react-ga4';
+import GuideCheck from './pages/GuideCheck';
+import Contact from './pages/Contact';
 ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
   return (
@@ -88,6 +90,8 @@ function App() {
             <Route path='/rules' element={<Rules />} />
             <Route path='/privacy' element={<Privacy />} />
             <Route path='/about' element={<About />} />
+            <Route path='/faq' element={<GuideCheck />} />
+            <Route path='/contact' element={<Contact />} />
           </Route>
           <Route
             path='/create-booking/:location_id/:working_space_id'

@@ -27,6 +27,29 @@
     padding-right: 20px !important;
   }
 }
+/*btn primary*/
+.btn-primary {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  user-select: none;
+  background: #ffb31f;
+  border-radius: 50px;
+  padding: 8px 20px;
+  border: none;
+  color: #282723;
+  &:hover {
+    color: #373633;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+      ),
+      #ffb31f;
+  }
+}
 /*CUSTOM SCROLL BAR*/
 .scroll-bar-custom::-webkit-scrollbar {
   width: 4px;

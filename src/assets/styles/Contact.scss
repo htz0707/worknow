@@ -1,0 +1,36 @@
+.contact {
+  width: 100%;
+  position: relative;
+  min-height: calc(100vh - 221px);
+  padding-top: 100px;
+  .title {
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+  .contact-block {
+    .name {
+      font-weight: 600;
+    }
+    .content {
+      display: flex;
+      .icon {
+        width: 24px;
+        height: 24px;
+      }
+      .email-info {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        a {
+          color: #212529;
+          text-decoration: none;
+          font-weight: 500;
+          &:hover {
+            color: #ffb31f;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

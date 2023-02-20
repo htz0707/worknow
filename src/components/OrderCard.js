@@ -51,7 +51,7 @@ export default function OrderCard(props) {
     }
   };
   return (
-    <div className='order-card py-2 px-3'>
+    <div className='order-card py-2'>
       <div className='order-card-left'>
         <img
           src={data?.orderDetails[0]?.workingSpaces?.images[0]?.publicUrl}

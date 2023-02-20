@@ -7,20 +7,28 @@
     min-height: 80px;
     width: 100%;
 
-    .title {
-      margin-bottom: 100px;
-    }
+    // .title {
+    //   margin-bottom: 100px;
+    // }
 
     .bar-item {
-     @media (min-width: 768px) {
-      padding-left: 12%;
-     }
+      .title {
+        font-weight: 600;
+        margin-bottom: 12px;
+        margin-top: 16px;
+      }
+      @media (min-width: 768px) {
+        padding-left: 12%;
+      }
     }
 
     .link-text {
       font-weight: 100;
       font-size: 15px;
       cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     .icon {
