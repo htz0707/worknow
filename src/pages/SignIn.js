@@ -16,6 +16,7 @@ import { Spinner } from 'react-bootstrap';
 import { useAuthContext } from '../context/auth';
 import { useTranslation } from 'react-i18next';
 import { useGoogleLogin } from '@react-oauth/google';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 export default function SignIn() {
   const { t } = useTranslation();
@@ -160,7 +161,75 @@ export default function SignIn() {
         });
       }
     },
+    onError: () => {
+      handleMessage('error', t('sign_in_not_success'));
+    },
   });
+  const SIGN_IN_WITH_FACEBOOK = gql`
+    mutation SignInWithFacebook($token: String!) {
+      signInWithFacebook(data: { token: $token }) {
+        avatar
+        avatarId
+        birthday
+        token
+        email
+        fullname
+        id
+        status
+        roles {
+          id
+          name
+          permissions {
+            description
+            id
+            permission
+          }
+          description
+        }
+        employeeId
+        phoneCountryCode
+        phoneNumber
+      }
+    }
+  `;
+  const [signInWithFacebook, { loadingFacebook }] = useMutation(
+    SIGN_IN_WITH_FACEBOOK,
+    {
+      update(_, { data: { signInWithFacebook: userData } }) {
+        console.log(userData);
+        if (userData?.roles[0]?.name === 'Space provider') {
+          handleMessage('error', t('account_provider_not_sign_in_this_page'));
+          return;
+        }
+        if (userData?.roles[0]?.name === 'WorkNow admin') {
+          login(userData);
+          navigate('/admin/orders');
+        }
+        if (userData?.roles[0]?.name === 'Member') {
+          login(userData);
+          redirectAfterLogin(navigate, '/');
+        }
+      },
+      onError(err) {
+        console.log(err);
+        handleMessage(
+          'error',
+          handleError(err.graphQLErrors[0]?.message, t('sign_in_not_success'))
+        );
+      },
+    }
+  );
+  const responseFacebook = async (response) => {
+    if (response?.accessToken) {
+      signInWithFacebook({
+        variables: {
+          token: response.accessToken,
+        },
+      });
+    } else {
+      handleMessage('error', t('sign_in_not_success'));
+    }
+  };
   return (
     <div className='sign-in-page'>
       <div className='container-md'>
@@ -298,6 +367,20 @@ export default function SignIn() {
               {/* <button className='btn btn-white w-100 border rounded mb-2'>
                 <FacebookIcon className='icon me-3' /> Đăng nhập với Facebook
               </button> */}
+              <FacebookLogin
+                appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                autoLoad={false}
+                callback={responseFacebook}
+                render={(renderProps) => (
+                  <button
+                    className='btn btn-white w-100 border rounded mb-2'
+                    onClick={renderProps.onClick}
+                  >
+                    <FacebookIcon className='icon me-3' /> Đăng nhập với
+                    Facebook
+                  </button>
+                )}
+              />
               <button
                 className='btn btn-white w-100 border rounded'
                 onClick={() => loginGoogle()}
