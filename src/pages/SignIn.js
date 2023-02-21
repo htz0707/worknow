@@ -161,9 +161,74 @@ export default function SignIn() {
         });
       }
     },
+    onError: () => {
+      handleMessage('error', t('sign_in_not_success'));
+    },
   });
-  const responseFacebook = (response) => {
-    console.log(response);
+  const SIGN_IN_WITH_FACEBOOK = gql`
+    mutation SignInWithFacebook($token: String!) {
+      signInWithFacebook(data: { token: $token }) {
+        avatar
+        avatarId
+        birthday
+        token
+        email
+        fullname
+        id
+        status
+        roles {
+          id
+          name
+          permissions {
+            description
+            id
+            permission
+          }
+          description
+        }
+        employeeId
+        phoneCountryCode
+        phoneNumber
+      }
+    }
+  `;
+  const [signInWithFacebook, { loadingFacebook }] = useMutation(
+    SIGN_IN_WITH_FACEBOOK,
+    {
+      update(_, { data: { signInWithFacebook: userData } }) {
+        console.log(userData);
+        if (userData?.roles[0]?.name === 'Space provider') {
+          handleMessage('error', t('account_provider_not_sign_in_this_page'));
+          return;
+        }
+        if (userData?.roles[0]?.name === 'WorkNow admin') {
+          login(userData);
+          navigate('/admin/orders');
+        }
+        if (userData?.roles[0]?.name === 'Member') {
+          login(userData);
+          redirectAfterLogin(navigate, '/');
+        }
+      },
+      onError(err) {
+        console.log(err);
+        handleMessage(
+          'error',
+          handleError(err.graphQLErrors[0]?.message, t('sign_in_not_success'))
+        );
+      },
+    }
+  );
+  const responseFacebook = async (response) => {
+    if (response?.accessToken) {
+      signInWithFacebook({
+        variables: {
+          token: response.accessToken,
+        },
+      });
+    } else {
+      handleMessage('error', t('sign_in_not_success'));
+    }
   };
   return (
     <div className='sign-in-page'>
@@ -303,7 +368,7 @@ export default function SignIn() {
                 <FacebookIcon className='icon me-3' /> Đăng nhập với Facebook
               </button> */}
               <FacebookLogin
-                appId='1363347964518825'
+                appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                 autoLoad={false}
                 callback={responseFacebook}
                 render={(renderProps) => (
