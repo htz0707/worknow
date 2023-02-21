@@ -16,6 +16,7 @@ import { Spinner } from 'react-bootstrap';
 import { useAuthContext } from '../context/auth';
 import { useTranslation } from 'react-i18next';
 import { useGoogleLogin } from '@react-oauth/google';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 export default function SignIn() {
   const { t } = useTranslation();
@@ -161,6 +162,9 @@ export default function SignIn() {
       }
     },
   });
+  const responseFacebook = (response) => {
+    console.log(response);
+  };
   return (
     <div className='sign-in-page'>
       <div className='container-md'>
@@ -298,6 +302,20 @@ export default function SignIn() {
               {/* <button className='btn btn-white w-100 border rounded mb-2'>
                 <FacebookIcon className='icon me-3' /> Đăng nhập với Facebook
               </button> */}
+              <FacebookLogin
+                appId='1363347964518825'
+                autoLoad={false}
+                callback={responseFacebook}
+                render={(renderProps) => (
+                  <button
+                    className='btn btn-white w-100 border rounded mb-2'
+                    onClick={renderProps.onClick}
+                  >
+                    <FacebookIcon className='icon me-3' /> Đăng nhập với
+                    Facebook
+                  </button>
+                )}
+              />
               <button
                 className='btn btn-white w-100 border rounded'
                 onClick={() => loginGoogle()}
