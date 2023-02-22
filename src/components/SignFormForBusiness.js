@@ -1,74 +1,106 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Form, Button, Input, Select } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Form, Button, Input, Select, Modal } from 'antd';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import parsePhoneNumber from 'libphonenumber-js';
+import { gql, useMutation } from '@apollo/client';
+import { handleError, handleMessage } from '../helpers/helpers';
 
 import '../assets/styles/SignUpForm.scss';
 
 export default function SignUpForm(props) {
   const { Option } = Select;
   const { t } = useTranslation();
+  const [form] = Form.useForm();
+
+  const [phone, setPhone] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [email, setEmail] = useState('');
+  const [show, setShow] = useState(false);
+
+  const SIGN_UP_BUSINESS = gql`
+    mutation SignUpBusiness(
+      $email: String!
+      $phoneCountryCode: String!
+      $phoneNumber: String!
+      $companyName: String!
+    ) {
+      signUpBusiness(
+        data: {
+          email: $email
+          phoneCountryCode: $phoneCountryCode
+          phoneNumber: $phoneNumber
+          companyName: $companyName
+        }
+      )
+    }
+  `;
+  const [signUpBusiness] = useMutation(SIGN_UP_BUSINESS, {
+    update(_) {
+      setShow(true);
+      setPhone('');
+      setCompanyName('');
+      setEmail('');
+      form.resetFields();
+    },
+    onError(err) {
+      console.log(err);
+      handleMessage(
+        'error',
+        handleError(err.graphQLErrors[0]?.message, t('create_inquiry_failed'))
+      );
+    },
+  });
+
+  const handleSubmit = async () => {
+    let parse_phone = await parsePhoneNumber('+' + phone);
+    signUpBusiness({
+      variables: {
+        email: email,
+        phoneCountryCode: parse_phone.countryCallingCode,
+        phoneNumber: parse_phone.nationalNumber,
+        companyName: companyName
+      }
+    })
+  };
   return (
     <div className='sign-up'>
-      {/* <h1>
-        {props.free
-          ? t('business.section_signup.free-note')
-          : t('business.section_signup.pay-note')}{' '}
-      </h1> */}
       <Form
-        name='free_signup'
+        name='sign-up-business'
         className='signup-form'
-        initialValues={{ remember: true }}
+        autoComplete='off'
+        onFinish={handleSubmit}
+        form={form}
+        scrollToFirstError
       >
-        <div className='d-flex'>
-          <Form.Item
-            name='last-name'
-            className='last-name-block'
-            rules={[
-              {
-                required: true,
-                message: 'Vui Lòng Nhập Họ Của Bạn!',
-              },
-            ]}
-          >
-            <label className='fw-bold'>
-              {t('last_name')}
-              <span className='required'>*</span>
-            </label>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name='first-name'
-            rules={[
-              {
-                required: true,
-                message: 'Vui Lòng Nhập Tên Của Bạn!',
-              },
-            ]}
-          >
-            <label className='fw-bold'>
-              {t('first_name')}
-              <span className='required'>*</span>
-            </label>
-            <Input />
-          </Form.Item>
-        </div>
-        <Form.Item
-          name='company'
-          rules={[
-            {
-              required: true,
-              message: 'Vui Lòng Nhập Tên Công Ty!',
-            },
-          ]}
-        >
+        <div>
           <label className='fw-bold'>
             {t('company_name')}
             <span className='required'>*</span>
           </label>
-          <Input />
-        </Form.Item>
+          <Form.Item
+            name='company'
+            rules={[
+              {
+                required: true,
+                message: 'Vui Lòng Nhập Tên Công Ty!',
+              },
+            ]}
+          >
+            <Input
+              className='input-field'
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              placeholder='Nhập vào tên công ty của bạn'
+            />
+          </Form.Item>
+        </div>
+        <label className='fw-bold'>
+          {t('email')}
+          <span className='required'>*</span>
+        </label>
         <Form.Item
           name='work-email'
           rules={[
@@ -76,91 +108,90 @@ export default function SignUpForm(props) {
               required: true,
               message: 'Vui Lòng Nhập Email!',
             },
+            {
+              type: 'email',
+              message: 'Vui Lòng Nhập Email hợp lệ!',
+            }
           ]}
         >
-          <label className='fw-bold'>
-            {t('email')}
-            <span className='required'>*</span>
-          </label>
-          <Input />
+          <Input
+            className='input-field'
+            type='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='Nhập vào email của bạn'
+          />
         </Form.Item>
-        <div className='row'>
+        <div>
           <label className='fw-bold'>
-            {t('phone_number')}
-            <span className='required'>*</span>
+            Số Điện Thoại <span className='required'>*</span>
           </label>
-          <div className='col-2'>
-            <Form.Item name='phone-code'>
-              <Select>
-                <Option value='+65'>+65</Option>
-                <Option value='+84'>+84</Option>
-              </Select>
-            </Form.Item>
-          </div>
-          <div className='col-10'>
-            <Form.Item
-              name='phone-number'
-              rules={[
-                {
-                  required: true,
-                  message: 'Vui Lòng Nhập Số Điện Thoại!',
+          <Form.Item
+            name='phone'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng điền vào trường này.',
+              },
+              {
+                async validator(_, value) {
+                  if (phone) {
+                    let parse_phone = await parsePhoneNumber(
+                      '+' + phone
+                    );
+                    if (parse_phone?.isValid() !== true) {
+                      return Promise.reject(
+                        new Error('Số điện thoại không hợp lệ')
+                      );
+                    }
+                    return Promise.resolve();
+                  }
+                  return Promise.resolve();
                 },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </div>
-        </div>
-        {/* {props.free ? (
-          <>
-            <Form.Item name='referral-code'>
-              <label>{t('business.section_signup.code')}</label>
-              <Input />
-            </Form.Item>
-            <div className='sign-up-term'>
-              By submitting, you agree with Work Now for{' '}
-              <a href='#'>
-                Work Now for Business Terms of Service,Work Now's Terms of
-                Service
-              </a>{' '}
-              and <a href='#'>Privacy Policy.</a>
+              },
+            ]}
+          >
+            <div className='phone-input-engine'>
+              <PhoneInput
+                inputProps={{
+                  id: 'phone_number',
+                  name: 'phone',
+                }}
+                placeholder='Nhập vào số điện thoại của bạn'
+                country={'vn'}
+                enableSearch={true}
+                value={phone}
+                onChange={(phone) =>
+                  setPhone(phone)
+                }
+              />
             </div>
-          </>
-        ) : (
-          <>
-            <Form.Item name='location'>
-              <label>{t('business.section_signup.location')}v</label>
-              <Select>
-                <Option value='Singapore'>Singapore</Option>
-                <Option value='VietNam'>VietNam</Option>
-              </Select>
-            </Form.Item>
-            <Form.Item name='job-title'>
-              <label>{t('business.section_signup.job-title')}</label>
-              <Input />
-            </Form.Item>
-            <Form.Item name='message'>
-              <label>{t('business.section_signup.message')}</label>
-              <Input.TextArea showCount maxLength={500} />
-            </Form.Item>
-            <Form.Item name='company-size'>
-              <label>{t('business.section_signup.size')}</label>
-              <Select>
-                <Option value='1-10'>1-10</Option>
-                <Option value='10-100'>10-100</Option>
-                <Option value='101-500'>101-500</Option>
-                <Option value='500+'>500+</Option>
-              </Select>
-            </Form.Item>
-          </>
-        )} */}
-
+          </Form.Item>
+        </div>
         <Form.Item>
           <Button type='primary' htmlType='submit' className='sign-up-btn'>
             {t('submit')}
           </Button>
         </Form.Item>
       </Form>
+      <Modal
+        centered
+        open={show}
+        footer={null}
+        onCancel={() => setShow(false)}
+      >
+        <h3 className='fw-bold mb-5'>
+          <span className='pb-2 border-bottom border-dark border-5'>ĐĂNG KÝ MIỄN PHÍ</span>
+        </h3>
+        <div>
+          <p>
+            Email xác minh đã được gửi đến hộp thư đến của bạn. Vui lòng truy cập hộp thư đến của bạn để xác minh email và thiết lập tài khoản.
+          </p>
+          <p>
+            Nếu bạn không thấy email sau vài phút, hãy kiểm tra thư mục thư rác hoặc thư.
+          </p>
+        </div>
+      </Modal>
     </div>
   );
 }

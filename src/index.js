@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
+import * as Sentry from '@sentry/react';
+import { BrowserTracing } from '@sentry/tracing';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -15,6 +15,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { ProSidebarProvider } from 'react-pro-sidebar';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DEV_DNS,
@@ -25,7 +26,6 @@ Sentry.init({
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
 });
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const httpLink = createHttpLink({
@@ -56,7 +56,9 @@ root.render(
   <ProSidebarProvider>
     <I18nextProvider i18n={i18n}>
       <ApolloProvider client={client}>
-        <App />
+        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+          <App />
+        </GoogleOAuthProvider>
       </ApolloProvider>
     </I18nextProvider>
   </ProSidebarProvider>

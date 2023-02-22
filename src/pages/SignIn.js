@@ -15,6 +15,8 @@ import { Form, Input } from 'antd';
 import { Spinner } from 'react-bootstrap';
 import { useAuthContext } from '../context/auth';
 import { useTranslation } from 'react-i18next';
+import { useGoogleLogin } from '@react-oauth/google';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 export default function SignIn() {
   const { t } = useTranslation();
@@ -92,6 +94,141 @@ export default function SignIn() {
   };
   const handleRedirectToHome = () => {
     navigate('/');
+  };
+  const SIGN_IN_WITH_GOOGLE = gql`
+    mutation SignInWithGoogle($token: String!) {
+      signInWithGoogle(data: { token: $token }) {
+        avatar
+        avatarId
+        birthday
+        token
+        email
+        fullname
+        id
+        status
+        roles {
+          id
+          name
+          permissions {
+            description
+            id
+            permission
+          }
+          description
+        }
+        employeeId
+        phoneCountryCode
+        phoneNumber
+      }
+    }
+  `;
+  const [signInWithGoogle, { loadingGoogle }] = useMutation(
+    SIGN_IN_WITH_GOOGLE,
+    {
+      update(_, { data: { signInWithGoogle: userData } }) {
+        console.log(userData);
+        if (userData?.roles[0]?.name === 'Space provider') {
+          handleMessage('error', t('account_provider_not_sign_in_this_page'));
+          return;
+        }
+        if (userData?.roles[0]?.name === 'WorkNow admin') {
+          login(userData);
+          navigate('/admin/orders');
+        }
+        if (userData?.roles[0]?.name === 'Member') {
+          login(userData);
+          redirectAfterLogin(navigate, '/');
+        }
+      },
+      onError(err) {
+        console.log(err);
+        handleMessage(
+          'error',
+          handleError(err.graphQLErrors[0]?.message, t('sign_in_not_success'))
+        );
+      },
+    }
+  );
+  const loginGoogle = useGoogleLogin({
+    flow: 'implicit',
+    onSuccess: async (res) => {
+      console.log(res);
+      if (res.access_token) {
+        signInWithGoogle({
+          variables: {
+            token: res.access_token,
+          },
+        });
+      }
+    },
+    onError: () => {
+      handleMessage('error', t('sign_in_not_success'));
+    },
+  });
+  const SIGN_IN_WITH_FACEBOOK = gql`
+    mutation SignInWithFacebook($token: String!) {
+      signInWithFacebook(data: { token: $token }) {
+        avatar
+        avatarId
+        birthday
+        token
+        email
+        fullname
+        id
+        status
+        roles {
+          id
+          name
+          permissions {
+            description
+            id
+            permission
+          }
+          description
+        }
+        employeeId
+        phoneCountryCode
+        phoneNumber
+      }
+    }
+  `;
+  const [signInWithFacebook, { loadingFacebook }] = useMutation(
+    SIGN_IN_WITH_FACEBOOK,
+    {
+      update(_, { data: { signInWithFacebook: userData } }) {
+        console.log(userData);
+        if (userData?.roles[0]?.name === 'Space provider') {
+          handleMessage('error', t('account_provider_not_sign_in_this_page'));
+          return;
+        }
+        if (userData?.roles[0]?.name === 'WorkNow admin') {
+          login(userData);
+          navigate('/admin/orders');
+        }
+        if (userData?.roles[0]?.name === 'Member') {
+          login(userData);
+          redirectAfterLogin(navigate, '/');
+        }
+      },
+      onError(err) {
+        console.log(err);
+        handleMessage(
+          'error',
+          handleError(err.graphQLErrors[0]?.message, t('sign_in_not_success'))
+        );
+      },
+    }
+  );
+  const responseFacebook = async (response) => {
+    if (response?.accessToken) {
+      signInWithFacebook({
+        variables: {
+          token: response.accessToken,
+        },
+      });
+    } else {
+      handleMessage('error', t('sign_in_not_success'));
+    }
   };
   return (
     <div className='sign-in-page'>
@@ -224,15 +361,32 @@ export default function SignIn() {
                   </span>
                 </div>
               </div>
-              {/* <div className='d-flex justify-content-center my-2 text-gray'>
+              <div className='d-flex justify-content-center my-2 text-gray'>
                 - Hoặc -
               </div>
-              <button className='btn btn-white w-100 border rounded mb-2'>
+              {/* <button className='btn btn-white w-100 border rounded mb-2'>
                 <FacebookIcon className='icon me-3' /> Đăng nhập với Facebook
-              </button>
-              <button className='btn btn-white w-100 border rounded'>
-                <GoogleIcon className='icon me-3' /> Đăng nhập với Google
               </button> */}
+              <FacebookLogin
+                appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                autoLoad={false}
+                callback={responseFacebook}
+                render={(renderProps) => (
+                  <button
+                    className='btn btn-white w-100 border rounded mb-2'
+                    onClick={renderProps.onClick}
+                  >
+                    <FacebookIcon className='icon me-3' /> Đăng nhập với
+                    Facebook
+                  </button>
+                )}
+              />
+              <button
+                className='btn btn-white w-100 border rounded'
+                onClick={() => loginGoogle()}
+              >
+                <GoogleIcon className='icon me-3' /> Đăng nhập với Google
+              </button>
             </div>
           </div>
         </div>

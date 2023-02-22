@@ -7,6 +7,7 @@ import { Steps, Upload } from 'antd';
 import MomoLogo from '../assets/images/momo.png';
 import VnpayLogo from '../assets/images/vnpay.jpg';
 import QrcodeImg from '../assets/images/qrcode.png';
+import VietQrImg from '../assets/images/vietQR.png';
 import { AiOutlineCheck } from 'react-icons/ai';
 import Bcrumb from '../components/Bcrumb';
 import { useEffect } from 'react';
@@ -425,11 +426,11 @@ export default function BookingPayment() {
                             <div className='bank-details'>
                               <div>
                                 <span>{t('account_number')}</span>
-                                <span>0531002547497</span>
+                                <span>1035324822</span>
                               </div>
                               <div>
                                 <span>{t('account_holder')}</span>
-                                <span>Công ty TNHH Rockship</span>
+                                <span>Công Ty TNHH Work Now</span>
                               </div>
                               <div>
                                 <span>{t('transfer_content')}</span>
@@ -444,13 +445,22 @@ export default function BookingPayment() {
                                 {formatCurrency(orderInfo?.finalTotal)}
                               </span>
                             </div>
+                            <div className='qrcode'>
+                              <div>
+                                <img
+                                  className='vietqr my-4'
+                                  src={VietQrImg}
+                                  alt=''
+                                />
+                              </div>
+                            </div>
                           </div>
                         </Accordion.Body>
                       </Accordion.Item>
                     </Accordion>
                   </div>
                 )}
-                <div className='payment-method-title'>
+                {/* <div className='payment-method-title'>
                   <input
                     className='form-check-input'
                     type='checkbox'
@@ -458,7 +468,7 @@ export default function BookingPayment() {
                     onChange={() => setPaymentMethod('e_wallet')}
                   />
                   <span>{t('e_wallet')}</span>
-                </div>
+                </div> */}
                 {paymentMethod === 'e_wallet' && (
                   <div className='according-ewallet'>
                     <Accordion defaultActiveKey='0'>
