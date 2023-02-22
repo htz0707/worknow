@@ -445,6 +445,15 @@ export default function BookingPayment() {
                                 {formatCurrency(orderInfo?.finalTotal)}
                               </span>
                             </div>
+                            <div className='qrcode'>
+                              <div>
+                                <img
+                                  className='vietqr my-4'
+                                  src={VietQrImg}
+                                  alt=''
+                                />
+                              </div>
+                            </div>
                           </div>
                         </Accordion.Body>
                       </Accordion.Item>
@@ -512,54 +521,6 @@ export default function BookingPayment() {
                               <div>Scan QR Code để thanh toán</div>
                               <div>
                                 <img src={QrcodeImg} alt='' />
-                              </div>
-                            </div>
-                          </div>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
-                  </div>
-                )}
-                <div className='payment-method-title'>
-                  <input
-                    className='form-check-input'
-                    type='checkbox'
-                    checked={paymentMethod === 'viet_qr'}
-                    onChange={() => setPaymentMethod('viet_qr')}
-                  />
-                  <span>Quét Mã QR</span>
-                </div>
-                {paymentMethod === 'viet_qr' && (
-                  <div className='according-ewallet'>
-                    <Accordion defaultActiveKey='0'>
-                      <Accordion.Item eventKey='0'>
-                        <Accordion.Body>
-                          <div className='according-ewallet_body'>
-                            <div className='ewallet-details'>
-                              <div>
-                                <span>Số tài khoản</span>
-                                <span>1035324822</span>
-                              </div>
-                              <div>
-                                <span>Chủ tài khoản</span>
-                                <span>Công ty TNHH Work Now</span>
-                              </div>
-                              <div>
-                                <span>Nội dung chuyển khoản</span>
-                                <span>
-                                  Thanh toan dat cho #{orderInfo?.orderId}
-                                </span>
-                              </div>
-                            </div>
-                            <div className='amount'>
-                              <span>Số tiền</span>
-                              <span>
-                                {formatCurrency(orderInfo?.finalTotal)}
-                              </span>
-                            </div>
-                            <div className='qrcode'>
-                              <div>
-                                <img src={VietQrImg} alt='' />
                               </div>
                             </div>
                           </div>
