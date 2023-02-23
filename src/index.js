@@ -39,9 +39,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-
 // Initialize Firebase
-const messaging = getMessaging();
+const messaging = getMessaging(app);
 // Add the public key generated from the console here.
 
 const getFCMToken = async () =>  {
