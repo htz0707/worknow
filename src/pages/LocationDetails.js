@@ -116,6 +116,7 @@ export default function LocationDetails() {
           day
           openHour
         }
+        highlight
       }
       workingSpaces(params: { locationId: $id }) {
         edges {
@@ -493,10 +494,18 @@ export default function LocationDetails() {
               </div>
             )}
             <div className='location-services'>
-              <div className='outstanding'>
-                <div className='title'>{t('outstanding')}</div>
-                <div className='content'>
-                  <div>
+              {locationInfo?.highlight && (
+                <div className='outstanding'>
+                  <div className='title'>{t('outstanding')}</div>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: replaceWithBr(locationInfo?.highlight),
+                    }}
+                    className='content'
+                  />
+                  {/* <div className='content'>
+                    {locationInfo?.highlight}
+                    <div>
                     <CheckIcon className='icon' /> Hơn 1200 lượt đặt chỗ
                   </div>
                   <div>
@@ -509,8 +518,9 @@ export default function LocationDetails() {
                     <CheckIcon className='icon' /> Môi trường yên tĩnh
                   </div>
                   <div className='show-more'>{t('read_more')}</div>
+                  </div> */}
                 </div>
-              </div>
+              )}
               <div className='amenity'>
                 <div className='title'>{t('amenity')}</div>
                 <div className='content'>

@@ -113,6 +113,10 @@ function Locations() {
           amenities {
             name
           }
+          category {
+            id
+            name
+          }
         }
         pageInfo {
           count

@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: center;
 
-    >div {
+    > div {
       margin-bottom: 10px;
     }
 
@@ -50,11 +50,11 @@
     }
   }
 
-  >.create-booking_body {
+  > .create-booking_body {
     margin-top: 20px;
 
     .info-customer {
-      >div {
+      > div {
         background: #ffffff;
         box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
@@ -62,12 +62,12 @@
         margin-bottom: 20px;
       }
 
-      >.box-1 {
+      > .box-1 {
         display: flex;
         align-items: center;
       }
 
-      >.box-2 {
+      > .box-2 {
         .title {
           font-weight: 600;
           font-size: 25px;
@@ -82,8 +82,8 @@
         }
       }
 
-      >.box-3 {
-        >.header {
+      > .box-3 {
+        > .header {
           font-weight: 600;
           font-size: 25px;
           margin-bottom: 20px;
@@ -93,7 +93,7 @@
           font-weight: 600;
           color: #282723;
 
-          >span {
+          > span {
             color: #ff4f4f;
           }
         }
@@ -139,36 +139,38 @@
     }
 
     .info-workspace {
-      >div {
+      > div {
         background: #ffffff;
         box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
         margin-bottom: 20px;
       }
 
-      >.box-1 {
+      > .box-1 {
         overflow: hidden;
 
-        >img {
+        > img {
           width: 100%;
           max-height: 200px;
+          object-position: center center;
+          object-fit: cover;
         }
 
-        >div {
+        > div {
           padding: 20px;
 
-          >div:nth-child(1) {
+          > div:nth-child(1) {
             font-size: 20px;
             line-height: 23px;
             font-weight: 700;
             text-transform: uppercase;
           }
 
-          >div:nth-child(2) {
+          > div:nth-child(2) {
             font-size: 14px;
           }
 
-          >div:nth-child(3) {
+          > div:nth-child(3) {
             font-weight: 600;
           }
 
@@ -179,7 +181,7 @@
         }
       }
 
-      >.box-2 {
+      > .box-2 {
         padding: 10px 20px;
 
         .title {
@@ -192,13 +194,13 @@
           display: flex;
           flex-shrink: 0;
 
-          >span {
+          > span {
             font-weight: 600;
             color: #ff7a19;
             margin-right: 10px;
           }
 
-          >img {
+          > img {
             width: 100px;
             max-height: 80px;
             margin-right: 10px;
@@ -206,7 +208,7 @@
         }
       }
 
-      >.box-3 {
+      > .box-3 {
         padding: 10px 20px;
 
         .title {
@@ -220,11 +222,11 @@
           border-bottom: 1px solid #b0b0b0;
           margin-bottom: 10px;
 
-          >div {
+          > div {
             display: flex;
             justify-content: space-between;
 
-            >span:nth-child(1) {
+            > span:nth-child(1) {
               font-weight: 600;
             }
           }
@@ -244,7 +246,7 @@
         }
       }
 
-      >.payment-button {
+      > .payment-button {
         width: 100%;
         padding: 10px;
         background: #ffb31f;
@@ -256,7 +258,7 @@
     }
 
     .info-payment {
-      >.box-1 {
+      > .box-1 {
         background: #ffffff;
         box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
@@ -266,7 +268,7 @@
         align-items: center;
       }
 
-      >.box-2 {
+      > .box-2 {
         margin-bottom: 20px;
 
         .left {
@@ -325,7 +327,7 @@
         }
       }
 
-      >.box-3 {
+      > .box-3 {
         background: #ffffff;
         box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
@@ -414,11 +416,11 @@
                 border-bottom: 0.5px solid #a7a49a;
                 margin-bottom: 10px;
 
-                >div {
+                > div {
                   display: flex;
                   justify-content: space-between;
 
-                  >span:nth-child(1) {
+                  > span:nth-child(1) {
                     font-weight: 600;
                   }
                 }
@@ -428,11 +430,11 @@
                 display: flex;
                 justify-content: space-between;
 
-                >span:nth-child(1) {
+                > span:nth-child(1) {
                   font-weight: 600;
                 }
 
-                >span:nth-child(2) {
+                > span:nth-child(2) {
                   color: #ff4f4f;
                 }
               }
@@ -442,16 +444,16 @@
                 flex-direction: column;
                 align-items: center;
 
-                >div:nth-child(1) {
+                > div:nth-child(1) {
                   color: #a7a49a;
                 }
 
-                >div:nth-child(2) {
+                > div:nth-child(2) {
                   font-weight: 600;
                   margin-bottom: 10px;
                 }
 
-                >div:nth-child(3) {
+                > div:nth-child(3) {
                   padding: 15px;
 
                   img {
@@ -557,11 +559,11 @@
                 border-bottom: 0.5px solid #a7a49a;
                 margin-bottom: 10px;
 
-                >div {
+                > div {
                   display: flex;
                   justify-content: space-between;
 
-                  >span:nth-child(1) {
+                  > span:nth-child(1) {
                     font-weight: 600;
                   }
                 }
@@ -572,11 +574,11 @@
                 justify-content: space-between;
                 margin-bottom: 20px;
 
-                >span:nth-child(1) {
+                > span:nth-child(1) {
                   font-weight: 600;
                 }
 
-                >span:nth-child(2) {
+                > span:nth-child(2) {
                   color: #ff4f4f;
                 }
               }
@@ -586,16 +588,16 @@
                 flex-direction: column;
                 align-items: center;
 
-                >div:nth-child(1) {
+                > div:nth-child(1) {
                   color: #a7a49a;
                 }
 
-                >div:nth-child(2) {
+                > div:nth-child(2) {
                   font-weight: 600;
                   margin-bottom: 10px;
                 }
 
-                >div:nth-child(3) {
+                > div:nth-child(3) {
                   width: 250px;
                   height: 250px;
                   padding: 15px;
@@ -615,7 +617,7 @@
     }
 
     .info-booking {
-      >div:nth-child(1) {
+      > div:nth-child(1) {
         background: #ffffff;
         box-shadow: 0px 0px 4.00232px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
@@ -636,14 +638,14 @@
           align-items: center;
           margin-bottom: 10px;
 
-          >div:nth-child(1) {
+          > div:nth-child(1) {
             width: 150px;
             margin-right: 20px;
             text-align: center;
             font-weight: 600;
           }
 
-          >div:nth-child(2) {
+          > div:nth-child(2) {
             width: 160px;
             display: flex;
             justify-content: center;
@@ -687,14 +689,14 @@
           align-items: center;
           margin-bottom: 10px;
 
-          >div:nth-child(1) {
+          > div:nth-child(1) {
             width: 150px;
             margin-right: 20px;
             text-align: center;
             font-weight: 600;
           }
 
-          >div:nth-child(2) {
+          > div:nth-child(2) {
             width: 160px;
             text-align: center;
           }
@@ -771,11 +773,11 @@
             border-bottom: 1px solid #b0b0b0;
             margin-bottom: 10px;
 
-            >div {
+            > div {
               display: flex;
               justify-content: space-between;
 
-              >span:nth-child(1) {
+              > span:nth-child(1) {
                 font-weight: 600;
               }
             }
@@ -792,7 +794,7 @@
         }
       }
 
-      >div:nth-child(2) {
+      > div:nth-child(2) {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -817,7 +819,9 @@
     }
   }
 
-  .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after {
+  .ant-steps-item-finish
+    > .ant-steps-item-container
+    > .ant-steps-item-tail::after {
     background-color: #ffb31f;
   }
 
