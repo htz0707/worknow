@@ -5,6 +5,7 @@ import { useAuthContext } from '../context/auth';
 import { ReactComponent as Info } from '../assets/icons/thongtin.svg';
 import { ReactComponent as Voucher } from '../assets/icons/voucher.svg';
 import { ReactComponent as Giaodich } from '../assets/icons/giaodich.svg';
+import { ReactComponent as Invite } from '../assets/icons/invite.svg';
 import { ReactComponent as Lockout } from '../assets/icons/lockout.svg';
 import { ReactComponent as Secure } from '../assets/icons/secure.svg';
 import { ReactComponent as Camera } from '../assets/icons/camera.svg';
@@ -106,6 +107,15 @@ export default function UserLayout(props) {
             >
               <Giaodich className='tab-icon-2' />
               <div className='text'> {t('order_history')}</div>
+            </div>
+            <div
+              className={cx('tab rounded-pill', {
+                active: currentTab === 'invite',
+              })}
+              onClick={() => handleNavigate('/user/invite')}
+            >
+              <Invite className='tab-icon-2' />
+              <div className='text'> {t('invite')}</div>
             </div>
           </div>
           <div className='footer-section'>
