@@ -292,5 +292,13 @@
   "contact_support": "Liên hệ hỗ trợ",
   "support_center": "Trung tâm trợ giúp",
   "vietnam": "Việt Nam",
-  "response_mail_description": "Chúng tôi sẽ trả lời trong vòng 1-2 ngày làm việc."
+  "response_mail_description": "Chúng tôi sẽ trả lời trong vòng 1-2 ngày làm việc.",
+  "invite": "Giới thiệu",
+  "invite_friend": "Mời bạn bè",
+  "invite_link": "Link Giới Thiệu",
+  "data": "Dữ liệu",
+  "invite_to_earn_1": "Sao chép đường dẫn này và gửi cho bạn bè. Với mỗi lượt đăng ký và đặt đơn đầu tiên từ link của bạn, bạn và người được mời sẽ nhận được một",
+  "invite_to_earn_2": "voucher trị giá 100.000Đ.",
+  "subs": "Lượt Đăng Ký",
+  "vouchers_recieved": "Voucher Đã Nhận"
 }

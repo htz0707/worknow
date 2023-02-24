@@ -18,7 +18,7 @@ import WorkingSpaceDetails from './pages/WorkingSpaceDetails';
 import BookingPayment from './pages/BookingPayment';
 import BookingStatus from './pages/BookingStatus';
 import PublicRoute from './utils/PublicRoute';
-import User from './pages/User';
+import Invite from './pages/Invite';
 import LocationsMap from './pages/LocationsMap';
 import Rules from './pages/Rules';
 import Privacy from './pages/Privacy';
@@ -76,6 +76,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Voucher />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/user/invite'
+              element={
+                <PrivateRoute>
+                  <Invite />
                 </PrivateRoute>
               }
             />
