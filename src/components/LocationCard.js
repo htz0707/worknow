@@ -78,7 +78,7 @@ export default function LocationCard(props) {
             <div className='icon-badge'>
               <BuildingIcon className='icon' />
             </div>
-            <div>Working space</div>
+            <div>{data?.category?.name}</div>
           </div>
           {data.isVerified && (
             <div className='location-authen'>
