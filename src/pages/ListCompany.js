@@ -221,12 +221,12 @@ export default function ListCompany() {
           >
             Create new company
           </button>
-          {/* <button
+          <button
             type='button'
             onClick={() => { console.log(data.abc.map((item) => item)) }}
           >
             Do not click
-          </button> */}
+          </button>
         </>
       )}
     </div>
