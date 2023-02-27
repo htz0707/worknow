@@ -361,13 +361,10 @@ export default function SignIn() {
                   </span>
                 </div>
               </div>
-              {/* <div className='d-flex justify-content-center my-2 text-gray'>
+              <div className='d-flex justify-content-center my-2 text-gray'>
                 - Hoặc -
-              </div> */}
-              {/* <button className='btn btn-white w-100 border rounded mb-2'>
-                <FacebookIcon className='icon me-3' /> Đăng nhập với Facebook
-              </button> */}
-              {/* <FacebookLogin
+              </div>
+              <FacebookLogin
                 appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                 autoLoad={false}
                 callback={responseFacebook}
@@ -386,7 +383,7 @@ export default function SignIn() {
                 onClick={() => loginGoogle()}
               >
                 <GoogleIcon className='icon me-3' /> Đăng nhập với Google
-              </button> */}
+              </button>
             </div>
           </div>
         </div>
