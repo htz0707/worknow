@@ -446,9 +446,11 @@ export default function BookingPayment() {
                               </span>
                             </div>
                             <div className='qrcode'>
+                              <div>Hoặc</div>
+                              <div>Scan QR Code để thanh toán</div>
                               <div>
                                 <img
-                                  className='vietqr my-4'
+                                  className='vietqr'
                                   src={VietQrImg}
                                   alt=''
                                 />
