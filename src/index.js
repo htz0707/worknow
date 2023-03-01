@@ -18,7 +18,7 @@ import { ProSidebarProvider } from 'react-pro-sidebar';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 Sentry.init({
-  dsn: process.env.REACT_APP_SENTRY_DEV_DNS,
+  dsn: process.env.REACT_APP_SENTRY_DNS,
   integrations: [new BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%
