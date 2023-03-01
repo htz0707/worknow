@@ -42,6 +42,21 @@
         color: #ff4f4f;
       }
     }
+    .review-section {
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      padding-right: 20px;
+      .btn-review {
+        border: none;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        .icon {
+          margin-right: 5px;
+        }
+      }
+    }
   }
   @media (max-width: 992px) {
     flex-direction: column;

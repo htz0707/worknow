@@ -67,7 +67,10 @@ export default function SignIn() {
         login(userData);
         navigate('/admin/orders');
       }
-      if (userData?.roles[0]?.name === 'Member') {
+      if (
+        userData?.roles[0]?.name === 'Member' ||
+        userData?.roles[0]?.name === 'Employee'
+      ) {
         login(userData);
         redirectAfterLogin(navigate, '/');
       }
