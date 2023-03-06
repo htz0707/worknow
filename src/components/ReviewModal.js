@@ -7,9 +7,11 @@ import cx from 'classnames';
 import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { handleError, handleMessage } from '../helpers/helpers';
+import { useTranslation } from 'react-i18next';
 
 export default function ReviewModal(props) {
-  const { show, data, handleClose, handleConfirm } = props;
+  const { t } = useTranslation();
+  const { show, data, handleClose } = props;
   const [starServiceIndex, setStarServiceIndex] = useState(0);
   const [starAmenityIndex, setStarAmenityIndex] = useState(0);
   const handleCancel = () => {
@@ -47,17 +49,14 @@ export default function ReviewModal(props) {
   `;
   const [createFeedback] = useMutation(CREATE_FEEDBACK, {
     update() {
-      handleMessage('success', 'Cảm ơn bạn đã đánh giá.');
+      handleMessage('success', t('review_success'));
       handleCancel();
     },
     onError(err) {
       console.log(err);
       handleMessage(
         'error',
-        handleError(
-          err.graphQLErrors[0]?.message,
-          'Tạo đánh giá không thành công. Vui lòng thử lại'
-        )
+        handleError(err.graphQLErrors[0]?.message, t('review_not_success'))
       );
       handleCancel();
     },
@@ -75,10 +74,10 @@ export default function ReviewModal(props) {
       });
     } else {
       if (starServiceIndex === 0) {
-        setErrorService('Vui lòng đánh giá');
+        setErrorService(t('please_rate'));
       }
       if (starAmenityIndex === 0) {
-        setErrorAmenity('Vui lòng đánh giá');
+        setErrorAmenity(t('please_rate'));
       }
     }
   };
@@ -95,7 +94,7 @@ export default function ReviewModal(props) {
       <Modal.Header closeButton className='review-modal_header'></Modal.Header>
       <Modal.Body className='review-modal_body'>
         <ReviewIcon className='icon' />
-        <div className='title'>Đánh giá</div>
+        <div className='title'>{t('evaluation')}</div>
         {data?.orderDetails && (
           <div className='location-name'>
             {data?.orderDetails[0]?.workingSpaces?.locationName}
@@ -108,7 +107,7 @@ export default function ReviewModal(props) {
         )}
         <hr />
         <div className='review-section'>
-          <label className='label'>Đánh giá dịch vụ</label>
+          <label className='label'>{t('service_rating')}</label>
           <div className='star-group'>
             {[1, 2, 3, 4, 5].map((item, index) => {
               return (
@@ -129,7 +128,7 @@ export default function ReviewModal(props) {
           {errorService && <div className='error'>{errorService}</div>}
         </div>
         <div className='review-section'>
-          <label className='label'>Tiện nghi</label>
+          <label className='label'>{t('amenity')}</label>
           <div className='star-group'>
             {[1, 2, 3, 4, 5].map((item, index) => {
               return (
@@ -150,7 +149,7 @@ export default function ReviewModal(props) {
           {errorAmenity && <div className='error'>{errorAmenity}</div>}
         </div>
         <div className='review-section mb-0'>
-          <label className='label'>Cảm nhận</label>
+          <label className='label'>{t('feeling')}</label>
           <textarea
             className='form-control'
             style={{ resize: 'none' }}
@@ -162,10 +161,10 @@ export default function ReviewModal(props) {
         <hr />
         <div className='btn-group'>
           <button className='btn-cancel' onClick={handleCancel}>
-            Hủy
+            {t('cancel')}
           </button>
           <button className='btn-confirm' onClick={handleSubmit}>
-            Gửi
+            {t('submit')}
           </button>
         </div>
       </Modal.Body>

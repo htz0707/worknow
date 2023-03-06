@@ -49,11 +49,16 @@
             font-weight: 400;
           }
         }
-        > div:nth-child(2) {
+        .location-rating {
           display: flex;
-          flex-direction: column;
-          align-items: flex-end;
+          align-items: center;
+          font-weight: 400;
           font-size: 14px;
+          color: #595959;
+          span {
+            margin-right: 5px;
+            color: #000000;
+          }
         }
       }
       > .row-4 {
@@ -400,7 +405,7 @@
         font-size: 32px;
         line-height: 37px;
         font-style: normal;
-        margin-bottom: 30px;
+        margin-bottom: 0px;
       }
       > .body {
         padding: 25px 10px;
@@ -618,6 +623,19 @@
           margin-bottom: 5px;
           padding-left: 20px;
           padding-right: 20px;
+        }
+        .location-rating {
+          padding-left: 20px;
+          padding-right: 20px;
+          display: flex;
+          align-items: center;
+          font-weight: 400;
+          font-size: 14px;
+          color: #595959;
+          span {
+            margin-right: 5px;
+            color: #000000;
+          }
         }
         .location-company {
           color: rgb(89, 89, 89);

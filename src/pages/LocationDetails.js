@@ -24,6 +24,8 @@ import ShowMore from '../components/ShowMore';
 import { renderAddress, renderWorkingHour } from '../helpers/helpers';
 import { useTranslation } from 'react-i18next';
 import WarningContactModal from '../components/WarningContactModal';
+import Rating from '../components/Rating';
+import ReviewCard from '../components/ReviewCard';
 
 export default function LocationDetails() {
   const { t, i18n } = useTranslation();
@@ -117,6 +119,7 @@ export default function LocationDetails() {
           openHour
         }
         highlight
+        locationRate
       }
       workingSpaces(params: { locationId: $id }) {
         edges {
@@ -366,6 +369,10 @@ export default function LocationDetails() {
             </div>
           </div>
           <div className='location-name'>{locationInfo?.name}</div>
+          <div className='location-rating'>
+            <span>{parseFloat(locationInfo?.locationRate)?.toFixed(1)}</span>{' '}
+            <Rating value={locationInfo?.locationRate} />
+          </div>
           <div className='location-tags'>
             {/* <Tag text='Open on Wknds' />
           <Tag text='Late Hours' /> */}
@@ -416,6 +423,10 @@ export default function LocationDetails() {
               >
                 {t('view_on_map')}
               </span>
+            </div>
+            <div className='location-rating'>
+              <span>{parseFloat(locationInfo?.locationRate)?.toFixed(1)}</span>{' '}
+              <Rating value={locationInfo?.locationRate} />
             </div>
             {/* <div>
               <div>
@@ -716,10 +727,14 @@ export default function LocationDetails() {
               </div>
             </div>
           </div>
-          {/* <div className='comment' id='section_4'>
+          <div className='comment' id='section_4'>
             <div className='header'>Đánh giá</div>
             <div className='body scroll-bar-custom'>
-              <div className='comment-card'>
+              <ReviewCard />
+              <ReviewCard />
+              <ReviewCard />
+              <ReviewCard />
+              {/* <div className='comment-card'>
                 <Avatar
                   size={60}
                   src='https://cdn.popsww.com/blog/sites/2/2022/02/Edogawa-Conan-.jpg'
@@ -787,9 +802,9 @@ export default function LocationDetails() {
                 </div>
                 <QuoteIcon className='quote-icon-open' />
                 <QuoteIcon className='quote-icon-close' />
-              </div>
+              </div> */}
             </div>
-          </div> */}
+          </div>
           <div className='support' id='section_5'>
             <div className='header'>{t('support')}</div>
             <div className='body'>
