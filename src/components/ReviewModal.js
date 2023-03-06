@@ -5,6 +5,8 @@ import { ReactComponent as ReviewIcon } from '../assets/icons/review.svg';
 import { ReactComponent as StarIcon } from '../assets/icons/star.svg';
 import cx from 'classnames';
 import { useState } from 'react';
+import { gql, useMutation } from '@apollo/client';
+import { handleError, handleMessage } from '../helpers/helpers';
 
 export default function ReviewModal(props) {
   const { show, data, handleClose, handleConfirm } = props;
@@ -15,13 +17,62 @@ export default function ReviewModal(props) {
     setStarAmenityIndex(0);
     setErrorAmenity('');
     setErrorService('');
+    setNote('');
     handleClose();
   };
   const [note, setNote] = useState('');
   const [errorService, setErrorService] = useState('');
   const [errorAmenity, setErrorAmenity] = useState('');
+  //
+  const CREATE_FEEDBACK = gql`
+    mutation CreateFeedback(
+      $locationId: UUID!
+      $orderId: UUID!
+      $servicesRate: Float!
+      $amenitiesRate: Float!
+      $comment: String!
+    ) {
+      createFeedback(
+        data: {
+          locationId: $locationId
+          orderId: $orderId
+          servicesRate: $servicesRate
+          amenitiesRate: $amenitiesRate
+          comment: $comment
+        }
+      ) {
+        orderId
+      }
+    }
+  `;
+  const [createFeedback] = useMutation(CREATE_FEEDBACK, {
+    update() {
+      handleMessage('success', 'Cảm ơn bạn đã đánh giá.');
+      handleCancel();
+    },
+    onError(err) {
+      console.log(err);
+      handleMessage(
+        'error',
+        handleError(
+          err.graphQLErrors[0]?.message,
+          'Tạo đánh giá không thành công. Vui lòng thử lại'
+        )
+      );
+      handleCancel();
+    },
+  });
   const handleSubmit = async () => {
     if (starServiceIndex > 0 && starAmenityIndex > 0) {
+      createFeedback({
+        variables: {
+          locationId: data?.orderDetails[0]?.workingSpaces?.locationId,
+          orderId: data?.id,
+          servicesRate: starServiceIndex,
+          amenitiesRate: starAmenityIndex,
+          comment: note,
+        },
+      });
     } else {
       if (starServiceIndex === 0) {
         setErrorService('Vui lòng đánh giá');
