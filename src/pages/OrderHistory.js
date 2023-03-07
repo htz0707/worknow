@@ -68,6 +68,7 @@ export default function OrderHistory() {
           orderId
           id
           status
+          isRated
           orderDetails {
             bookingType
             day
@@ -145,6 +146,7 @@ export default function OrderHistory() {
   const handleCloseAddReview = () => {
     setSelectedOrder({});
     setShowAddReview(false);
+    handleGetOrders();
   };
   return (
     <UserLayout currentTab='history'>

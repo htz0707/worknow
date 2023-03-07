@@ -400,12 +400,18 @@
     .comment {
       padding-top: 20px;
       padding-bottom: 20px;
-      > .header {
+      .header {
         font-weight: 500;
         font-size: 32px;
         line-height: 37px;
         font-style: normal;
         margin-bottom: 0px;
+      }
+      .view-all {
+        width: fit-content;
+        color: #0075ff;
+        cursor: pointer;
+        font-weight: 600;
       }
       > .body {
         padding: 25px 10px;
