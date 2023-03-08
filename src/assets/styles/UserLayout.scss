@@ -1,18 +1,4 @@
 .user-layout {
-  min-height: calc(100vh - 221px);
-  margin-top: 80px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  .user-layout_header {
-    margin-bottom: 20px;
-    .bcrumb {
-      a {
-        &.active {
-          font-weight: 600;
-        }
-      }
-    }
-  }
   .user-layout_body {
     display: flex;
     gap: 20px;
@@ -113,11 +99,9 @@
     }
     @media (max-width: 992px) {
       flex-direction: column;
-      padding: 0;
       .control-pannel {
         width: 100%;
         max-width: 100%;
-        min-width: 100%;
       }
     }
   }

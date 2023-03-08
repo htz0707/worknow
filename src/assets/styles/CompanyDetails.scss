@@ -1,4 +1,4 @@
-.create-company {
+.company-details {
   position: relative;
   width: 100%;
   padding: 0px 20px;
@@ -11,13 +11,6 @@
 
     .custom-label-input>span {
       color: red;
-    }
-
-    .submit-button {
-      font-weight: 600;
-      width: 150px;
-      background: #FFB31F;
-      border-radius: 8px;
     }
 
     .delete-button {
@@ -52,7 +45,14 @@
     }
   }
 
-  .create-company-container {
+  .submit-button {
+    font-weight: 600;
+    min-width: 150px;
+    background: #FFB31F;
+    border-radius: 8px;
+  }
+
+  .company-details {
     margin-top: 20px;
     margin-bottom: 20px;
   }

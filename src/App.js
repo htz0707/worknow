@@ -39,12 +39,58 @@ import ReactGA from 'react-ga4';
 import GuideCheck from './pages/GuideCheck';
 import Contact from './pages/Contact';
 import SignUpByInviteLink from './pages/SignUpByInviteLink';
+import Orders from './pages/Orders';
+import CompanyDetails from './pages/CompanyDetails';
+import Companies from './pages/Companies';
+import CreateSpaceProvider from './pages/CreateSpaceProvider';
 ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          <Route path='/admin/' element={<AdminLayout />}>
+            <Route
+              path='orders'
+              element={
+                <PrivateRoute>
+                  <Orders />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='companies'
+              element={
+                <PrivateRoute>
+                  <Companies />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='company/new'
+              element={
+                <PrivateRoute>
+                  <CreateCompany />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='company/:id'
+              element={
+                <PrivateRoute>
+                  <CompanyDetails />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/admin/company/:id/space-provider/new'
+              element={
+                <PrivateRoute>
+                  <CreateSpaceProvider />
+                </PrivateRoute>
+              }
+            />
+          </Route>
           <Route path='/' element={<DashboardLayout />}>
             <Route index element={<Home />} />
             <Route path='locations' element={<Locations />} />
@@ -131,7 +177,7 @@ function App() {
               </PublicRoute>
             }
           />
-           <Route
+          <Route
             path='/:id'
             element={
               <PublicRoute>
@@ -139,32 +185,6 @@ function App() {
               </PublicRoute>
             }
           />
-          <Route path='/admin/' element={<AdminLayout />}>
-            <Route
-              path='orders'
-              element={
-                <PrivateRoute>
-                  <AdminOrders />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path='space/companies'
-              element={
-                <PrivateRoute>
-                  <ListCompany />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path='space/company/new'
-              element={
-                <PrivateRoute>
-                  <CreateCompany />
-                </PrivateRoute>
-              }
-            />
-          </Route>
           <Route
             path='forget-password'
             element={
