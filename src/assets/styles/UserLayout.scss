@@ -1,4 +1,6 @@
 .user-layout {
+  margin-top: 100px;
+  min-height: calc(100vh - 300px);
   .user-layout_body {
     display: flex;
     gap: 20px;
