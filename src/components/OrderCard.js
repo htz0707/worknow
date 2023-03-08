@@ -96,8 +96,12 @@ export default function OrderCard(props) {
         {renderStatus(data?.status)}
         {(data?.status === 'completed' || data?.status === 'checked_in') && (
           <div className='review-section'>
-            <button className='btn-review' onClick={() => handleReview(data)}>
-              <EditIcon className='icon' /> Đánh giá
+            <button
+              className='btn-review'
+              onClick={() => handleReview(data)}
+              disabled={data?.isRated}
+            >
+              <EditIcon className='icon' /> {t('evaluation')}
             </button>
           </div>
         )}

@@ -300,5 +300,10 @@
   "invite_to_earn_1": "Sao chép đường dẫn này và gửi cho bạn bè. Với mỗi lượt đăng ký và đặt đơn đầu tiên từ link của bạn, bạn và người được mời sẽ nhận được một",
   "invite_to_earn_2": "voucher trị giá 100.000Đ.",
   "subs": "Lượt Đăng Ký",
-  "vouchers_recieved": "Voucher Đã Nhận"
+  "vouchers_recieved": "Voucher Đã Nhận",
+  "feeling": "Cảm nhận",
+  "service_rating": "Đánh giá dịch vụ",
+  "please_rate": "Vui lòng đánh giá",
+  "review_success": "Gửi đánh giá thành công",
+  "review_not_success": "Gửi đánh giá thất bại. Vui lòng thử lại"
 }

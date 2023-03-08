@@ -1,0 +1,32 @@
+.rating {
+  .rating-container {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .rating-star {
+    width: 20px;
+    margin-right: 0px;
+    display: flex;
+    color: #ffc700;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  .overlay {
+    background-color: black;
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+
+    @supports (mix-blend-mode: color) {
+      mix-blend-mode: color;
+      opacity: unset;
+    }
+  }
+}

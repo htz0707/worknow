@@ -117,6 +117,7 @@ function Locations() {
             id
             name
           }
+          locationRate
         }
         pageInfo {
           count
