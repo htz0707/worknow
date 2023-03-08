@@ -38,6 +38,7 @@ import ResetPassword from './pages/ResetPassword';
 import ReactGA from 'react-ga4';
 import GuideCheck from './pages/GuideCheck';
 import Contact from './pages/Contact';
+import SignUpByInviteLink from './pages/SignUpByInviteLink';
 ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
   return (
@@ -127,6 +128,14 @@ function App() {
             element={
               <PublicRoute>
                 <SignUp />
+              </PublicRoute>
+            }
+          />
+           <Route
+            path='/:id'
+            element={
+              <PublicRoute>
+                <SignUpByInviteLink />
               </PublicRoute>
             }
           />
