@@ -1,0 +1,52 @@
+.admin-topbar {
+  position: sticky;
+  top: 0;
+  height: 72px;
+  z-index: 1000;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0px 0px 16px 16px;
+  padding: 0px 20px;
+  .title {
+    font-weight: 700;
+    font-size: 24px;
+    color: #98968d;
+    text-transform: uppercase;
+  }
+  .action {
+    display: flex;
+    gap: 15px;
+    .btn-avatar {
+      width: fit-content;
+      height: fit-content;
+      padding: 0;
+      background: transparent;
+      border: none;
+    }
+    .avatar-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .user-name {
+      font-weight: 600;
+      color: #282723;
+      margin-right: 10px;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      .avatar {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+      }
+      .name {
+        font-weight: 600;
+        color: #282723;
+      }
+    }
+  }
+}
