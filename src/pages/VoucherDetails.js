@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react';
 import Topbar from '../components/AdminTopbar';
 import Bcrumb from '../components/Bcrumb';
 import { gql, useMutation, useLazyQuery } from '@apollo/client';
-import { Form, Input, Select } from 'antd';
+import { Form, Input, Select, Table } from 'antd';
 import { handleMessage } from '../helpers/helpers';
-import '../assets/styles/CreateCompany.scss';
+import '../assets/styles/CompanyDetails.scss';
 import { useAuthContext } from '../context/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import '../assets/styles/VoucherDetails.scss';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import parsePhoneNumber from 'libphonenumber-js';
+import moment from 'moment';
 
-export default function CreateCompany() {
+export default function VoucherDetails() {
   const { user } = useAuthContext();
   const navigate = useNavigate();
-  const [phone, setPhone] = useState('');
+  const { id } = useParams();
 
   useEffect(() => {
     if (user?.roles[0]?.name === 'Member') {
@@ -22,6 +24,19 @@ export default function CreateCompany() {
     }
   }, [user]);
   const [form] = Form.useForm();
+
+  const [phone, setPhone] = useState(localStorage.getItem('companyPhoneNumber'));
+  const [name, setName] = useState(localStorage.getItem('companyName'));
+  const [address, setAddress] = useState(localStorage.getItem('companyAddress'));
+  const [countryId, setCountryId] = useState(localStorage.getItem('countryId'));
+  const [cityId, setCityId] = useState(localStorage.getItem('cityId'));
+  const [districtId, setDistrictId] = useState(localStorage.getItem('districtId'));
+  const [wardId, setWardId] = useState(localStorage.getItem('wardId'));
+
+  const handleSetInitFields = () => {
+    form.setFieldValue('name', name);
+    form.setFieldValue('address', address);
+  }
 
   const GET_WARDS = gql`
     query getWards(
@@ -154,52 +169,140 @@ export default function CreateCompany() {
   const handleChangeData = (field, value) => {
     setData({ ...data, [field]: value });
   }
-  const handleSubmit = async () => {
-    try {
-      let parse_phone = await parsePhoneNumber('+' + phone);
-      let formData = {
-        name: data.name,
-        address: data.address,
-        wardId: data.wardId,
-        districtId: data.districtId,
-        cityId: data.cityId,
-        countryId: data.countryId,
-        phoneCountryCode: parse_phone?.countryCallingCode,
-        phoneNumber: parse_phone?.nationalNumber
-      }
-      if (formData.phoneCountryCode === '') delete formData.phoneCountryCode;
-      if (formData.phoneNumber === '') delete formData.phoneNumber;
-      await createCompany({
-        variables: formData
-      });
-      handleMessage('success', 'Thêm công ty thành công.');
-      navigate('/admin/companies');
-    } catch (err) {
-      console.log(err)
-      handleMessage('error', 'Thêm công ty không thành công.');
-    }
 
+  const GET_USERS = gql`
+    query GetUsers {
+      users(params: {}) {
+        edges {
+          id
+          fullname
+          phoneNumber
+          phoneCountryCode
+          createdAt
+          createdBy
+          updatedAt
+          birthday
+          companyId
+          email
+          employeeId
+          note
+          status
+          roles {
+            name
+          }
+        }
+      }
+    }
+  `;
+  const [getUsers, { called, refetch }] = useLazyQuery(GET_USERS, {
+    fetchPolicy: 'no-cache',
+  });
+  const [spaceData, setSpaceData] = useState([]);
+
+  const handleGetUsers = async (number, size) => {
+    let res = await getUsers();
+    if (res.data) {
+      let array = res.data.users.edges.map((item, key) => ({ key, ...item }));
+
+      let spaceArray = [];
+
+      array.forEach(element => {
+        if (element?.companyId === id) {
+          spaceArray.push(element);
+        }
+      });
+
+      for (const item of spaceArray) {
+        if (item.phoneNumber) {
+          item.phone = '+' + item?.phoneCountryCode + item?.phoneNumber;
+        }
+        item.role = item?.roles[0]?.name;
+      }
+      setSpaceData(spaceArray);
+    }
   };
+
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'fullname',
+      key: 'fullname',
+    },
+    {
+      title: 'Birthday',
+      dataIndex: 'birthday',
+      key: 'birthday',
+    },
+    {
+      title: 'Phone number',
+      dataIndex: 'phone',
+      key: 'phone',
+    },
+    {
+      title: 'Created By',
+      dataIndex: 'createdBy',
+      key: 'createdBy'
+    },
+    {
+      title: 'Created At',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (_, data) => moment(data.createdAt).format('HH:mm, DD/MM/YYYY')
+    },
+    {
+      title: 'Updated At',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      render: (_, data) => moment(data.updatedAt).format('HH:mm, DD/MM/YYYY')
+    },
+    {
+      title: 'Employee ID',
+      dataIndex: 'employeeId',
+      key: 'employeeId'
+    },
+    {
+      title: 'Note',
+      dataIndex: 'note',
+      key: 'note'
+    },
+    {
+      title: 'Role',
+      dataIndex: 'role',
+      key: 'role'
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status'
+    }
+  ];
 
   useEffect(() => {
     handleGetDistricts('008c4432-0f9d-4d56-80e1-619010ed8c46');
     handleResetWard();
+    handleSetInitFields();
+    handleGetUsers();
   }, []);
 
   useEffect(() => {
-    handleGetWards(data.districtId);
-  }, [data.districtId])
+    handleGetWards(districtId);
+  }, [districtId])
 
   return (
-    <div className='create-company'>
+    <div className='voucher-details'>
       {user?.roles[0]?.name === 'WorkNow admin' && (
         <>
-          <Topbar title='Tạo Công Ty' />
+          <Topbar title='Thông Tin Công Ty' />
           <div className='my-2'>
             <Bcrumb
               data={[
                 {
-                  label: 'Tạo Công Ty'
+                  label: 'Thông Tin Công Ty'
                 }
               ]}
             />
@@ -207,10 +310,10 @@ export default function CreateCompany() {
           <Form
             id='my_form'
             autoComplete='off'
-            onFinish={handleSubmit}
+            // onFinish={handleSubmit}
             form={form}
           >
-            <div className='create-company-container'>
+            <div className='create-voucher-container'>
               <label className='custom-label-input my-2'>
                 Tên Công Ty <span>*</span>
               </label>
@@ -224,11 +327,12 @@ export default function CreateCompany() {
                 ]}
               >
                 <Input
+                  disabled
                   className='form-control mb-0'
                   placeholder='Nhập vào tên địa điểm'
-                  value={data.name}
+                  value={name}
                   onChange={(e) =>
-                    handleChangeData('name', e.target.value)
+                    setName(e.target.value)
                   }
                 />
               </Form.Item>
@@ -247,6 +351,7 @@ export default function CreateCompany() {
                 ]}
               >
                 <Input
+                  disabled
                   className='form-control mb-0'
                   placeholder='Nhập vào địa chỉ'
                   value={data.address}
@@ -283,6 +388,7 @@ export default function CreateCompany() {
               >
                 <div className='phone-input-engine'>
                   <PhoneInput
+                    disabled
                     inputProps={{
                       id: 'phone_number',
                       name: 'phone',
@@ -325,6 +431,7 @@ export default function CreateCompany() {
                     initialValue='008c4432-0f9d-4d56-80e1-619010ed8c46'
                   >
                     <Select
+                      disabled
                       options={[
                         {
                           value: '008c4432-0f9d-4d56-80e1-619010ed8c46',
@@ -341,7 +448,6 @@ export default function CreateCompany() {
                     Quận <span>*</span>
                   </label>
                   <Form.Item
-                    name='district'
                     rules={[
                       {
                         required: true,
@@ -350,9 +456,10 @@ export default function CreateCompany() {
                     ]}
                   >
                     <Select
-                      placeholder='Chọn quận'
+                      disabled
+                      value={districtId}
                       options={districtsList}
-                      onChange={handleChangeDistrict}
+                      onChange={(value) => setDistrictId(value)}
                     />
                   </Form.Item>
                 </div>
@@ -363,7 +470,6 @@ export default function CreateCompany() {
                     Phường <span>*</span>
                   </label>
                   <Form.Item
-                    name='ward'
                     rules={[
                       {
                         required: true,
@@ -372,23 +478,33 @@ export default function CreateCompany() {
                     ]}
                   >
                     <Select
+                      disabled
                       id='ward'
                       placeholder='Chọn phường'
                       options={wardsList}
-                      onChange={handleChangeWard}
+                      value={wardId}
+                      onChange={(value) => setWardId(value)}
                     />
                   </Form.Item>
                 </div>
               </div>
             </div>
-            <button
-              type='submit'
-              form='my_form'
-              className='btn submit-button mt-3'
-            >
-              Lưu
-            </button>
           </Form>
+
+          <Table
+            columns={columns}
+            dataSource={[...spaceData]}
+            scroll={{
+              x: 3500,
+              y: 600,
+            }}
+          />
+          <button
+            className='btn submit-button mt-3'
+            onClick={() => navigate(`/admin/company/${id}/space-provider/new`)}
+          >
+            Tạo tài khoản NCC
+          </button>
         </>
       )}
     </div>

@@ -43,6 +43,9 @@ import Orders from './pages/Orders';
 import CompanyDetails from './pages/CompanyDetails';
 import Companies from './pages/Companies';
 import CreateSpaceProvider from './pages/CreateSpaceProvider';
+import Vouchers from './pages/Vouchers';
+import VoucherDetails from './pages/VoucherDetails';
+
 ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
   return (
@@ -83,10 +86,26 @@ function App() {
               }
             />
             <Route
-              path='/admin/company/:id/space-provider/new'
+              path='company/:id/space-provider/new'
               element={
                 <PrivateRoute>
                   <CreateSpaceProvider />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='vouchers'
+              element={
+                <PrivateRoute>
+                  <Vouchers />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='vouchers/:id'
+              element={
+                <PrivateRoute>
+                  <VoucherDetails />
                 </PrivateRoute>
               }
             />

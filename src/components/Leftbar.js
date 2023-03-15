@@ -10,6 +10,8 @@ import '../assets/styles/Leftbar.scss';
 import Logo from '../assets/icons/logo.svg';
 import { ReactComponent as Booking } from '../assets/icons/booking.svg';
 import { ReactComponent as Employee } from '../assets/icons/employee.svg';
+import { ReactComponent as Voucher } from '../assets/icons/voucher_2.svg';
+
 import { ReactComponent as LeftDoubleArrowIcon } from '../assets/icons/leftdoublearrow.svg';
 import cx from 'classnames';
 import { useTranslation } from 'react-i18next';
@@ -31,6 +33,13 @@ export default function Leftbar(props) {
       title: 'Quản Lý Space Provider',
       icon: <Employee className='icon' />,
       path: '/admin/companies',
+      subNav: [],
+    },
+    {
+      id: 3,
+      title: 'Quản Lý Voucher',
+      icon: <Voucher className='icon' />,
+      path: '/admin/vouchers',
       subNav: [],
     },
     // {
