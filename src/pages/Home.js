@@ -17,10 +17,10 @@ import P2 from '../assets/icons/partner2.svg';
 import P3 from '../assets/icons/partner3.svg';
 import P4 from '../assets/icons/partner4.svg';
 import P5 from '../assets/icons/partner5.svg';
-import hl1 from '../assets/images/highlight1.svg';
-import hl2 from '../assets/images/highlight2.svg';
-import hl3 from '../assets/images/highlight3.svg';
-import hl4 from '../assets/images/highlight4.svg';
+import hl1 from '../assets/images/highlight1.png';
+import hl2 from '../assets/images/highlight2.png';
+import hl3 from '../assets/images/highlight3.png';
+import hl4 from '../assets/images/highlight4.png';
 import { useTranslation } from 'react-i18next';
 
 export default function NewBusiness() {
@@ -100,11 +100,11 @@ export default function NewBusiness() {
       </div>
       <div className='section-3'>
         <div className='container-fluid page-container'>
-          <div className='row mb-3'>
-            <h3 className='my-5 fw-bold'> {t('outstanding_type')}</h3>
-            <div className='col-lg-6'>
+          <h3 className='my-5 fw-bold'> {t('outstanding_type')}</h3>
+          <div className='flex-box justify-content-center mb-3'>
+            <div className=''>
               <div className='working-space-type-card mb-3'>
-                <img src={hl4} alt='hl-4' className='image' />
+                <img src={hl3} alt='hl-3' className='image' />
                 <div className='footer-section'>
                   <div className='content'>
                     <div className='title'> {t('private_booth')}</div>
@@ -118,7 +118,7 @@ export default function NewBusiness() {
                 </div>
               </div>
               <div className='working-space-type-card'>
-                <img src={hl1} alt='hl-4' className='image' />
+                <img src={hl1} alt='hl-1' className='image image-2' />
                 <div className='footer-section'>
                   <div className='content'>
                     <div className='title'>{t('flexible_seat')}</div>
@@ -132,9 +132,9 @@ export default function NewBusiness() {
                 </div>
               </div>
             </div>
-            <div className='col-lg-6 col-right'>
+            <div className='col-right'>
               <div className='working-space-type-card mb-3'>
-                <img src={hl2} alt='hl-4' className='image' />
+                <img src={hl4} alt='hl-4' className='image' />
                 <div className='footer-section'>
                   <div className='content'>
                     <div className='title'>{t('meeting_room')}</div>
@@ -148,7 +148,7 @@ export default function NewBusiness() {
                 </div>
               </div>
               <div className='working-space-type-card mb-3'>
-                <img src={hl3} alt='hl-4' className='image' />
+                <img src={hl2} alt='hl-2' className='image' />
                 <div className='footer-section'>
                   <div className='content'>
                     <div className='title'>{t('event_hall')}</div>
