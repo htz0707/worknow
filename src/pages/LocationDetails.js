@@ -173,7 +173,9 @@ export default function LocationDetails() {
       }
     }
   `;
-  const [getLocationDetails] = useLazyQuery(GET_LOCATION_DETAILS);
+  const [getLocationDetails] = useLazyQuery(GET_LOCATION_DETAILS, {
+    fetchPolicy: 'no-cache',
+  });
   const [locationInfo, setLocationInfo] = useState({});
   const [workingSpaces, setWorkingSpaces] = useState([]);
   const [typeWorkingSpace, setTypeWorkingSpace] = useState([]);
@@ -755,7 +757,7 @@ export default function LocationDetails() {
                             handleShowWarningContact(item);
                           }
                         }}
-                        key={index}
+                        key={item.id}
                       />
                     );
                   })}
