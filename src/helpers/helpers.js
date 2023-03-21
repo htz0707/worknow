@@ -133,15 +133,15 @@ export const returnStatusBooking = (status) => {
 export const returnDescriptionStatusBooking = (status) => {
   switch (status) {
     case 'confirming':
-      return 'Email xác thực sẽ được gửi đến bạn sau khi hoàn tất quá trình xác thực.';
+      return i18n.t('description_status_booking_confirming');
     case 'confirmed':
-      return 'Đã xác thực thanh toán. Chúng tôi sẽ gửi email thông báo ngay khi Nhà cung cấp xác nhận đặt chỗ thành công.';
+      return i18n.t('description_status_booking_confirmed');
     case 'booking_successfull':
-      return 'Đặt chỗ thành công. Hãy kiểm tra hộp thư email của bạn để lấy mã QR code check-in nào.';
+      return i18n.t('description_status_booking_booking_successfull');
     case 'payment_fail':
-      return 'Xác nhận thanh toán thất bại. Vui lòng đặt chỗ lại hoặc liên hệ với chúng tôi.';
+      return i18n.t('description_status_booking_payment_fail');
     case 'canceled':
-      return 'Đặt chỗ của bạn đã bị huỷ bởi Nhà cung cấp vì lý do bất khả kháng. Thanh toán của bạn sẽ được hoàn lại trong thời gian ngắn nhất. Mong bạn thông cảm.';
+      return i18n.t('description_status_booking_canceled');
     default:
       return null;
   }
