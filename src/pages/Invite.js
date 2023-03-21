@@ -18,7 +18,7 @@ export default function UserProfile() {
         usersReferee {
           id
         }
-        vouchers {
+        userVouchers {
           id
         }
       }
