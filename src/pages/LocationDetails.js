@@ -173,7 +173,9 @@ export default function LocationDetails() {
       }
     }
   `;
-  const [getLocationDetails] = useLazyQuery(GET_LOCATION_DETAILS);
+  const [getLocationDetails] = useLazyQuery(GET_LOCATION_DETAILS, {
+    fetchPolicy: 'no-cache',
+  });
   const [locationInfo, setLocationInfo] = useState({});
   const [workingSpaces, setWorkingSpaces] = useState([]);
   const [typeWorkingSpace, setTypeWorkingSpace] = useState([]);
@@ -445,7 +447,8 @@ export default function LocationDetails() {
             />
           </div>
           <div className='row-2'>
-            {locationInfo?.name} <span>+1200 {t('booking_amount')}</span>
+            {locationInfo?.name} 
+            {/* <span>+1200 {t('booking_amount')}</span> */}
           </div>
           <div className='row-3'>
             <div>
@@ -755,7 +758,7 @@ export default function LocationDetails() {
                             handleShowWarningContact(item);
                           }
                         }}
-                        key={index}
+                        key={item.id}
                       />
                     );
                   })}
