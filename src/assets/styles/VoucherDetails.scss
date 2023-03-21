@@ -1,4 +1,4 @@
-.create-space-provider {
+.voucher-details {
   position: relative;
   width: 100%;
   padding: 0px 20px;
@@ -11,13 +11,6 @@
 
     .custom-label-input>span {
       color: red;
-    }
-
-    .submit-button {
-      font-weight: 600;
-      width: 150px;
-      background: #FFB31F;
-      border-radius: 8px;
     }
 
     .delete-button {
@@ -50,20 +43,16 @@
       color: #0075FF;
       cursor: pointer;
     }
-
-    .password-field {
-      display: flex;
-
-      .eye-icon {
-        margin-bottom: -30px;
-        margin-top: 10px;
-        margin-left: -30px;
-        cursor: pointer;
-      }
-    }
   }
 
-  .create-space-provider {
+  .submit-button {
+    font-weight: 600;
+    min-width: 150px;
+    background: #FFB31F;
+    border-radius: 8px;
+  }
+
+  .voucher-details {
     margin-top: 20px;
     margin-bottom: 20px;
   }

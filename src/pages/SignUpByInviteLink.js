@@ -161,7 +161,7 @@ export default function SignUp() {
                 {t('sign_up')}
               </h3>
               <p className='d-flex justify-content-center'>
-                {t('become_member_of_worknow')}
+                Đăng ký thành viên mời theo lời mời của bạn bè
               </p>
               <Form
                 id='my_form'
