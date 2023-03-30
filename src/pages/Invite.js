@@ -61,7 +61,7 @@ export default function UserProfile() {
           <label className='invite-label fw-bold'>{t('invite_link')}</label>
           <Input
             className='input-field py-2'
-            onClick={() => navigate(`/${user?.id}`)}
+            onClick={() => copyToClipboard(link)}
             value={link}
             suffix={
               <Copy
