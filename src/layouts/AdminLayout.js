@@ -52,12 +52,12 @@ export default function DashboardLayout() {
   };
   const [play] = useSound(notificationSound);
   let interval;
-  useEffect(() => {
-    interval = setInterval(() => {
-      handleGetOrders();
-    }, process.env.REACT_APP_ORDER_POLLING_INTERVAL || 5000);
-    return () => clearInterval(interval);
-  }, [orderCount]);
+  // useEffect(() => {
+  //   interval = setInterval(() => {
+  //     handleGetOrders();
+  //   }, process.env.REACT_APP_ORDER_POLLING_INTERVAL || 5000);
+  //   return () => clearInterval(interval);
+  // }, [orderCount]);
   const navigate = useNavigate();
   useEffect(() => {
     if (orderCount?.triggerNewOrder) {

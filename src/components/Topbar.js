@@ -19,6 +19,8 @@ import { ReactComponent as Voucher } from '../assets/icons/voucher_2.svg';
 import { ReactComponent as Giaodich } from '../assets/icons/history.svg';
 import { ReactComponent as Lockout } from '../assets/icons/lockout.svg';
 import { ReactComponent as Secure } from '../assets/icons/secure.svg';
+import { ReactComponent as Invite } from '../assets/icons/invite2.svg';
+
 import Avatar from '../assets/images/default_avatar.png';
 import { useAuthContext } from '../context/auth';
 import cx from 'classnames';
@@ -88,6 +90,9 @@ export default function Topbar(props) {
   const handleViewUserSecurity = () => {
     navigate('/user/security');
   };
+  const handleViewInvite = () => {
+    navigate('user/invite');
+  };
   const menu = (
     <Menu>
       <Menu.Item style={{ width: '150px' }} onClick={handleViewUserInfo}>
@@ -130,6 +135,10 @@ export default function Topbar(props) {
       <Menu.Item onClick={handleViewUserSecurity} className='pt-2'>
         <Secure height={20} className='me-2 mb-1' />
         <span> {t('security')}</span>
+      </Menu.Item>
+      <Menu.Item onClick={handleViewInvite} className='pt-2'>
+        <Invite height={20} className='me-2 mb-1' />
+        <span> {t('invite')}</span>
       </Menu.Item>
       <hr className='mx-2 mb-2' />
       <Menu.Item onClick={handleLogout} className='mb-2 pt-2'>

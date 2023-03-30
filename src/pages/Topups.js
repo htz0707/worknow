@@ -3,13 +3,11 @@ import { Table } from 'antd';
 import Topbar from '../components/AdminTopbar';
 import { gql, useLazyQuery } from '@apollo/client';
 import moment from 'moment';
-import { HiOutlineBuildingOffice2 } from 'react-icons/hi2';
-import '../assets/styles/Vouchers.scss';
+import '../assets/styles/Topups.scss';
 import { useAuthContext } from '../context/auth';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Voucher } from '../assets/icons/voucher_2.svg';
 
-export default function Vouchers() {
+export default function Topups() {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   useEffect(() => {
@@ -17,23 +15,16 @@ export default function Vouchers() {
       navigate('/');
     }
   }, [user]);
-  const GET_VOUCHERS = gql`
+  const GET_TOPUPS = gql`
     query GetVouchers($page: Int!, $limit: Int!, $sort: String) {
-      vouchers(params: { page: $page, limit: $limit, sort: $sort }) {
+      topups(params: { page: $page, limit: $limit, sort: $sort }) {
         edges {
-          availabilityOption
-          code
-          costs
-          description
           createdAt
+          discountPercent
           id
-          name
-          quantity
-          redeemLimit
-          startDate
-          status
+          maxPrice
+          minPrice
           updatedAt
-          validDays
         }
         pageInfo {
           count
@@ -44,16 +35,16 @@ export default function Vouchers() {
       }
     }
   `;
-  const [getVouchers, { called, refetch }] = useLazyQuery(GET_VOUCHERS, {
+  const [getTopups, { called, refetch }] = useLazyQuery(GET_TOPUPS, {
     fetchPolicy: 'no-cache',
   });
-  const [vouchers, setVouchers] = useState([]);
+  const [topups, setVouchers] = useState([]);
   const [total, setTotal] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const handleGetVouchers = async (number, size) => {
-    let res = await getVouchers({
+  const handleGetTopups = async (number, size) => {
+    let res = await getTopups({
       variables: {
         page: number,
         limit: size,
@@ -61,15 +52,15 @@ export default function Vouchers() {
       },
     });
     if (res.data) {
-      setTotal(res.data.vouchers.pageInfo.count);
-      let array = res.data.vouchers.edges.map((item, key) => ({ key, ...item }));
+      setTotal(res.data.topups.pageInfo.count);
+      let array = res.data.topups.edges.map((item, key) => ({ key, ...item }));
       setVouchers(array);
       console.log(array)
     }
   };
 
   useEffect(() => {
-    handleGetVouchers(pageNumber, pageSize);
+    handleGetTopups(pageNumber, pageSize);
   }, []);
 
   const columns = [
@@ -79,23 +70,19 @@ export default function Vouchers() {
       key: 'id',
     },
     {
-      title: 'Code',
-      dataIndex: 'code',
-      key: 'code',
+      title: 'Discount Percent',
+      dataIndex: 'discountPercent',
+      key: 'discountPercent',
     },
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: 'Max Price',
+      dataIndex: 'maxPrice',
+      key: 'maxPrice',
     },
     {
-      title: 'Availability Option',
-      dataIndex: 'availabilityOption',
-      key: 'availabilityOption',
-      render: (_, data) => {
-        if (data) return 'True';
-        return 'False';
-      },
+      title: 'Min Price',
+      dataIndex: 'minPrice',
+      key: 'minPrice'
     },
     {
       title: 'Created At',
@@ -111,66 +98,30 @@ export default function Vouchers() {
       render: (_, data) => moment(data.updatedAt).format('HH:mm, DD/MM/YYYY'),
       // sorter: (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt)
     },
-    {
-      title: 'Cost',
-      dataIndex: 'costs',
-      key: 'costs',
-    },
-    {
-      title: 'Quantity',
-      dataIndex: 'quantity',
-      key: 'quantity',
-    },
-    {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
-    },
-    {
-      title: 'RedeemLimit',
-      dataIndex: 'redeemLimit',
-      key: 'redeemLimit'
-    },
-    {
-      title: 'Start Date',
-      dataIndex: 'startDate',
-      key: 'startDate',
-      render: (_, data) => moment(data.updatedAt).format('HH:mm, DD/MM/YYYY'),
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-    },
-    {
-      title: 'Valid Days',
-      dataIndex: 'validDays',
-      key: 'validDays',
-    }
   ];
 
   return (
-    <div className='vouchers'>
+    <div className='topups'>
       {user?.roles[0]?.name === 'WorkNow admin' && (
         <>
           <Topbar title='Quản lý Space Provider' />
-          <div className='vouchers-container'>
-            <div className='table-vouchers'>
-              <div className='title'>Danh Sách Vouchers</div>
+          <div className='topups-container'>
+            <div className='table-topups'>
+              <div className='title'>Danh Sách Topups</div>
               <div className='content'>
-                <div className='action-bar'>
+                {/* <div className='action-bar'>
                   <div
                     onClick={() => navigate('/admin/voucher/new')}
                     className='add-voucher-button'
                   >
                     Thêm Voucher
                   </div>
-                </div>
+                </div> */}
                 <Table
                   columns={columns}
-                  dataSource={[...vouchers]}
+                  dataSource={[...topups]}
                   scroll={{
-                    x: 3500,
+                    // x: 3500,
                     y: 600,
                   }}
                   className='table-custom'
@@ -180,12 +131,12 @@ export default function Vouchers() {
                     onChange: (value, pageSize) => {
                       setPageNumber(value);
                       setPageSize(pageSize);
-                      handleGetVouchers(value, pageSize);
+                      handleGetTopups(value, pageSize);
                     }
                   }}
                   onRow={(record, rowIndex) => {
                     return {
-                      onClick: (event) => navigate(`/admin/vouchers/${record?.id}`)
+                      onClick: (event) => navigate(`/admin/topups/${record?.id}`)
                     };
                   }}
                 />

@@ -23,7 +23,7 @@ export default function Leftbar(props) {
   const navData = [
     {
       id: 1,
-      title: t('booking_management'),
+      title: 'booking_management',
       icon: <Booking className='icon' />,
       path: '/admin/orders',
       subNav: [],
@@ -38,8 +38,14 @@ export default function Leftbar(props) {
     {
       id: 3,
       title: 'Quản Lý Voucher',
-      icon: <Voucher className='icon' />,
+      // icon: <Voucher className='icon' />,
       path: '/admin/vouchers',
+      subNav: [],
+    },
+    {
+      id: 4,
+      title: 'Quản Lý Topups',
+      path: '/admin/topups',
       subNav: [],
     },
     // {
