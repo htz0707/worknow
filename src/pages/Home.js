@@ -22,6 +22,8 @@ import hl2 from '../assets/images/highlight2.png';
 import hl3 from '../assets/images/highlight3.png';
 import hl4 from '../assets/images/highlight4.png';
 import { useTranslation } from 'react-i18next';
+import { ReactComponent as PartnerShipIcon } from '../assets/icons/partnership.svg';
+import { ReactComponent as IndividualIcon } from '../assets/icons/individual.svg';
 
 export default function NewBusiness() {
   const { t } = useTranslation();
@@ -32,23 +34,45 @@ export default function NewBusiness() {
   return (
     <div className='home'>
       <div className='section-1'>
-        <div className='container-fluid page-container'>
-          <div className='row'>
-            <div className='col-lg-5 d-flex justify-content-center align-items-center mb-4'>
-              <div>
-                <h2 className='fw-bold'>{t('home_title')}</h2>
-                <p>{t('home_description')}</p>
-                {/* <button
-                  onClick={handleClick}
-                  className='btn btn-warning fw-bold rounded-pill d-flex justify-content-center'
-                >
-                  TÌM HIỂU VỀ WORKNOW{' '}
-                  <BsPlayCircle className='ms-3 icon' fill='dark' size={25} />
-                </button> */}
+        <div className='section-container page-container'>
+          <h2 className='title'>
+            TỐI ƯU HÓA MÔ HÌNH LÀM VIỆC KẾT HỢP (HYBRID)
+          </h2>
+          <p className='description'>
+            Tiết kiệm chi phí một cách hiệu quả, gia tăng hiệu suất, đổi mới tư
+            duy và kiến tạo cho những thành tựu ở tương lai
+          </p>
+          <div className='customer-kind'>
+            <div className='business-customer'>
+              <div className='name'>Khách hàng doanh nghiệp</div>
+              <div className='sub-layer' onClick={() => navigate('/business')}>
+                <div className='icon-badge'>
+                  <PartnerShipIcon className='icon' />
+                </div>
+                <div className='title'>Khách hàng doanh nghiệp</div>
+                <div className='description'>
+                  Bạn có biết, sự tăng trưởng của một số công ty công nghệ hiện
+                  nay chỉ dựa vào việc thay đổi một nơi làm việc phù hợp. Văn
+                  phòng hiện đại, tiện ích đi kèm, độ xác thực cao và rộng khắp
+                  TP.HCM là những gì mà bạn có thể tìm thấy tại Worknow.
+                </div>
               </div>
             </div>
-            <div className='col-lg-7'>
-              <img src={TwoPeople} className='w-100' alt='image' />
+            <div className='individual-customer'>
+              <div className='name'>Khách hàng cá nhân</div>
+              <div className='sub-layer' onClick={() => navigate('/locations')}>
+                <div className='icon-badge'>
+                  <IndividualIcon className='icon' />
+                </div>
+                <div className='title'>Khách hàng cá nhân</div>
+                <div className='description'>
+                  Là một nhà sáng tạo nội dung, một Freelancer, một marketer hay
+                  đơn giản là bạn cần những thay đổi về không gian về nơi làm
+                  việc mang lại hứng khởi cho công việc của mình thì Worknow tự
+                  tin có thể mang đến cho bạn những trải nghiệm tuyệt vời với
+                  những không gian làm việc mới mẻ, hiện đại và riêng tư.
+                </div>
+              </div>
             </div>
           </div>
         </div>
