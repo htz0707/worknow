@@ -126,6 +126,8 @@ export const returnStatusBooking = (status) => {
       return i18n.t('booking_expired');
     case 'extended':
       return i18n.t('booking_extended');
+    case 'completed':
+      return i18n.t('booking_completed');
     default:
       return null;
   }

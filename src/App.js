@@ -192,10 +192,7 @@ function App() {
             path='/create-booking/payment/:location_id/:order_id'
             element={<BookingPayment />}
           />
-          <Route
-            path='/create-booking/status/:location_id/:order_id'
-            element={<BookingStatus />}
-          />
+          <Route path='/create-booking/status' element={<BookingStatus />} />
           <Route path='/verify-account' element={<VerifyAccount />} />
           <Route
             path='sign-in'

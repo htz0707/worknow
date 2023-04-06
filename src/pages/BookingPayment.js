@@ -338,9 +338,12 @@ export default function BookingPayment() {
           },
         });
         if (res.data) {
-          navigate(`/create-booking/status/${location_id}/${orderInfo.id}`, {
-            replace: true,
-          });
+          navigate(
+            `/create-booking/status?location_id=${location_id}&order_id=${orderInfo.id}`,
+            {
+              replace: true,
+            }
+          );
         }
       }
       if (paymentMethod === 'business_wallet') {
@@ -350,9 +353,12 @@ export default function BookingPayment() {
           },
         });
         if (res.data) {
-          navigate(`/create-booking/status/${location_id}/${orderInfo.id}`, {
-            replace: true,
-          });
+          navigate(
+            `/create-booking/status?location_id=${location_id}&order_id=${orderInfo.id}`,
+            {
+              replace: true,
+            }
+          );
         }
       }
     } catch (error) {
