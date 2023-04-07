@@ -46,7 +46,7 @@ export default function OrderCard(props) {
       );
     } else {
       navigate(
-        `/create-booking/status/${data?.orderDetails[0]?.workingSpaces?.locationId}/${data?.id}`
+        `/create-booking/status?location_id=${data?.orderDetails[0]?.workingSpaces?.locationId}&order_id=${data?.id}`
       );
     }
   };

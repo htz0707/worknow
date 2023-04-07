@@ -6,7 +6,7 @@ import { Steps } from 'antd';
 import Bcrumb from '../components/Bcrumb';
 import { useEffect } from 'react';
 import { gql, useLazyQuery } from '@apollo/client';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   formatCurrency,
   renderAddress,
@@ -21,7 +21,10 @@ import { useTranslation } from 'react-i18next';
 const { Step } = Steps;
 
 export default function BookingStatus() {
-  const { location_id, order_id } = useParams();
+  // const { location_id, order_id } = useParams();
+  const [searchParams] = useSearchParams();
+  const location_id = searchParams.get('location_id');
+  const order_id = searchParams.get('order_id');
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(2);
@@ -176,10 +179,12 @@ export default function BookingStatus() {
               >
                 <RefreshIcon /> {t('refresh_page')}
               </div>
-              <div className='confirm-booking'>
-                <p>{returnDescriptionStatusBooking(orderInfo.status)}</p>
-                {/* <div>01:25:00</div> */}
-              </div>
+              {orderInfo.status !== 'completed' && (
+                <div className='confirm-booking'>
+                  <p>{returnDescriptionStatusBooking(orderInfo.status)}</p>
+                  {/* <div>01:25:00</div> */}
+                </div>
+              )}
               <div className='location-info'>
                 <div className='location-name'>{locationInfo?.name}</div>
                 <div>{renderAddress(locationInfo)}</div>

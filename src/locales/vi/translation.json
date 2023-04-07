@@ -317,5 +317,6 @@
   "pay_with_business_wallet": "Thanh toán bằng ví doanh nghiệp",
   "business_info": "Thông tin doanh nghiệp",
   "tax_code": "Mã số thuế",
-  "balance": "Số dư"
+  "balance": "Số dư",
+  "booking_completed": "Đơn hoàn tất"
 }
