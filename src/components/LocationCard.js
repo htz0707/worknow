@@ -1,7 +1,7 @@
 import React from 'react';
 import '../assets/styles/LocationCard.scss';
 import { Carousel } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Tag from './Tag';
 import { ReactComponent as StarIcon } from '../assets/icons/star_percentage.svg';
 import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
@@ -54,9 +54,13 @@ export default function LocationCard(props) {
       </div>
       <div className='location-card_right'>
         <div>
-          <div className='location-name' onClick={() => handleClick(data.id)}>
+          <Link
+            className='location-name'
+            to={`/locations/${data.id}`}
+            onClick={() => localStorage.removeItem('selectedWspaceType')}
+          >
             {data.name}
-          </div>
+          </Link>
           <div className='location-review'>
             <span>{parseFloat(data?.locationRate)?.toFixed(1)}</span>{' '}
             <Rating value={data?.locationRate} />{' '}

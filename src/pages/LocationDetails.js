@@ -27,6 +27,7 @@ import WarningContactModal from '../components/WarningContactModal';
 import Rating from '../components/Rating';
 import ReviewCard from '../components/ReviewCard';
 import ReviewListModal from '../components/ReviewListModal';
+import { Helmet } from 'react-helmet-async';
 
 export default function LocationDetails() {
   const { t, i18n } = useTranslation();
@@ -381,6 +382,10 @@ export default function LocationDetails() {
   const [showFeedbacks, setShowFeedbacks] = useState(false);
   return (
     <div className='location-details'>
+      <Helmet>
+        <title>{locationInfo.name}</title>
+        <meta name='description' content={locationInfo.description} />
+      </Helmet>
       <div className='location-details_header'></div>
       <div className='location-details_body '>
         <div className='general-responsive'>
@@ -447,7 +452,7 @@ export default function LocationDetails() {
             />
           </div>
           <div className='row-2'>
-            {locationInfo?.name} 
+            {locationInfo?.name}
             {/* <span>+1200 {t('booking_amount')}</span> */}
           </div>
           <div className='row-3'>

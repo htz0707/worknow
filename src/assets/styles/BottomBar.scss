@@ -12,6 +12,8 @@
     // }
 
     .bar-item {
+      display: flex;
+      flex-direction: column;
       .title {
         font-weight: 600;
         margin-bottom: 12px;
@@ -26,6 +28,8 @@
       font-weight: 100;
       font-size: 15px;
       cursor: pointer;
+      color: white;
+      text-decoration: none;
       &:hover {
         text-decoration: underline;
       }

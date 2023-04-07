@@ -13,6 +13,7 @@ import NoData from '../components/NoData';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { returnUrlParams } from '../helpers/helpers';
 import { Trans, useTranslation, withTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 
 function Locations() {
   const { t } = useTranslation();
@@ -180,6 +181,9 @@ function Locations() {
   }, [filterLocations, searchData]);
   return (
     <div className='locations'>
+      <Helmet>
+        <title>Địa điểm</title>
+      </Helmet>
       <div className='locations_header'>
         <div className='locations_header_content'>
           <div className='row-1'>
