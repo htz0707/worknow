@@ -17,6 +17,7 @@ import circle2 from '../assets/images/normalcircle.svg';
 import circle3 from '../assets/images/largecircle.svg';
 import TwoPeople from '../assets/images/two_people.png';
 import { Trans, useTranslation, withTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 
 function Business() {
   const { t } = useTranslation();
@@ -28,6 +29,9 @@ function Business() {
   };
   return (
     <div className='business'>
+      <Helmet>
+        <title>Khách hàng doanh nghiệp</title>
+      </Helmet>
       {/* <div className='layout'>
         <section className='section-about'>
           <div className='container-md'>

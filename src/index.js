@@ -16,6 +16,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DNS,
@@ -52,12 +53,18 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+const helmetContext = {};
 root.render(
   <ProSidebarProvider>
     <I18nextProvider i18n={i18n}>
       <ApolloProvider client={client}>
         <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-          <App />
+          <HelmetProvider context={helmetContext}>
+            <Helmet>
+              <title>WorkNow</title>
+            </Helmet>
+            <App />
+          </HelmetProvider>
         </GoogleOAuthProvider>
       </ApolloProvider>
     </I18nextProvider>

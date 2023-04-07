@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { BsPlayCircle } from 'react-icons/bs';
 import { Trans, useTranslation, withTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 
 function SpacePartner() {
   const { t } = useTranslation();
@@ -34,6 +35,9 @@ function SpacePartner() {
   };
   return (
     <div className='space-partner'>
+      <Helmet>
+        <title>Đối tác</title>
+      </Helmet>
       <div className='section-1'>
         <div className='container-fluid page-container'>
           <div className='row gy-3'>
