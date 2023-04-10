@@ -1,12 +1,6 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: 'AIzaSyDrgqN55Yu90gPGHJbbaWIDvctWYo86cEc',
   authDomain: 'ambient-odyssey-372104.firebaseapp.com',
@@ -20,19 +14,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase
 const messaging = getMessaging(app);
-// Add the public key generated from the console here.
-
-const getFCMToken = async () => {
-  const token = await getToken(messaging, { vapidKey: 'BNu2_4R6cOymrW0fsiuDR-5nBZOxWrSP7pGptgE3v6DAzEsFJAwhtBJscvJcTWnE2r7dZFuqL37HhTJ118wUmRM' })
-  console.log(token);
-}
-
-getFCMToken();
 
 export const fetchToken = (setTokenFound) => {
-  return getToken(messaging, { vapidKey: 'BHGPr3pJQSflJAJtTIVXbmcEXlPV_HP29TZQRcqrGCN10gKIa-ojIJmtvM9kQGcsNKsWIA6ezKFG8Bd6LTjaVc0' }).then((currentToken) => {
+  return getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_CLOUD_MESSAGING_KEY_PAIR }).then((currentToken) => {
     if (currentToken) {
       console.log('current token for client: ', currentToken);
       setTokenFound(true);

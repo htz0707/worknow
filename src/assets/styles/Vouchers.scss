@@ -1,0 +1,105 @@
+.vouchers {
+    position: relative;
+    width: 100%;
+    padding: 0px 20px;
+    color: #282723;
+  
+    .vouchers-container {
+      margin-top: 20px;
+      margin-bottom: 20px;
+  
+      .table-vouchers {
+        .title {
+          font-weight: 600;
+          font-size: 24px;
+          text-transform: capitalize;
+          margin-bottom: 10px;
+        }
+  
+        .content {
+          background-color: #ffffff;
+          padding: 10px;
+          border-radius: 16px;
+  
+          .action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+  
+            .input-container {
+              display: flex;
+              align-items: center;
+              width: fit-content;
+              background: #f3f3f3;
+              border-radius: 12px;
+              padding: 0px 10px;
+              height: 40px;
+  
+              .search-box {
+                border: none;
+                outline: none;
+                background: transparent;
+                padding: 10px;
+              }
+            }
+  
+            .add-voucher-button {
+              background: #ffb31f;
+              border-radius: 12px;
+              padding: 8px 16px;
+              display: flex;
+              align-items: center;
+              height: 40px;
+              font-weight: 600;
+              color: #282723;
+              cursor: pointer;
+            }
+          }
+  
+          .table-custom {
+            .ant-table-body>table>tbody>tr:hover {
+              td {
+                background: #eafaff;
+              }
+            }
+  
+            // .location-name {
+            //   font-weight: 600;
+            //   color: #0075ff;
+            //   font-size: 16px;
+            //   cursor: pointer;
+            // }
+  
+            .row-custom {
+              &.selected {
+                background-color: #eafaff !important;
+  
+                .ant-table-cell {
+                  background-color: #eafaff;
+                }
+              }
+            }
+          }
+  
+          .status-badge {
+            width: fit-content;
+            font-weight: 600;
+            padding: 6px 24px;
+            border-radius: 12px;
+            text-align: center;
+          }
+  
+          .status-badge.active {
+            color: #0075ff;
+            background: #eafaff;
+          }
+  
+          .status-badge.inactive {
+            color: #5E5B50;
+            background: #F3F3F3;
+          }
+        }
+      }
+    }
+  }

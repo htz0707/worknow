@@ -1,14 +1,15 @@
 import React from 'react';
 import '../assets/styles/LocationCard.scss';
 import { Carousel } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Tag from './Tag';
-import { ReactComponent as StarIcon } from '../assets/icons/start.svg';
+import { ReactComponent as StarIcon } from '../assets/icons/star_percentage.svg';
 import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
 import { ReactComponent as BuildingIcon } from '../assets/icons/building.svg';
 import { ReactComponent as AuthenIcon } from '../assets/icons/shield.svg';
 import { formatCurrency, renderAddress } from '../helpers/helpers';
 import { useTranslation } from 'react-i18next';
+import Rating from './Rating';
 
 export default function LocationCard(props) {
   const { t } = useTranslation();
@@ -53,17 +54,23 @@ export default function LocationCard(props) {
       </div>
       <div className='location-card_right'>
         <div>
-          <div className='location-name' onClick={() => handleClick(data.id)}>
+          <Link
+            className='location-name'
+            to={`/locations/${data.id}`}
+            onClick={() => localStorage.removeItem('selectedWspaceType')}
+          >
             {data.name}
-          </div>
+          </Link>
           <div className='location-review'>
-            <div>
+            <span>{parseFloat(data?.locationRate)?.toFixed(1)}</span>{' '}
+            <Rating value={data?.locationRate} />{' '}
+            {/* <div>
               <StarIcon className='icon' />
               <StarIcon className='icon' />
               <StarIcon className='icon' />
               <StarIcon className='icon' />
               <StarIcon className='icon' />
-            </div>
+            </div> */}
             {/* <span>+1200 lượt đặt</span> */}
           </div>
           <div className='location-address'>

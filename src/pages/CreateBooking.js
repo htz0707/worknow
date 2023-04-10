@@ -177,7 +177,12 @@ export default function CreateBooking() {
     });
   };
   if (data) {
-    navigate(`/create-booking/payment/${location_id}/${data?.createOrder?.id}`);
+    navigate(
+      `/create-booking/payment/${location_id}/${data?.createOrder?.id}`,
+      {
+        replace: true,
+      }
+    );
   }
   if (error) {
     handleMessage('error', 'Đặt chỗ không thành công.');

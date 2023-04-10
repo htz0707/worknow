@@ -1,0 +1,150 @@
+.left-bar,
+.menu,
+.bottom,
+.sidebar-inner {
+  color: #ffffff;
+  background: #282723 !important;
+}
+
+.collapsed {
+  img {
+    width: 50%;
+  }
+}
+
+img {
+  cursor: pointer;
+}
+
+.left-bar {
+  display: flex;
+  // @media (max-width: 768px) {
+  //   display: none;
+  // }
+  height: 100%;
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    margin-right: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    color: #c4c4c4;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgb(255, 255, 255);
+  }
+  .sidebar-inner {
+    height: 100%;
+    overflow-y: auto;
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+      margin-right: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      color: #c4c4c4;
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+  }
+  .btn-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: 24px;
+    height: 100px;
+    background: rgba(207, 206, 200, 0.1);
+    border-radius: 1000px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    .icon {
+      &.reverse {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .logo {
+    width: 100%;
+    max-width: 95px;
+  }
+  .menu {
+    position: relative;
+    min-height: 100%;
+
+    .menu-item {
+      &.active {
+        .menu-anchor {
+          background: #ffb31f;
+          color: #282723;
+          .icon {
+            path {
+              fill: #282723;
+            }
+          }
+        }
+      }
+      .menu-anchor {
+        margin: 5px 10px 5px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 12px;
+        padding-left: 10px;
+        text-transform: capitalize;
+        color: #ffffff;
+        .icon {
+          path {
+            fill: #ffffff;
+          }
+        }
+      }
+
+      .menu-anchor:hover {
+        background: #ffb31f;
+        color: #282723;
+        .icon {
+          path {
+            fill: #282723;
+          }
+        }
+      }
+    }
+    .sub-menu {
+      .sub-menu-content {
+        background: #282723 !important;
+        margin-left: 30px !important;
+        border-left: 1px solid #7c7a73;
+        .menu-item {
+          .menu-anchor {
+          }
+        }
+      }
+    }
+    .contact {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    .contact {
+      width: 100%;
+      padding: 20px;
+      font-size: 14px;
+    }
+  }
+
+  .bottom {
+    padding-left: 25px;
+    cursor: pointer;
+
+    @media (min-width: 768px) {
+      bottom: 0;
+    }
+  }
+}

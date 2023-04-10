@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import Topbar from '../components/AdminTopbar';
 import Bcrumb from '../components/Bcrumb';
 import { gql, useMutation, useLazyQuery } from '@apollo/client';
 import { Form, Input, Select } from 'antd';
 import { handleMessage } from '../helpers/helpers';
-import '../assets/styles/AdminOrders.scss';
+import '../assets/styles/CreateCompany.scss';
 import { useAuthContext } from '../context/auth';
 import { useNavigate } from 'react-router-dom';
-import '../assets/styles/CreateCompany.scss';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import parsePhoneNumber from 'libphonenumber-js';
 
-export default function ListCompany() {
+export default function CreateCompany() {
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  const [phone, setPhone] = useState('');
+
   useEffect(() => {
     if (user?.roles[0]?.name === 'Member') {
       navigate('/');
@@ -108,8 +113,6 @@ export default function ListCompany() {
     setData({ ...data, districtId: value });
   }
 
-
-
   const CREATE_COMPANY = gql`
     mutation CreateCompany(
       $name: String!
@@ -118,6 +121,8 @@ export default function ListCompany() {
       $districtId: UUID!
       $cityId: UUID!
       $countryId: UUID!
+      $phoneNumber: String
+      $phoneCountryCode: String
     ) {
       createCompany(
         data: {
@@ -127,6 +132,8 @@ export default function ListCompany() {
           districtId: $districtId
           cityId: $cityId
           countryId: $countryId
+          phoneNumber: $phoneNumber
+          phoneCountryCode: $phoneCountryCode
         }
       ) {
         id
@@ -140,27 +147,35 @@ export default function ListCompany() {
     wardId: '',
     districtId: '',
     cityId: '008c4432-0f9d-4d56-80e1-619010ed8c46',
-    countryId: 'c2374186-4975-4c48-bf48-d699e88e77da'
+    countryId: 'c2374186-4975-4c48-bf48-d699e88e77da',
+    phoneNumber: '',
+    phoneCountryCode: '',
   });
   const handleChangeData = (field, value) => {
     setData({ ...data, [field]: value });
   }
   const handleSubmit = async () => {
     try {
+      let parse_phone = await parsePhoneNumber('+' + phone);
       let formData = {
         name: data.name,
         address: data.address,
         wardId: data.wardId,
         districtId: data.districtId,
         cityId: data.cityId,
-        countryId: data.countryId
+        countryId: data.countryId,
+        phoneCountryCode: parse_phone?.countryCallingCode,
+        phoneNumber: parse_phone?.nationalNumber
       }
+      if (formData.phoneCountryCode === '') delete formData.phoneCountryCode;
+      if (formData.phoneNumber === '') delete formData.phoneNumber;
       await createCompany({
         variables: formData
       });
       handleMessage('success', 'Thêm công ty thành công.');
-      navigate('/admin/space/companies');
+      navigate('/admin/companies');
     } catch (err) {
+      console.log(err)
       handleMessage('error', 'Thêm công ty không thành công.');
     }
 
@@ -175,22 +190,17 @@ export default function ListCompany() {
     handleGetWards(data.districtId);
   }, [data.districtId])
 
-
   return (
-    <div className='create-company h-100 w-100 p-5'>
+    <div className='create-company'>
       {user?.roles[0]?.name === 'WorkNow admin' && (
         <>
-          <div>
+          <Topbar title='Tạo Công Ty' />
+          <div className='my-2'>
             <Bcrumb
               data={[
                 {
-                  label: 'Trang Chủ',
-                  path: '/'
-                },
-                {
-                  label: 'Create New Company',
-                  active: true
-                },
+                  label: 'Tạo Công Ty'
+                }
               ]}
             />
           </div>
@@ -200,7 +210,7 @@ export default function ListCompany() {
             onFinish={handleSubmit}
             form={form}
           >
-            <div>
+            <div className='create-company-container'>
               <label className='custom-label-input my-2'>
                 Tên Công Ty <span>*</span>
               </label>
@@ -244,6 +254,48 @@ export default function ListCompany() {
                     handleChangeData('address', e.target.value)
                   }
                 />
+              </Form.Item>
+            </div>
+            <div>
+              <label className='custom-label-input my-2'>
+                Số Điện Thoại <span>*</span>
+              </label>
+              <Form.Item
+                name='phone'
+                rules={[
+                  {
+                    async validator(_, value) {
+                      if (phone) {
+                        let parse_phone = await parsePhoneNumber(
+                          '+' + phone
+                        );
+                        if (parse_phone?.isValid() !== true) {
+                          return Promise.reject(
+                            new Error('Số điện thoại không hợp lệ')
+                          );
+                        }
+                        return Promise.resolve();
+                      }
+                      return Promise.resolve();
+                    },
+                  },
+                ]}
+              >
+                <div className='phone-input-engine'>
+                  <PhoneInput
+                    inputProps={{
+                      id: 'phone_number',
+                      name: 'phone',
+                    }}
+                    placeholder='Vui lòng điền vào trường này.'
+                    country={'vn'}
+                    enableSearch={true}
+                    value={phone}
+                    onChange={(phone) =>
+                      setPhone(phone)
+                    }
+                  />
+                </div>
               </Form.Item>
             </div>
             <div className='row'>

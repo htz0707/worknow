@@ -1,4 +1,9 @@
 .create-company {
+  position: relative;
+  width: 100%;
+  padding: 0px 20px;
+  color: #282723;
+
   .ant-form {
     .custom-label-input {
       font-weight: 600;
@@ -41,13 +46,14 @@
       }
     }
 
-    // .ant-form-item {
-    //   margin-bottom: 0;
-    // }
-
     .text-view-more {
       color: #0075FF;
       cursor: pointer;
     }
+  }
+
+  .create-company-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 }

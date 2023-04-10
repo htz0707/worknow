@@ -24,6 +24,10 @@ import ShowMore from '../components/ShowMore';
 import { renderAddress, renderWorkingHour } from '../helpers/helpers';
 import { useTranslation } from 'react-i18next';
 import WarningContactModal from '../components/WarningContactModal';
+import Rating from '../components/Rating';
+import ReviewCard from '../components/ReviewCard';
+import ReviewListModal from '../components/ReviewListModal';
+import { Helmet } from 'react-helmet-async';
 
 export default function LocationDetails() {
   const { t, i18n } = useTranslation();
@@ -82,7 +86,12 @@ export default function LocationDetails() {
   }, []);
   //
   const GET_LOCATION_DETAILS = gql`
-    query GetLocationDetails($id: UUID!) {
+    query GetLocationDetails(
+      $id: UUID!
+      $limit: Int
+      $page: Int
+      $hasComment: Boolean
+    ) {
       location(id: $id) {
         id
         name
@@ -117,6 +126,7 @@ export default function LocationDetails() {
           openHour
         }
         highlight
+        locationRate
       }
       workingSpaces(params: { locationId: $id }) {
         edges {
@@ -139,19 +149,48 @@ export default function LocationDetails() {
           }
         }
       }
+      feedbacks(
+        params: {
+          locationId: $id
+          limit: $limit
+          page: $page
+          hasComment: $hasComment
+        }
+      ) {
+        edges {
+          amenitiesRate
+          avgRate
+          comment
+          servicesRate
+          user {
+            fullname
+            avatar
+          }
+          workingSpaces {
+            locationName
+            name
+          }
+        }
+      }
     }
   `;
-  const [getLocationDetails] = useLazyQuery(GET_LOCATION_DETAILS);
+  const [getLocationDetails] = useLazyQuery(GET_LOCATION_DETAILS, {
+    fetchPolicy: 'no-cache',
+  });
   const [locationInfo, setLocationInfo] = useState({});
   const [workingSpaces, setWorkingSpaces] = useState([]);
   const [typeWorkingSpace, setTypeWorkingSpace] = useState([]);
   const [selectedTypeWorkingSpace, setSelectedTypeWorkingSpace] = useState('');
   const [currentWorkingSpace, setCurrentWorkingSpace] = useState([]);
+  const [feedbackList, setFeedbackList] = useState([]);
   const handleGetLocationDetails = async () => {
     if (id) {
       let res = await getLocationDetails({
         variables: {
           id: id,
+          limit: 10,
+          page: 1,
+          hasComment: true,
         },
       });
       if (res.data) {
@@ -160,6 +199,7 @@ export default function LocationDetails() {
           setImageUrl(res.data.location?.images?.map((item) => item.publicUrl));
         }
         setWorkingSpaces(res.data.workingSpaces.edges);
+        setFeedbackList(res.data.feedbacks.edges);
       }
     }
   };
@@ -338,8 +378,14 @@ export default function LocationDetails() {
         });
     }
   };
+  //
+  const [showFeedbacks, setShowFeedbacks] = useState(false);
   return (
     <div className='location-details'>
+      <Helmet>
+        <title>{locationInfo.name}</title>
+        <meta name='description' content={locationInfo.description} />
+      </Helmet>
       <div className='location-details_header'></div>
       <div className='location-details_body '>
         <div className='general-responsive'>
@@ -366,6 +412,10 @@ export default function LocationDetails() {
             </div>
           </div>
           <div className='location-name'>{locationInfo?.name}</div>
+          <div className='location-rating'>
+            <span>{parseFloat(locationInfo?.locationRate)?.toFixed(1)}</span>{' '}
+            <Rating value={locationInfo?.locationRate} />
+          </div>
           <div className='location-tags'>
             {/* <Tag text='Open on Wknds' />
           <Tag text='Late Hours' /> */}
@@ -402,7 +452,7 @@ export default function LocationDetails() {
             />
           </div>
           <div className='row-2'>
-            {locationInfo?.name} 
+            {locationInfo?.name}
             {/* <span>+1200 {t('booking_amount')}</span> */}
           </div>
           <div className='row-3'>
@@ -417,6 +467,10 @@ export default function LocationDetails() {
               >
                 {t('view_on_map')}
               </span>
+            </div>
+            <div className='location-rating'>
+              <span>{parseFloat(locationInfo?.locationRate)?.toFixed(1)}</span>{' '}
+              <Rating value={locationInfo?.locationRate} />
             </div>
             {/* <div>
               <div>
@@ -709,7 +763,7 @@ export default function LocationDetails() {
                             handleShowWarningContact(item);
                           }
                         }}
-                        key={index}
+                        key={item.id}
                       />
                     );
                   })}
@@ -717,10 +771,22 @@ export default function LocationDetails() {
               </div>
             </div>
           </div>
-          {/* <div className='comment' id='section_4'>
-            <div className='header'>Đánh giá</div>
-            <div className='body scroll-bar-custom'>
-              <div className='comment-card'>
+          {feedbackList.length > 0 && (
+            <div className='comment' id='section_4'>
+              <div className='d-flex justify-content-between align-items-center'>
+                <div className='header'>Đánh giá</div>
+                <div
+                  className='view-all'
+                  onClick={() => setShowFeedbacks(true)}
+                >
+                  Đọc tất cả đánh giá
+                </div>
+              </div>
+              <div className='body scroll-bar-custom'>
+                {feedbackList.map((item, index) => {
+                  return <ReviewCard index={index} data={item} />;
+                })}
+                {/* <div className='comment-card'>
                 <Avatar
                   size={60}
                   src='https://cdn.popsww.com/blog/sites/2/2022/02/Edogawa-Conan-.jpg'
@@ -788,9 +854,10 @@ export default function LocationDetails() {
                 </div>
                 <QuoteIcon className='quote-icon-open' />
                 <QuoteIcon className='quote-icon-close' />
+              </div> */}
               </div>
             </div>
-          </div> */}
+          )}
           <div className='support' id='section_5'>
             <div className='header'>{t('support')}</div>
             <div className='body'>
@@ -834,6 +901,11 @@ export default function LocationDetails() {
         show={showMoreImage}
         handleClose={handleCloseShowMoreImage}
         images={imageUrl}
+      />
+      <ReviewListModal
+        show={showFeedbacks}
+        handleClose={() => setShowFeedbacks(false)}
+        locationId={id}
       />
     </div>
   );

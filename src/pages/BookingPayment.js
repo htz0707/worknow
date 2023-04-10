@@ -266,7 +266,49 @@ export default function BookingPayment() {
   //
   const [showOrderExpire, setShowOrderExpire] = useState(false);
   //
-  const [paymentMethod, setPaymentMethod] = useState('bank_account');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const handleInitPaymentMethod = () => {
+    if (user?.roles?.[0]?.name === 'Employee') {
+      setPaymentMethod('business_wallet');
+    } else {
+      setPaymentMethod('bank_account');
+    }
+  };
+  useEffect(() => {
+    handleInitPaymentMethod();
+  }, []);
+  //
+  const GET_ME = gql`
+    query GetMe {
+      me {
+        company {
+          balance
+          name
+          registrationNumber
+          phoneCountryCode
+          phoneNumber
+        }
+      }
+    }
+  `;
+  const [getMe] = useLazyQuery(GET_ME, {
+    fetchPolicy: 'no-cache',
+    onError(err) {
+      console.log(err);
+    },
+  });
+  const [businessWalletInfo, setBusinessWalletInfo] = useState({});
+  const handleGetBusinessWalletInfo = async () => {
+    if (user?.roles?.[0]?.name === 'Employee') {
+      let res = await getMe();
+      if (res.data) {
+        setBusinessWalletInfo(res.data.me.company);
+      }
+    }
+  };
+  useEffect(() => {
+    handleGetBusinessWalletInfo();
+  }, []);
   // handle pay order with bank
   const PAY_ORDER_WITH_BANK = gql`
     mutation PayOrderWithBank($fileId: UUID, $orderId: UUID!) {
@@ -276,16 +318,48 @@ export default function BookingPayment() {
     }
   `;
   const [payOrderWithBank] = useMutation(PAY_ORDER_WITH_BANK);
+  const PAY_ORDER_WITH_BUSINESS_WALLET = gql`
+    mutation PayOrderWithBusinessWallet($orderId: UUID!) {
+      payOrderWithBusinessWallet(data: { orderId: $orderId }) {
+        id
+      }
+    }
+  `;
+  const [payOrderWithBusinessWallet] = useMutation(
+    PAY_ORDER_WITH_BUSINESS_WALLET
+  );
   const handleFinish = async () => {
     try {
-      let res = await payOrderWithBank({
-        variables: {
-          fileId: fileList[0]?.response?.id,
-          orderId: order_id,
-        },
-      });
-      if (res.data) {
-        navigate(`/create-booking/status/${location_id}/${orderInfo.id}`);
+      if (paymentMethod === 'bank_account') {
+        let res = await payOrderWithBank({
+          variables: {
+            fileId: fileList[0]?.response?.id,
+            orderId: order_id,
+          },
+        });
+        if (res.data) {
+          navigate(
+            `/create-booking/status?location_id=${location_id}&order_id=${orderInfo.id}`,
+            {
+              replace: true,
+            }
+          );
+        }
+      }
+      if (paymentMethod === 'business_wallet') {
+        let res = await payOrderWithBusinessWallet({
+          variables: {
+            orderId: order_id,
+          },
+        });
+        if (res.data) {
+          navigate(
+            `/create-booking/status?location_id=${location_id}&order_id=${orderInfo.id}`,
+            {
+              replace: true,
+            }
+          );
+        }
       }
     } catch (error) {
       console.log(error);
@@ -402,6 +476,63 @@ export default function BookingPayment() {
               <div className='title'>{t('payment_method')}</div>
               <div className='content'>
                 <div className='confirm-text'>{t('payment_email_confirm')}</div>
+                {user?.roles?.[0]?.name === 'Employee' && (
+                  <>
+                    <div className='payment-method-title'>
+                      <input
+                        className='form-check-input'
+                        type='checkbox'
+                        checked={paymentMethod === 'business_wallet'}
+                        onChange={() => setPaymentMethod('business_wallet')}
+                      />
+                      <span>{t('pay_with_business_wallet')}</span>
+                    </div>
+                    {paymentMethod === 'business_wallet' && (
+                      <div className='according-business'>
+                        <Accordion defaultActiveKey='0'>
+                          <Accordion.Item eventKey='0'>
+                            <Accordion.Header>
+                              <div className='according-business_header'>
+                                {t('business_info')}
+                              </div>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                              <div className='according-business_body'>
+                                <div className='business-name'>
+                                  {businessWalletInfo?.name}
+                                </div>
+                                <div className='business-details'>
+                                  <div>
+                                    <span>{t('tax_code')}</span>
+                                    <span>
+                                      {businessWalletInfo?.registrationNumber}
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <span>{t('phone_number')}</span>
+                                    <span>
+                                      {'+' +
+                                        businessWalletInfo?.phoneCountryCode +
+                                        businessWalletInfo?.phoneNumber}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className='business-balance'>
+                                  <span>{t('balance')}</span>
+                                  <span>
+                                    {formatCurrency(
+                                      businessWalletInfo?.balance
+                                    )}
+                                  </span>
+                                </div>
+                              </div>
+                            </Accordion.Body>
+                          </Accordion.Item>
+                        </Accordion>
+                      </div>
+                    )}
+                  </>
+                )}
                 <div className='payment-method-title'>
                   <input
                     className='form-check-input'
@@ -668,10 +799,10 @@ export default function BookingPayment() {
           </div>
         </div>
       </div>
-      <OrderExpireModal
+      {/* <OrderExpireModal
         show={showOrderExpire}
         order_code={orderInfo?.orderId}
-      />
+      /> */}
     </div>
   );
 }

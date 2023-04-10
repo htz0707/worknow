@@ -14,6 +14,7 @@ import {
 } from 'react-router-dom';
 import NoData from '../components/NoData';
 import { useTranslation } from 'react-i18next';
+import ReviewModal from '../components/ReviewModal';
 const { TabPane } = Tabs;
 
 export default function OrderHistory() {
@@ -67,6 +68,7 @@ export default function OrderHistory() {
           orderId
           id
           status
+          isRated
           orderDetails {
             bookingType
             day
@@ -134,6 +136,18 @@ export default function OrderHistory() {
       });
     }
   };
+  //
+  const [showAddReview, setShowAddReview] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState({});
+  const handleAddReview = (data) => {
+    setSelectedOrder(data);
+    setShowAddReview(true);
+  };
+  const handleCloseAddReview = () => {
+    setSelectedOrder({});
+    setShowAddReview(false);
+    handleGetOrders();
+  };
   return (
     <UserLayout currentTab='history'>
       <div className='order-history p-4'>
@@ -150,7 +164,7 @@ export default function OrderHistory() {
             orderList.map((item, index) => {
               return (
                 <div key={index}>
-                  <OrderCard data={item} />
+                  <OrderCard data={item} handleReview={handleAddReview} />
                   <hr />
                 </div>
               );
@@ -160,6 +174,11 @@ export default function OrderHistory() {
           )}
         </div>
       </div>
+      <ReviewModal
+        show={showAddReview}
+        handleClose={handleCloseAddReview}
+        data={selectedOrder}
+      />
     </UserLayout>
   );
 }

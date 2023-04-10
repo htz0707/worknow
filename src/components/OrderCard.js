@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import '../assets/styles/OrderCard.scss';
-import Room from '../assets/images/room.png';
 import { ReactComponent as Calendar } from '../assets/icons/calendar_2.svg';
 import { ReactComponent as Clock } from '../assets/icons/clock_2.svg';
+import { ReactComponent as EditIcon } from '../assets/icons/edit.svg';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 export default function OrderCard(props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { data } = props;
+  const { data, handleReview } = props;
   const renderStatus = (status) => {
     if (status === 'confirming') {
       return (
@@ -46,7 +46,7 @@ export default function OrderCard(props) {
       );
     } else {
       navigate(
-        `/create-booking/status/${data?.orderDetails[0]?.workingSpaces?.locationId}/${data?.id}`
+        `/create-booking/status?location_id=${data?.orderDetails[0]?.workingSpaces?.locationId}&order_id=${data?.id}`
       );
     }
   };
@@ -94,6 +94,17 @@ export default function OrderCard(props) {
           </>
         )}
         {renderStatus(data?.status)}
+        {(data?.status === 'completed' || data?.status === 'checked_in') && (
+          <div className='review-section'>
+            <button
+              className='btn-review'
+              onClick={() => handleReview(data)}
+              disabled={data?.isRated}
+            >
+              <EditIcon className='icon' /> {t('evaluation')}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

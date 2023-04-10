@@ -1,0 +1,70 @@
+.create-space-provider {
+  position: relative;
+  width: 100%;
+  padding: 0px 20px;
+  color: #282723;
+
+  .ant-form {
+    .custom-label-input {
+      font-weight: 600;
+    }
+
+    .custom-label-input>span {
+      color: red;
+    }
+
+    .submit-button {
+      font-weight: 600;
+      width: 150px;
+      background: #FFB31F;
+      border-radius: 8px;
+    }
+
+    .delete-button {
+      color: red;
+    }
+
+    .text-black {
+      color: #282723;
+      font-weight: 600;
+    }
+
+    .ant-input[disabled],
+    .ant-select-disabled .ant-select-selection-item {
+      color: #282723;
+    }
+
+    .phone-input-engine {
+      input {
+        background: #ffffff;
+      }
+
+      .react-tel-input {
+        .form-control {
+          width: 100%;
+        }
+      }
+    }
+
+    .text-view-more {
+      color: #0075FF;
+      cursor: pointer;
+    }
+
+    .password-field {
+      display: flex;
+
+      .eye-icon {
+        margin-bottom: -30px;
+        margin-top: 10px;
+        margin-left: -30px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .create-space-provider {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}

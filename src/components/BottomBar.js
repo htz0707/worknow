@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { ReactComponent as FacebookIcon } from '../assets/icons/facebook_2.svg';
 import { ReactComponent as TwitterIcon } from '../assets/icons/twitter.svg';
@@ -17,32 +17,29 @@ export default function BottomBar() {
         <div className='row w-100'>
           <div className='bar-item col-md-4 col-12'>
             <div className='title'>WorkNow</div>
-            <div className='link-text' onClick={() => navigate('/about')}>
+            <Link className='link-text' to={'/about'}>
               {t('about_us')}
-            </div>
+            </Link>
             <div className='link-text'>{t('media')}</div>
             <div className='link-text'>{t('recruitment')}</div>
           </div>
           <div className='bar-item col-md-4 col-12'>
             <div className='title'>{t('contact')}</div>
-            <div className='link-text' onClick={() => navigate('/contact')}>
+            <Link className='link-text' to={'/contact'}>
               {t('help_center')}
-            </div>
-            <div
-              className='link-text'
-              onClick={() => navigate('/space-partner')}
-            >
+            </Link>
+            <Link className='link-text' to={'/space-partner'}>
               {t('become_partner')}
-            </div>
+            </Link>
           </div>
           <div className='bar-item col-md-4 col-12'>
             <div className='title'>{t('policy_and_terms')}</div>
-            <div className='link-text' onClick={() => navigate('/rules')}>
+            <Link className='link-text' to={'/rules'}>
               {t('term_and_condition')}
-            </div>
-            <div className='link-text' onClick={() => navigate('/privacy')}>
+            </Link>
+            <Link className='link-text' to={'/privacy'}>
               {t('privacy_policy')}
-            </div>
+            </Link>
           </div>
           <div className='d-flex justify-content-center my-3'>
             <a href='https://www.facebook.com/worknow.center'>
