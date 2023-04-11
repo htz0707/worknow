@@ -47,8 +47,13 @@ function Locations() {
     }
     if (obj.workingSpaceTypes) {
       filter_location.workingSpaceTypes = obj.workingSpaceTypes.split(',');
+      localStorage.setItem(
+        'selectedWspaceType',
+        JSON.stringify(filter_location.workingSpaceTypes)
+      );
     } else {
       filter_location.workingSpaceTypes = [];
+      localStorage.removeItem('selectedWspaceType');
     }
     if (obj.isVerified) {
       if (obj.isVerified === 'true') {
