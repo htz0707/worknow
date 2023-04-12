@@ -64,10 +64,12 @@ export default function WorkSpaceCard(props) {
         <div className='description'>
           <div>{data.description}</div>
         </div>
-        <div className='capacity'>
+        {returnTypeOfBooking(data?.type) === 'square' && (
+          <div className='capacity'>
           <ThreeUserIcon className='icon' /> {data?.capacity?.name}{' '}
           {t('person')}
         </div>
+        )}
         <div className='capacity'>
           <SquareIcon className='icon' /> {data?.acreage}{'m2'}
         </div>
