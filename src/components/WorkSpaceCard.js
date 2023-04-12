@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as ThreeUserIcon } from '../assets/icons/three_user.svg';
 import { ReactComponent as ClockIcon } from '../assets/icons/clock.svg';
 import { ReactComponent as SquareIcon } from '../assets/icons/m2.svg';
+import Empty from '../assets/images/empty.svg';
 import { useTranslation } from 'react-i18next';
 
 export default function WorkSpaceCard(props) {
@@ -52,6 +53,12 @@ export default function WorkSpaceCard(props) {
               </Carousel.Item>
             );
           })}
+          {
+            data.images.length === 0 &&
+            <Carousel.Item>
+              <img alt='' src={Empty} />
+            </Carousel.Item>
+          }
         </Carousel>
       </div>
       <div className='center'>
@@ -63,6 +70,10 @@ export default function WorkSpaceCard(props) {
         </div>
         <div className='description'>
           <div>{data.description}</div>
+        </div>
+        <div className='capacity'>
+          <ThreeUserIcon className='icon' /> {data?.capacity?.name}{' '}
+          {t('person')}
         </div>
         {returnTypeOfBooking(data?.type) === 'square' && (
           <div className='capacity'>
@@ -94,7 +105,7 @@ export default function WorkSpaceCard(props) {
         )}
         {returnTypeOfBooking(data?.type) === 'square' && (
           <div className='new-price'>
-            {formatCurrency(data?.pricePerSquare)}/{renderHourOrDay(data?.type)}
+            {'$' + data?.pricePerSquare}/{renderHourOrDay(data?.type)}
           </div>
         )}
         {returnTypeOfBooking(data?.type) === 'month' && (

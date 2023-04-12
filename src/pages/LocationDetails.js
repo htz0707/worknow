@@ -28,6 +28,7 @@ import Rating from '../components/Rating';
 import ReviewCard from '../components/ReviewCard';
 import ReviewListModal from '../components/ReviewListModal';
 import { Helmet } from 'react-helmet-async';
+import Empty from '../assets/images/empty.svg';
 
 export default function LocationDetails() {
   const { t, i18n } = useTranslation();
@@ -200,6 +201,9 @@ export default function LocationDetails() {
         setLocationInfo(res.data.location);
         if (res.data.location?.images?.length) {
           setImageUrl(res.data.location?.images?.map((item) => item.publicUrl));
+        }
+        else {
+          setImageUrl([Empty]);
         }
         setWorkingSpaces(res.data.workingSpaces.edges);
         setFeedbackList(res.data.feedbacks.edges);
