@@ -7,6 +7,7 @@ import { ReactComponent as StarIcon } from '../assets/icons/star_percentage.svg'
 import { ReactComponent as LocationIcon } from '../assets/icons/location.svg';
 import { ReactComponent as BuildingIcon } from '../assets/icons/building.svg';
 import { ReactComponent as AuthenIcon } from '../assets/icons/shield.svg';
+import Empty from '../assets/images/empty.svg';
 import { formatCurrency, renderAddress } from '../helpers/helpers';
 import { useTranslation } from 'react-i18next';
 import Rating from './Rating';
@@ -50,6 +51,12 @@ export default function LocationCard(props) {
               </Carousel.Item>
             );
           })}
+          {
+            data.images.length === 0 &&
+            <Carousel.Item>
+              <img alt='' src={Empty} />
+            </Carousel.Item>
+          }
         </Carousel>
       </div>
       <div className='location-card_right'>
