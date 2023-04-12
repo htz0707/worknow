@@ -65,6 +65,8 @@ export const returnTypeOfBooking = (value) => {
   ) {
     return 'hour';
   }
+  if (value === 'raw_space') return 'square';
+  if (value === 'month') return 'month';
 };
 export const createTimeSlot = (start, end) => {
   var startTime = moment(start, 'HH:mm');

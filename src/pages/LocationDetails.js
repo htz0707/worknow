@@ -135,6 +135,9 @@ export default function LocationDetails() {
           description
           priceByDay
           priceByHour
+          pricePerSquare
+          priceByMonth
+          acreage
           images {
             publicUrl
           }
@@ -211,6 +214,9 @@ export default function LocationDetails() {
     'convience_room',
     'event',
     'booth',
+    'raw_space',
+    'studio',
+    'virtual_office'
   ];
   const handleCreateTypeWorkingSpace = (data) => {
     let arr = [];
@@ -328,6 +334,9 @@ export default function LocationDetails() {
     event: t('event_hall'),
     convience_room: t('convience_room'),
     booth: t('phone_booth'),
+    raw_space: 'Sàn thô',
+    studio: 'Studio',
+    virtual_office: 'Văn phòng đại diện'
   };
   const [selectedWorkingSpace, setSelectedWorkingSpace] = useState({});
   const [showModal, setShowModal] = useState(false);

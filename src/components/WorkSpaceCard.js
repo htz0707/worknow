@@ -8,6 +8,7 @@ import { formatCurrency, returnTypeOfBooking } from '../helpers/helpers';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as ThreeUserIcon } from '../assets/icons/three_user.svg';
 import { ReactComponent as ClockIcon } from '../assets/icons/clock.svg';
+import { ReactComponent as SquareIcon } from '../assets/icons/m2.svg';
 import { useTranslation } from 'react-i18next';
 
 export default function WorkSpaceCard(props) {
@@ -34,8 +35,10 @@ export default function WorkSpaceCard(props) {
       value === 'booth'
     ) {
       return 'H';
-    } else {
-      return 'H';
+    } else if (value === 'raw_space') return 'm2';
+    else if (value === 'studio') return 'Tháng';
+    else {
+      return 'Ng/Tháng';
     }
   };
   return (
@@ -65,6 +68,9 @@ export default function WorkSpaceCard(props) {
           <ThreeUserIcon className='icon' /> {data?.capacity?.name}{' '}
           {t('person')}
         </div>
+        <div className='capacity'>
+          <SquareIcon className='icon' /> {data?.acreage}{'m2'}
+        </div>
         <div className='working-time'>
           <ClockIcon className='icon' /> {props.workingTime}
         </div>
@@ -86,6 +92,16 @@ export default function WorkSpaceCard(props) {
         {returnTypeOfBooking(data?.type) === 'day' && (
           <div className='new-price'>
             {formatCurrency(data?.priceByDay)}/{renderHourOrDay(data?.type)}
+          </div>
+        )}
+        {returnTypeOfBooking(data?.type) === 'square' && (
+          <div className='new-price'>
+            {formatCurrency(data?.pricePerSquare)}/{renderHourOrDay(data?.type)}
+          </div>
+        )}
+        {returnTypeOfBooking(data?.type) === 'month' && (
+          <div className='new-price'>
+            {formatCurrency(data?.priceByMonth)}/{renderHourOrDay(data?.type)}
           </div>
         )}
         <button className='btn-primary' onClick={handleClick}>
