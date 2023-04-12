@@ -64,13 +64,11 @@ export default function WorkSpaceCard(props) {
         <div className='description'>
           <div>{data.description}</div>
         </div>
-        <div className='capacity'>
-          <ThreeUserIcon className='icon' /> {data?.capacity?.name}{' '}
-          {t('person')}
-        </div>
-        <div className='capacity'>
-          <SquareIcon className='icon' /> {data?.acreage}{'m2'}
-        </div>
+        {returnTypeOfBooking(data?.type) === 'square' && (
+          <div className='capacity'>
+            <SquareIcon className='icon' /> {data?.acreage}{'m2'}
+          </div>
+        )}
         <div className='working-time'>
           <ClockIcon className='icon' /> {props.workingTime}
         </div>
