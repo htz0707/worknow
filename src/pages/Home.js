@@ -24,6 +24,7 @@ import hl4 from '../assets/images/highlight4.png';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as PartnerShipIcon } from '../assets/icons/partnership.svg';
 import { ReactComponent as IndividualIcon } from '../assets/icons/individual.svg';
+import ReactGA from 'react-ga4';
 
 export default function NewBusiness() {
   const { t } = useTranslation();
@@ -45,7 +46,17 @@ export default function NewBusiness() {
           <div className='customer-kind'>
             <div className='business-customer'>
               <div className='name'>Khách hàng doanh nghiệp</div>
-              <div className='sub-layer' onClick={() => navigate('/business')}>
+              <div
+                className='sub-layer'
+                onClick={() => {
+                  ReactGA.event({
+                    category: 'on_click',
+                    action: 'business_customer_clicked',
+                    label: 'Khách hàng doanh nghiệp',
+                  });
+                  navigate('/business');
+                }}
+              >
                 <div className='icon-badge'>
                   <PartnerShipIcon className='icon' />
                 </div>
@@ -60,7 +71,17 @@ export default function NewBusiness() {
             </div>
             <div className='individual-customer'>
               <div className='name'>Khách hàng cá nhân</div>
-              <div className='sub-layer' onClick={() => navigate('/locations')}>
+              <div
+                className='sub-layer'
+                onClick={() => {
+                  ReactGA.event({
+                    category: 'on_click',
+                    action: 'individual_customer_clicked',
+                    label: 'Khách hàng cá nhân',
+                  });
+                  navigate('/locations');
+                }}
+              >
                 <div className='icon-badge'>
                   <IndividualIcon className='icon' />
                 </div>
@@ -136,7 +157,12 @@ export default function NewBusiness() {
                       {t('private_booth_description')}
                     </p>
                   </div>
-                  <button className='btn-discover' onClick={handleClick}>
+                  <button
+                    className='btn-discover'
+                    onClick={() =>
+                      navigate('/locations?workingSpaceTypes=booth')
+                    }
+                  >
                     {t('discover')} <BiPaperPlane className='ms-2' />
                   </button>
                 </div>
@@ -150,7 +176,12 @@ export default function NewBusiness() {
                       {t('flexible_seat_description')}
                     </p>
                   </div>
-                  <button className='btn-discover' onClick={handleClick}>
+                  <button
+                    className='btn-discover'
+                    onClick={() =>
+                      navigate('/locations?workingSpaceTypes=flexible_desk')
+                    }
+                  >
                     {t('discover')} <BiPaperPlane className='ms-2' />
                   </button>
                 </div>
@@ -166,7 +197,12 @@ export default function NewBusiness() {
                       {t('meeting_room_description')}
                     </p>
                   </div>
-                  <button className='btn-discover' onClick={handleClick}>
+                  <button
+                    className='btn-discover'
+                    onClick={() =>
+                      navigate('/locations?workingSpaceTypes=meeting_room')
+                    }
+                  >
                     {t('discover')} <BiPaperPlane className='ms-2' />
                   </button>
                 </div>
@@ -178,7 +214,12 @@ export default function NewBusiness() {
                     <div className='title'>{t('event_hall')}</div>
                     <p className='description'>{t('event_hall_description')}</p>
                   </div>
-                  <button className='btn-discover' onClick={handleClick}>
+                  <button
+                    className='btn-discover'
+                    onClick={() =>
+                      navigate('/locations?workingSpaceTypes=event')
+                    }
+                  >
                     {t('discover')} <BiPaperPlane className='ms-2' />
                   </button>
                 </div>
