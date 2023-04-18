@@ -2,7 +2,7 @@ import 'antd/dist/antd.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.scss';
 import { AuthProvider } from './context/auth';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import DashboardLayout from './layouts/DashboardLayout';
 import AdminLayout from './layouts/AdminLayout';
@@ -46,6 +46,8 @@ import CreateSpaceProvider from './pages/CreateSpaceProvider';
 import Vouchers from './pages/Vouchers';
 import VoucherDetails from './pages/VoucherDetails';
 import Topups from './pages/Topups';
+import ManageHybridOffice from './pages/ManageHybridOffice';
+import QuoteFlexOffice from './pages/QuoteFlexOffice';
 
 ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
@@ -194,6 +196,11 @@ function App() {
           />
           <Route path='/create-booking/status' element={<BookingStatus />} />
           <Route path='/verify-account' element={<VerifyAccount />} />
+          <Route
+            path='/manage-hybrid-office'
+            element={<ManageHybridOffice />}
+          />
+          <Route path='/quote-flex-office' element={<QuoteFlexOffice />} />
           <Route
             path='sign-in'
             element={
