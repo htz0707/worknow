@@ -54,19 +54,57 @@
           }
         }
       }
-      .btn-submit {
-        margin-top: 16px;
-        width: 100%;
-        background: #ffb31f;
-        border-radius: 10px;
-        border: none;
-        color: #282723;
-        font-weight: 600;
-        height: 40px;
-        border-color: unset;
-        font-style: normal;
-        font-size: 16px;
-        line-height: 28px;
+    }
+    .btn-submit {
+      margin-top: 16px;
+      width: 100%;
+      background: #ffb31f;
+      border-radius: 10px;
+      border: none;
+      color: #282723;
+      font-weight: 600;
+      height: 40px;
+      border-color: unset;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 28px;
+    }
+    .status-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+      max-width: 400px;
+      > .icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 4px;
+      }
+      > .status-title {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 33px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      > .status-description {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 27px;
+        color: #98968d;
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      @media (max-width: 768px) {
+        > .status-title {
+          font-size: 16px;
+          line-height: 22px;
+        }
+        > .status-description {
+          font-size: 16px;
+          line-height: 22px;
+        }
       }
     }
   }
