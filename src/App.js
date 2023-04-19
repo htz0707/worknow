@@ -198,9 +198,20 @@ function App() {
           <Route path='/verify-account' element={<VerifyAccount />} />
           <Route
             path='/manage-hybrid-office'
-            element={<ManageHybridOffice />}
+            element={<ManageHybridOffice status={false} />}
           />
-          <Route path='/quote-flex-office' element={<QuoteFlexOffice />} />
+          <Route
+            path='/manage-hybrid-office/status'
+            element={<ManageHybridOffice status={true} />}
+          />
+          <Route
+            path='/quote-flex-office'
+            element={<QuoteFlexOffice status={false} />}
+          />
+          <Route
+            path='/quote-flex-office/status'
+            element={<QuoteFlexOffice status={true} />}
+          />
           <Route
             path='sign-in'
             element={

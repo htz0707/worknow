@@ -10,13 +10,13 @@ import hl1 from '../assets/images/highlight1.png';
 import hl2 from '../assets/images/highlight2.png';
 import hl3 from '../assets/images/highlight3.png';
 import hl4 from '../assets/images/highlight4.png';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation, withTranslation } from 'react-i18next';
 import { ReactComponent as BannerIcon1 } from '../assets/icons/bannerIcon1.svg';
 import { ReactComponent as BannerIcon2 } from '../assets/icons/bannerIcon2.svg';
 import { ReactComponent as BannerIcon3 } from '../assets/icons/bannerIcon3.svg';
 import ReactGA from 'react-ga4';
 
-export default function NewBusiness() {
+function NewBusiness() {
   const { t } = useTranslation();
   let navigate = useNavigate();
   return (
@@ -24,12 +24,15 @@ export default function NewBusiness() {
       <div className='section-1'>
         <div className='section-container page-container'>
           <div className='title'>
-            giải pháp toàn diện
-            <br /> <b>cho văn phòng làm việc</b>
+            <Trans i18nKey='homepage_title'>
+              GIẢI PHÁP TOÀN DIỆN
+              <br />
+              <b>CHO VĂN PHÒNG LÀM VIỆC</b>
+            </Trans>
           </div>
           <div className='options-section'>
             <div className='option option-1'>
-              <div className='name'>Đặt chỗ theo nhu cầu</div>
+              <div className='name'>{t('booking_on_demand')}</div>
               <div
                 className='sub-layer'
                 onClick={() => {
@@ -44,15 +47,14 @@ export default function NewBusiness() {
                 <div className='icon-badge'>
                   <BannerIcon1 className='icon' />
                 </div>
-                <div className='title'>Đặt chỗ theo nhu cầu</div>
+                <div className='title'>{t('booking_on_demand')}</div>
                 <div className='description'>
-                  Đặt chỗ làm việc tức thì tại hơn 50 văn phòng ở những thành
-                  phố lớn: Hồ Chí Minh, Singapore
+                  {t('booking_on_demand_description')}
                 </div>
               </div>
             </div>
             <div className='option option-2'>
-              <div className='name'>Báo giá flex Office</div>
+              <div className='name'>{t('quote_flex_office')}</div>
               <div
                 className='sub-layer'
                 onClick={() => {
@@ -67,15 +69,14 @@ export default function NewBusiness() {
                 <div className='icon-badge'>
                   <BannerIcon2 className='icon' />
                 </div>
-                <div className='title'>Báo giá flex Office</div>
+                <div className='title'>{t('quote_flex_office')}</div>
                 <div className='description'>
-                  Dễ dàng thu hẹp và mở rộng văn phòng của bạn từ những đơn vị
-                  cung cấp văn phòng của WorkNow
+                  {t('quote_flex_office_description')}
                 </div>
               </div>
             </div>
             <div className='option option-3'>
-              <div className='name'>Quản lý văn phòng Hybrid</div>
+              <div className='name'>{t('manage_hybrid_office')}</div>
               <div
                 className='sub-layer'
                 onClick={() => {
@@ -90,11 +91,9 @@ export default function NewBusiness() {
                 <div className='icon-badge'>
                   <BannerIcon3 className='icon' />
                 </div>
-                <div className='title'>Quản lý văn phòng Hybrid</div>
+                <div className='title'>{t('manage_hybrid_office')}</div>
                 <div className='description'>
-                  Hỗ trợ doanh nghiệp quản lí đội ngũ: làm việc từ xa một cách
-                  hiệu quả thông qua hệ thống quản lí remote team và giải pháp
-                  văn phòng từ các nhà cung cấp
+                  {t('manage_hybrid_office_description')}
                 </div>
               </div>
             </div>
@@ -234,3 +233,4 @@ export default function NewBusiness() {
     </div>
   );
 }
+export default withTranslation()(NewBusiness);
