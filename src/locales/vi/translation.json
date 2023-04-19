@@ -319,7 +319,7 @@
   "tax_code": "Mã số thuế",
   "balance": "Số dư",
   "booking_completed": "Đơn hoàn tất",
-  "homepage_title": "Giải pháp toàn diện<br /> <strong>cho văn phòng làm việc</strong>",
+  "homepage_title": "Giải pháp toàn diện<br /> cho văn phòng làm việc",
   "booking_on_demand": "Đặt chỗ theo nhu cầu",
   "booking_on_demand_description": "Đặt chỗ làm việc tức thì tại hơn 50 văn phòng ở những thành phố lớn: Hồ Chí Minh, Singapore",
   "quote_flex_office": "Báo giá flex office",
@@ -342,5 +342,6 @@
   "select_city": "Chọn thành phố",
   "select_district": "Chọn quận",
   "receive_to_quote": "Nhận báo giá",
-  "view_more_location": "Xem thêm địa điểm"
+  "view_more_location": "Xem thêm địa điểm",
+  "lookup_order": "Tra cứu đơn đặt"
 }
