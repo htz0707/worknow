@@ -23,6 +23,8 @@ import { ReactComponent as SecurityIcon } from '../assets/icons/security.svg';
 import { ReactComponent as WaterIcon } from '../assets/icons/water.svg';
 import { ReactComponent as WifiIcon } from '../assets/icons/wifi.svg';
 import { ReactComponent as ThreeUserIcon } from '../assets/icons/three_user.svg';
+import { ReactComponent as SquareIcon } from '../assets/icons/m2.svg';
+import Empty from '../assets/images/empty.svg';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -88,6 +90,9 @@ export default function WorkingSpaceDetails() {
         description
         priceByDay
         priceByHour
+        pricePerSquare
+        priceByMonth
+        acreage
         type
         amenities {
           name
@@ -240,8 +245,10 @@ export default function WorkingSpaceDetails() {
       value === 'booth'
     ) {
       return 'H';
-    } else {
-      return 'H';
+    } else if (value === 'raw_space') return 'm2';
+    else if (value === 'studio') return 'Tháng';
+    else {
+      return 'Ng/Tháng';
     }
   };
   const returnWorkingHour = () => {
@@ -314,6 +321,11 @@ export default function WorkingSpaceDetails() {
                 </SwiperSlide>
               );
             })}
+            {workingSpaceInfo?.images?.length === 0 &
+              <SwiperSlide>
+                <img src={Empty} alt='' />
+              </SwiperSlide>
+            }
           </Swiper>
         </div>
         <div className='working-space-info'>
@@ -330,6 +342,11 @@ export default function WorkingSpaceDetails() {
                 <ThreeUserIcon className='icon' />
                 {workingSpaceInfo?.capacity?.name} {t('person')}
               </div>
+              {returnTypeOfBooking(workingSpaceInfo?.type) === 'square' && (
+                <div className='capacity'>
+                  <SquareIcon className='icon' /> {workingSpaceInfo?.acreage}{'m2'}
+                </div>
+              )}
               <div className='working-hour'>
                 <ClockIcon className='icon' /> {returnWorkingHour()}
               </div>
@@ -345,6 +362,16 @@ export default function WorkingSpaceDetails() {
                 <div className='price'>
                   {formatCurrency(workingSpaceInfo?.priceByDay)}/
                   {renderHourOrDay(workingSpaceInfo?.type)}
+                </div>
+              )}
+              {returnTypeOfBooking(workingSpaceInfo?.type) === 'square' && (
+                <div className='price'>
+                  {'$' + (workingSpaceInfo?.pricePerSquare)}/{renderHourOrDay(workingSpaceInfo?.type)}
+                </div>
+              )}
+              {returnTypeOfBooking(workingSpaceInfo?.type) === 'month' && (
+                <div className='price'>
+                  {formatCurrency(workingSpaceInfo?.priceByMonth)}/{renderHourOrDay(workingSpaceInfo?.type)}
                 </div>
               )}
               <button

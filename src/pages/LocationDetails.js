@@ -28,6 +28,7 @@ import Rating from '../components/Rating';
 import ReviewCard from '../components/ReviewCard';
 import ReviewListModal from '../components/ReviewListModal';
 import { Helmet } from 'react-helmet-async';
+import Empty from '../assets/images/empty.svg';
 
 export default function LocationDetails() {
   const { t, i18n } = useTranslation();
@@ -135,6 +136,9 @@ export default function LocationDetails() {
           description
           priceByDay
           priceByHour
+          pricePerSquare
+          priceByMonth
+          acreage
           images {
             publicUrl
           }
@@ -198,6 +202,9 @@ export default function LocationDetails() {
         if (res.data.location?.images?.length) {
           setImageUrl(res.data.location?.images?.map((item) => item.publicUrl));
         }
+        else {
+          setImageUrl([Empty]);
+        }
         setWorkingSpaces(res.data.workingSpaces.edges);
         setFeedbackList(res.data.feedbacks.edges);
       }
@@ -211,6 +218,9 @@ export default function LocationDetails() {
     'convience_room',
     'event',
     'booth',
+    'raw_space',
+    'studio',
+    'virtual_office'
   ];
   const handleCreateTypeWorkingSpace = (data) => {
     let arr = [];
@@ -228,22 +238,31 @@ export default function LocationDetails() {
       });
       setTypeWorkingSpace(real_arr);
       console.log(real_arr);
-      let save_wspace_type = localStorage.getItem('selectedWspaceType');
+      let save_wspace_type = JSON.parse(
+        localStorage.getItem('selectedWspaceType')
+      );
+      let check = false;
       if (save_wspace_type) {
-        let find = real_arr.find((item) => item === save_wspace_type);
-        if (find) {
-          handleSelectTypeWorkingSpace(find);
-          return;
-        }
+        save_wspace_type.every((wspace_type) => {
+          let find = real_arr.find((item) => item === wspace_type);
+          if (find) {
+            check = true;
+            handleSelectTypeWorkingSpace(find);
+            return false;
+          }
+          return true;
+        });
       }
-      handleSelectTypeWorkingSpace(real_arr[0]);
+      if (!check) {
+        handleSelectTypeWorkingSpace(real_arr[0]);
+      }
     } else {
       setTypeWorkingSpace([]);
       setCurrentWorkingSpace([]);
     }
   };
   const handleSelectTypeWorkingSpace = (value) => {
-    localStorage.setItem('selectedWspaceType', value);
+    localStorage.setItem('selectedWspaceType', JSON.stringify([value]));
     setSelectedTypeWorkingSpace(value);
     let arr = workingSpaces.filter((item) => item.type === value);
     setCurrentWorkingSpace(arr);
@@ -328,6 +347,9 @@ export default function LocationDetails() {
     event: t('event_hall'),
     convience_room: t('convience_room'),
     booth: t('phone_booth'),
+    raw_space: 'Sàn thô',
+    studio: 'Studio',
+    virtual_office: 'Văn phòng đại diện'
   };
   const [selectedWorkingSpace, setSelectedWorkingSpace] = useState({});
   const [showModal, setShowModal] = useState(false);

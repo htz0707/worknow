@@ -1,76 +1,99 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import '../assets/styles/Home.scss';
-
-import { Button } from 'react-bootstrap';
 import { BiPaperPlane } from 'react-icons/bi';
-import { BsPlayCircle } from 'react-icons/bs';
 import { ReactComponent as Reason1 } from '../assets/images/reason1.svg';
 import { ReactComponent as Reason2 } from '../assets/images/reason2.svg';
 import { ReactComponent as Reason3 } from '../assets/images/reason3.svg';
 import { ReactComponent as Reason4 } from '../assets/images/reason4.svg';
-
-import TwoPeople from '../assets/images/two_people.png';
-import P1 from '../assets/icons/partner1.svg';
-import P2 from '../assets/icons/partner2.svg';
-import P3 from '../assets/icons/partner3.svg';
-import P4 from '../assets/icons/partner4.svg';
-import P5 from '../assets/icons/partner5.svg';
 import hl1 from '../assets/images/highlight1.png';
 import hl2 from '../assets/images/highlight2.png';
 import hl3 from '../assets/images/highlight3.png';
 import hl4 from '../assets/images/highlight4.png';
-import { useTranslation } from 'react-i18next';
-import { ReactComponent as PartnerShipIcon } from '../assets/icons/partnership.svg';
-import { ReactComponent as IndividualIcon } from '../assets/icons/individual.svg';
+import { Trans, useTranslation, withTranslation } from 'react-i18next';
+import { ReactComponent as BannerIcon1 } from '../assets/icons/bannerIcon1.svg';
+import { ReactComponent as BannerIcon2 } from '../assets/icons/bannerIcon2.svg';
+import { ReactComponent as BannerIcon3 } from '../assets/icons/bannerIcon3.svg';
+import ReactGA from 'react-ga4';
 
-export default function NewBusiness() {
+function NewBusiness() {
   const { t } = useTranslation();
   let navigate = useNavigate();
-  const handleClick = () => {
-    navigate(`/locations`);
-  };
   return (
     <div className='home'>
       <div className='section-1'>
         <div className='section-container page-container'>
-          <h2 className='title'>
-            TỐI ƯU HÓA MÔ HÌNH LÀM VIỆC KẾT HỢP (HYBRID)
-          </h2>
-          <p className='description'>
-            Tiết kiệm chi phí một cách hiệu quả, gia tăng hiệu suất, đổi mới tư
-            duy và kiến tạo cho những thành tựu ở tương lai
-          </p>
-          <div className='customer-kind'>
-            <div className='business-customer'>
-              <div className='name'>Khách hàng doanh nghiệp</div>
-              <div className='sub-layer' onClick={() => navigate('/business')}>
+          <div className='title'>
+            <Trans i18nKey='homepage_title'>
+              GIẢI PHÁP TOÀN DIỆN
+              <br />
+              <b>CHO VĂN PHÒNG LÀM VIỆC</b>
+            </Trans>
+          </div>
+          <div className='options-section'>
+            <div className='option option-1'>
+              <div className='name'>{t('booking_on_demand')}</div>
+              <div
+                className='sub-layer'
+                onClick={() => {
+                  ReactGA.event({
+                    category: 'on_click',
+                    action: 'booking_on_demand_clicked',
+                    label: 'Đặt chỗ theo nhu cầu',
+                  });
+                  navigate('/locations');
+                }}
+              >
                 <div className='icon-badge'>
-                  <PartnerShipIcon className='icon' />
+                  <BannerIcon1 className='icon' />
                 </div>
-                <div className='title'>Khách hàng doanh nghiệp</div>
+                <div className='title'>{t('booking_on_demand')}</div>
                 <div className='description'>
-                  Bạn có biết, sự tăng trưởng của một số công ty công nghệ hiện
-                  nay chỉ dựa vào việc thay đổi một nơi làm việc phù hợp. Văn
-                  phòng hiện đại, tiện ích đi kèm, độ xác thực cao và rộng khắp
-                  TP.HCM là những gì mà bạn có thể tìm thấy tại Worknow.
+                  {t('booking_on_demand_description')}
                 </div>
               </div>
             </div>
-            <div className='individual-customer'>
-              <div className='name'>Khách hàng cá nhân</div>
-              <div className='sub-layer' onClick={() => navigate('/locations')}>
+            <div className='option option-2'>
+              <div className='name'>{t('quote_flex_office')}</div>
+              <div
+                className='sub-layer'
+                onClick={() => {
+                  ReactGA.event({
+                    category: 'on_click',
+                    action: 'quote_flex_office_clicked',
+                    label: 'Báo giá flex office',
+                  });
+                  navigate('/quote-flex-office');
+                }}
+              >
                 <div className='icon-badge'>
-                  <IndividualIcon className='icon' />
+                  <BannerIcon2 className='icon' />
                 </div>
-                <div className='title'>Khách hàng cá nhân</div>
+                <div className='title'>{t('quote_flex_office')}</div>
                 <div className='description'>
-                  Là một nhà sáng tạo nội dung, một Freelancer, một marketer hay
-                  đơn giản là bạn cần những thay đổi về không gian về nơi làm
-                  việc mang lại hứng khởi cho công việc của mình thì Worknow tự
-                  tin có thể mang đến cho bạn những trải nghiệm tuyệt vời với
-                  những không gian làm việc mới mẻ, hiện đại và riêng tư.
+                  {t('quote_flex_office_description')}
+                </div>
+              </div>
+            </div>
+            <div className='option option-3'>
+              <div className='name'>{t('manage_hybrid_office')}</div>
+              <div
+                className='sub-layer'
+                onClick={() => {
+                  ReactGA.event({
+                    category: 'on_click',
+                    action: 'manage_hybrid_office_clicked',
+                    label: 'Quản lý văn phòng hybrid',
+                  });
+                  navigate('/manage-hybrid-office');
+                }}
+              >
+                <div className='icon-badge'>
+                  <BannerIcon3 className='icon' />
+                </div>
+                <div className='title'>{t('manage_hybrid_office')}</div>
+                <div className='description'>
+                  {t('manage_hybrid_office_description')}
                 </div>
               </div>
             </div>
@@ -103,7 +126,7 @@ export default function NewBusiness() {
             </div>
             <div className='col-lg-3'>
               <div className='d-flex justify-content-center align-items center'>
-                <Reason1 height={170} />
+                <Reason3 height={170} />
               </div>
               <h5 className='d-flex justify-content-center align-items center mt-3'>
                 {t('pros_3')}
@@ -112,7 +135,7 @@ export default function NewBusiness() {
             </div>
             <div className='col-lg-3'>
               <div className='d-flex justify-content-center align-items center'>
-                <Reason2 height={170} />
+                <Reason4 height={170} />
               </div>
               <h5 className='d-flex justify-content-center align-items center mt-3'>
                 {t('pros_4')}
@@ -136,7 +159,12 @@ export default function NewBusiness() {
                       {t('private_booth_description')}
                     </p>
                   </div>
-                  <button className='btn-discover' onClick={handleClick}>
+                  <button
+                    className='btn-discover'
+                    onClick={() =>
+                      navigate('/locations?workingSpaceTypes=booth')
+                    }
+                  >
                     {t('discover')} <BiPaperPlane className='ms-2' />
                   </button>
                 </div>
@@ -150,7 +178,12 @@ export default function NewBusiness() {
                       {t('flexible_seat_description')}
                     </p>
                   </div>
-                  <button className='btn-discover' onClick={handleClick}>
+                  <button
+                    className='btn-discover'
+                    onClick={() =>
+                      navigate('/locations?workingSpaceTypes=flexible_desk')
+                    }
+                  >
                     {t('discover')} <BiPaperPlane className='ms-2' />
                   </button>
                 </div>
@@ -166,7 +199,12 @@ export default function NewBusiness() {
                       {t('meeting_room_description')}
                     </p>
                   </div>
-                  <button className='btn-discover' onClick={handleClick}>
+                  <button
+                    className='btn-discover'
+                    onClick={() =>
+                      navigate('/locations?workingSpaceTypes=meeting_room')
+                    }
+                  >
                     {t('discover')} <BiPaperPlane className='ms-2' />
                   </button>
                 </div>
@@ -178,7 +216,12 @@ export default function NewBusiness() {
                     <div className='title'>{t('event_hall')}</div>
                     <p className='description'>{t('event_hall_description')}</p>
                   </div>
-                  <button className='btn-discover' onClick={handleClick}>
+                  <button
+                    className='btn-discover'
+                    onClick={() =>
+                      navigate('/locations?workingSpaceTypes=event')
+                    }
+                  >
                     {t('discover')} <BiPaperPlane className='ms-2' />
                   </button>
                 </div>
@@ -190,3 +233,4 @@ export default function NewBusiness() {
     </div>
   );
 }
+export default withTranslation()(NewBusiness);

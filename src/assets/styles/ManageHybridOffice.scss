@@ -1,0 +1,269 @@
+.manage-hybrid-office {
+  width: 100%;
+  height: 100vh;
+  .manage-hybrid-office-container {
+    .phone-input-engine {
+      input {
+        background: #ffffff;
+        border: 1px solid #d9d9d9;
+        border-radius: 8px;
+
+        box-shadow: none;
+      }
+
+      .react-tel-input {
+        .form-control {
+          width: 100%;
+          padding-top: 12px !important;
+          padding-bottom: 12px !important;
+          height: 40px;
+        }
+
+        .flag-dropdown {
+          border-bottom-left-radius: 8.007px;
+          border-top-left-radius: 8.007px;
+
+          &.open {
+            border-bottom-left-radius: 8.007px;
+            border-top-left-radius: 8.007px;
+
+            .selected-flag {
+              border-bottom-left-radius: 8.007px;
+              border-top-left-radius: 8.007px;
+            }
+          }
+
+          .selected-flag {
+            &:hover {
+              border-bottom-left-radius: 8.007px;
+              border-top-left-radius: 8.007px;
+            }
+          }
+        }
+      }
+    }
+    .btn-submit {
+      width: 100%;
+      background: #ffb31f;
+      border-radius: 10px;
+      border: none;
+      color: #282723;
+      font-weight: 600;
+      height: 40px;
+      border-color: unset;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 28px;
+    }
+
+    &.webview {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      .form-section {
+        height: 100%;
+        flex: 1;
+        min-width: 550px;
+        background-color: #f3f3f3;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        overflow-y: auto;
+        .form-container {
+          width: 100%;
+          max-width: 450px;
+          .logo {
+            width: 70px;
+            margin-bottom: 20px;
+          }
+          .title {
+            font-weight: 700;
+            font-size: 30px;
+
+            text-transform: uppercase;
+          }
+          .description {
+            color: #98968d;
+            margin-bottom: 20px;
+          }
+          .form-title {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 30px;
+            width: fit-content;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            border-bottom: 5px solid #282723;
+            margin-bottom: 20px;
+          }
+          .form-label {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+            color: rgb(63, 63, 63);
+            margin-bottom: 4px;
+            .required {
+              color: rgb(245, 85, 35);
+              margin-left: 3px;
+            }
+          }
+        }
+        .status-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 80px;
+          > .icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 4px;
+          }
+          > .status-title {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 33px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            text-align: center;
+          }
+          > .status-description {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 27px;
+            color: #98968d;
+            text-align: center;
+            margin-bottom: 32px;
+          }
+        }
+      }
+      .banner-section {
+        flex: 2;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1)
+          url(../images/manage_hybrid_office_background.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 20px 0px 20px 30px;
+        position: relative;
+        .banner {
+          height: 100%;
+          width: 100%;
+          max-width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+    &.mobileview {
+      display: none;
+      min-height: 100%;
+      width: 100%;
+      .banner-section {
+        width: 100%;
+        height: fit-content;
+        background: rgba(0, 0, 0, 0.1)
+          url(../images/manage_hybrid_office_background.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 20px 25px 20px;
+        .logo {
+          width: 70px;
+          margin-bottom: 25px;
+        }
+        .banner {
+          width: 100%;
+          max-width: 400px;
+        }
+      }
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        .title {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 27px;
+          text-align: center;
+          text-transform: uppercase;
+        }
+        .description {
+          text-align: center;
+          margin-bottom: 15px;
+          color: #98968d;
+        }
+        .form-container {
+          width: 100%;
+          background: #f3f3f3;
+          border-radius: 12px;
+          padding: 8px 12px 12px;
+          .form-title {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 20px;
+            width: fit-content;
+            text-transform: uppercase;
+            padding-bottom: 3px;
+            border-bottom: 3px solid #282723;
+            margin-bottom: 20px;
+          }
+          .form-label {
+            font-weight: 600 !important;
+            font-size: 14px;
+            line-height: 17px;
+            color: rgb(63, 63, 63);
+            margin-bottom: 4px;
+            .required {
+              color: rgb(245, 85, 35);
+              margin-left: 3px;
+            }
+          }
+        }
+        .status-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 50px;
+          > .icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 4px;
+          }
+          > .status-title {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 22px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            text-align: center;
+          }
+          > .status-description {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 22px;
+            color: #98968d;
+            text-align: center;
+            margin-bottom: 32px;
+          }
+        }
+      }
+    }
+    @media (max-width: 768px) {
+      &.webview {
+        display: none;
+      }
+      &.mobileview {
+        display: unset;
+      }
+    }
+  }
+}

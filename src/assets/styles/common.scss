@@ -50,6 +50,56 @@
       #ffb31f;
   }
 }
+.form-label {
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+  span {
+    color: #ff4f4f;
+  }
+}
+.form-input {
+  height: 40px;
+  border-radius: 12px;
+  color: #282723;
+  border: 1px solid #d9d9d9 !important;
+  box-shadow: unset !important;
+  width: 100%;
+  outline: none;
+  &:hover {
+    border-color: #d9d9d9 !important;
+  }
+  &:focus {
+    border-width: 1px !important;
+    border-color: #d9d9d9;
+    box-shadow: unset !important;
+  }
+}
+.form-single-select {
+  &.ant-select {
+    width: 100%;
+    &.ant-select-focused {
+      .ant-select-selector {
+        border-color: #d9d9d9 !important;
+        box-shadow: none !important;
+      }
+    }
+    .ant-select-selector {
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid #d9d9d9 !important;
+      display: flex;
+      align-items: center;
+      .ant-select-selection-search-input {
+        height: 100%;
+      }
+    }
+    &:hover {
+      .ant-select-selector {
+        border-color: #d9d9d9;
+      }
+    }
+  }
+}
 /*CUSTOM SCROLL BAR*/
 .scroll-bar-custom::-webkit-scrollbar {
   width: 4px;
