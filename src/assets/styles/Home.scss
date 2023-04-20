@@ -23,12 +23,13 @@
       align-items: center;
       justify-content: center;
       > .title {
-        font-weight: 400;
         font-size: 48px;
         color: #ffffff;
         text-align: center;
         text-transform: uppercase;
         margin-bottom: 20px;
+        font-weight: 700 !important;
+        line-height: 60px;
       }
       > .options-section {
         display: flex;
@@ -51,11 +52,11 @@
           }
           .name {
             width: 100%;
-            text-transform: capitalize;
+            text-transform: uppercase;
             text-align: center;
             margin-top: auto;
             color: #ffffff;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
           }
           transition: 0.5s;
@@ -89,9 +90,9 @@
               }
             }
             > .title {
+              font-size: 16px;
               font-weight: 700;
-              font-size: 20px;
-              text-transform: capitalize;
+              text-transform: uppercase;
               margin-bottom: 15px;
             }
             > .description {

@@ -27,7 +27,7 @@ function NewBusiness() {
             <Trans i18nKey='homepage_title'>
               GIẢI PHÁP TOÀN DIỆN
               <br />
-              <b>CHO VĂN PHÒNG LÀM VIỆC</b>
+              CHO VĂN PHÒNG LÀM VIỆC
             </Trans>
           </div>
           <div className='options-section'>

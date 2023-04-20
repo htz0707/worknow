@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Offcanvas,
+} from 'react-bootstrap';
 import {
   NavLink,
   Link,
@@ -20,10 +26,12 @@ import { ReactComponent as Giaodich } from '../assets/icons/history.svg';
 import { ReactComponent as Lockout } from '../assets/icons/lockout.svg';
 import { ReactComponent as Secure } from '../assets/icons/secure.svg';
 import { ReactComponent as Invite } from '../assets/icons/invite2.svg';
-
+import { ReactComponent as AddUserIcon } from '../assets/icons/addUser.svg';
 import Avatar from '../assets/images/default_avatar.png';
 import { useAuthContext } from '../context/auth';
 import cx from 'classnames';
+import ChangeLanguageEngine from './ChangeLanguageEngine';
+
 export default function Topbar(props) {
   const { user, logout } = useAuthContext();
   const path = useLocation();
@@ -65,7 +73,7 @@ export default function Topbar(props) {
     localStorage.setItem('language', item.value);
   };
   let navigate = useNavigate();
-  const handleClick = () => {
+  const handleClickSignIn = () => {
     localStorage.setItem(
       'preUrl',
       JSON.stringify({
@@ -74,6 +82,9 @@ export default function Topbar(props) {
       })
     );
     navigate(`/sign-in`);
+  };
+  const handleClickSignUp = () => {
+    navigate(`/sign-up`);
   };
   const handleLogout = () => {
     logout();
@@ -147,19 +158,26 @@ export default function Topbar(props) {
       </Menu.Item>
     </Menu>
   );
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(true);
+  };
+  const handleHide = () => {
+    setShow(false);
+  };
   return (
     <Navbar
       variant='light'
-      expand='lg'
+      expand='xl'
       fixed='top'
       collapseOnSelect
       className='topbar'
     >
       <Container
         className='topbar-container'
-        style={{ minHeight: '80px', maxWidth: '100%' }}
+        style={{ minHeight: '66px', maxWidth: '100%' }}
       >
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Toggle onClick={handleShow} />
         <Navbar.Brand>
           <Link to='/'>
             <img src={Logo} width={45} />
@@ -167,24 +185,39 @@ export default function Topbar(props) {
         </Navbar.Brand>
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav>
-            <Nav.Link eventKey='1'>
+            {/* <Nav.Link eventKey='1'>
               <NavLink to='/' className='nav-item-link'>
                 {t('home')}
               </NavLink>
-            </Nav.Link>
-            <Nav.Link eventKey='2'>
+            </Nav.Link> */}
+            <Nav.Link eventKey='1'>
               <NavLink to='locations' className='nav-item-link'>
                 {t('locations')}
               </NavLink>
             </Nav.Link>
+            <Nav.Link eventKey='2'>
+              <NavLink to='manage-hybrid-office' className='nav-item-link'>
+                {t('manage_hybrid_office')}
+              </NavLink>
+            </Nav.Link>
             <Nav.Link eventKey='3'>
+              <NavLink to='quote-flex-office' className='nav-item-link'>
+                {t('quote_flex_office')}
+              </NavLink>
+            </Nav.Link>
+            {/* <Nav.Link eventKey='3'>
               <NavLink to='business' className='nav-item-link'>
                 {t('for_business')}
               </NavLink>
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link eventKey='4'>
               <NavLink to='space-partner' className='nav-item-link'>
                 {t('space_partner')}
+              </NavLink>
+            </Nav.Link>
+            <Nav.Link eventKey='5'>
+              <NavLink to='lookup-order' className='nav-item-link'>
+                {t('lookup_order')}
               </NavLink>
             </Nav.Link>
             {/* <Nav.Link eventKey='5'>
@@ -192,7 +225,7 @@ export default function Topbar(props) {
                 {t('navbar.newsroom')}
               </NavLink>
             </Nav.Link> */}
-            <Nav.Link className='nav-item-link'>
+            {/* <Nav.Link className='nav-item-link'>
               <NavDropdown title={t('language')} id='basic-nav-dropdown'>
                 {languageOptions.map((item, index) => {
                   return (
@@ -207,29 +240,16 @@ export default function Topbar(props) {
                   );
                 })}
               </NavDropdown>
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
         <div className='login-section'>
+          <div className='change-language-section'>
+            <ChangeLanguageEngine />
+          </div>
           {user ? (
             <>
               <div className='isLoginWeb'>
-                {/* <div className='text'>
-                  <div>
-                    <div>
-                      {t('hi')},{' '}
-                      <Dropdown
-                        overlay={menuWeb}
-                        placement='bottomRight'
-                        forceRender
-                        trigger={['click']}
-                      >
-                        <span className='pointer'>{user?.fullname}</span>
-                      </Dropdown>
-                    </div>
-                  </div>
-                  <div onClick={handleLogout}>{t('logout')}</div>
-                </div> */}
                 <div id='container-dropdown'>
                   <Dropdown
                     overlay={menuWeb}
@@ -270,13 +290,59 @@ export default function Topbar(props) {
               </div>
             </>
           ) : (
-            <div className='isNotLogin' onClick={handleClick}>
-              <span className='text'> {t('login')}</span>
-              <UserIcon />
+            <div className='isNotLogin'>
+              <div className='btn-signin' onClick={handleClickSignIn}>
+                <Lockout className='icon' /> {t('login')}
+              </div>
+              <div className='btn-signup' onClick={handleClickSignUp}>
+                <AddUserIcon className='icon' /> {t('signup')}
+              </div>
+              <UserIcon
+                className='btn-signin-mobile'
+                onClick={handleClickSignIn}
+              />
             </div>
           )}
         </div>
       </Container>
+      <Offcanvas
+        show={show}
+        onHide={handleHide}
+        placement='start'
+        options={{
+          backdrop: true,
+        }}
+        className='navbar-collapse-mobile'
+      >
+        <Offcanvas.Body className='navbar-collapse-mobile-body'>
+          <Link to='locations' className='link-item' onClick={handleHide}>
+            {t('locations')}
+          </Link>
+          <Link
+            to='manage-hybrid-office'
+            className='link-item'
+            onClick={handleHide}
+          >
+            {t('manage_hybrid_office')}
+          </Link>
+          <Link
+            to='quote-flex-office'
+            className='link-item'
+            onClick={handleHide}
+          >
+            {t('quote_flex_office')}
+          </Link>
+          <Link to='space-partner' className='link-item' onClick={handleHide}>
+            {t('space_partner')}
+          </Link>
+          <Link to='lookup-order' className='link-item' onClick={handleHide}>
+            {t('lookup_order')}
+          </Link>
+          <div className='change-language-section'>
+            <ChangeLanguageEngine />
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
     </Navbar>
   );
 }
