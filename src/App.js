@@ -186,14 +186,8 @@ function App() {
             <Route path='/faq' element={<GuideCheck />} />
             <Route path='/contact' element={<Contact />} />
           </Route>
-          <Route
-            path='/create-booking/:location_id/:working_space_id'
-            element={<CreateBooking />}
-          />
-          <Route
-            path='/create-booking/payment/:location_id/:order_id'
-            element={<BookingPayment />}
-          />
+          <Route path='/create-booking' element={<CreateBooking />} />
+          <Route path='/create-booking/payment' element={<BookingPayment />} />
           <Route path='/create-booking/status' element={<BookingStatus />} />
           <Route path='/verify-account' element={<VerifyAccount />} />
           <Route

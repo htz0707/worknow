@@ -42,7 +42,7 @@ export default function OrderCard(props) {
   const handleClick = (status) => {
     if (status === 'booking' || status === 'extended') {
       navigate(
-        `/create-booking/payment/${data?.orderDetails[0]?.workingSpaces?.locationId}/${data?.id}`
+        `/create-booking/payment?location_id=${data?.orderDetails[0]?.workingSpaces?.locationId}&order_id=${data?.id}`
       );
     } else {
       navigate(
