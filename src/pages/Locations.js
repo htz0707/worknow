@@ -187,7 +187,9 @@ function Locations() {
   return (
     <div className='locations'>
       <Helmet>
-        <title>Địa điểm</title>
+        <title>{t('locations')}</title>
+        <link rel='canonical' href='https://worknow.center/locations' />
+        <meta property='og:title' content={t('locations')} />
       </Helmet>
       <div className='locations_header'>
         <div className='locations_header_content'>
