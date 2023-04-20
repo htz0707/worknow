@@ -343,5 +343,13 @@
   "select_district": "Chọn quận",
   "receive_to_quote": "Nhận báo giá",
   "view_more_location": "Xem thêm địa điểm",
-  "lookup_order": "Tra cứu đơn đặt"
+  "lookup_order": "Tra cứu đơn đặt",
+  "company_field_1": "Công nghệ",
+  "company_field_2": "Bảo hiểm, BĐS, Marketing đa tầng",
+  "company_field_3": "Phi lợi nhuận",
+  "company_field_4": "Sáng tạo/ Nghệ thuật",
+  "company_field_5": "Giáo dục",
+  "company_field_6": "Freelancer",
+  "ho_chi_minh_city": "Tp. Hồ Chí Minh",
+  "singapore": "Singapore"
 }
