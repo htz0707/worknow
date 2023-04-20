@@ -17,7 +17,14 @@ import { setContext } from '@apollo/client/link/context';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import TagManager from 'react-gtm-module';
 
+//init google tag manager
+const tagManagerArgs = {
+  gtmId: process.env.REACT_APP_GTM_ID,
+};
+TagManager.initialize(tagManagerArgs);
+//init sentry
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DNS,
   integrations: [new BrowserTracing()],
@@ -29,6 +36,7 @@ Sentry.init({
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+//init graphql
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_API_URL,
 });
@@ -53,6 +61,7 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+//init helmet
 const helmetContext = {};
 root.render(
   <ProSidebarProvider>
