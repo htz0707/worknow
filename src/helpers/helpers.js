@@ -168,6 +168,9 @@ export const handleError = (value, defaultMessage) => {
     case 'USER_NOT_FOUND':
       return i18n.t('user_not_found');
       break;
+    case 'USERS_DUPLICATE':
+      return i18n.t('users_duplicate_error');
+      break;
     default:
       return defaultMessage;
       break;
