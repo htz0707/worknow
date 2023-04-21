@@ -15,12 +15,26 @@ import { ReactComponent as BannerIcon1 } from '../assets/icons/bannerIcon1.svg';
 import { ReactComponent as BannerIcon2 } from '../assets/icons/bannerIcon2.svg';
 import { ReactComponent as BannerIcon3 } from '../assets/icons/bannerIcon3.svg';
 import ReactGA from 'react-ga4';
+import { Helmet } from 'react-helmet-async';
 
 function NewBusiness() {
   const { t } = useTranslation();
   let navigate = useNavigate();
   return (
     <div className='home'>
+      <Helmet>
+        <title>WorkNow</title>
+        <meta
+          name='description'
+          content='GIẢI PHÁP TOÀN DIỆN CHO VĂN PHÒNG LÀM VIỆC'
+        />
+        <link rel='canonical' href='https://worknow.center' />
+        <meta property='og:title' content='WorkNow' />
+        <meta
+          property='og:description'
+          content='GIẢI PHÁP TOÀN DIỆN CHO VĂN PHÒNG LÀM VIỆC'
+        />
+      </Helmet>
       <div className='section-1'>
         <div className='section-container page-container'>
           <div className='title'>

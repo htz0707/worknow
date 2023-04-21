@@ -166,9 +166,10 @@ function Locations() {
       setLocations(res.data?.locations?.edges);
       setLocationAmount(res.data?.locations?.pageInfo?.count);
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 300);
+    setLoading(false);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 300);
   };
   const [filterLocations, setFilterLocations] = useState({
     amenitiesLocationIds: [],
