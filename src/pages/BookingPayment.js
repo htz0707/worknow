@@ -11,7 +11,12 @@ import VietQrImg from '../assets/images/vietQR.png';
 import { AiOutlineCheck } from 'react-icons/ai';
 import Bcrumb from '../components/Bcrumb';
 import { useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import {
   formatCurrency,
@@ -32,7 +37,10 @@ const { Step } = Steps;
 export default function BookingPayment() {
   const user = JSON.parse(localStorage.getItem('user'));
   const path = useLocation();
-  const { location_id, order_id } = useParams();
+  // const { location_id, order_id } = useParams();
+  const [searchParams] = useSearchParams();
+  const location_id = searchParams.get('location_id');
+  const order_id = searchParams.get('order_id');
   const navigate = useNavigate();
   //get order details
   const GET_ORDER_DETAILS = gql`

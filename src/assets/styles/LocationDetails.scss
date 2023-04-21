@@ -2,16 +2,6 @@
 .location-details {
   width: 100%;
   position: relative;
-  .location-details_header {
-    z-index: 1000;
-    position: fixed;
-    width: 100%;
-    height: 80px;
-    left: 0px;
-    top: 0px;
-    background: url(../images/background1.jpg);
-    background-position: center;
-  }
   .location-details_body {
     margin-top: 66px;
     .general {

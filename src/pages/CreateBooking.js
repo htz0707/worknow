@@ -5,7 +5,12 @@ import '../assets/styles/CreateBooking.scss';
 import { Steps } from 'antd';
 import { AiOutlineCheck } from 'react-icons/ai';
 import Bcrumb from '../components/Bcrumb';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import {
   formatCurrency,
@@ -25,8 +30,16 @@ export default function CreateBooking() {
   const path = useLocation();
   const { t } = useTranslation();
   let navigate = useNavigate();
-  const { location_id, working_space_id } = useParams();
+  // const { location_id, working_space_id } = useParams();
+  const [searchParams] = useSearchParams();
+  const location_id = searchParams.get('location_id');
+  const working_space_id = searchParams.get('working_space_id');
   const orderInfo = useLocation()?.state?.orderInfo;
+  useEffect(() => {
+    if (!orderInfo) {
+      navigate('/locations');
+    }
+  }, [orderInfo]);
   //get working space details
   const GET_WORKING_SPACE_DETAILS = gql`
     query GetWorkingSpaceDetails(
@@ -178,7 +191,7 @@ export default function CreateBooking() {
   };
   if (data) {
     navigate(
-      `/create-booking/payment/${location_id}/${data?.createOrder?.id}`,
+      `/create-booking/payment?location_id=${location_id}&order_id=${data?.createOrder?.id}`,
       {
         replace: true,
       }
@@ -408,6 +421,7 @@ export default function CreateBooking() {
                         note: e.target.value,
                       })
                     }
+                    spellCheck={false}
                   ></textarea>
                 </div>
               </Form>

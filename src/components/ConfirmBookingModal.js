@@ -260,11 +260,14 @@ export default function ConfirmBookingModal(props) {
           start_date_utc: start_date_utc,
           end_date_utc: end_date_utc,
         };
-        navigate(`/create-booking/${locationId}/${selectedWorkingSpace.id}`, {
-          state: {
-            orderInfo: data,
-          },
-        });
+        navigate(
+          `/create-booking?location_id=${locationId}&working_space_id=${selectedWorkingSpace.id}`,
+          {
+            state: {
+              orderInfo: data,
+            },
+          }
+        );
       } else {
         setError(t('please_select_booking_time'));
       }
@@ -297,11 +300,14 @@ export default function ConfirmBookingModal(props) {
           start_date_utc: start_date_utc,
           end_date_utc: end_date_utc,
         };
-        navigate(`/create-booking/${locationId}/${selectedWorkingSpace.id}`, {
-          state: {
-            orderInfo: data,
-          },
-        });
+        navigate(
+          `/create-booking?location_id=${locationId}&working_space_id=${selectedWorkingSpace.id}`,
+          {
+            state: {
+              orderInfo: data,
+            },
+          }
+        );
       } else {
         setError(t('please_select_booking_time'));
       }
