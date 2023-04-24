@@ -5,7 +5,7 @@ import Tag from './Tag';
 import TimeSlotView from './TimeSlotView';
 import { Carousel } from 'react-bootstrap';
 import { formatCurrency, returnTypeOfBooking } from '../helpers/helpers';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as ThreeUserIcon } from '../assets/icons/three_user.svg';
 import { ReactComponent as ClockIcon } from '../assets/icons/clock.svg';
 import { ReactComponent as SquareIcon } from '../assets/icons/m2.svg';
@@ -53,21 +53,21 @@ export default function WorkSpaceCard(props) {
               </Carousel.Item>
             );
           })}
-          {
-            data.images.length === 0 &&
+          {data.images.length === 0 && (
             <Carousel.Item>
               <img alt='' src={Empty} />
             </Carousel.Item>
-          }
+          )}
         </Carousel>
       </div>
       <div className='center'>
-        <div
+        <Link
           className='name'
-          onClick={() => handleGoToWorkingSpaceDetail(data.locationId, data.id)}
+          // onClick={() => handleGoToWorkingSpaceDetail(data.locationId, data.id)}
+          to={`/locations/${data.locationId}/working-space/${data.id}`}
         >
           {data?.name}
-        </div>
+        </Link>
         <div className='description'>
           <div>{data.description}</div>
         </div>
@@ -77,7 +77,8 @@ export default function WorkSpaceCard(props) {
         </div>
         {returnTypeOfBooking(data?.type) === 'square' && (
           <div className='capacity'>
-            <SquareIcon className='icon' /> {data?.acreage}{'m2'}
+            <SquareIcon className='icon' /> {data?.acreage}
+            {'m2'}
           </div>
         )}
         <div className='working-time'>

@@ -36,7 +36,11 @@ function SpacePartner() {
   return (
     <div className='space-partner'>
       <Helmet>
-        <title>Đối tác</title>
+        <title>{t('space_partner')}</title>
+        <meta name='description' content={t('space_provider_title')} />
+        <link rel='canonical' href='https://worknow.center/space-partner' />
+        <meta property='og:title' content={t('space_partner')} />
+        <meta property='og:description' content={t('space_provider_title')} />
       </Helmet>
       <div className='section-1'>
         <div className='container-fluid page-container'>
