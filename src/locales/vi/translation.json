@@ -351,5 +351,6 @@
   "company_field_5": "Giáo dục",
   "company_field_6": "Freelancer",
   "ho_chi_minh_city": "Tp. Hồ Chí Minh",
-  "singapore": "Singapore"
+  "singapore": "Singapore",
+  "users_duplicate_error": "Thất bại: Tài khoản email này đã tồn tại. Vui lòng khôi phục lại mật khẩu hoặc liên hệ hỗ trợ từ WorkNow."
 }
