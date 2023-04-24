@@ -12,7 +12,7 @@ export default function BottomBar() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
-    <Navbar bg='dark' className='bottom-bar'>
+    <Navbar bg='dark' className='bottom-bar' id='bottom-bar'>
       <Container className='container-bottom-bar'>
         <div className='row w-100'>
           <div className='bar-item col-md-4 col-12'>
