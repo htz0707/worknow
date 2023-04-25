@@ -12,9 +12,16 @@ export default function DashboardLayout() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [path]);
-  onMessageListener().then(payload => {
-    console.log(payload);
-  }).catch(err => console.log('failed: ', err));
+  onMessageListener()
+    .then((payload) => {
+      console.log(payload);
+    })
+    .catch((err) => console.log('failed: ', err));
+
+  const getBottomBarWidth = () => {
+    let element = document.getElementById('bottom-bar');
+    return `${element?.offsetHeight}px`;
+  };
   return (
     <>
       <Topbar />
@@ -23,6 +30,7 @@ export default function DashboardLayout() {
           display: 'flex',
           justifyContent: 'center',
           width: '100%',
+          minHeight: `calc(100vh - ${getBottomBarWidth()})`,
         }}
       >
         <Outlet />

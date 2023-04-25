@@ -15,6 +15,7 @@ import { handleError, handleMessage } from '../helpers/helpers';
 import { ReactComponent as CircleCheckIcon } from '../assets/icons/circleCheck.svg';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
+import { Helmet } from 'react-helmet-async';
 
 export default function ManageHybridOffice(props) {
   const { status } = props;
@@ -81,6 +82,25 @@ export default function ManageHybridOffice(props) {
   };
   return (
     <div className='manage-hybrid-office'>
+      <Helmet>
+        <title>{t('manage_hybrid_model_for_business')}</title>
+        <meta
+          name='description'
+          content={t('manage_hybrid_model_for_business_description')}
+        />
+        <link
+          rel='canonical'
+          href='https://worknow.center/manage-hybrid-office'
+        />
+        <meta
+          property='og:title'
+          content={t('manage_hybrid_model_for_business')}
+        />
+        <meta
+          property='og:description'
+          content={t('manage_hybrid_model_for_business_description')}
+        />
+      </Helmet>
       <div className='manage-hybrid-office-container webview'>
         <div className='form-section'>
           <div className='form-container'>

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { gql, useMutation, useLazyQuery } from '@apollo/client';
 import { handleError, handleMessage } from '../helpers/helpers';
 import { Spinner } from 'react-bootstrap';
+import { Helmet } from 'react-helmet-async';
 const { Option } = Select;
 
 export default function QuoteFlexOffice(props) {
@@ -184,6 +185,11 @@ export default function QuoteFlexOffice(props) {
   };
   return (
     <div className='quote-flex-office'>
+      <Helmet>
+        <title>{t('quote_flex_office')}</title>
+        <link rel='canonical' href='https://worknow.center/quote-flex-office' />
+        <meta property='og:title' content={t('quote_flex_office')} />
+      </Helmet>
       <div className='quote-flex-office-container'>
         <img
           src={Logo}

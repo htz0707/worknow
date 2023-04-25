@@ -1,7 +1,7 @@
 @import '_setting.scss';
 .topbar {
   padding: 0;
-  background-color: #f3f3f3;
+  background-color: #ffffff;
   .topbar-container {
     width: 100%;
     padding-left: 130px !important;
@@ -27,23 +27,20 @@
   }
   .navbar-collapse {
     padding: 0px 10px;
+    display: none;
   }
   .nav-item-link {
     text-decoration: none;
     color: #282723;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 17px;
-    padding: 7px 12px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    padding: 7px 0px;
     &:hover {
-      background: rgba(171, 171, 171, 0.5);
-      border-radius: 8px;
+      color: #ffb31f;
     }
   }
   .nav-item-link.active {
-    font-weight: 700;
-    background: rgba(255, 179, 31, 0.5);
-    border-radius: 8px;
   }
   .nav-link {
     display: flex;
@@ -52,40 +49,65 @@
   .nav-link.active {
     border-bottom: none;
   }
-  .dropdown {
-    .dropdown-item {
-      &.active {
-        background: rgba(255, 179, 31, 0.5);
-        color: #282723;
-      }
-      &:active {
-        background-color: #ffffff;
-      }
-    }
-  }
-  .btn-login {
-    width: 116px;
-    height: 33px;
-    color: #ffffff;
-    background: #282723;
-    border-radius: 100px;
-    position: relative !important;
-  }
   .login-section {
+    display: flex;
+    align-items: center;
+    .change-language-section {
+      margin-right: 20px;
+    }
     .isNotLogin {
-      cursor: pointer;
+      // cursor: pointer;
+      // display: flex;
+      // align-items: center;
+      // &:hover {
+      //   color: #ffb31f;
+      //   svg {
+      //     path {
+      //       fill: #ffb31f;
+      //     }
+      //   }
+      // }
+      // .text {
+      //   margin-right: 10px;
+      // }
       display: flex;
-      align-items: center;
-      &:hover {
-        color: #ffb31f;
-        svg {
+      .btn-signin {
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        margin-right: 20px;
+        cursor: pointer;
+        .icon {
+          width: 24px;
+          height: 24px;
+          margin-right: 7px;
           path {
-            fill: #ffb31f;
+            fill: #282723;
           }
         }
       }
-      .text {
-        margin-right: 10px;
+      .btn-signup {
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        cursor: pointer;
+        color: #0085ff;
+        .icon {
+          width: 24px;
+          height: 24px;
+          margin-right: 7px;
+          path {
+            fill: #0085ff;
+          }
+        }
+      }
+      .btn-signin-mobile {
+        display: none;
+        cursor: pointer;
       }
     }
     .isLoginWeb {
@@ -104,26 +126,6 @@
       display: none;
     }
   }
-  @media (max-width: 992px) {
-    .navbar-collapse {
-      order: 4 !important;
-    }
-    .login-section {
-      order: 3 !important;
-      .isNotLogin {
-        cursor: pointer;
-        .text {
-          display: none;
-        }
-      }
-      .isLoginWeb {
-        display: none;
-      }
-      .isLoginMobile {
-        display: unset;
-      }
-    }
-  }
   .btn-avatar {
     width: fit-content;
     height: fit-content;
@@ -136,7 +138,44 @@
     height: 50px;
     border-radius: 50%;
   }
-  .pointer {
-    cursor: pointer;
+
+  @media screen and (max-width: 1199px) {
+    .login-section {
+      .change-language-section {
+        display: none;
+      }
+      .isNotLogin {
+        .btn-signin {
+          display: none;
+        }
+        .btn-signup {
+          display: none;
+        }
+        .btn-signin-mobile {
+          display: unset;
+        }
+      }
+      .isLoginWeb {
+        display: none;
+      }
+      .isLoginMobile {
+        display: unset;
+      }
+    }
+  }
+}
+.navbar-collapse-mobile {
+  width: 207px !important;
+  .navbar-collapse-mobile-body {
+    display: flex;
+    flex-direction: column;
+    .link-item {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 19px;
+      color: #282723;
+      margin-bottom: 16px;
+      text-decoration: none;
+    }
   }
 }

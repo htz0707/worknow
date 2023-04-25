@@ -42,7 +42,7 @@ export default function LocationCard(props) {
   return (
     <div className='location-card'>
       <div className='location-card_left'>
-        <Carousel variant='light' className='carousel' interval={null}>
+        {/* <Carousel variant='light' className='carousel' interval={null}>
           {data.images?.map((item, index) => {
             return (
               <Carousel.Item key={index}>
@@ -56,7 +56,12 @@ export default function LocationCard(props) {
               <img alt='' src={Empty} />
             </Carousel.Item>
           }
-        </Carousel>
+        </Carousel> */}
+        <img
+          className='location-image'
+          src={data?.images?.[0]?.publicUrl || Empty}
+          alt='location-image'
+        />
       </div>
       <div className='location-card_right'>
         <div>

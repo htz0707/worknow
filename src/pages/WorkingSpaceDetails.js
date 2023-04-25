@@ -43,6 +43,7 @@ import ConfirmBookingModal from '../components/ConfirmBookingModal';
 import { useTranslation } from 'react-i18next';
 import WarningContactModal from '../components/WarningContactModal';
 import moment from 'moment';
+import { Helmet } from 'react-helmet-async';
 
 export default function WorkingSpaceDetails() {
   const { t } = useTranslation();
@@ -264,6 +265,23 @@ export default function WorkingSpaceDetails() {
   };
   return (
     <div className='working-space-details page-container'>
+      <Helmet>
+        <title>{locationInfo.name + '-' + workingSpaceInfo.name}</title>
+        <meta name='description' content={workingSpaceInfo.description} />
+        <link
+          rel='canonical'
+          href={`https://worknow.center/locations/${locationInfo.id}/working-space/${workingSpaceInfo.id}`}
+        />
+        <meta property='og:title' content={workingSpaceInfo.name} />
+        <meta
+          property='og:image'
+          content={workingSpaceInfo?.images?.[0]?.publicUrl}
+        />
+        <meta
+          property='og:description'
+          content={workingSpaceInfo.description}
+        />
+      </Helmet>
       <div className='working-space-details_header'>
         <Bcrumb
           data={[
@@ -321,11 +339,12 @@ export default function WorkingSpaceDetails() {
                 </SwiperSlide>
               );
             })}
-            {workingSpaceInfo?.images?.length === 0 &
+            {(workingSpaceInfo?.images?.length === 0) &
+            (
               <SwiperSlide>
                 <img src={Empty} alt='' />
               </SwiperSlide>
-            }
+            )}
           </Swiper>
         </div>
         <div className='working-space-info'>
@@ -344,7 +363,8 @@ export default function WorkingSpaceDetails() {
               </div>
               {returnTypeOfBooking(workingSpaceInfo?.type) === 'square' && (
                 <div className='capacity'>
-                  <SquareIcon className='icon' /> {workingSpaceInfo?.acreage}{'m2'}
+                  <SquareIcon className='icon' /> {workingSpaceInfo?.acreage}
+                  {'m2'}
                 </div>
               )}
               <div className='working-hour'>
@@ -366,12 +386,14 @@ export default function WorkingSpaceDetails() {
               )}
               {returnTypeOfBooking(workingSpaceInfo?.type) === 'square' && (
                 <div className='price'>
-                  {'$' + (workingSpaceInfo?.pricePerSquare)}/{renderHourOrDay(workingSpaceInfo?.type)}
+                  {'$' + workingSpaceInfo?.pricePerSquare}/
+                  {renderHourOrDay(workingSpaceInfo?.type)}
                 </div>
               )}
               {returnTypeOfBooking(workingSpaceInfo?.type) === 'month' && (
                 <div className='price'>
-                  {formatCurrency(workingSpaceInfo?.priceByMonth)}/{renderHourOrDay(workingSpaceInfo?.type)}
+                  {formatCurrency(workingSpaceInfo?.priceByMonth)}/
+                  {renderHourOrDay(workingSpaceInfo?.type)}
                 </div>
               )}
               <button

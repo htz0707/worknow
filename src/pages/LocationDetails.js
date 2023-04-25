@@ -128,6 +128,8 @@ export default function LocationDetails() {
         }
         highlight
         locationRate
+        phoneCountryCode
+        phoneNumber
       }
       workingSpaces(params: { locationId: $id }) {
         edges {
@@ -201,8 +203,7 @@ export default function LocationDetails() {
         setLocationInfo(res.data.location);
         if (res.data.location?.images?.length) {
           setImageUrl(res.data.location?.images?.map((item) => item.publicUrl));
-        }
-        else {
+        } else {
           setImageUrl([Empty]);
         }
         setWorkingSpaces(res.data.workingSpaces.edges);
@@ -220,7 +221,7 @@ export default function LocationDetails() {
     'booth',
     'raw_space',
     'studio',
-    'virtual_office'
+    'virtual_office',
   ];
   const handleCreateTypeWorkingSpace = (data) => {
     let arr = [];
@@ -349,7 +350,7 @@ export default function LocationDetails() {
     booth: t('phone_booth'),
     raw_space: 'Sàn thô',
     studio: 'Studio',
-    virtual_office: 'Văn phòng đại diện'
+    virtual_office: 'Văn phòng đại diện',
   };
   const [selectedWorkingSpace, setSelectedWorkingSpace] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -407,8 +408,36 @@ export default function LocationDetails() {
       <Helmet>
         <title>{locationInfo.name}</title>
         <meta name='description' content={locationInfo.description} />
+        <link
+          rel='canonical'
+          href={`https://worknow.center/locations/${locationInfo.id}`}
+        />
+        <meta property='og:title' content={locationInfo.name} />
+        <meta property='og:image' content={imageUrl[0]} />
+        <meta property='og:description' content={locationInfo.description} />
+        <script type='application/ld+json'>
+          {JSON.stringify({
+            '@context': 'http://schema.org',
+            '@type': 'Place',
+            name: locationInfo.name,
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: locationInfo.address,
+              addressLocality: locationInfo?.city?.name,
+              addressCountry: locationInfo?.country?.name,
+            },
+            telephone:
+              '+' + locationInfo.phoneCountryCode + locationInfo.phoneNumber,
+            url: `https://worknow.center/locations/${locationInfo.id}`,
+            image: imageUrl[0],
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: locationInfo.lat,
+              longitude: locationInfo.long,
+            },
+          })}
+        </script>
       </Helmet>
-      <div className='location-details_header'></div>
       <div className='location-details_body '>
         <div className='general-responsive'>
           <div className='location-image'>
@@ -421,7 +450,7 @@ export default function LocationDetails() {
               {imageUrl.map((item, index) => {
                 return (
                   <Carousel.Item key={index}>
-                    <img alt='' src={item} />
+                    <img alt='location-image' src={item} />
                   </Carousel.Item>
                 );
               })}
