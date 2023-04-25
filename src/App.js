@@ -48,6 +48,7 @@ import VoucherDetails from './pages/VoucherDetails';
 import Topups from './pages/Topups';
 import ManageHybridOffice from './pages/ManageHybridOffice';
 import QuoteFlexOffice from './pages/QuoteFlexOffice';
+import LookupOrder from './pages/LookupOrder';
 
 ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
@@ -185,6 +186,7 @@ function App() {
             <Route path='/about' element={<About />} />
             <Route path='/faq' element={<GuideCheck />} />
             <Route path='/contact' element={<Contact />} />
+            <Route path='/lookup-order' element={<LookupOrder />} />
           </Route>
           <Route path='/create-booking' element={<CreateBooking />} />
           <Route path='/create-booking/payment' element={<BookingPayment />} />
