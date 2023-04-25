@@ -50,7 +50,7 @@ function NewBusiness() {
       </Helmet>
       <div className='section-1'>
         <div className='section-container page-container'>
-          <div className='title'>
+          <div className='title' data-aos='fade-down'>
             <Trans i18nKey='homepage_title'>
               GIẢI PHÁP TOÀN DIỆN
               <br />
@@ -58,7 +58,7 @@ function NewBusiness() {
             </Trans>
           </div>
           <div className='options-section'>
-            <div className='option option-1'>
+            <div className='option option-1' data-aos='fade-up'>
               <div className='name'>{t('booking_on_demand')}</div>
               <div
                 className='sub-layer'
@@ -80,7 +80,7 @@ function NewBusiness() {
                 </div>
               </div>
             </div>
-            <div className='option option-2'>
+            <div className='option option-2' data-aos='fade-up'>
               <div className='name'>{t('quote_flex_office')}</div>
               <div
                 className='sub-layer'
@@ -102,7 +102,7 @@ function NewBusiness() {
                 </div>
               </div>
             </div>
-            <div className='option option-3'>
+            <div className='option option-3' data-aos='fade-up'>
               <div className='name'>{t('manage_hybrid_office')}</div>
               <div
                 className='sub-layer'
@@ -130,13 +130,15 @@ function NewBusiness() {
       <div className='section-2'>
         <div className='section-container'>
           <div className='worknow-benefits'>
-            <div className='title'>{t('why_should_be_worknow')}</div>
+            <div className='title' data-aos='fade-up'>
+              {t('why_should_be_worknow')}
+            </div>
             <div className='worknow-benefits-container'>
               <div className='row-1'>
-                <div className='image'>
+                <div className='image' data-aos='fade-up'>
                   <img src={WorkNowBenefit1} alt='worknow-benefit' />
                 </div>
-                <div className='content'>
+                <div className='content' data-aos='fade-up'>
                   <div className='title'>{t('pros_1')}</div>
                   <div className='description'>{t('pros_1_description')}</div>
                   <hr />
@@ -175,7 +177,7 @@ function NewBusiness() {
                 </div>
               </div>
               <div className='row-2'>
-                <div className='content'>
+                <div className='content' data-aos='fade-up'>
                   <div className='title'>{t('pros_2')}</div>
                   <div className='description'>{t('pros_2_description')}</div>
                   <hr />
@@ -236,17 +238,17 @@ function NewBusiness() {
                     </div>
                   </div>
                 </div>
-                <div className='image'>
+                <div className='image' data-aos='fade-up'>
                   <div className='image'>
                     <img src={WorkNowBenefit2} alt='worknow-benefit' />
                   </div>
                 </div>
               </div>
               <div className='row-3'>
-                <div className='image'>
+                <div className='image' data-aos='fade-up'>
                   <img src={WorkNowBenefit3} alt='worknow-benefit' />
                 </div>
-                <div className='content'>
+                <div className='content' data-aos='fade-up'>
                   <div className='title'>{t('pros_3')}</div>
                   <div className='description'>{t('pros_3_description')}</div>
                   <hr />
@@ -285,8 +287,13 @@ function NewBusiness() {
             </div>
           </div>
           <div className='worknow-outstanding-wspace'>
-            <div className='title'>{t('outstanding_type')}</div>
-            <div className='worknow-outstanding-wspace-container'>
+            <div className='title' data-aos='fade-up'>
+              {t('outstanding_type')}
+            </div>
+            <div
+              className='worknow-outstanding-wspace-container'
+              data-aos='fade-up'
+            >
               <div className='working-space-type-card'>
                 <img src={hl3} alt='hl-3' className='image' />
                 <div className='footer-section'>

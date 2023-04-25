@@ -49,9 +49,18 @@ import Topups from './pages/Topups';
 import ManageHybridOffice from './pages/ManageHybridOffice';
 import QuoteFlexOffice from './pages/QuoteFlexOffice';
 import LookupOrder from './pages/LookupOrder';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 ReactGA.initialize(process.env.REACT_APP_GA_ID);
 function App() {
+  useEffect(() => {
+    AOS.init({
+      delay: 100,
+      duration: 1000,
+    });
+  }, []);
   return (
     <AuthProvider>
       <BrowserRouter>
