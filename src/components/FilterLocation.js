@@ -358,7 +358,7 @@ export default function FilterLocation(props) {
       filterLocations?.amenitiesLocationIds?.length > 0 ||
       filterLocations?.amenitiesWorkingSpaceIds?.length > 0 ||
       filterLocations?.capacityIds?.length > 0 ||
-      filterLocations?.workingSpaceTypes?.length > 0 ||
+      // filterLocations?.workingSpaceTypes?.length > 0 ||
       filterLocations?.isVerified === true
     ) {
       return true;
@@ -506,7 +506,7 @@ export default function FilterLocation(props) {
           })}
         </div>
       </div>
-      <div className='filter-location_card'>
+      {/* <div className='filter-location_card'>
         <div className='filter-location_card_title'>
           <RoomIcon className='icon' /> {t('working_space_type')}
         </div>
@@ -528,7 +528,7 @@ export default function FilterLocation(props) {
             );
           })}
         </div>
-      </div>
+      </div> */}
       <div className='filter-location_card'>
         <div className='filter-location_card_title'>
           <PolicyIcon className='icon' /> {t('policy')}
