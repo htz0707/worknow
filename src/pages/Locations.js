@@ -10,10 +10,16 @@ import { useState } from 'react';
 import FilterSortLocationMobile from '../components/FilterSortLocationMobile';
 import { Skeleton } from 'antd';
 import NoData from '../components/NoData';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  createSearchParams,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import { returnUrlParams } from '../helpers/helpers';
 import { Trans, useTranslation, withTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
+import SearchLocation from '../components/SearchLocation';
 
 function Locations() {
   const { t } = useTranslation();
@@ -68,6 +74,11 @@ function Locations() {
       ...filterLocations,
       ...filter_location,
     });
+    if (obj.keyword) {
+      setSearchData(obj.keyword);
+    } else {
+      setSearchData('');
+    }
   };
   useEffect(() => {
     handleInitFilterSort(currentParams);
@@ -143,6 +154,12 @@ function Locations() {
     clearTimeout(timeout);
     timeout = setTimeout(function () {
       setSearchData(value);
+      navigate({
+        search: createSearchParams({
+          ...currentParams,
+          keyword: value,
+        }).toString(),
+      });
     }, 300);
   };
   const [loading, setLoading] = useState(true);
@@ -195,19 +212,14 @@ function Locations() {
       <div className='locations_header'>
         <div className='locations_header_content'>
           <div className='row-1'>
-            <div className='page-container'>
-              <div className='search-bar'>
-                <SearchIcon />
-                <input
-                  type='text'
-                  placeholder={t('search_for_locations')}
-                  onChange={(e) => handleTypeSearch(e.target.value)}
-                />
-              </div>
-              <div className='calendar-bar'></div>
-            </div>
+            <SearchLocation
+              setFilterLocations={setFilterLocations}
+              filterLocations={filterLocations}
+              searchData={searchData}
+              handleTypeSearch={handleTypeSearch}
+            />
           </div>
-          <div className='row-2'>
+          {/* <div className='row-2'>
             <div className='page-container'>
               <FilterSortLocationMobile
                 setFilterLocations={setFilterLocations}
@@ -219,8 +231,19 @@ function Locations() {
                 allowSort
               />
             </div>
-          </div>
+          </div> */}
         </div>
+      </div>
+      <div className='locations-filter-sort-mobile'>
+        <FilterSortLocationMobile
+          setFilterLocations={setFilterLocations}
+          filterLocations={filterLocations}
+          result={locationsAmount}
+          sort={sortLocation}
+          setSort={setSortLocation}
+          allowFilter
+          allowSort
+        />
       </div>
       <div className='locations_body page-container'>
         <div className='locations_body_left'>

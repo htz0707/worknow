@@ -297,7 +297,7 @@ export default function FilterSortLocationMobile(props) {
       filterLocations?.amenitiesLocationIds?.length > 0 ||
       filterLocations?.amenitiesWorkingSpaceIds?.length > 0 ||
       filterLocations?.capacityIds?.length > 0 ||
-      filterLocations?.workingSpaceTypes?.length > 0 ||
+      // filterLocations?.workingSpaceTypes?.length > 0 ||
       filterLocations?.isVerified === true
     ) {
       return true;
@@ -333,7 +333,7 @@ export default function FilterSortLocationMobile(props) {
               className='icon'
               onClick={() => setShowFilterModal(false)}
             />
-            <div className='main-title'>{t('filter')}</div>
+            {t('filter')}
             <div className='clear-title' onClick={handleClearFilter}>
               {handleCheckFilter() && <>{t('clear_all')}</>}
             </div>
@@ -485,7 +485,7 @@ export default function FilterSortLocationMobile(props) {
                 })}
               </div>
             </div>
-            <div className='filter-location_card'>
+            {/* <div className='filter-location_card'>
               <div className='filter-location_card_title'>
                 <RoomIcon className='icon' /> {t('working_space_type')}
               </div>
@@ -512,7 +512,7 @@ export default function FilterSortLocationMobile(props) {
                   );
                 })}
               </div>
-            </div>
+            </div> */}
             <div className='filter-location_card'>
               <div className='filter-location_card_title'>
                 <PolicyIcon className='icon' /> {t('policy')}
