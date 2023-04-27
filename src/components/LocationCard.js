@@ -61,6 +61,7 @@ export default function LocationCard(props) {
           className='location-image'
           src={data?.images?.[0]?.publicUrl || Empty}
           alt='location-image'
+          loading='lazy'
         />
       </div>
       <div className='location-card_right'>

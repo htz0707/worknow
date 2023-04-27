@@ -70,6 +70,14 @@ function Locations() {
     } else {
       filter_location.isVerified = '';
     }
+    if (obj.rangePrice) {
+      filter_location.rangePrice = [
+        parseInt(obj.rangePrice.split(',')[0]),
+        parseInt(obj.rangePrice.split(',')[1]),
+      ];
+    } else {
+      filter_location.rangePrice = [0, 10000000];
+    }
     setFilterLocations({
       ...filterLocations,
       ...filter_location,
@@ -89,6 +97,7 @@ function Locations() {
       $amenitiesWorkingSpaceIds: [UUID!]
       $workingSpaceCapacityIds: [UUID!]
       $workingSpaceTypes: [WorkingSpaceType!]
+      $rangePrice: [Float!]
       $isVerified: Boolean
       $keyword: String!
       $sort: String!
@@ -99,6 +108,7 @@ function Locations() {
           amenitiesWorkingSpaceIds: $amenitiesWorkingSpaceIds
           workingSpaceCapacityIds: $workingSpaceCapacityIds
           workingSpaceTypes: $workingSpaceTypes
+          rangePrice: $rangePrice
           isVerified: $isVerified
           keyword: $keyword
           sort: $sort
@@ -170,6 +180,7 @@ function Locations() {
       amenitiesWorkingSpaceIds: filterLocations.amenitiesWorkingSpaceIds,
       workingSpaceCapacityIds: filterLocations.capacityIds,
       workingSpaceTypes: filterLocations.workingSpaceTypes,
+      rangePrice: filterLocations.rangePrice,
       keyword: searchData,
       sort: sortLocation,
     };
@@ -194,6 +205,7 @@ function Locations() {
     capacityIds: [],
     workingSpaceTypes: [],
     isVerified: '',
+    rangePrice: [0, 10000000],
   });
   const [sortLocation, setSortLocation] = useState('-is_verified');
   useEffect(() => {
