@@ -363,7 +363,7 @@ export default function FilterSortLocationMobile(props) {
         <Offcanvas.Body>
           <div className='filter-location-modal_body'>
             <div className='filter-location-price-range'>
-              <div className='title'>Chọn khoảng giá</div>
+              <div className='title'>{t('select_range_price')}</div>
               <div className='range-price-section'>
                 <Slider
                   range
@@ -388,7 +388,7 @@ export default function FilterSortLocationMobile(props) {
                 />
                 <div className='value-display'>
                   <div className='min'>
-                    <div className='label'>Tối thiểu</div>
+                    <div className='label'>{t('min')}</div>
                     <Input
                       suffix='VND'
                       readOnly
@@ -397,7 +397,7 @@ export default function FilterSortLocationMobile(props) {
                     />
                   </div>
                   <div className='max'>
-                    <div className='label'>Tối đa</div>
+                    <div className='label'>{t('max')}</div>
                     <Input
                       suffix='VND'
                       readOnly
