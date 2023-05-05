@@ -20,6 +20,8 @@ import { returnUrlParams } from '../helpers/helpers';
 import { Trans, useTranslation, withTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import SearchLocation from '../components/SearchLocation';
+import LogoPartner from '../assets/icons/kai_ros_default.svg';
+import LogoPartnerHover from '../assets/icons/kai_ros_hover.svg'
 
 function Locations() {
   const { t } = useTranslation();
@@ -292,6 +294,12 @@ function Locations() {
             </div>
           </div>
           <div className='content'>
+            <div className='logo-partner'>
+              <div className='relative-card'>
+                <img className='logo-default' src={LogoPartner} />
+                <img className='logo-hover' src={LogoPartnerHover} />
+              </div>
+            </div>
             {/* <List
               itemLayout='vertical'
               size='large'
