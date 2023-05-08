@@ -140,6 +140,24 @@
         justify-content: space-between;
       }
       > .content {
+        .logo-partner {
+          position: fixed;
+          right: 50px;
+          top: 50%;
+          z-index: 1000;
+          .relative-card {
+            position: relative;
+          }
+          .relative-card .logo-hover {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+          .relative-card:hover .logo-hover{
+            display: inline;
+          }
+        }
         .ant-list-item.ant-list-item-no-flex {
           padding: 0;
           border-bottom: none;
@@ -190,6 +208,13 @@
         }
         > .content {
           padding: 20px 0px;
+          .logo-partner {
+            right: 20px;
+            .relative-card .logo-hover, .relative-card .logo-default {
+              width: 70px;
+            }
+            
+          }
         }
       }
     }
