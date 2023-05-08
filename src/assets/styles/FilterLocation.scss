@@ -6,7 +6,47 @@
   // border-radius: 20px;
   // padding: 24px;
   border-radius: 16px;
-  padding: 16px;
+  // padding: 16px;
+  .filter-location-price-range {
+    border: 1px solid #cfcec8;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    padding: 16px;
+    .title {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 25px;
+      text-transform: capitalize;
+      color: #282723;
+      text-align: center;
+    }
+    .range-price-section {
+      .value-display {
+        display: flex;
+        margin-top: 16px;
+        > div {
+          flex: 1;
+          margin-right: 10px;
+          &:last-child {
+            margin-right: 0px;
+          }
+          .label {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+          }
+          .form-input {
+            border-radius: 4px;
+            height: 26px;
+            background: #f3f3f3;
+            input {
+              background: #f3f3f3;
+            }
+          }
+        }
+      }
+    }
+  }
   .filter-location_card {
     .clear-filter {
       font-weight: 400;

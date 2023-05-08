@@ -51,6 +51,7 @@ export default function SortLocation(props) {
         </Dropdown.Toggle>
         <Dropdown.Menu className='dropdown-menu'>
           <Dropdown.Item
+            as='button'
             className={
               sort === 'name' ? 'dropdown-item active' : 'dropdown-item'
             }
@@ -59,6 +60,7 @@ export default function SortLocation(props) {
             {t('from_a_z')}
           </Dropdown.Item>
           <Dropdown.Item
+            as='button'
             className={
               sort === '-name' ? 'dropdown-item active' : 'dropdown-item'
             }
@@ -67,6 +69,7 @@ export default function SortLocation(props) {
             {t('from_z_a')}
           </Dropdown.Item>
           <Dropdown.Item
+            as='button'
             className={
               sort === 'price' ? 'dropdown-item active' : 'dropdown-item'
             }
@@ -75,6 +78,7 @@ export default function SortLocation(props) {
             {t('lowest_price')}
           </Dropdown.Item>
           <Dropdown.Item
+            as='button'
             className={
               sort === '-price' ? 'dropdown-item active' : 'dropdown-item'
             }
@@ -83,6 +87,7 @@ export default function SortLocation(props) {
             {t('highest_price')}
           </Dropdown.Item>
           <Dropdown.Item
+            as='button'
             className={
               sort === '-is_verified' ? 'dropdown-item active' : 'dropdown-item'
             }

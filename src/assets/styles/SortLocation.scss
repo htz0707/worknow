@@ -6,7 +6,7 @@
     margin-right: 5px;
   }
   .dropdown {
-    button {
+    .dropdown-toggle {
       background: #f3f3f3;
       border-radius: 8px;
       box-shadow: none;
@@ -38,6 +38,7 @@
       margin-bottom: 6px;
       padding: 6px 12px;
       border-radius: 6px;
+      background-color: #ffffff;
       &:hover {
         background: #f3f3f3;
       }
