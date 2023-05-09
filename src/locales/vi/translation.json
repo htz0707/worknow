@@ -372,5 +372,11 @@
   "fast_support": "Hỗ trợ nhanh chóng",
   "fill_order_code": "Nhập mã đơn đặt",
   "no_found_order": "Không tìm thấy đơn hàng tương ứng",
-  "search": "Tìm kiếm"
+  "search": "Tìm kiếm",
+  "type": "Loại hình",
+  "all_types": "Tất cả loại hình",
+  "apply": "Áp dụng",
+  "select_range_price": "Chọn khoảng giá",
+  "min": "Tối thiểu",
+  "max": "Tối đa"
 }

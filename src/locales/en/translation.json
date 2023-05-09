@@ -372,5 +372,11 @@
   "fast_support": "Quick support",
   "fill_order_code": "Type your booking code",
   "no_found_order": "We cannot found any booking according to your code. Please check again",
-  "search": "Search"
+  "search": "Search",
+  "type": "Workspace type",
+  "all_types": "All types",
+  "apply": "Apply",
+  "select_range_price": "Select price range",
+  "min": "Min price",
+  "max": "Max price"
 }

@@ -100,7 +100,8 @@ export default function Marker(props) {
           </div>
         ) : (
           <div className='card-body'>
-            {t('just_from')}{' '}
+            {t('just_from')}
+            <br />
             {returnLowestPrice(data.priceByHour, data.priceByDay)}
           </div>
         )}

@@ -16,6 +16,7 @@ import {
 import { returnUrlParams } from '../helpers/helpers';
 import { ReactComponent as CloseIcon } from '../assets/icons/close.svg';
 import { useTranslation } from 'react-i18next';
+import { Input, Slider } from 'antd';
 
 export default function FilterLocation(props) {
   const { t } = useTranslation();
@@ -331,6 +332,26 @@ export default function FilterLocation(props) {
       });
     }
   };
+  //handle filter by range price
+  const [rangePrice, setRangePrice] = useState([]);
+  useEffect(() => {
+    setRangePrice(filterLocations.rangePrice);
+  }, [filterLocations.rangePrice]);
+  const handleChangeRangePrice = (value) => {
+    setRangePrice(value);
+  };
+  const handleAfterChangeRangePrice = (value) => {
+    setFilterLocations({
+      ...filterLocations,
+      rangePrice: value,
+    });
+    navigate({
+      search: createSearchParams({
+        ...currentParams,
+        rangePrice: value.toString(),
+      }).toString(),
+    });
+  };
   const [showMoreAmenitiesLocation, setShowMoreAmenitiesLocation] =
     useState(false);
   const [showMoreAmenitiesWorkingSpace, setShowMoreAmenitiesWorkingSpace] =
@@ -342,6 +363,7 @@ export default function FilterLocation(props) {
       capacityIds: [],
       workingSpaceTypes: [],
       isVerified: '',
+      rangePrice: [0, 10000000],
     });
     if (currentParams.sort) {
       navigate({
@@ -358,7 +380,7 @@ export default function FilterLocation(props) {
       filterLocations?.amenitiesLocationIds?.length > 0 ||
       filterLocations?.amenitiesWorkingSpaceIds?.length > 0 ||
       filterLocations?.capacityIds?.length > 0 ||
-      filterLocations?.workingSpaceTypes?.length > 0 ||
+      // filterLocations?.workingSpaceTypes?.length > 0 ||
       filterLocations?.isVerified === true
     ) {
       return true;
@@ -368,6 +390,52 @@ export default function FilterLocation(props) {
   };
   return (
     <div className='filter-location'>
+      <div className='filter-location-price-range'>
+        <div className='title'>{t('select_range_price')}</div>
+        <div className='range-price-section'>
+          <Slider
+            range
+            value={rangePrice}
+            onChange={handleChangeRangePrice}
+            onAfterChange={handleAfterChangeRangePrice}
+            min={0}
+            max={10000000}
+            step={50000}
+            tooltip={{ open: false }}
+            railStyle={{
+              height: '8px',
+            }}
+            trackStyle={{ backgroundColor: '#FFB31F', height: '8px' }}
+            handleStyle={{
+              borderColor: '#FFB31F',
+              borderWidth: '5px',
+              height: '18px',
+              width: '18px',
+              boxShadow: 'none',
+            }}
+          />
+          <div className='value-display'>
+            <div className='min'>
+              <div className='label'>{t('min')}</div>
+              <Input
+                suffix='VND'
+                readOnly
+                className='form-input'
+                value={rangePrice[0]?.toLocaleString('pl-PL')}
+              />
+            </div>
+            <div className='max'>
+              <div className='label'>{t('max')}</div>
+              <Input
+                suffix='VND'
+                readOnly
+                className='form-input'
+                value={rangePrice[1]?.toLocaleString('pl-PL')}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       <div className='filter-location_card'>
         {handleCheckFilter() && (
           <div className='clear-filter' onClick={handleClearFilter}>
@@ -506,7 +574,7 @@ export default function FilterLocation(props) {
           })}
         </div>
       </div>
-      <div className='filter-location_card'>
+      {/* <div className='filter-location_card'>
         <div className='filter-location_card_title'>
           <RoomIcon className='icon' /> {t('working_space_type')}
         </div>
@@ -528,7 +596,7 @@ export default function FilterLocation(props) {
             );
           })}
         </div>
-      </div>
+      </div> */}
       <div className='filter-location_card'>
         <div className='filter-location_card_title'>
           <PolicyIcon className='icon' /> {t('policy')}
