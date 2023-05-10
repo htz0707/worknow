@@ -152,6 +152,7 @@ export default function CreateBooking() {
       $startDate: datetime!
       $endDate: datetime!
       $bookingType: BookingType!
+      $referenceCode: String
     ) {
       createOrder(
         data: {
@@ -160,6 +161,7 @@ export default function CreateBooking() {
           phoneCountryCode: $phoneCountryCode
           phoneNumber: $phoneNumber
           note: $note
+          referenceCode: $referenceCode
           details: {
             workingSpaceId: $workingSpaceId
             startDate: $startDate
@@ -175,21 +177,27 @@ export default function CreateBooking() {
   const [createOrder, { data, loading, error }] = useMutation(CREATE_ORDER);
   const handleSubmit = async () => {
     let parse_phone = await parsePhoneNumber('+' + customerInfo.phone_number);
+    let bodyData = {
+      fullname: customerInfo.full_name,
+      email: customerInfo.email,
+      phoneCountryCode: parse_phone.countryCallingCode,
+      phoneNumber: parse_phone.nationalNumber,
+      note: customerInfo.note,
+      workingSpaceId: working_space_id,
+      startDate: orderInfo.start_date_utc,
+      endDate: orderInfo.end_date_utc,
+      bookingType: orderInfo.type,
+    };
+    let reference_code = localStorage.getItem('referenceCode');
+    if (reference_code) {
+      bodyData.referenceCode = reference_code;
+    }
     await createOrder({
-      variables: {
-        fullname: customerInfo.full_name,
-        email: customerInfo.email,
-        phoneCountryCode: parse_phone.countryCallingCode,
-        phoneNumber: parse_phone.nationalNumber,
-        note: customerInfo.note,
-        workingSpaceId: working_space_id,
-        startDate: orderInfo.start_date_utc,
-        endDate: orderInfo.end_date_utc,
-        bookingType: orderInfo.type,
-      },
+      variables: bodyData,
     });
   };
   if (data) {
+    localStorage.removeItem('referenceCode');
     navigate(
       `/create-booking/payment?location_id=${location_id}&order_id=${data?.createOrder?.id}`,
       {
