@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import Topbar from '../components/Topbar';
 import BottomBar from '../components/BottomBar';
 import { fetchToken, onMessageListener } from '../firebase';
 import '../firebase';
 
 export default function DashboardLayout() {
+  const [searchParams] = useSearchParams();
+  const referenceCode = searchParams.get('referenceCode');
+  useEffect(() => {
+    if (referenceCode) {
+      localStorage.setItem('referenceCode', referenceCode);
+    }
+  }, [referenceCode]);
+  //
   const path = useLocation();
   const [isTokenFound, setTokenFound] = useState(false);
   fetchToken(setTokenFound);
