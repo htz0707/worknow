@@ -25,6 +25,7 @@ export default function Orders() {
           email
           finalTotal
           fullname
+          referenceCode
           note
           status
           phoneNumber
@@ -117,6 +118,11 @@ export default function Orders() {
       title: 'Full Name',
       dataIndex: 'fullname',
       key: 'fullname',
+    },
+    {
+      title: 'Reference Code',
+      dataIndex: 'referenceCode',
+      key: 'referenceCode'
     },
     {
       title: 'Note',
