@@ -27,6 +27,7 @@ export default function AdminOrders() {
           finalTotal
           fullname
           note
+          referenceCode
           status
           phoneNumber
           phoneCountryCode
@@ -123,6 +124,11 @@ export default function AdminOrders() {
       title: 'Note',
       dataIndex: 'note',
       key: 'note',
+    },
+    {
+      title: 'Reference Code',
+      dataIndex: 'referenceCode',
+      key: 'referenceCode'
     },
     {
       title: 'Phone number',
