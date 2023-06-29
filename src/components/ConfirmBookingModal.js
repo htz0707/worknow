@@ -13,7 +13,10 @@ import {
   formatCurrency,
   returnTypeOfBooking,
   toHoursAndMinutes,
+  getLastDayOfMonth,
+  monthsBetweenDates,
 } from '../helpers/helpers';
+import { Tabs } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import '../assets/styles/ConfirmBookingModal.scss';
 import { ReactComponent as ArrowDownIcon } from '../assets/icons/arrowdownfill.svg';
@@ -56,6 +59,8 @@ export default function ConfirmBookingModal(props) {
   //   console.log(dates);
   // };
 
+  const { TabPane } = Tabs;
+  const [dayTab, setDayTab] = useState(true);
   const [bookingInfoTypeDay, setBookingInfoTypeDay] = useState({
     startDate: null,
     endDate: null,
@@ -63,6 +68,47 @@ export default function ConfirmBookingModal(props) {
     price: null,
     date_range: null,
   });
+  const [bookingInfoTypeMonth, setBookingInfoTypeMonth] = useState({
+    start: null,
+    end: null,
+    startDate: null,
+    endDate: null,
+    totalDay: null,
+    price: null,
+    date_range: null,
+  });
+  const startDateOfMonth = (startDate) => {
+    return moment().toDate().getMonth() === startDate.getMonth() &&
+      moment().toDate().getFullYear() === startDate.getFullYear()
+      ? moment().add(1, 'd').toDate()
+      : startDate;
+  }; 
+  const handleMonthRangeChange = ([start, end]) => {
+    if (end) {
+      for (let i = 0; i < excludeMonths.length; i++) {
+        if (
+          excludeMonths[i].getMonth() > start.getMonth() &&
+          excludeMonths[i].getMonth() < end.getMonth()
+        ) {
+          setBookingInfoTypeMonth({
+            ...bookingInfoTypeMonth,
+            start: end,
+            end: null,
+            startDate: startDateOfMonth(end),
+            endDate: getLastDayOfMonth(end),
+          });
+          return;
+        }
+      }
+    }
+    setBookingInfoTypeMonth({
+      ...bookingInfoTypeMonth,
+      start: start,
+      end: end,
+      startDate: startDateOfMonth(start),
+      endDate: end ? getLastDayOfMonth(end) : getLastDayOfMonth(start),
+    });
+  };
   function checkForBlockedDates(start, end, dates) {
     let closeDay = [];
     worksHour?.forEach((item) => {
@@ -86,8 +132,7 @@ export default function ConfirmBookingModal(props) {
 
     return false;
   }
-  const handleDateRangeChange = (dates) => {
-    const [start, end] = dates;
+  const handleDayRangeChange = ([start, end]) => {
     if (end) {
       if (checkForBlockedDates(start, end, excludeDates)) {
         setBookingInfoTypeDay({
@@ -105,31 +150,23 @@ export default function ConfirmBookingModal(props) {
     });
     setError('');
   };
-  const handleCaculate = () => {
-    if (typeOfBooking === 'day') {
-      if (bookingInfoTypeDay.startDate) {
-        if (bookingInfoTypeDay.endDate) {
-          let start_date_format = moment(bookingInfoTypeDay.startDate).format(
-            'MM/DD/YYYY'
-          );
-          let end_date_format = moment(bookingInfoTypeDay.endDate).format(
-            'MM/DD/YYYY'
-          );
-          let total_day =
-            moment(end_date_format).diff(moment(start_date_format), 'days') + 1;
-
+  const handleCalculateDay = () => {
+    if (typeOfBooking === 'day-month' && selectedWorkingSpace?.priceByDay !== 0) {
+      const startTemp = bookingInfoTypeDay.startDate;
+      const endTemp = bookingInfoTypeDay.endDate;
+      if (startTemp) {
+        if (endTemp) {
+          let start_format = moment(startTemp).format('MM/DD/YYYY');
+          let end_format = moment(endTemp).format('MM/DD/YYYY');
+          let total_day = moment(end_format).diff(moment(start_format), 'days') + 1;
           let price = total_day * selectedWorkingSpace.priceByDay;
           let date_range;
-          let start_date_format1 = moment(bookingInfoTypeDay.startDate).format(
-            'DD/MM/YYYY'
-          );
-          let end_date_format1 = moment(bookingInfoTypeDay.endDate).format(
-            'DD/MM/YYYY'
-          );
-          if (start_date_format1 === end_date_format1) {
-            date_range = start_date_format1;
+          let start_format1 = moment(startTemp).format('DD/MM/YYYY');
+          let end_format1 = moment(endTemp).format('DD/MM/YYYY');
+          if (start_format1 === end_format1) {
+            date_range = start_format1;
           } else {
-            date_range = start_date_format1 + ' - ' + end_date_format1;
+            date_range = start_format1 + ' - ' + end_format1;
           }
           setBookingInfoTypeDay({
             ...bookingInfoTypeDay,
@@ -142,17 +179,47 @@ export default function ConfirmBookingModal(props) {
             ...bookingInfoTypeDay,
             totalDay: 1,
             price: selectedWorkingSpace.priceByDay,
-            date_range: moment(bookingInfoTypeDay.startDate).format(
-              'DD/MM/YYYY'
-            ),
+            date_range: moment(startTemp).format('DD/MM/YYYY'),
+          });
+        }
+      }
+    }
+    if (typeOfBooking === 'day-month' && selectedWorkingSpace?.priceByMonth !== 0) {
+      const startTemp = bookingInfoTypeMonth.startDate;
+      const endTemp = bookingInfoTypeMonth.endDate;
+      if (startTemp) {
+        if (endTemp) {
+          let start_format = moment(startTemp).format('MM/DD/YYYY');
+          let end_format = moment(endTemp).format('MM/DD/YYYY');
+          let total_day = moment(end_format).diff(moment(start_format), 'days') + 1;
+          let price =  monthsBetweenDates(startTemp, endTemp) * selectedWorkingSpace.priceByMonth;
+          let date_range;
+          let start_format1 = moment(startTemp).format('DD/MM/YYYY');
+          let end_format1 = moment(endTemp).format('DD/MM/YYYY');
+          if (start_format1 === end_format1) {
+            date_range = start_format1;
+          } else {
+            date_range = start_format1 + ' - ' + end_format1;
+          }
+          setBookingInfoTypeMonth({
+            ...bookingInfoTypeMonth,
+            totalDay: total_day,
+            price: price,
+            date_range: date_range,
           });
         }
       }
     }
   };
   useEffect(() => {
-    handleCaculate();
-  }, [bookingInfoTypeDay.startDate, bookingInfoTypeDay.endDate, typeOfBooking]);
+    handleCalculateDay();
+  }, [
+    bookingInfoTypeDay.startDate,
+    bookingInfoTypeDay.endDate,
+    bookingInfoTypeMonth.startDate,
+    bookingInfoTypeMonth.endDate,
+    typeOfBooking,
+  ]);
   //
   const [bookingInfoTypeHour, setBookingInfoTypeHour] = useState({
     date: new Date(),
@@ -178,7 +245,7 @@ export default function ConfirmBookingModal(props) {
     });
     setShowCalendar(false);
   };
-  const handleCaculateHour = () => {
+  const handleCalculateHour = () => {
     if (typeOfBooking === 'hour') {
       if (
         bookingInfoTypeHour.startTime.time &&
@@ -188,7 +255,7 @@ export default function ConfirmBookingModal(props) {
           bookingInfoTypeHour.startTime.time +
           ' - ' +
           bookingInfoTypeHour.endTime.time;
-        let totalminutes =
+        let totalMinutes =
           (bookingInfoTypeHour.endTime.id - bookingInfoTypeHour.startTime.id) *
           30;
         let price =
@@ -198,7 +265,7 @@ export default function ConfirmBookingModal(props) {
         setBookingInfoTypeHour({
           ...bookingInfoTypeHour,
           time_range: time_range,
-          totalTime: toHoursAndMinutes(totalminutes),
+          totalTime: toHoursAndMinutes(totalMinutes),
           price: price,
         });
       } else {
@@ -212,7 +279,7 @@ export default function ConfirmBookingModal(props) {
     }
   };
   useEffect(() => {
-    handleCaculateHour();
+    handleCalculateHour();
   }, [
     bookingInfoTypeHour.startTime,
     bookingInfoTypeHour.endTime,
@@ -222,30 +289,31 @@ export default function ConfirmBookingModal(props) {
   const [showCalendar, setShowCalendar] = useState(false);
   //
   const handleSubmit = () => {
-    if (typeOfBooking === 'day') {
-      if (bookingInfoTypeDay.startDate) {
-        let day = moment(bookingInfoTypeDay.startDate).day();
+    if (typeOfBooking === 'day-month') {
+      const bookingInfo = dayTab ? {...bookingInfoTypeDay} : {...bookingInfoTypeMonth}
+      if (bookingInfo.startDate) {
+        let day = moment(bookingInfo.startDate).day();
         let working_hour = worksHour.find((item) => item.day === day);
         let start_date_join_time =
-          moment(bookingInfoTypeDay.startDate).format('YYYY-MM-DD') +
+          moment(bookingInfo.startDate).format('YYYY-MM-DD') +
           'T' +
           working_hour?.openHour;
         let start_date_utc = moment
           .utc(new Date(start_date_join_time).toUTCString())
           .format();
         let end_date_join_time;
-        if (bookingInfoTypeDay.endDate) {
-          let day = moment(bookingInfoTypeDay.endDate).day();
+        if (bookingInfo.endDate) {
+          let day = moment(bookingInfo.endDate).day();
           let working_hour = worksHour.find((item) => item.day === day);
           end_date_join_time =
-            moment(bookingInfoTypeDay.endDate).format('YYYY-MM-DD') +
+            moment(bookingInfo.endDate).format('YYYY-MM-DD') +
             'T' +
             working_hour?.closeHour;
         } else {
-          let day = moment(bookingInfoTypeDay.startDate).day();
+          let day = moment(bookingInfo.startDate).day();
           let working_hour = worksHour.find((item) => item.day === day);
           end_date_join_time =
-            moment(bookingInfoTypeDay.startDate).format('YYYY-MM-DD') +
+            moment(bookingInfo.startDate).format('YYYY-MM-DD') +
             'T' +
             working_hour?.closeHour;
         }
@@ -253,10 +321,10 @@ export default function ConfirmBookingModal(props) {
           .utc(new Date(end_date_join_time).toUTCString())
           .format();
         let data = {
-          type: 'day',
-          date_range: bookingInfoTypeDay.date_range,
-          totalDay: bookingInfoTypeDay.totalDay,
-          price: bookingInfoTypeDay.price,
+          type: dayTab? 'day' : 'month',
+          date_range: bookingInfo.date_range,
+          totalDay: bookingInfo.totalDay,
+          price: bookingInfo.price,
           start_date_utc: start_date_utc,
           end_date_utc: end_date_utc,
         };
@@ -322,6 +390,15 @@ export default function ConfirmBookingModal(props) {
       price: null,
       date_range: null,
     });
+    setBookingInfoTypeMonth({
+      start: null,
+      end: null,
+      startDate: null,
+      endDate: null,
+      totalDay: null,
+      price: null,
+      date_range: null,
+    });
     setBookingInfoTypeHour({
       date: new Date(),
       startTime: {},
@@ -332,6 +409,7 @@ export default function ConfirmBookingModal(props) {
     });
     setError('');
     setShowCalendar(false);
+    setDayTab(true);
   }, [show]);
   const GET_WORKINGSPACE_AVAILABLE = gql`
     query GetWorkingspaceAvailable(
@@ -406,6 +484,7 @@ export default function ConfirmBookingModal(props) {
       }
     }
   }, [bookingInfoTypeHour.date, typeOfBooking]);
+  const [excludeMonths, setExcludeMonth] = useState([]);
   const [excludeDates, setExcludeDate] = useState([]);
   const handleGetExcludeDates = async () => {
     let day = moment().day();
@@ -430,13 +509,26 @@ export default function ConfirmBookingModal(props) {
     });
     if (res.data) {
       let data = res.data.workingSpaceAvailable;
-      let arr = data.map((item) => new Date(item.time));
+      let arr = data.filter(item => item.available === false).map(item => new Date(item.time));
       setExcludeDate(arr);
+    }
+    let bodyData1 = {
+      bookingType: 'month',
+      workingSpaceId: selectedWorkingSpace.id,
+      startDate: start_date_utc,
+    }
+    let res1 = await getWorkingspaceAvailable({
+      variables: bodyData1,
+    });
+    if (res1.data) {
+      let data = res1.data.workingSpaceAvailable;
+      let arr = data.filter(item => item.available === false).map(item => new Date(item.time));
+      setExcludeMonth(arr);
     }
   };
   useEffect(() => {
     if (selectedWorkingSpace.id) {
-      if (typeOfBooking === 'day') {
+      if (typeOfBooking === 'day-month') {
         handleGetExcludeDates();
       }
     }
@@ -469,23 +561,43 @@ export default function ConfirmBookingModal(props) {
       <Modal.Header className='px-4 py-2 d-flex flex-column align-items-center justify-content-center'>
         <h3 className='modal-title fw-bold'>{t('select_time')}</h3>
       </Modal.Header>
-      <Modal.Body className='modal-body px-0 py-4'>
-        {typeOfBooking === 'day' && (
+      <Modal.Body className='modal-body px-0'>
+        {typeOfBooking === 'day-month' && (
           <>
-            <div className='mb-3'>
-              <div className='d-flex justify-content-center'>
-                <DatePicker
-                  onChange={handleDateRangeChange}
-                  startDate={bookingInfoTypeDay.startDate}
-                  endDate={bookingInfoTypeDay.endDate}
-                  selectsRange
-                  inline
-                  locale={'vi'}
-                  minDate={moment().add(1, 'd').toDate()}
-                  excludeDates={excludeDates}
-                  filterDate={isOpenDay}
-                />
-              </div>
+            <div className='mx-4'>
+              <Tabs defaultActiveKey="1" className='mb-3' onChange={() => setDayTab(!dayTab)}
+              >
+                <TabPane tab={t('rent_by_day')} key='1' disabled={selectedWorkingSpace?.priceByDay === 0}>
+                  <div className='d-flex justify-content-center'>
+                    <DatePicker
+                      onChange={handleDayRangeChange}
+                      startDate={bookingInfoTypeDay.startDate}
+                      endDate={bookingInfoTypeDay.endDate}
+                      selectsRange
+                      inline
+                      locale='vi'
+                      minDate={moment().add(1, 'd').toDate()}
+                      excludeDates={excludeDates}
+                      filterDate={isOpenDay}
+                    />
+                  </div>
+                </TabPane>
+                <TabPane tab={t('rent_by_month')} key='2' disabled={selectedWorkingSpace?.priceByMonth === 0}>
+                  <div className='d-flex justify-content-center'>
+                    <DatePicker
+                      onChange={handleMonthRangeChange}
+                      startDate={bookingInfoTypeMonth.start}
+                      endDate={bookingInfoTypeMonth.end}
+                      minDate={moment().toDate().setDate(0)}
+                      excludeDates={excludeMonths}
+                      locale='vi'
+                      showMonthYearPicker
+                      selectsRange
+                      inline
+                    />
+                  </div>
+                </TabPane>
+              </Tabs>
             </div>
             <div className='mb-3 mx-4'>
               {/* <div className='fw-bold d-flex justify-content-center align-items-center'>
@@ -497,7 +609,7 @@ export default function ConfirmBookingModal(props) {
 
               <div>
                 <label className='mt-2 form-label text-gray'>
-                  {t('time')}: {bookingInfoTypeDay.date_range}
+                  {t('time')}: {dayTab ? bookingInfoTypeDay.date_range : bookingInfoTypeMonth.date_range}
                 </label>
               </div>
               {error && <div className='text-danger'>{error}</div>}
@@ -506,17 +618,25 @@ export default function ConfirmBookingModal(props) {
             <div className='d-flex justify-content-between px-4'>
               <div className='text-gray'>{t('total_time')}:</div>
               <div className='text-end'>
-                {bookingInfoTypeDay.totalDay && (
-                  <>
-                    {bookingInfoTypeDay.totalDay} {t('day')}
-                  </>
+                {dayTab ? (
+                  bookingInfoTypeDay.totalDay && (
+                    <>
+                      {bookingInfoTypeDay.totalDay} {t('day')}
+                    </>
+                  )
+                ) : (
+                  bookingInfoTypeMonth.totalDay && (
+                    <>
+                      {bookingInfoTypeMonth.totalDay} {t('day')}
+                    </>
+                  )
                 )}
               </div>
             </div>
             <div className='d-flex justify-content-between px-4'>
               <div className='text-gray'>{t('price')}:</div>
               <div className='text-red'>
-                <h4>{formatCurrency(bookingInfoTypeDay.price)}</h4>
+                <h4>{formatCurrency(dayTab ? bookingInfoTypeDay.price : bookingInfoTypeMonth.price)}</h4>
               </div>
             </div>
           </>

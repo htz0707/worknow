@@ -378,5 +378,7 @@
   "apply": "Apply",
   "select_range_price": "Select price range",
   "min": "Min price",
-  "max": "Max price"
+  "max": "Max price",
+  "rent_by_day": "Rent by day",
+  "rent_by_month": "Rent by month"
 }

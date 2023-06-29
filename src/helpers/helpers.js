@@ -50,23 +50,7 @@ export const renderHourOrDay = (value) => {
   }
 };
 export const returnTypeOfBooking = (value) => {
-  if (
-    value === 'flexible_desk' ||
-    value === 'fixed_desk' ||
-    value === 'private_room'
-  ) {
-    return 'day';
-  }
-  if (
-    value === 'meeting_room' ||
-    value === 'event' ||
-    value === 'convience_room' ||
-    value === 'booth'
-  ) {
-    return 'hour';
-  }
-  if (value === 'raw_space') return 'square';
-  if (value === 'month') return 'month';
+  return value === 'flexible_desk' || value === 'fixed_desk' || value === 'private_room' ? 'day-month' : 'hour';
 };
 export const createTimeSlot = (start, end) => {
   var startTime = moment(start, 'HH:mm');
@@ -215,3 +199,29 @@ export const returnLowestPrice = (priceByHour, priceByDay) => {
     }
   }
 };
+export const getLastDayOfMonth =(dates) => {
+  let month = dates.getMonth();
+  let year  = dates.getFullYear();
+  let lastDayOfMonth = new Date(year, month, 1);
+  if (month + 1 === 2) {
+    if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+      lastDayOfMonth.setDate(29);
+    } else {
+      lastDayOfMonth.setDate(28);
+    }
+  } else if ([1, 3, 5, 7, 8, 10, 12].includes(month + 1)) {
+    lastDayOfMonth.setDate(31);
+  } else if ([4, 6, 9, 11].includes(month + 1)) {
+    lastDayOfMonth.setDate(30);
+  }
+  return lastDayOfMonth;
+}
+export const monthsBetweenDates = (startDate, endDate) => {
+  let months = (endDate.getFullYear() - startDate.getFullYear()) * 12 + 1;
+  months -= startDate.getMonth() + 1;
+  months += endDate.getMonth() + 1;
+  // if (endDate.getDate() < startDate.getDate()) {
+  //     months--;
+  // }
+  return months;
+}

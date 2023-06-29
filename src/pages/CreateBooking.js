@@ -79,6 +79,7 @@ export default function CreateBooking() {
         }
         description
         priceByDay
+        priceByMonth
         priceByHour
         type
         amenities {
@@ -198,6 +199,7 @@ export default function CreateBooking() {
   };
   if (data) {
     localStorage.removeItem('referenceCode');
+    console.log(data);
     navigate(
       `/create-booking/payment?location_id=${location_id}&order_id=${data?.createOrder?.id}`,
       {
@@ -491,7 +493,7 @@ export default function CreateBooking() {
                         </div>
                       </>
                     )}
-                    {orderInfo?.type === 'day' && (
+                    {(orderInfo?.type === 'day' || orderInfo?.type === 'month') && (
                       <>
                         <div>
                           {orderInfo?.date_range} ({orderInfo?.totalDay} ngày)
