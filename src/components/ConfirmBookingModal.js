@@ -509,8 +509,8 @@ export default function ConfirmBookingModal(props) {
     });
     if (res.data) {
       let data = res.data.workingSpaceAvailable;
-      let arr = data.filter(item => item.available === false).map(item => new Date(item.time));
-      setExcludeDate(arr);
+      let notAvailableDate = data.filter(item => item.available === false).map(item => new Date(item.time));
+      setExcludeDate(notAvailableDate);
     }
     let bodyData1 = {
       bookingType: 'month',
@@ -588,7 +588,7 @@ export default function ConfirmBookingModal(props) {
                       onChange={handleMonthRangeChange}
                       startDate={bookingInfoTypeMonth.start}
                       endDate={bookingInfoTypeMonth.end}
-                      minDate={moment().toDate().setDate(0)}
+                      minDate={moment().add(1, 'd').toDate()}
                       excludeDates={excludeMonths}
                       locale='vi'
                       showMonthYearPicker

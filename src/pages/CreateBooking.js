@@ -199,7 +199,6 @@ export default function CreateBooking() {
   };
   if (data) {
     localStorage.removeItem('referenceCode');
-    console.log(data);
     navigate(
       `/create-booking/payment?location_id=${location_id}&order_id=${data?.createOrder?.id}`,
       {

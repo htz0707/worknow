@@ -200,28 +200,11 @@ export const returnLowestPrice = (priceByHour, priceByDay) => {
   }
 };
 export const getLastDayOfMonth =(dates) => {
-  let month = dates.getMonth();
-  let year  = dates.getFullYear();
-  let lastDayOfMonth = new Date(year, month, 1);
-  if (month + 1 === 2) {
-    if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-      lastDayOfMonth.setDate(29);
-    } else {
-      lastDayOfMonth.setDate(28);
-    }
-  } else if ([1, 3, 5, 7, 8, 10, 12].includes(month + 1)) {
-    lastDayOfMonth.setDate(31);
-  } else if ([4, 6, 9, 11].includes(month + 1)) {
-    lastDayOfMonth.setDate(30);
-  }
-  return lastDayOfMonth;
+  return new Date(dates.getFullYear(), dates.getMonth() + 1, 0);
 }
 export const monthsBetweenDates = (startDate, endDate) => {
   let months = (endDate.getFullYear() - startDate.getFullYear()) * 12 + 1;
   months -= startDate.getMonth() + 1;
   months += endDate.getMonth() + 1;
-  // if (endDate.getDate() < startDate.getDate()) {
-  //     months--;
-  // }
   return months;
 }
