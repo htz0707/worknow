@@ -588,7 +588,7 @@ export default function ConfirmBookingModal(props) {
                       onChange={handleMonthRangeChange}
                       startDate={bookingInfoTypeMonth.start}
                       endDate={bookingInfoTypeMonth.end}
-                      minDate={moment().add(1, 'd').toDate()}
+                      minDate={moment().toDate().setDate(0)}
                       excludeDates={excludeMonths}
                       locale='vi'
                       showMonthYearPicker

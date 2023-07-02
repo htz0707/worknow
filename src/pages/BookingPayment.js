@@ -730,9 +730,10 @@ export default function BookingPayment() {
                   )}
                   <div>
                     <div className='fw-bold'>{workingSpaceInfo?.name}</div>
-                    {returnTypeOfBooking(workingSpaceInfo.type) === 'hour' && (
+                    {returnTypeOfBooking(workingSpaceInfo.type) === 'hour' &&
+                    orderInfo.orderDetails && (
                       <>
-                        {/* <div>
+                        <div>
                           {moment(orderInfo.orderDetails[0].startDate).format(
                             'DD/MM/YYYY'
                           )}
@@ -750,10 +751,11 @@ export default function BookingPayment() {
                             orderInfo.orderDetails[0].hour * 60
                           )}
                           )
-                        </div> */}
+                        </div>
                       </>
                     )}
-                    {returnTypeOfBooking(workingSpaceInfo.type) === 'day-month' && (
+                    {returnTypeOfBooking(workingSpaceInfo.type) === 'day-month' &&
+                    orderInfo.orderDetails && (
                       <>
                         <div>
                           {moment(orderInfo.orderDetails[0].startDate).format(
