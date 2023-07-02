@@ -378,7 +378,7 @@ export default function WorkingSpaceDetails() {
                   {renderHourOrDay(workingSpaceInfo?.type)}
                 </div>
               )}
-              {returnTypeOfBooking(workingSpaceInfo?.type) === 'day' && (
+              {returnTypeOfBooking(workingSpaceInfo?.type) === 'day-month' && (
                 <div className='price'>
                   {formatCurrency(workingSpaceInfo?.priceByDay)}/
                   {renderHourOrDay(workingSpaceInfo?.type)}

@@ -99,7 +99,7 @@ export default function WorkSpaceCard(props) {
             {formatCurrency(data?.priceByHour)}/{renderHourOrDay(data?.type)}
           </div>
         )}
-        {returnTypeOfBooking(data?.type) === 'day' && (
+        {returnTypeOfBooking(data?.type) === 'day-month' && (
           <div className='new-price'>
             {formatCurrency(data?.priceByDay)}/{renderHourOrDay(data?.type)}
           </div>

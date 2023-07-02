@@ -91,3 +91,70 @@
     color: red;
   }
 }
+
+
+.react-datepicker__month {
+  .react-datepicker__month-text {
+    width: 8rem;
+  }
+}
+.react-datepicker__month {
+  &--selected,
+  &--in-selecting-range,
+  &--in-range {
+    background-color: #ffb31f;
+    color: #000;
+
+    &:hover {
+      background-color: darken(#ffb31f, 5%);
+    }
+  }
+}
+.react-datepicker__month-text {
+  &:hover {
+    background-color: #fff1d7;
+  }
+
+  &--selected,
+  &--in-selecting-range,
+  &--in-range {
+    background-color: #ffb31f;
+    color: #000;
+
+    &:hover {
+      background-color: darken(#ffb31f, 5%);
+    }
+  }
+
+  &--keyboard-selected {
+    background-color: lighten(#ffb31f, 5%);
+    color: #000;
+
+    &:hover {
+      background-color: darken(#ffb31f, 5%);
+    }
+  }
+
+  &--in-selecting-range:not(&--in-range) {
+    background-color: rgba(#ffb31f, 0.5);
+  }
+
+  &--in-range:not(&--in-selecting-range) {
+    .react-datepicker__month--selecting-range & {
+      background-color: #fff1d7;
+      color: #000;
+    }
+  }
+}
+.react-datepicker__month-text {
+  &.react-datepicker__month--selected,
+  &.react-datepicker__month--in-range {
+    &:hover {
+      background-color: #ffb31f;
+    }
+  }
+
+  &:hover {
+    background-color: #fff1d7;
+  }
+}
