@@ -378,5 +378,7 @@
   "apply": "Áp dụng",
   "select_range_price": "Chọn khoảng giá",
   "min": "Tối thiểu",
-  "max": "Tối đa"
+  "max": "Tối đa",
+  "rent_by_day": "Thuê theo ngày",
+  "rent_by_month": "Thuê theo tháng"
 }

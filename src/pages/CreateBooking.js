@@ -79,6 +79,7 @@ export default function CreateBooking() {
         }
         description
         priceByDay
+        priceByMonth
         priceByHour
         type
         amenities {
@@ -491,7 +492,7 @@ export default function CreateBooking() {
                         </div>
                       </>
                     )}
-                    {orderInfo?.type === 'day' && (
+                    {(orderInfo?.type === 'day' || orderInfo?.type === 'month') && (
                       <>
                         <div>
                           {orderInfo?.date_range} ({orderInfo?.totalDay} ngày)
